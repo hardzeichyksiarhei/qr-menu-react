@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals'
 
 import store from './store'
 
+import AuthProvider from './auth/AuthProvider'
 import App from './App'
 
 import './plugins'
@@ -16,7 +17,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </Router>
     </Provider>
   </React.StrictMode>,
