@@ -1,9 +1,12 @@
 import { useRoutes } from 'react-router-dom'
+import { useAuth } from '../auth/AuthProvider'
 
 import routes from './routes'
 
 const Router = () => {
-  const routing = useRoutes(routes(true))
+  const auth = useAuth()
+
+  const routing = useRoutes(routes(auth.isAuth))
 
   return routing
 }

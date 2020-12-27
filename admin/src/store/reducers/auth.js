@@ -84,7 +84,8 @@ const reducer = (state = initialState, action) => {
     }
 
     case types.LOGOUT: {
-      Cookies.clear()
+      Cookies.remove('isLoggedIn')
+      Cookies.remove('token')
       return {
         ...state,
         isLoggedIn: false,

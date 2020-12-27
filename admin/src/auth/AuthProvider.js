@@ -15,15 +15,21 @@ const AuthProvider = ({ children }) => {
   const dispatch = useDispatch()
   const { user, token } = useSelector((state) => state.auth)
 
-  const login = useCallback(() => {
-    dispatch(authActions.login())
-  }, [dispatch])
+  const login = useCallback(
+    (email, password) => () => {
+      dispatch(authActions.login(email, password))
+    },
+    [dispatch],
+  )
+
+  const registration = useCallback(
+    (email, password, passwordConfirm) => () => {
+      dispatch(authActions.registration(email, password, passwordConfirm))
+    },
+    [dispatch],
+  )
 
   const logout = useCallback(() => {
-    dispatch(authActions.registration())
-  }, [dispatch])
-
-  const registration = useCallback(() => {
     dispatch(authActions.logout())
   }, [dispatch])
 
