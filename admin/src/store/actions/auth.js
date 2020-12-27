@@ -30,7 +30,7 @@ export const requestedLogin = () => ({
 
 export const requestedLoginSuccess = (token) => ({
   type: types.REQUESTED_LOGIN_SUCCEEDED,
-  payload: { token, isLoggedIn: true },
+  payload: { token },
 })
 
 export const requestedLoginError = () => ({
@@ -49,7 +49,7 @@ export const requestedRegistration = () => ({
 
 export const requestedRegistrationSuccess = (token) => ({
   type: types.REQUESTED_REGISTRATION_SUCCEEDED,
-  payload: { token, isLoggedIn: true },
+  payload: { token },
 })
 
 export const requestedRegistrationError = () => ({

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -14,6 +14,12 @@ export const AuthContext = React.createContext({
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch()
   const { user, token } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (!user && token) {
+      dispatch(authActions.fetchUser())
+    }
+  }, [user, token, dispatch])
 
   const login = useCallback(
     (email, password) => () => {
@@ -36,7 +42,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        isAuth: user && token,
+        isAuth: token,
         login,
         registration,
         logout,
