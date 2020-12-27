@@ -1,0 +1,28 @@
+@import '~antd/dist/antd.css';
+
+/* Default Layout */
+.default-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    &__container {
+        flex-grow: 1;
+    }
+    &__content {
+        background-color: #fff;
+        padding: 24px;
+        margin: 0;
+    }
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    &__logo {
+        width: 200px;
+        height: 40px;
+        background-color: #ddd;
+    }
+}
