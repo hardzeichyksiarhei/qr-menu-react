@@ -1,8 +1,25 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const config = require('config')
 
 const app = express()
 
 const PORT = config.get('port') || 5000
 
-app.listen(PORT, () => console.log(`Server has been started on port ${PORT}`))
+async function start() {
+  try {
+    await mongoose
+      .connect(config.get('mongoDB'), {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+      })
+      .then(() => console.log('MongoDB connected'))
+    app.listen(PORT, () => console.log(`Server has been started on port ${PORT}`))
+  } catch (e) {
+    console.log('Server error:', e.message)
+    process.exit(1)
+  }
+}
+
+start()
