@@ -20,9 +20,7 @@ module.exports.register = async function (req, res) {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ errors: errors.array(), message: 'Invalid data' })
+      return res.status(400).json({ errors: errors.array(), message: 'Invalid data' })
     }
     const { email, password } = req.body
 
@@ -56,9 +54,7 @@ module.exports.login = async function (req, res) {
     const user = await User.findOne({ email })
 
     if (!user) {
-      return res
-        .status(400)
-        .json({ message: 'User with this login does not exist' })
+      return res.status(400).json({ message: 'User with this login does not exist' })
     }
 
     const isMatchPassword = await bcrypt.compare(password, user.password)
