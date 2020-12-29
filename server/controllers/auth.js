@@ -33,7 +33,7 @@ module.exports.register = async function (req, res) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 12)
-    const userRole = await Role.findOne({ value: 'user' })
+    const userRole = await Role.findOne({ value: 'supplier' })
     const user = new User({
       email,
       password: hashedPassword,

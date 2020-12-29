@@ -10,7 +10,13 @@ module.exports.getUser = async function (req, res) {
     }
     const { id } = jwt.verify(token, config.get('jwt-secret'))
     const user = await User.findOne({ _id: id })
-    return res.status(200).json(user)
+    const { roles, _id, email } = user
+    const userWithoutPassword = {
+      roles,
+      _id,
+      email,
+    }
+    return res.status(200).json(userWithoutPassword)
   } catch (e) {
     return res.status(500).json({ message: e.message })
   }
