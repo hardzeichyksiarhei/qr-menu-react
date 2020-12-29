@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 
 import DefaultLayout from '../layouts/Default'
-import EmptyLayout from '../layouts/Empty'
+import AuthLayout from '../layouts/Auth'
 
 import Dashboard from '../pages/Dashboard'
 import Login from '../pages/auth/Login'
@@ -20,7 +20,7 @@ const routes = (isLoggedIn) => [
   {
     // public routes
     path: '/',
-    element: !isLoggedIn ? <EmptyLayout /> : <Navigate to="/dashboard" />,
+    element: !isLoggedIn ? <AuthLayout /> : <Navigate to="/dashboard" />,
     children: [
       { path: 'login', element: <Login /> },
       { path: 'registration', element: <Registration /> },
