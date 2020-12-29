@@ -24,9 +24,9 @@ module.exports.register = async function (req, res) {
         .status(400)
         .json({ errors: errors.array(), message: 'Invalid data' })
     }
-    const { username, password } = req.body
+    const { email, password } = req.body
 
-    const candidate = await User.findOne({ username })
+    const candidate = await User.findOne({ email })
 
     if (candidate) {
       return res.status(409).json({
@@ -37,7 +37,7 @@ module.exports.register = async function (req, res) {
     const hashedPassword = await bcrypt.hash(password, 12)
     const userRole = await Role.findOne({ value: 'user' })
     const user = new User({
-      username,
+      email,
       password: hashedPassword,
       roles: [userRole.value],
     })
@@ -51,9 +51,9 @@ module.exports.register = async function (req, res) {
 
 module.exports.login = async function (req, res) {
   try {
-    const { username, password } = req.body
+    const { email, password } = req.body
 
-    const user = await User.findOne({ username })
+    const user = await User.findOne({ email })
 
     if (!user) {
       return res

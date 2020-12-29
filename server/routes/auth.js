@@ -7,7 +7,7 @@ const controller = require('../controllers/auth')
 router.post(
   '/register',
   [
-    check('username', 'Invalid login').isLength({ min: 5 }),
+    check('email', 'login is not email').isEmail(),
     check('password', 'Invalid password').isLength({ min: 6 }),
   ],
   controller.register,
