@@ -9,6 +9,8 @@ import Dashboard from '../pages/Dashboard'
 import Login from '../pages/auth/Login'
 import Registration from '../pages/auth/Registration'
 
+const Settings = lazy(() => import('../pages/Settings'))
+
 const MenusList = lazy(() => import('../pages/menu/MenusList'))
 const MenusTrashList = lazy(() => import('../pages/menu/MenusTrashList'))
 const MenuCreate = lazy(() => import('../pages/menu/MenuCreate'))
@@ -20,6 +22,7 @@ const routes = (isLoggedIn) => [
     element: isLoggedIn ? <DefaultLayout /> : <Navigate to="/login" />,
     children: [
       { path: '/dashboard', element: <Dashboard /> },
+      { path: '/Settings', element: <Settings /> },
       { path: '/menus', element: <MenusList /> },
       { path: '/menus/create', element: <MenuCreate /> },
       { path: '/menus/:id/edit', element: <MenuEdit /> },

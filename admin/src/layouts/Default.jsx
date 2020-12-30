@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import { Layout, Menu, Button } from 'antd'
 import {
@@ -14,6 +14,29 @@ import {
 import { useAuth } from '../auth/AuthProvider'
 
 const { Header, Content, Sider } = Layout
+
+const routes = [
+  {
+    path: '/dashboard',
+    label: 'Dashboard',
+    icon: <DashboardOutlined />,
+  },
+  {
+    path: '/menus',
+    label: 'My menus',
+    icon: <AppstoreAddOutlined />,
+  },
+  {
+    path: '/menus/trash',
+    label: 'Trash Menu',
+    icon: <DeleteOutlined />,
+  },
+  {
+    path: '/settings',
+    label: 'Settings',
+    icon: <SettingOutlined />,
+  },
+]
 
 const Default = () => {
   const auth = useAuth()
@@ -38,18 +61,11 @@ const Default = () => {
       <Layout className="default-layout__container">
         <Sider width={280} className="site-layout-background">
           <Menu mode="inline" style={{ height: '100%', borderRight: 0 }}>
-            <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
-              Dashboard
-            </Menu.Item>
-            <Menu.Item key="menus" icon={<AppstoreAddOutlined />}>
-              My menus
-            </Menu.Item>
-            <Menu.Item key="trashMenus" icon={<DeleteOutlined />}>
-              Trash Menu
-            </Menu.Item>
-            <Menu.Item key="settings" icon={<SettingOutlined />}>
-              Settings
-            </Menu.Item>
+            {routes.map((route) => (
+              <Menu.Item key={route.path} icon={route.icon}>
+                <Link to={route.path}>{route.label}</Link>
+              </Menu.Item>
+            ))}
             <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={auth.logout}>
               Logout
             </Menu.Item>
