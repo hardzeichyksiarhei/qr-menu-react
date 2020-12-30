@@ -1,5 +1,11 @@
 import React from 'react'
 
-const MenuEdit = () => <>MenuEdit</>
+import MenuManagement from '../../components/menu/MenuManagement'
+
+const MenuEdit = () => (
+  <div className="menu-edit-page">
+    <MenuManagement />
+  </div>
+)
 
 export default MenuEdit

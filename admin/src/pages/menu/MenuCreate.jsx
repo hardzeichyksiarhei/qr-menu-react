@@ -1,5 +1,11 @@
 import React from 'react'
 
-const MenuCreate = () => <>MenuCreate</>
+import MenuManagement from '../../components/menu/MenuManagement'
+
+const MenuCreate = () => (
+  <div className="menu-create-page">
+    <MenuManagement />
+  </div>
+)
 
 export default MenuCreate
