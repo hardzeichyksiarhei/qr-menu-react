@@ -21,7 +21,7 @@ const initialState = {
     priceCurrency: null,
 
     createdAt: null,
-    archivedAt: null,
+    // archivedAt: null,
     deletedAt: null,
   },
 
