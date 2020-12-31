@@ -1,12 +1,22 @@
+/* eslint-disable no-template-curly-in-string */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 
-import { Form, Input, Button, Checkbox, Typography } from 'antd'
+import { Card, Form, Input, Button, /* Checkbox, */ Typography } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
 
+import './Login.scss'
+
 const { Link } = Typography
+
+const validateMessages = {
+  required: 'This field is required.',
+  types: {
+    email: 'This field must be a valid email address.',
+  },
+}
 
 const Login = () => {
   const auth = useAuth()
@@ -15,70 +25,48 @@ const Login = () => {
 
   const onFinish = (values) => {
     const { email, password } = values
-    login(email, password)
+
+    login(email, password)()
   }
 
   return (
-    <>
-      Login
-      {/* <Button style={{ marginLeft: 10 }} onClick={login('testUser', 'testPassword')}>
-        Login
-      </Button> */}
-      <Form
-        name="login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
+    <div className="login">
+      <Card
+        className="login-card"
+        style={{ width: 500 }}
+        title={<h2 className="login-card__title">QR Menu Clone</h2>}
       >
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              // type: 'email',
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
+        <Form
+          className="login-form"
+          layout="vertical"
+          validateMessages={validateMessages}
+          onFinish={onFinish}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
-        </Form.Item>
-
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-        >
-          <Input.Password
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            placeholder="Password"
-          />
-        </Form.Item>
-
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
+          <h3 className="login-form__title">Authorization</h3>
+          <Form.Item name="email" rules={[{ type: 'email', required: true }]}>
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
           </Form.Item>
-          <Link className="login-form-forgot" href="">
-            Forgot password
-          </Link>
-        </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
+          <Form.Item name="password" rules={[{ required: true }]}>
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              placeholder="Password"
+            />
+          </Form.Item>
+
+          <Button type="primary" htmlType="submit" className="login-form__sign-in" block>
+            Sign In
           </Button>
-          <Link style={{ marginLeft: 10 }} href="registration">
-            register now!
-          </Link>
-        </Form.Item>
-      </Form>
-    </>
+        </Form>
+      </Card>
+
+      <div className="login__footer">
+        <span>Don&apos;t have an account?</span>
+        <Link className="login__sign-up" to="/registration">
+          Sign Up
+        </Link>
+      </div>
+    </div>
   )
 }
 

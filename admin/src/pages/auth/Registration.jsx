@@ -10,10 +10,10 @@ const { Link } = Typography
 const Registration = () => {
   const auth = useAuth()
 
-  const { login } = auth
+  const { register } = auth
 
-  const onFinish = (values) => {
-    login(values.email, values.password)
+  const onFinish = ({ email, password, confirmPassword }) => {
+    register(email, password, confirmPassword)()
   }
 
   return (
@@ -51,7 +51,7 @@ const Registration = () => {
           <Input.Password placeholder="Password" />
         </Form.Item>
         <Form.Item
-          name="confirm"
+          name="confirmPassword"
           dependencies={['password']}
           hasFeedback
           rules={[
