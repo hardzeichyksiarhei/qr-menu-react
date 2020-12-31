@@ -1,15 +1,14 @@
 /* eslint-disable no-template-curly-in-string */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { Card, Form, Input, Button, /* Checkbox, */ Typography } from 'antd'
+import { Card, Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
 
 import './Login.scss'
-
-const { Link } = Typography
 
 const validateMessages = {
   required: 'This field is required.',
