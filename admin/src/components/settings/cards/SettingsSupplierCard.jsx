@@ -26,7 +26,7 @@ const SettingsSupplierCard = () => {
   }
 
   return (
-    <Card className="card-item" title={<h2>Supplier</h2>}>
+    <Card className="card-item card-shadow" title={<h2 className="mb-0">Supplier</h2>}>
       <Form name="supplier-form" layout="vertical">
         <Form.Item label="Restaurant name" rules={[{ required: true }]}>
           <Input
