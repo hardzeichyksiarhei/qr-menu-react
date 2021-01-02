@@ -2,8 +2,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-import { Card, Form, Input, Button } from 'antd'
+import { Card, Form, Input, Button, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
@@ -19,6 +20,8 @@ const validateMessages = {
 
 const Login = () => {
   const auth = useAuth()
+
+  const { isLoading, isError, errorMessage } = useSelector((state) => state.auth)
 
   const { login } = auth
 
@@ -53,9 +56,24 @@ const Login = () => {
             />
           </Form.Item>
 
-          <Button type="primary" htmlType="submit" className="login-form__sign-in" block>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form__sign-in"
+            loading={isLoading}
+            block
+          >
             Sign In
           </Button>
+
+          {isError ? (
+            <Alert
+              className="login-form__error mt-2"
+              message={errorMessage}
+              type="error"
+              showIcon
+            />
+          ) : null}
         </Form>
       </Card>
 

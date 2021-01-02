@@ -1,5 +1,31 @@
 @import '~antd/dist/antd.css';
 
+/* Common */
+.d-block {
+    display: block !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+/* Margin */
+.mt-2 {
+    margin-top: 20px !important;
+}
+
 /* Default Layout */
 .default-layout {
     display: flex;

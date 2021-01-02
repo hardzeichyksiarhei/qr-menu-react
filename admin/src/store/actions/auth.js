@@ -33,8 +33,9 @@ export const requestedLoginSuccess = (token) => ({
   payload: { token },
 })
 
-export const requestedLoginError = () => ({
+export const requestedLoginError = (message) => ({
   type: types.REQUESTED_LOGIN_FAILED,
+  payload: { message },
 })
 
 // Registration
@@ -52,8 +53,9 @@ export const requestedRegistrationSuccess = (token) => ({
   payload: { token },
 })
 
-export const requestedRegistrationError = () => ({
+export const requestedRegistrationError = (message) => ({
   type: types.REQUESTED_REGISTRATION_FAILED,
+  payload: { message },
 })
 
 export const logout = () => ({

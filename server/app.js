@@ -1,9 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const config = require('config')
 
 const app = express()
 
+app.use(cors())
 app.use(express.json({ extended: true }))
 
 app.use('/api/auth', require('./routes/auth'))

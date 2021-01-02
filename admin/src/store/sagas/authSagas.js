@@ -1,17 +1,15 @@
-import axios from 'axios'
-
-import { put, takeEvery, call /* select */ } from 'redux-saga/effects'
+import { put, takeEvery, call } from 'redux-saga/effects'
 
 import * as types from '../types/auth'
 import * as actions from '../actions/auth'
 
+import * as userService from '../../services/users'
+import * as authService from '../../services/auth'
+
 // User
-
 const asyncUser = async () => {
-  // Request server
-  const { data } = await axios.get('https://jsonplaceholder.typicode.com/users/1')
-
-  return data
+  const user = await userService.getAuthUser()
+  return user
 }
 
 function* fetchUser() {
@@ -25,10 +23,8 @@ function* fetchUser() {
 }
 
 // Login
-const asyncLogin = async (/* { email, password } */) => {
-  await axios.get('https://jsonplaceholder.typicode.com/users/1')
-
-  return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+const asyncLogin = async ({ email, password }) => {
+  await authService.login(email, password)
 }
 
 function* login(action) {
@@ -40,16 +36,14 @@ function* login(action) {
     yield put(actions.requestedLoginSuccess(token))
     yield put(actions.fetchUser())
   } catch (error) {
-    yield put(actions.requestedLoginError())
+    const { data } = error.response
+    yield put(actions.requestedLoginError(data.message))
   }
 }
 
 // Registration
-const asyncRegistration = async (/* { email, password, passwordConfirm } */) => {
-  // Request server
-  const { data } = { data: 'token' }
-
-  return data
+const asyncRegistration = async ({ email, password }) => {
+  await authService.registration(email, password)
 }
 
 function* registration(action) {
