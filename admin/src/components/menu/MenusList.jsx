@@ -6,7 +6,7 @@ import { fetchMenus } from '../../store/actions/menus'
 // import authSelectors from '../../store/selectors/auth'
 import menusSelectors from '../../store/selectors/menus'
 
-import MenuCard from './MenuCard'
+import MenuCard from './cards/MenuCard'
 
 const MenuList = () => {
   const dispatch = useDispatch()
