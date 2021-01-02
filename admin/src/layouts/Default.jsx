@@ -46,7 +46,7 @@ const Default = () => {
   return (
     <Layout className="default-layout">
       <Header className="app-header">
-        <div className="app-header__logo" />
+        <h2 className="app-header__logo">QR Menu Clone</h2>
         <div className="app-header__controls">
           <>
             <ProfileDropdown />
