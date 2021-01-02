@@ -1,0 +1,35 @@
+.setting-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-item {
+  min-width: 268px;
+  width: 90%;
+  margin: 10px;
+  -webkit-box-shadow: 1px 2px 5px 1px rgba(0,0,0,0.25); 
+  box-shadow: 1px 2px 5px 1px rgba(0,0,0,0.25);
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.ant-input {
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.ant-input-group-addon {
+  border: none;
+}
+
+@media screen and (min-width: 970px) {
+  .setting-cards {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+  }
+
+  .card-item {
+    width: 48%;
+  }
+}

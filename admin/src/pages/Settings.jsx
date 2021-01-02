@@ -1,5 +1,12 @@
 import React from 'react'
 
-const Settings = () => <>Settings</>
+import SettingsManagement from '../components/settings/SettingsManagement'
+import './Settings.scss'
+
+const Settings = () => (
+  <div className="setting-cards">
+    <SettingsManagement />
+  </div>
+)
 
 export default Settings
