@@ -48,9 +48,8 @@ export const requestedRegistration = () => ({
   type: types.REQUESTED_REGISTRATION,
 })
 
-export const requestedRegistrationSuccess = (token) => ({
+export const requestedRegistrationSuccess = () => ({
   type: types.REQUESTED_REGISTRATION_SUCCEEDED,
-  payload: { token },
 })
 
 export const requestedRegistrationError = (message) => ({

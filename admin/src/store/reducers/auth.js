@@ -9,6 +9,8 @@ const initialState = {
   isLoginError: false,
   isRegistrationError: false,
   errorMessage: null,
+
+  isRegistrated: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -71,14 +73,15 @@ const reducer = (state = initialState, action) => {
 
         isRegistrationError: false,
         errorMessage: null,
+
+        isRegistrated: false,
       }
     }
     case types.REQUESTED_REGISTRATION_SUCCEEDED: {
-      Cookies.set('token', action.payload.token, { expires: 1 })
       return {
         ...state,
-        token: action.payload.token,
         isLoading: false,
+        isRegistrated: true,
       }
     }
     case types.REQUESTED_REGISTRATION_FAILED: {

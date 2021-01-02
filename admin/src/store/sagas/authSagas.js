@@ -51,12 +51,12 @@ function* registration(action) {
 
   try {
     yield put(actions.requestedRegistration())
-    const token = yield call(asyncRegistration, {
+    yield call(asyncRegistration, {
       email,
       password,
       passwordConfirm,
     })
-    yield put(actions.requestedRegistrationSuccess(token))
+    yield put(actions.requestedRegistrationSuccess())
   } catch (error) {
     const { data } = error.response
     yield put(actions.requestedRegistrationError(data.message))

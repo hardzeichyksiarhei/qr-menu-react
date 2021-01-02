@@ -11,6 +11,8 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons'
 
+import ProfileDropdown from '../components/ProfileDropdown'
+
 import { useAuth } from '../auth/AuthProvider'
 
 const { Header, Content, Sider } = Layout
@@ -44,9 +46,10 @@ const Default = () => {
   return (
     <Layout className="default-layout">
       <Header className="app-header">
-        <div className="app-header__logo" />
+        <h2 className="app-header__logo">QR Menu Clone</h2>
         <div className="app-header__controls">
           <>
+            <ProfileDropdown />
             <Button
               className="app-header__logout"
               style={{ marginLeft: 10 }}
