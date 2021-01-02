@@ -17,3 +17,7 @@ export const requestedMenusSuccess = (menus) => ({
 export const requestedMenusError = () => ({
   type: types.REQUESTED_MENUS_FAILED,
 })
+
+export const clearMenus = () => ({
+  type: types.CLEAR_MENUS,
+})

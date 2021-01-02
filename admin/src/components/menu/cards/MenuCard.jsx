@@ -21,7 +21,7 @@ const MenuCard = ({ menu }) => (
 )
 
 MenuCard.propTypes = {
-  menu: PropTypes.shape.isRequired,
+  menu: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default MenuCard

@@ -3,7 +3,7 @@ import * as types from '../types/menus'
 const initialState = {
   menus: [],
 
-  isMenusLoading: false,
+  isMenusLoading: true,
   isErrors: false,
 }
 
@@ -28,6 +28,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         isErrors: true,
         isMenusLoading: false,
+      }
+    }
+
+    case types.CLEAR_MENUS: {
+      return {
+        ...state,
+        menus: [],
       }
     }
 
