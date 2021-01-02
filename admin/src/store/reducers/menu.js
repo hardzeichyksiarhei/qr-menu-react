@@ -1,4 +1,4 @@
-import * as types from '../types/auth'
+import * as types from '../types/menu'
 
 const initialState = {
   menu: {
