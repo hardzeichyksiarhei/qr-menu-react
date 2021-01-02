@@ -10,10 +10,10 @@ const { Link } = Typography
 const Registration = () => {
   const auth = useAuth()
 
-  const { register } = auth
+  const { registration } = auth
 
   const onFinish = ({ email, password, confirmPassword }) => {
-    register(email, password, confirmPassword)()
+    registration(email, password, confirmPassword)()
   }
 
   return (

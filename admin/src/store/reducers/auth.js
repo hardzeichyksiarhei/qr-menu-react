@@ -39,6 +39,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+
+        isError: false,
+        errorMessage: null,
       }
     }
     case types.REQUESTED_LOGIN_SUCCEEDED: {
@@ -63,6 +66,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+
+        isError: false,
+        errorMessage: null,
       }
     }
     case types.REQUESTED_REGISTRATION_SUCCEEDED: {

@@ -24,7 +24,8 @@ function* fetchUser() {
 
 // Login
 const asyncLogin = async ({ email, password }) => {
-  await authService.login(email, password)
+  const { token } = await authService.login(email, password)
+  return token
 }
 
 function* login(action) {
@@ -34,7 +35,6 @@ function* login(action) {
     yield put(actions.requestedLogin())
     const token = yield call(asyncLogin, { email, password })
     yield put(actions.requestedLoginSuccess(token))
-    yield put(actions.fetchUser())
   } catch (error) {
     const { data } = error.response
     yield put(actions.requestedLoginError(data.message))
@@ -57,7 +57,6 @@ function* registration(action) {
       passwordConfirm,
     })
     yield put(actions.requestedRegistrationSuccess(token))
-    yield put(actions.fetchUser())
   } catch (error) {
     yield put(actions.requestedRegistrationError())
   }
