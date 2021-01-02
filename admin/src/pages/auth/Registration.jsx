@@ -10,6 +10,8 @@ import { useAuth } from '../../auth/AuthProvider'
 
 import './Registration.scss'
 
+import RegistrationSuccessfully from './RegistrationSuccessfully'
+
 const validateMessages = {
   required: 'This field is required.',
   types: {
@@ -30,6 +32,7 @@ const Registration = () => {
 
   return (
     <div className="registration">
+      <RegistrationSuccessfully />
       <Card
         className="registration-card"
         style={{ width: 500 }}
