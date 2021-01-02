@@ -25,9 +25,18 @@
     align-items: center !important;
 }
 
+/* Shadow */
+.card-shadow {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
 /* Margin */
 .mt-2 {
     margin-top: 20px !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
 }
 
 /* Default Layout */
