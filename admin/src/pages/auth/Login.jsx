@@ -21,7 +21,7 @@ const validateMessages = {
 const Login = () => {
   const auth = useAuth()
 
-  const { isLoading, isError, errorMessage } = useSelector((state) => state.auth)
+  const { isLoading, isLoginError, errorMessage } = useSelector((state) => state.auth)
 
   const { login } = auth
 
@@ -66,7 +66,7 @@ const Login = () => {
             Sign In
           </Button>
 
-          {isError ? (
+          {isLoginError ? (
             <Alert
               className="login-form__error mt-2"
               message={errorMessage}

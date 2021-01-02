@@ -6,7 +6,8 @@ const initialState = {
   token: Cookies.get('token') || null,
   isLoading: false,
 
-  isError: false,
+  isLoginError: false,
+  isRegistrationError: false,
   errorMessage: null,
 }
 
@@ -40,7 +41,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
 
-        isError: false,
+        isLoginError: false,
         errorMessage: null,
       }
     }
@@ -56,7 +57,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isError: true,
+
+        isLoginError: true,
         errorMessage: action.payload.message,
       }
     }
@@ -67,7 +69,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
 
-        isError: false,
+        isRegistrationError: false,
         errorMessage: null,
       }
     }
@@ -83,7 +85,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isError: true,
+
+        isRegistrationError: true,
         errorMessage: action.payload.message,
       }
     }

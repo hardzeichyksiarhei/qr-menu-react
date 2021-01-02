@@ -58,7 +58,8 @@ function* registration(action) {
     })
     yield put(actions.requestedRegistrationSuccess(token))
   } catch (error) {
-    yield put(actions.requestedRegistrationError())
+    const { data } = error.response
+    yield put(actions.requestedRegistrationError(data.message))
   }
 }
 

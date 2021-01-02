@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { Card, Form, Button, Input } from 'antd'
+import { Alert, Card, Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
@@ -20,7 +20,7 @@ const validateMessages = {
 const Registration = () => {
   const auth = useAuth()
 
-  const { isLoading } = useSelector((state) => state.auth)
+  const { isLoading, isRegistrationError, errorMessage } = useSelector((state) => state.auth)
 
   const { registration } = auth
 
@@ -75,26 +75,25 @@ const Registration = () => {
               placeholder="Confirm Password"
             />
           </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="registration-form__sign-up"
-              loading={isLoading}
-              block
-            >
-              Sign Up
-            </Button>
-          </Form.Item>
+
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="registration-form__sign-up"
+            loading={isLoading}
+            block
+          >
+            Sign Up
+          </Button>
         </Form>
-        {/* {isError ? (
+        {isRegistrationError ? (
           <Alert
             className="registration-form__error mt-2"
             message={errorMessage}
             type="error"
             showIcon
           />
-        ) : null} */}
+        ) : null}
       </Card>
       <div className="registration__footer">
         <span>Already have an account?</span>
