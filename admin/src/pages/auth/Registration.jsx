@@ -1,6 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { Alert, Card, Form, Button, Input } from 'antd'
@@ -9,8 +9,6 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAuth } from '../../auth/AuthProvider'
 
 import './Registration.scss'
-
-import RegistrationSuccessfully from './RegistrationSuccessfully'
 
 const validateMessages = {
   required: 'This field is required.',
@@ -21,18 +19,33 @@ const validateMessages = {
 
 const Registration = () => {
   const auth = useAuth()
+  const navigate = useNavigate()
 
-  const { isLoading, isRegistrationError, errorMessage } = useSelector((state) => state.auth)
+  const redirectToRegistrationSuccessfully = useRef(() => {})
+
+  const { isLoading, isRegistrationError, errorMessage, isRegistrated } = useSelector(
+    (state) => state.auth,
+  )
 
   const { registration } = auth
 
   const onFinish = ({ email, password, confirmPassword }) => {
     registration(email, password, confirmPassword)()
+
+    redirectToRegistrationSuccessfully.current = () =>
+      navigate('/registration/successfully', { state: { email, password } })
   }
+
+  useEffect(() => {
+    redirectToRegistrationSuccessfully.current()
+  }, [isRegistrated])
+
+  // if (isRegistrated) {
+  //   return <Navigate to="/registration/successfully" />
+  // }
 
   return (
     <div className="registration">
-      <RegistrationSuccessfully />
       <Card
         className="registration-card"
         style={{ width: 500 }}

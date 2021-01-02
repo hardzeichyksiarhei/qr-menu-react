@@ -8,6 +8,7 @@ import Dashboard from '../pages/Dashboard'
 
 import Login from '../pages/auth/Login'
 import Registration from '../pages/auth/Registration'
+import RegistrationSuccessfully from '../pages/auth/RegistrationSuccessfully'
 
 const Settings = lazy(() => import('../pages/Settings'))
 
@@ -37,6 +38,7 @@ const routes = (isLoggedIn) => [
     children: [
       { path: 'login', element: <Login /> },
       { path: 'registration', element: <Registration /> },
+      { path: 'registration/successfully', element: <RegistrationSuccessfully /> },
       { path: '/', element: <Navigate to="/login" /> },
     ],
   },
