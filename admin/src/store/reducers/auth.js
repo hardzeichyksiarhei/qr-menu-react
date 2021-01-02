@@ -74,10 +74,8 @@ const reducer = (state = initialState, action) => {
       }
     }
     case types.REQUESTED_REGISTRATION_SUCCEEDED: {
-      Cookies.set('token', action.payload.token, { expires: 1 })
       return {
         ...state,
-        token: action.payload.token,
         isLoading: false,
       }
     }
