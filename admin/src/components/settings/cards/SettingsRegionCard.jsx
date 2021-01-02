@@ -22,7 +22,7 @@ const SettingsRegionCard = () => {
   }
 
   return (
-    <Card className="card-item" title={<h2>Region Settings</h2>}>
+    <Card className="card-item" title={<h3>Region Settings</h3>}>
       <Form name="region-settings-form" layout="vertical">
         <Form.Item label="Country">
           <Select placeholder="Select country" value={country} onChange={onChangeCountry}>
