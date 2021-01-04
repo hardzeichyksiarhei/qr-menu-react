@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { Card, Form, Input } from 'antd'
 
-const SettingsSupplierCard = () => {
-  const [restaurantName, setRestaurantName] = useState(null)
-  const [companyName, setCompanyName] = useState(null)
-  const [phone, setPhone] = useState(null)
-  const [website, setWebsite] = useState(null)
-  const [addon] = useState('+375')
+const SettingsSupplierCard = ({ supplier }) => {
+  const [restaurantName, setRestaurantName] = useState(supplier.restaurantName)
+  const [companyName, setCompanyName] = useState(supplier.companyName)
+  const [phone, setPhone] = useState(supplier.phone)
+  const [website, setWebsite] = useState(supplier.website)
+  const [addon] = useState(supplier.addon)
 
   const onChangeRestaurantName = (e) => {
     setRestaurantName(e.target.value)
@@ -51,6 +52,10 @@ const SettingsSupplierCard = () => {
       </Form>
     </Card>
   )
+}
+
+SettingsSupplierCard.propTypes = {
+  supplier: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default SettingsSupplierCard
