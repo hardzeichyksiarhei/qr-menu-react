@@ -30,7 +30,8 @@ const SettingsManagement = () => {
     )
   }
 
-  const { regionSettings, supplier } = settings
+  // const { regionSettings, supplier } = settings
+  console.log(settings)
 
   return (
     <>
@@ -44,8 +45,8 @@ const SettingsManagement = () => {
         ]}
       />
       <div className="setting-cards">
-        <SettingsRegionCard regionSettings={regionSettings} />
-        <SettingsSupplierCard supplier={supplier} />
+        <SettingsRegionCard regionSettings={settings.regionSettings} />
+        <SettingsSupplierCard supplier={settings.supplier} />
       </div>
     </>
   )

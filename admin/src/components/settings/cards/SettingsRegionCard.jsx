@@ -21,7 +21,6 @@ const SettingsRegionCard = ({ regionSettings }) => {
   const onChangeTime = (e) => {
     setTime(e.target.value)
   }
-
   return (
     <Card className="card-item card-shadow" title={<h2 className="mb-0">Region Settings</h2>}>
       <Form name="region-settings-form" layout="vertical">
