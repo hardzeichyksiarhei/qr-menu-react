@@ -12,7 +12,7 @@ const asyncUser = async () => {
   return user
 }
 
-function* fetchUser() {
+export function* fetchUser() {
   try {
     yield put(actions.requestedUser())
     const user = yield call(asyncUser)
