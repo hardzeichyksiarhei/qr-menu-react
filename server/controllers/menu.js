@@ -12,3 +12,12 @@ module.exports.save = async function (req, res) {
     return res.status(500).json({ message: e.message })
   }
 }
+
+module.exports.getAll = async function (req, res) {
+  try {
+    const menus = await Menu.find()
+    return res.status(201).json(menus)
+  } catch (e) {
+    return res.status(500).json({ message: e.message })
+  }
+}
