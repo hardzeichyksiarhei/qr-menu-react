@@ -23,11 +23,20 @@ const reducer = (state = initialState, action) => {
         isSettingsLoading: false,
       }
     }
+
     case types.REQUESTED_SETTINGS_FAILED: {
       return {
         ...state,
         isErrors: true,
         isSettingsLoading: false,
+      }
+    }
+
+    case types.UPDATE_SETTINGS: {
+      const { settings, field, subField, value } = action.payload
+      settings[field][subField] = value
+      return {
+        ...state,
       }
     }
 

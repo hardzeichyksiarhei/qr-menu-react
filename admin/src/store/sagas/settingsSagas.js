@@ -16,6 +16,6 @@ function* fetchSettings() {
   }
 }
 
-export default function* watchAuth() {
+export default function* watchSettings() {
   yield takeEvery(types.FETCH_SETTINGS, fetchSettings)
 }

@@ -3,27 +3,32 @@ import PropTypes from 'prop-types'
 
 import { Card, Form, Input } from 'antd'
 
-const SettingsSupplierCard = ({ supplier }) => {
+const SettingsSupplierCard = ({ supplier, changeField }) => {
   const [restaurantName, setRestaurantName] = useState(supplier.restaurantName)
   const [companyName, setCompanyName] = useState(supplier.companyName)
   const [phone, setPhone] = useState(supplier.phone)
   const [website, setWebsite] = useState(supplier.website)
-  const [addon] = useState(supplier.addon)
+
+  const setField = (subField, value) => changeField('supplier', subField, value)
 
   const onChangeRestaurantName = (e) => {
     setRestaurantName(e.target.value)
+    setField('restaurantName', e.target.value)
   }
 
   const onChangeCompanyName = (e) => {
     setCompanyName(e.target.value)
+    setField('companyName', e.target.value)
   }
 
   const onChangePhone = (e) => {
     setPhone(e.target.value)
+    setField('phone', e.target.value)
   }
 
   const onChangeWebsite = (e) => {
     setWebsite(e.target.value)
+    setField('website', e.target.value)
   }
 
   return (
@@ -44,7 +49,7 @@ const SettingsSupplierCard = ({ supplier }) => {
           />
         </Form.Item>
         <Form.Item label="Phone (optional)">
-          <Input addonBefore={addon} value={phone} onChange={onChangePhone} />
+          <Input value={phone} onChange={onChangePhone} />
         </Form.Item>
         <Form.Item label="Website (optional)">
           <Input placeholder="Add website" value={website} onChange={onChangeWebsite} />
@@ -56,6 +61,7 @@ const SettingsSupplierCard = ({ supplier }) => {
 
 SettingsSupplierCard.propTypes = {
   supplier: PropTypes.instanceOf(Object).isRequired,
+  changeField: PropTypes.func.isRequired,
 }
 
 export default SettingsSupplierCard

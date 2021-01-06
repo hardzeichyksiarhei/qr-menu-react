@@ -16,9 +16,8 @@ const getSettings = async () =>
         supplier: {
           restaurantName: 'Random restaurant',
           companyName: 'Random company name',
-          phone: '25 555-55-55',
+          phone: '+375 25 555-55-55',
           website: 'link',
-          addon: '+375',
         },
       })
     }, 2000),

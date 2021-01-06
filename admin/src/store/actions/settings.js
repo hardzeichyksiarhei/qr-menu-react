@@ -18,6 +18,11 @@ export const requestedSettingsError = () => ({
   type: types.REQUESTED_SETTINGS_FAILED,
 })
 
+export const updateSettings = (settings, field, subField, value) => ({
+  type: types.UPDATE_SETTINGS,
+  payload: { settings, field, subField, value },
+})
+
 export const clearSettings = () => ({
   type: types.CLEAR_SETTINGS,
 })

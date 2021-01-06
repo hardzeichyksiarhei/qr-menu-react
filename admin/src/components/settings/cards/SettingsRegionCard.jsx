@@ -5,22 +5,28 @@ import { Card, Select, Form, Radio } from 'antd'
 
 const { Option } = Select
 
-const SettingsRegionCard = ({ regionSettings }) => {
+const SettingsRegionCard = ({ regionSettings, changeField }) => {
   const [country, setCountry] = useState(regionSettings.country)
   const [currency, setCurrency] = useState(regionSettings.currency)
   const [time, setTime] = useState(regionSettings.time)
 
+  const setField = (subField, value) => changeField('regionSettings', subField, value)
+
   const onChangeCountry = (e) => {
     setCountry(e)
+    setField('country', e)
   }
 
   const onChangeCurrency = (e) => {
     setCurrency(e)
+    setField('currency', e)
   }
 
   const onChangeTime = (e) => {
     setTime(e.target.value)
+    setField('time', e.target.value)
   }
+
   return (
     <Card className="card-item card-shadow" title={<h2 className="mb-0">Region Settings</h2>}>
       <Form name="region-settings-form" layout="vertical">
@@ -50,6 +56,7 @@ const SettingsRegionCard = ({ regionSettings }) => {
 
 SettingsRegionCard.propTypes = {
   regionSettings: PropTypes.instanceOf(Object).isRequired,
+  changeField: PropTypes.func.isRequired,
 }
 
 export default SettingsRegionCard
