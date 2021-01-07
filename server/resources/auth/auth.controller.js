@@ -18,27 +18,23 @@ exports.login = catchErrors(async (req, res) => {
 })
 
 exports.register = catchErrors(async (req, res) => {
-  try {
-    const { email, password } = req.body
+  const { email, password } = req.body
 
-    const candidate = await User.findOne({ email })
+  const candidate = await User.findOne({ email })
 
-    if (candidate) {
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        message: 'User with this login already exists',
-      })
-    }
-
-    const userRole = await Role.findOne({ value: 'supplier' })
-    const user = new User({
-      email,
-      password,
-      roles: [userRole.value],
+  if (candidate) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: 'User with this login already exists',
     })
-
-    await user.save()
-    return res.status(201).json({ message: 'User was created' })
-  } catch (e) {
-    return res.status(500).json({ message: e.message })
   }
+
+  const userRole = await Role.findOne({ value: 'supplier' })
+  const user = new User({
+    email,
+    password,
+    roles: [userRole.value],
+  })
+
+  await user.save()
+  return res.status(StatusCodes.CREATED).json({ message: 'User was created' })
 })
