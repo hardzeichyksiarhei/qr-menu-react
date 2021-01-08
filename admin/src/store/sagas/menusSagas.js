@@ -16,6 +16,6 @@ function* fetchMenus() {
   }
 }
 
-export default function* watchAuth() {
+export default function* watchMenus() {
   yield takeEvery(types.FETCH_MENUS, fetchMenus)
 }

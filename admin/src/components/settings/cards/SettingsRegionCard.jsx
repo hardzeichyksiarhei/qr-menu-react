@@ -1,24 +1,30 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { Card, Select, Form, Radio } from 'antd'
 
 const { Option } = Select
 
-const SettingsRegionCard = () => {
-  const [country, setCountry] = useState('Belarus')
-  const [currency, setCurrency] = useState('BLR')
-  const [time, setTime] = useState(null)
+const SettingsRegionCard = ({ regionSettings, changeField }) => {
+  const [country, setCountry] = useState(regionSettings.country)
+  const [currency, setCurrency] = useState(regionSettings.currency)
+  const [time, setTime] = useState(regionSettings.time)
+
+  const setField = (subField, value) => changeField('regionSettings', subField, value)
 
   const onChangeCountry = (e) => {
     setCountry(e)
+    setField('country', e)
   }
 
   const onChangeCurrency = (e) => {
     setCurrency(e)
+    setField('currency', e)
   }
 
   const onChangeTime = (e) => {
     setTime(e.target.value)
+    setField('time', e.target.value)
   }
 
   return (
@@ -39,13 +45,18 @@ const SettingsRegionCard = () => {
         </Form.Item>
         <Form.Item label="Time format">
           <Radio.Group onChange={onChangeTime} value={time}>
-            <Radio value={1}>12 global hours</Radio>
-            <Radio value={2}>24 global hours</Radio>
+            <Radio value={12}>12 global hours</Radio>
+            <Radio value={24}>24 global hours</Radio>
           </Radio.Group>
         </Form.Item>
       </Form>
     </Card>
   )
+}
+
+SettingsRegionCard.propTypes = {
+  regionSettings: PropTypes.instanceOf(Object).isRequired,
+  changeField: PropTypes.func.isRequired,
 }
 
 export default SettingsRegionCard
