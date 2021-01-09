@@ -1,10 +1,6 @@
 const router = require('express').Router()
-const UsersController = require('./user.controller')
+const UserController = require('./user.controller')
 
-// const { validate } = require('express-validation');
-
-// const UserValidation = require('./user.validator')
-
-router.route('/current').get([UsersController.getAuthUser])
+router.route('/current').get([UserController.getAuthUser])
 
 module.exports = router
