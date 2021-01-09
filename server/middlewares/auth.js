@@ -26,6 +26,8 @@ module.exports = async (req, res, next) => {
     if (!user) {
       throw Error('Not authorized to access this resource. Token is not valid.')
     }
+
+    req.user = { id: userId }
   } catch (error) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       auth: false,

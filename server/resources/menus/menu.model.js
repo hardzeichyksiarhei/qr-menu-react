@@ -11,7 +11,7 @@ const categorySchema = new Schema({
 })
 
 const menuSchema = new Schema({
-  userId: { type: Types.ObjectId, unique: true, required: true },
+  userId: { type: Types.ObjectId, required: true },
   status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
   title: { type: String, default: 'New menu' },
   internalComment: { type: String },
