@@ -6,7 +6,7 @@ import * as actions from '../actions/settings'
 import settingsService from '../../services/settings'
 
 // Settings
-function* fetchSettings() {
+export function* fetchSettings() {
   try {
     yield put(actions.requestedSettings())
     const settings = yield call(settingsService.getSettings)
