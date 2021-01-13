@@ -1,12 +1,17 @@
-import React from 'react';
-import './App.scss';
+import React from 'react'
+import './App.scss'
+import Menu from './components/Menu/Menu'
+import Header from './components/Header/Header'
+import MenuBar from './components/Navigation/Navigation'
 
 function App() {
   return (
     <div className="App">
-      <h1>Client</h1>
+      <Header />
+      <Menu />
+      {/* <MenuBar /> */}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
