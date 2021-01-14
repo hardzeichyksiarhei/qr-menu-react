@@ -12,8 +12,10 @@ module.exports.get = catchErrors(async (req, res) => {
 })
 
 module.exports.update = catchErrors(async (req, res) => {
+  const { user } = req
   const { settings } = req.body
-  await settingsService.update(settings)
+
+  await settingsService.update(user.id, settings)
 
   return res.status(StatusCodes.CREATED).json({ message: 'Settings was updated' })
 })

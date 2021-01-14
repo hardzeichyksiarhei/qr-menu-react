@@ -6,7 +6,7 @@ const photoSchema = new Schema({
 
 const categorySchema = new Schema({
   title: { type: String },
-  visibility: { type: Boolean },
+  isVisible: { type: Boolean },
   photo: { type: photoSchema, default: null },
 })
 

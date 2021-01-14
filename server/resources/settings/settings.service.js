@@ -7,7 +7,7 @@ exports.getByUserId = async (userId) => {
 
 exports.create = async (payload) => new Settings(payload).save()
 
-exports.update = async ({ id, userId, ...payload }) => {
+exports.update = async (userId, payload) => {
   const settings = Settings.findOneAndUpdate({ userId }, payload, { new: true })
   return settings
 }
