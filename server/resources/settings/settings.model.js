@@ -13,11 +13,14 @@ const supplierSchema = new Schema({
   website: { type: String, default: null },
 })
 
-const settingsSchema = new Schema({
-  userId: { type: Types.ObjectId, ref: 'User' },
-  regionSettings: { type: regionSettingsSchema, default: null },
-  supplier: { type: supplierSchema, default: null },
-})
+const settingsSchema = new Schema(
+  {
+    userId: { type: Types.ObjectId, ref: 'User' },
+    regionSettings: { type: regionSettingsSchema, default: () => ({}) },
+    supplierSettings: { type: supplierSchema, default: () => ({}) },
+  },
+  { timestamps: true },
+)
 
 const Settings = model('Settings', settingsSchema)
 

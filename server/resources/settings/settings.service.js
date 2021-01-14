@@ -1,10 +1,13 @@
 const Settings = require('./settings.model')
 
-exports.getSettings = async (UserId) => {
-  const settings = await Settings.find({ UserId })
-  console.log(settings)
+exports.getByUserId = async (userId) => {
+  const settings = await Settings.find({ userId })
   return settings
 }
 
-// посмотреть, что получает метод save и нужно ли создавать новый объект каждый раз
-exports.save = async (settings) => new Settings(settings).save()
+exports.create = async (payload) => new Settings(payload).save()
+
+exports.update = async ({ id, userId, ...payload }) => {
+  const settings = Settings.findOneAndUpdate({ userId }, payload, { new: true })
+  return settings
+}
