@@ -14,7 +14,7 @@ const supplierSchema = new Schema({
 })
 
 const settingsSchema = new Schema({
-  id: { type: Types.ObjectId, required: true },
+  userId: { type: Types.ObjectId, ref: 'User' },
   regionSettings: { type: regionSettingsSchema, default: null },
   supplier: { type: supplierSchema, default: null },
 })
