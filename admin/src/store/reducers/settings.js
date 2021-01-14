@@ -33,9 +33,7 @@ const reducer = (state = initialState, action) => {
     }
 
     case types.UPDATE_SETTINGS: {
-      // field: 'regionSettings.country'
-      const { /* settings, */ field, subField, value } = action.payload
-      // settings[field][subField] = value
+      const { field, subField, value } = action.payload
       return {
         ...state,
         settings: {

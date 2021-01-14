@@ -4,6 +4,7 @@ const { MONGO_CONNECTION_STRING } = require('./helpers/config')
 
 const User = require('./resources/users/user.model')
 const Role = require('./resources/roles/role.model')
+const Settings = require('./resources/settings/settings.model')
 
 const connectDb = () =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -13,7 +14,7 @@ const connectDb = () =>
     useFindAndModify: false,
   })
 
-const models = { User, Role }
+const models = { User, Role, Settings }
 
 exports.connectDb = connectDb
 
