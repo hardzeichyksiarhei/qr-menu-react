@@ -1,14 +1,20 @@
 import React from 'react'
 
 import { Menu } from 'antd'
+// import { NavLink } from 'react-router-dom'
 import { ArrowLeftOutlined, HomeOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import './Navigation.scss'
 
-const MenuBar = () => {
+function MenuBar() {
   return (
-    <Menu mode="horizontal">
+    <Menu className="menu-bar" mode="horizontal">
       <Menu.Item icon={<ArrowLeftOutlined />} key="back" />
-      <Menu.Item icon={<HomeOutlined />} key="home" />
-      <Menu.Item icon={<ShoppingCartOutlined />} key="cart" />
+      <Menu.Item icon={<HomeOutlined />} key="home">
+        {/* <NavLink to="/" /> */}
+      </Menu.Item>
+      <Menu.Item icon={<ShoppingCartOutlined />} key="cart">
+        {/* <NavLink to="/cart" /> */}
+      </Menu.Item>
     </Menu>
   )
 }
