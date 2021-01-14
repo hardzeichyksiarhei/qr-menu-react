@@ -11,11 +11,7 @@ async function start() {
     await connectDb()
 
     if (eraseDatabaseOnSync) {
-      await Promise.all([
-        models.User.deleteMany({}),
-        models.Task.deleteMany({}),
-        models.Board.deleteMany({}),
-      ])
+      await Promise.all([models.User.deleteMany({}), models.Menu.deleteMany({})])
     }
 
     const server = app.listen(PORT, () => console.log(`App is running on http://localhost:${PORT}`))
