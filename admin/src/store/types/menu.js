@@ -23,5 +23,5 @@ export const DELETE_CATEGORY = 'MENU/DELETE_CATEGORY'
 
 /* Dish */
 export const ADD_DISH = 'MENU/ADD_DISH'
-export const DELETE_DISH = 'MENU/DELETE_DISH'
 export const UPDATE_DISH = 'MENU/UPDATE_DISH'
+export const DELETE_DISH = 'MENU/DELETE_DISH'
