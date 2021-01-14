@@ -2,7 +2,7 @@ import React from 'react'
 import CardMenu from '../CardMenu/CardMenu'
 import { menu } from '../../MENU/MENU'
 
-function Menu() {
+function MenuList() {
   function cardClick(item: any) {
     console.log(item)
   }
@@ -16,4 +16,4 @@ function Menu() {
   )
 }
 
-export default Menu
+export default MenuList

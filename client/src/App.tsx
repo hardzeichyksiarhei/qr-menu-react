@@ -1,14 +1,14 @@
 import React from 'react'
 import './App.scss'
-import Menu from './components/Menu/Menu'
 import Header from './components/Header/Header'
 import MenuBar from './components/Navigation/Navigation'
+import MenuList from './components/MenuList/MenuList'
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Menu />
+      <MenuList />
       {/* <MenuBar /> */}
     </div>
   )
