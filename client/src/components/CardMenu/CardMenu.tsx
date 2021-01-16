@@ -4,9 +4,9 @@ import './CardMenu.css'
 import { CardMenuProps } from '../../utils/propsComponents'
 const { Meta } = Card
 
-function CardMenu({ card, clickMenu }: CardMenuProps) {
+function CardMenu({ menu, clickMenu }: CardMenuProps) {
   function clickCard() {
-    clickMenu(card)
+    clickMenu(menu)
   }
   return (
     <Card
@@ -16,13 +16,13 @@ function CardMenu({ card, clickMenu }: CardMenuProps) {
         <img
           className="card__image"
           style={{ width: '100%', height: '200px' }}
-          alt={card.title}
-          src={card.photo}
+          alt={menu.title}
+          src={menu.photo}
         />
       }
       onClick={clickCard}
     >
-      <Meta title={card.title} />
+      <Meta title={menu.title} />
     </Card>
   )
 }

@@ -29,7 +29,7 @@ function CardCategory({ category, choiceDish }: CardCategoryProps) {
       <List
         className={dishClass}
         bordered
-        dataSource={category.dish}
+        dataSource={category.dishes}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
             <CardDish key={item.title} dish={item} choiceDish={choiceDish} />
