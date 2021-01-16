@@ -4,6 +4,9 @@ const catchErrors = require('../../helpers/catchErrors')
 const User = require('../users/user.model')
 const Role = require('../roles/role.model')
 
+const userService = require('../users/user.service')
+const settingsService = require('../settings/settings.service')
+
 exports.login = catchErrors(async (req, res) => {
   const { email, password } = req.body
   const user = await User.findByCredentials(email, password)
@@ -29,12 +32,13 @@ exports.register = catchErrors(async (req, res) => {
   }
 
   const userRole = await Role.findOne({ value: 'supplier' })
-  const user = new User({
+
+  const user = await userService.create({
     email,
     password,
     roles: [userRole.value],
   })
+  await settingsService.create({ userId: user.id })
 
-  await user.save()
   return res.status(StatusCodes.CREATED).json({ message: 'User was created' })
 })

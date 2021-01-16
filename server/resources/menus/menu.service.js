@@ -5,4 +5,14 @@ exports.getAll = async (userId) => {
   return menus
 }
 
-exports.save = async (menu) => new Menu(menu).save()
+exports.getById = async (menuId) => {
+  const menu = await Menu.findById(menuId)
+  return menu
+}
+
+exports.create = async (menu) => new Menu(menu).save()
+
+exports.update = async ({ id, userId, ...payload }) => {
+  const menu = Menu.findOneAndUpdate({ _id: id }, payload, { new: true })
+  return menu
+}

@@ -12,8 +12,20 @@ module.exports.getAll = catchErrors(async (req, res) => {
 })
 
 module.exports.save = catchErrors(async (req, res) => {
+  const { user } = req
   const { menu } = req.body
-  await menuService.save(menu)
 
-  return res.status(StatusCodes.CREATED).json({ message: 'Menu was created' })
+  if (menu.id) {
+    await menuService.update(menu)
+    return res.status(StatusCodes.CREATED).json({ message: 'Menu was updated' })
+  }
+
+  const createdMenu = await menuService.create({
+    ...menu,
+    userId: user.id,
+  })
+
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ menuId: createdMenu.id, message: 'Menu was created' })
 })

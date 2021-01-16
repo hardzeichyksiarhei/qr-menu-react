@@ -2,10 +2,18 @@ import React from 'react'
 import { Card } from 'antd'
 import './CardMenu.css'
 const { Meta } = Card
-type CardMenuProps = { card: any, cardClick: (card: any) => void }
-function CardMenu({ card, cardClick }: CardMenuProps) {
-  function clickMenu() {
-    cardClick(card)
+type CardMenuProps = {
+  card: {
+    id: number,
+    title: string,
+    photo: string,
+    categories: any[],
+  },
+  clickMenu: (card: any) => void,
+}
+function CardMenu({ card, clickMenu }: CardMenuProps) {
+  function clickCard() {
+    clickMenu(card)
   }
   return (
     <Card
@@ -19,7 +27,7 @@ function CardMenu({ card, cardClick }: CardMenuProps) {
           src={card.photo}
         />
       }
-      onClick={clickMenu}
+      onClick={clickCard}
     >
       <Meta title={card.title} />
     </Card>

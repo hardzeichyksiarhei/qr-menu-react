@@ -1,9 +1,10 @@
 import React from 'react'
 import { Card } from 'antd'
 import './CardDish.scss'
+import { dishProps } from '../../utils/propsComponents'
 const { Meta } = Card
-type CardDishProps = { dish: any }
-function CardDish({ dish }: CardDishProps) {
+
+function CardDish({ dish }: dishProps) {
   const clickDish = () => {
     console.log(dish)
   }

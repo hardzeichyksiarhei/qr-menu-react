@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Card, List, Typography } from 'antd'
 import './CardCategory.scss'
 import CardDish from '../CardDish/CardDish'
+import { categoryProps } from '../../utils/propsComponents'
 const { Title } = Typography
-type CardCategoryProps = { category: any }
-function CardCategory({ category }: CardCategoryProps) {
+
+function CardCategory({ category }: categoryProps) {
   const [dishClass, setDishClass] = useState('dish')
   function clickCategory() {
     if (dishClass === 'dish') {

@@ -1,16 +1,34 @@
 import React from 'react'
 import CardMenu from '../CardMenu/CardMenu'
-import { menu } from '../../MENU/MENU'
 
-function MenuList() {
-  function cardClick(item: any) {
-    console.log(item)
+type MenuListProps = {
+  menus: {
+    id: number,
+    title: string,
+    photo: string,
+    categories: { dish: { title: string }[], title: string, photo: string }[],
+  }[],
+  choiceMenu: (menu: {
+    id: number,
+    title: string,
+    photo: string,
+    categories: { dish: { title: string }[], title: string, photo: string }[],
+  }) => void,
+}
+function MenuList({ menus, choiceMenu }: MenuListProps) {
+  function menuClick(menu: {
+    id: number,
+    title: string,
+    photo: string,
+    categories: { dish: { title: string }[], title: string, photo: string }[],
+  }) {
+    choiceMenu(menu)
   }
 
   return (
     <>
-      {menu.map((card) => {
-        return <CardMenu key={card.id} card={card} cardClick={cardClick} />
+      {menus.map((card) => {
+        return <CardMenu key={card.id} card={card} clickMenu={menuClick} />
       })}
     </>
   )

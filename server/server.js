@@ -13,8 +13,8 @@ async function start() {
     if (eraseDatabaseOnSync) {
       await Promise.all([
         models.User.deleteMany({}),
-        models.Task.deleteMany({}),
-        models.Board.deleteMany({}),
+        models.Settings.deleteMany({}),
+        models.Menu.deleteMany({}),
       ])
     }
 
