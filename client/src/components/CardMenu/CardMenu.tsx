@@ -1,16 +1,9 @@
 import React from 'react'
 import { Card } from 'antd'
 import './CardMenu.css'
+import { CardMenuProps } from '../../utils/propsComponents'
 const { Meta } = Card
-type CardMenuProps = {
-  card: {
-    id: number,
-    title: string,
-    photo: string,
-    categories: any[],
-  },
-  clickMenu: (card: any) => void,
-}
+
 function CardMenu({ card, clickMenu }: CardMenuProps) {
   function clickCard() {
     clickMenu(card)

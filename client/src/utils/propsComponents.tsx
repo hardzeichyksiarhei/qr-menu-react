@@ -9,3 +9,12 @@ export type menuProps = {
 export type categoriesProps = { categoryMenu: { dish: {}[], title: string, photo: string }[] }
 export type categoryProps = { category: { dish: {}[], title: string, photo: string } }
 export type dishProps = { dish: any }
+export type CardMenuProps = {
+  card: {
+    id: number,
+    title: string,
+    photo: string,
+    categories: any[],
+  },
+  clickMenu: (card: any) => void,
+}
