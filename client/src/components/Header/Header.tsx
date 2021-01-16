@@ -9,7 +9,7 @@ const Header = ({ orderUser }: HeaderProps) => {
     <PageHeader
       title="QR Menu Clone"
       extra={[
-        <Button key="3" icon={<ShoppingCartOutlined />}>
+        <Button key="2" icon={<ShoppingCartOutlined />}>
           <Badge count={orderUser.length}></Badge>
         </Button>,
 

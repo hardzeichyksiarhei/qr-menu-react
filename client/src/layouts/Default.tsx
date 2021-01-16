@@ -28,26 +28,30 @@ import MenuDish from '../components/MenuDish/MenuDish'
 //   },
 // ]
 import { menu } from '../MENU/MENU'
+import { dishProps } from '../utils/propsComponents'
 type DefaultProps = {
   menu: {
     id: number,
     title: string,
     photo: string,
-    categories: { dish: { title: string }[], title: string, photo: string }[],
+    categories: { dishes: { title: string }[], title: string, photo: string }[],
   },
-  categories: { dish: { title: string }[], title: string, photo: string }[],
-  categoryMenu: { dish: { title: string }[], title: string, photo: string }[],
+  categories: { dishes: { id: string, title: string }[], title: string, photo: string }[],
+  categoryMenu: { dishes: { title: string }[], title: string, photo: string }[],
 }
-const Default = () => {
-  const orderUser = JSON.parse(localStorage.getItem('order') || '[]')
+function Default() {
+  const [orderUser, setOrderUser] = useState(JSON.parse(localStorage.getItem('order') || '[]'))
   const [categoryMenu, setCategoryMenu] = useState([])
-  const [dish, setDish] = useState({
-    title: 'Soup title 1',
-  }) // поменять на {}
+  const [dish, setDish] = useState({})
   const choiceMenu = (menu: any) => {
-    const categories = menu.categories
-    console.log(categories)
-    // setCategoryMenu(menu.categories)
+    setCategoryMenu(menu.categories)
+  }
+  const choiceDish = (dish: any) => {
+    setDish(dish)
+  }
+  const addDish = (dish: any) => {
+    setOrderUser(orderUser.push(dish))
+    localStorage.setItem('order', JSON.stringify(orderUser))
   }
   return (
     <>
@@ -58,8 +62,8 @@ const Default = () => {
       {/* </Route>
 //         <Route path="/"> */}
       <MenuList menus={menu} choiceMenu={choiceMenu} />
-      <MenuCategory categoryMenu={categoryMenu} />
-      <MenuDish dish={dish} />
+      <MenuCategory categoryMenu={categoryMenu} choiceDish={choiceDish} />
+      <MenuDish dish={dish} addDish={addDish} />
       {/* </Route>
 //       </Switch> */}
     </>

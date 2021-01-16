@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Card, List, Typography } from 'antd'
 import './CardCategory.scss'
 import CardDish from '../CardDish/CardDish'
-import { categoryProps } from '../../utils/propsComponents'
+import { CardCategoryProps } from '../../utils/propsComponents'
 const { Title } = Typography
 
-function CardCategory({ category }: categoryProps) {
+function CardCategory({ category, choiceDish }: CardCategoryProps) {
   const [dishClass, setDishClass] = useState('dish')
   function clickCategory() {
     if (dishClass === 'dish') {
@@ -32,7 +32,7 @@ function CardCategory({ category }: categoryProps) {
         dataSource={category.dish}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
-            <CardDish key={item.title} dish={item} />
+            <CardDish key={item.title} dish={item} choiceDish={choiceDish} />
           </List.Item>
         )}
       />

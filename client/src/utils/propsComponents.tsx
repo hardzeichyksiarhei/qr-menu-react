@@ -6,8 +6,7 @@ export type menuProps = {
     categories: { dish: { title: string }[], title: string, photo: string }[],
   }[],
 }
-export type categoriesProps = { categoryMenu: { dish: {}[], title: string, photo: string }[] }
-export type categoryProps = { category: { dish: {}[], title: string, photo: string } }
+export type MenuDishProps = { dish: any, addDish: (dish: any) => void }
 export type dishProps = { dish: any }
 export type CardMenuProps = {
   card: {
@@ -17,4 +16,16 @@ export type CardMenuProps = {
     categories: any[],
   },
   clickMenu: (card: any) => void,
+}
+export type CardDishProps = {
+  dish: any,
+  choiceDish: (dish: any) => void,
+}
+export type CardCategoryProps = {
+  category: { dish: {}[], title: string, photo: string }
+  choiceDish: (dish: any) => void,
+}
+export type MenuCategoryProps = {
+  categoryMenu: { dish: {}[], title: string, photo: string }[]
+  choiceDish: (dish: any) => void,
 }
