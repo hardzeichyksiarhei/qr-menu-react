@@ -44,3 +44,9 @@ export const setCategories = (categories) => ({
   type: types.SET_CATEGORIES,
   payload: { categories },
 })
+
+/* Other */
+export const setSelectedCategoryId = (categoryId) => ({
+  type: types.SET_SELECTED_CATEGORY_ID,
+  payload: { categoryId },
+})

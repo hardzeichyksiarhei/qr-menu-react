@@ -17,6 +17,8 @@ const menuSchema = () => ({
 const initialState = {
   menu: menuSchema(),
 
+  selectedCategoryId: null,
+
   isMenuLoading: false,
   isMenuBusy: false,
   menuError: null,
@@ -186,6 +188,15 @@ const reducer = (state = initialState, action) => {
           }
           return category
         }),
+      }
+    }
+
+    /* Other */
+    case types.SET_SELECTED_CATEGORY_ID: {
+      const { categoryId } = action.payload
+      return {
+        ...state,
+        selectedCategoryId: categoryId,
       }
     }
 

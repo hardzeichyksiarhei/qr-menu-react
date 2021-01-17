@@ -4,6 +4,9 @@
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
     cursor: pointer;
+    &:focus {
+      outline: none;
+    }
     &:last-of-type {
       border-bottom: none;
     }
