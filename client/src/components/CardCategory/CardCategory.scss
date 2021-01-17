@@ -1,0 +1,14 @@
+.category{
+    position: relative;
+}
+.category__title{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.dish{
+ display: none;
+}
+.dish_visable {
+    display: block;
+}
