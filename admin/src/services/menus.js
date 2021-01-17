@@ -16,7 +16,40 @@ const MENUS = [
     title: 'Menu title 2',
     photo:
       'https://images.unsplash.com/photo-1548943487-a2e4e43b4853?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    categories: [],
+    categories: [
+      {
+        id: 'a946a5ae-1583-4e3a-8b74-b11952462e68',
+        title: 'Today`S Specials',
+        isVisible: true,
+        photo:
+          'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        dishes: [],
+      },
+      {
+        id: 'd2412173-6a77-4168-8c3f-c7a608014c74',
+        title: 'Soups',
+        isVisible: true,
+        photo:
+          'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        dishes: [],
+      },
+      {
+        id: 'c4e3cfe8-bcbd-4e59-b6a0-621d0c9bf07e',
+        title: 'Deserts',
+        visibility: true,
+        photo:
+          'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        dishes: [],
+      },
+      {
+        id: '29e36f86-39d2-475a-90c7-0d72d20b6013',
+        title: 'Main Course',
+        visibility: true,
+        photo:
+          'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        dishes: [],
+      },
+    ],
     createdAt: new Date(),
   },
   {

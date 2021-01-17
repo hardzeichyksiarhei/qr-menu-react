@@ -38,3 +38,9 @@ export const requestedMenuError = (error) => ({
   type: types.REQUESTED_MENU_FAILED,
   payload: { error },
 })
+
+// Categories
+export const setCategories = (categories) => ({
+  type: types.SET_CATEGORIES,
+  payload: { categories },
+})

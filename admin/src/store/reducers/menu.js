@@ -94,6 +94,14 @@ const reducer = (state = initialState, action) => {
     }
 
     /* Categories */
+    case types.SET_CATEGORIES: {
+      const { categories } = action.payload
+      return {
+        ...state,
+        menu: { ...state.menu, categories },
+      }
+    }
+
     case types.ADD_CATEGORY: {
       const { category } = action.payload
       return {

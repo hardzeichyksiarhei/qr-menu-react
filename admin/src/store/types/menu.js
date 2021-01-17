@@ -16,12 +16,13 @@ export const REQUESTED_SAVE_MENU_FAILED = 'MENU/REQUESTED_SAVE_MENU_FAILED'
 export const UPDATE_MENU = 'MENU/UPDATE_MENU'
 export const CLEAR_MENU = 'MENU/CLEAR_MENU'
 
-/* Category */
+/* Categories */
+export const SET_CATEGORIES = 'MENU/SET_CATEGORIES'
 export const ADD_CATEGORY = 'MENU/ADD_CATEGORY'
 export const UPDATE_CATEGORY = 'MENU/UPDATE_CATEGORY'
 export const DELETE_CATEGORY = 'MENU/DELETE_CATEGORY'
 
-/* Dish */
+/* Dishes */
 export const ADD_DISH = 'MENU/ADD_DISH'
 export const UPDATE_DISH = 'MENU/UPDATE_DISH'
 export const DELETE_DISH = 'MENU/DELETE_DISH'

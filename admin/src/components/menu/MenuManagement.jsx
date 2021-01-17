@@ -13,7 +13,11 @@ const MenuManagement = () => (
       style={{ paddingLeft: 0, paddingRight: 0 }}
       ghost={false}
       title="Menu"
-      extra={[<Button type="primary">Save</Button>]}
+      extra={[
+        <Button type="primary" key="save">
+          Save
+        </Button>,
+      ]}
     />
 
     <div className="menu-constructor-grid">

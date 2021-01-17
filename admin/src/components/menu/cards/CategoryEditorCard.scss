@@ -1,0 +1,12 @@
+.category-editor {
+    &__content {
+      width: 100%;
+      height: calc(100vh - 360px);
+      &--loading,
+      &--empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
