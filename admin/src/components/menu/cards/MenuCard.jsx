@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { Card } from 'antd'
@@ -11,7 +12,9 @@ const MenuCard = ({ menu }) => (
   <Card
     cover={<img alt={menu.title} src={menu.photo} />}
     actions={[
-      <EditOutlined key="edit" />,
+      <Link to={`/menus/${menu.id}/edit`}>
+        <EditOutlined key="edit" />
+      </Link>,
       <EyeOutlined key="preview" />,
       <EllipsisOutlined key="ellipsis" />,
     ]}

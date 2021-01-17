@@ -23,10 +23,10 @@ const routes = (isLoggedIn) => [
     element: isLoggedIn ? <DefaultLayout /> : <Navigate to="/login" />,
     children: [
       { path: '/dashboard', element: <Dashboard /> },
-      { path: '/Settings', element: <Settings /> },
+      { path: '/settings', element: <Settings /> },
       { path: '/menus', element: <MenusList /> },
       { path: '/menus/create', element: <MenuCreate /> },
-      { path: '/menus/:id/edit', element: <MenuEdit /> },
+      { path: '/menus/:menuId/edit', element: <MenuEdit /> },
       { path: '/menus/trash', element: <MenusTrashList /> },
       { path: '/', element: <Navigate to="/dashboard" /> },
     ],

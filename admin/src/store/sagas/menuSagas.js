@@ -6,10 +6,12 @@ import * as actions from '../actions/menu'
 import menusService from '../../services/menus'
 
 // Fetch Menu
-function* fetchMenu(menuId) {
+function* fetchMenu(action) {
+  const { menuId } = action.payload
+
   try {
     yield put(actions.requestedMenu())
-    const menu = yield call(menusService.getById(menuId))
+    const menu = yield call(menusService.getById, { menuId })
     yield put(actions.requestedMenuSuccess(menu))
   } catch (error) {
     yield put(actions.requestedMenuError(error.response))
@@ -20,8 +22,8 @@ function* fetchMenu(menuId) {
 function* saveMenu() {
   const menu = select((state) => state.menu.menu)
   try {
-    yield put(actions.requestedSAveMenu())
-    const { menuId } = yield call(menusService.save(menu))
+    yield put(actions.requestedSaveMenu())
+    const { menuId } = yield call(menusService.save, { menu })
     yield put(actions.requestedSaveMenuSuccess(menuId))
   } catch (error) {
     yield put(actions.requestedSaveMenuError(error.response))
@@ -29,6 +31,6 @@ function* saveMenu() {
 }
 
 export default function* watchMenus() {
-  yield takeEvery(types.FETCH_MENUS, fetchMenu)
+  yield takeEvery(types.FETCH_MENU, fetchMenu)
   yield takeEvery(types.SAVE_MENU, saveMenu)
 }
