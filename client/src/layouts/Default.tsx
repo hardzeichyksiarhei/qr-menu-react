@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../components/Header/Header'
-// import MenuCategory from '../components/MenuCategory/MenuCategory'
+import MenuCategory from '../components/MenuCategory/MenuCategory'
 import MenuList from '../components/MenuList/MenuList'
 import MenuDish from '../components/MenuDish/MenuDish'
 // import MenuBar from '../components/Navigation/Navigation'
@@ -53,7 +53,7 @@ function Default() {
       {/* </Route>
 //         <Route path="/"> */}
       <MenuList menus={menus} choiceMenu={choiceMenu} />
-      {/* <MenuCategory categoryMenu={categoryMenu} choiceDish={choiceDish} /> */}
+      <MenuCategory categoryMenu={categoryMenu} choiceDish={choiceDish} />
 
       {dish && <MenuDish dish={dish} addDish={addDish} />}
       {/* </Route>

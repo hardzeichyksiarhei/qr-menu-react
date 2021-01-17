@@ -42,7 +42,7 @@ export type MenuProps = {
   id: number,
   title: string,
   photo: string,
-  categories: CategoryProps,
+  categories: CategoryProps[],
   createdAt: any,
 }
 
@@ -66,6 +66,6 @@ export type CardCategoryProps = {
   choiceDish: (dish: Dish) => void,
 }
 export type MenuCategoryProps = {
-  categoryMenu: CategoryProps,
+  categoryMenu: CategoryProps[],
   choiceDish: (dish: Dish) => void,
 }

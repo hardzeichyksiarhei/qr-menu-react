@@ -1,13 +1,13 @@
 import React from 'react'
-import { MenuCategoryProps } from '../../utils/propsComponents'
-// import CardCategory from '../CardCategory/CardCategory'
+import { CategoryProps, MenuCategoryProps } from '../../utils/propsComponents'
+import CardCategory from '../CardCategory/CardCategory'
 
 function MenuCategory({ categoryMenu, choiceDish }: MenuCategoryProps) {
   return (
     <>
-      {/* {categoryMenu.map((category: { dishes: {}[], id: string, title: string, photo: any }) => {
+      {categoryMenu.map((category: CategoryProps) => {
         return <CardCategory key={category.title} category={category} choiceDish={choiceDish} />
-      })} */}
+      })}
     </>
   )
 }

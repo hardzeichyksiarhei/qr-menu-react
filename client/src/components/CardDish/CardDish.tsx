@@ -11,7 +11,7 @@ function CardDish({ dish, choiceDish }: CardDishProps) {
   return (
     <Card
       className="category"
-      style={{ padding: '0', width: '100%', border: 'none' }}
+      style={{ padding: '0', width: '100%', border: 'none', cursor: 'pointer' }}
       onClick={clickDish}
     >
       <Meta className="dish__title" title={dish.title} />
