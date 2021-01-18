@@ -21,6 +21,7 @@ function* fetchMenu(action) {
 // Save Menu
 function* saveMenu() {
   const menu = select((state) => state.menu.menu)
+
   try {
     yield put(actions.requestedSaveMenu())
     const { menuId } = yield call(menusService.save, { menu })

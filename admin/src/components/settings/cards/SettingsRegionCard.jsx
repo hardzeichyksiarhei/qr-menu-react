@@ -8,7 +8,7 @@ const { Option } = Select
 const SettingsRegionCard = ({ regionSettings, changeField }) => {
   const [country, setCountry] = useState(regionSettings.country)
   const [currency, setCurrency] = useState(regionSettings.currency)
-  const [time, setTime] = useState(regionSettings.time)
+  const [timeFormat, setTimeFormat] = useState(regionSettings.timeFormat)
 
   const setField = (subField, value) => changeField('regionSettings', subField, value)
 
@@ -22,9 +22,9 @@ const SettingsRegionCard = ({ regionSettings, changeField }) => {
     setField('currency', e)
   }
 
-  const onChangeTime = (e) => {
-    setTime(e.target.value)
-    setField('time', e.target.value)
+  const onChangeTimeFormat = (e) => {
+    setTimeFormat(e.target.value)
+    setField('timeFormat', e.target.value)
   }
 
   return (
@@ -44,7 +44,7 @@ const SettingsRegionCard = ({ regionSettings, changeField }) => {
           </Select>
         </Form.Item>
         <Form.Item label="Time format">
-          <Radio.Group onChange={onChangeTime} value={time}>
+          <Radio.Group onChange={onChangeTimeFormat} value={timeFormat}>
             <Radio value={12}>12 global hours</Radio>
             <Radio value={24}>24 global hours</Radio>
           </Radio.Group>

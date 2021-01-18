@@ -1,7 +1,7 @@
 const Settings = require('./settings.model')
 
 exports.getByUserId = async (userId) => {
-  const settings = await Settings.find({ userId })
+  const settings = await Settings.findOne({ userId })
   return settings
 }
 
