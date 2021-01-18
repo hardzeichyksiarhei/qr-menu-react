@@ -34,10 +34,15 @@ const reducer = (state = initialState, action) => {
       }
     }
     case types.REQUESTED_MENU_SUCCEEDED: {
+      const { menu } = action.payload
+      const firstCategory = menu.categories[0]
+
       return {
         ...state,
-        menu: action.payload.menu,
+        menu,
         isMenuLoading: false,
+
+        selectedCategoryId: firstCategory || null,
       }
     }
     case types.REQUESTED_MENU_FAILED: {
@@ -140,6 +145,18 @@ const reducer = (state = initialState, action) => {
     }
 
     /* Dishes */
+    case types.SET_DISHES: {
+      const { categoryId, dishes } = action.payload
+      return {
+        ...state,
+        menu: {
+          ...state.menu,
+          categories: state.menu.categories.map((category) =>
+            category.id === categoryId ? { ...category, dishes } : category,
+          ),
+        },
+      }
+    }
 
     case types.ADD_DISH: {
       const { categoryId, dish } = action.payload

@@ -25,7 +25,7 @@ const CategoryItem = ({ category }) => {
       tabIndex="0"
     >
       <div className="category-item__photo">
-        <Image width={60} height={60} src={category.photo} />
+        <Image width={60} height={60} src={category.photo} preview={false} />
       </div>
       <div className="category-item__content">
         <div className="category-item__title">{category.title}</div>

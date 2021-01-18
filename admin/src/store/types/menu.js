@@ -23,6 +23,7 @@ export const UPDATE_CATEGORY = 'MENU/UPDATE_CATEGORY'
 export const DELETE_CATEGORY = 'MENU/DELETE_CATEGORY'
 
 /* Dishes */
+export const SET_DISHES = 'MENU/SET_DISHES'
 export const ADD_DISH = 'MENU/ADD_DISH'
 export const UPDATE_DISH = 'MENU/UPDATE_DISH'
 export const DELETE_DISH = 'MENU/DELETE_DISH'
