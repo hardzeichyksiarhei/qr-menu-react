@@ -1,12 +1,14 @@
 /* eslint-disable prefer-promise-reject-errors */
 import React, { useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Alert, Card, Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
+
+import * as authActions from '../../store/actions/auth'
 
 import './Registration.scss'
 
@@ -18,6 +20,7 @@ const validateMessages = {
 }
 
 const Registration = () => {
+  const dispatch = useDispatch()
   const auth = useAuth()
   const navigate = useNavigate()
 
@@ -39,6 +42,13 @@ const Registration = () => {
   useEffect(() => {
     redirectToRegistrationSuccessfully.current()
   }, [isRegistrated])
+
+  useEffect(
+    () => () => {
+      dispatch(authActions.clearErrors())
+    },
+    [dispatch],
+  )
 
   // if (isRegistrated) {
   //   return <Navigate to="/registration/successfully" />

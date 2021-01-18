@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isError: true,
+        errorMessage: action.payload.message,
       }
     }
 
@@ -42,9 +42,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-
-        isLoginError: false,
-        errorMessage: null,
       }
     }
     case types.REQUESTED_LOGIN_SUCCEEDED: {
@@ -70,10 +67,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-
-        isRegistrationError: false,
-        errorMessage: null,
-
         isRegistrated: false,
       }
     }
@@ -91,6 +84,15 @@ const reducer = (state = initialState, action) => {
 
         isRegistrationError: true,
         errorMessage: action.payload.message,
+      }
+    }
+
+    case types.CLEAR_ERRORS: {
+      return {
+        ...state,
+        isLoginError: false,
+        isRegistrationError: false,
+        errorMessage: null,
       }
     }
 
