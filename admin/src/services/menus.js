@@ -82,7 +82,7 @@ const MENUS = [
       {
         id: 'c4e3cfe8-bcbd-4e59-b6a0-621d0c9bf07e',
         title: 'Deserts',
-        visibility: true,
+        isVisible: true,
         photo:
           'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
         dishes: [],
@@ -90,7 +90,7 @@ const MENUS = [
       {
         id: '29e36f86-39d2-475a-90c7-0d72d20b6013',
         title: 'Main Course',
-        visibility: true,
+        isVisible: true,
         photo:
           'https://images.unsplash.com/photo-1599077971981-99c35aa835e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
         dishes: [],
