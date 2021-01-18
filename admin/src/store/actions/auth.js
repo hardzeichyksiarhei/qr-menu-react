@@ -14,8 +14,9 @@ export const requestedUserSuccess = (user) => ({
   payload: { user },
 })
 
-export const requestedUserError = () => ({
+export const requestedUserError = (message) => ({
   type: types.REQUESTED_USER_FAILED,
+  payload: { message },
 })
 
 // Login
@@ -55,6 +56,10 @@ export const requestedRegistrationSuccess = () => ({
 export const requestedRegistrationError = (message) => ({
   type: types.REQUESTED_REGISTRATION_FAILED,
   payload: { message },
+})
+
+export const clearErrors = () => ({
+  type: types.CLEAR_ERRORS,
 })
 
 export const logout = () => ({

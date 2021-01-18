@@ -13,7 +13,7 @@ exports.login = catchErrors(async (req, res) => {
   if (!user) {
     return res.status(StatusCodes.FORBIDDEN).send({
       auth: false,
-      error: 'Login failed! Check authentication credentials',
+      message: 'Login failed! Check authentication credentials',
     })
   }
   const token = await user.generateAuthToken()

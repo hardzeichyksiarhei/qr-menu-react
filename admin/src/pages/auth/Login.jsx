@@ -1,13 +1,15 @@
 /* eslint-disable no-template-curly-in-string */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Card, Form, Input, Button, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
+
+import * as authActions from '../../store/actions/auth'
 
 import './Login.scss'
 
@@ -19,11 +21,19 @@ const validateMessages = {
 }
 
 const Login = () => {
+  const dispatch = useDispatch()
   const auth = useAuth()
 
   const { isLoading, isLoginError, errorMessage } = useSelector((state) => state.auth)
 
   const { login } = auth
+
+  useEffect(
+    () => () => {
+      dispatch(authActions.clearErrors())
+    },
+    [dispatch],
+  )
 
   const onFinish = (values) => {
     const { email, password } = values

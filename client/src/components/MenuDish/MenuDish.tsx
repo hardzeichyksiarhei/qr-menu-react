@@ -9,9 +9,8 @@ function MenuDish({ dish, addDish }: MenuDishProps) {
   return (
     <>
       <h2>{dish.title}</h2>
-      <Button onClick={clickDish} key="1">
-        Add dish
-      </Button>
+      <p>{dish.description}</p>
+      <Button onClick={clickDish}>Add dish</Button>
     </>
   )
 }

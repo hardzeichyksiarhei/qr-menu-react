@@ -18,7 +18,8 @@ export function* fetchUser() {
     const user = yield call(asyncUser)
     yield put(actions.requestedUserSuccess(user))
   } catch (error) {
-    yield put(actions.requestedUserError())
+    const { data } = error.response
+    yield put(actions.requestedUserError(data.message))
   }
 }
 

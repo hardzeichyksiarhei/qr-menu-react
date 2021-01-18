@@ -2,15 +2,15 @@ import React from 'react'
 import './Header.scss'
 import { PageHeader, Button, Badge } from 'antd'
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import { HeaderProps } from '../../utils/propsComponents'
 
-type HeaderProps = { orderUser: Array<any> }
-const Header = ({ orderUser }: HeaderProps) => {
+function Header({ counrOrder }: HeaderProps) {
   return (
     <PageHeader
       title="QR Menu Clone"
       extra={[
         <Button key="2" icon={<ShoppingCartOutlined />}>
-          <Badge count={orderUser.length}></Badge>
+          <Badge count={counrOrder}></Badge>
         </Button>,
 
         <Button key="1" icon={<UserOutlined />}></Button>,
