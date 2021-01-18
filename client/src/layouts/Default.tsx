@@ -27,7 +27,7 @@ import MenuDish from '../components/MenuDish/MenuDish'
 //     icon: <SettingOutlined />,
 //   },
 // ]
-import { menus } from '../MENU/MENU'
+import { MENUS } from '../MENU/MENU'
 import { Dish } from '../utils/propsComponents'
 
 function Default() {
@@ -52,7 +52,7 @@ function Default() {
       {/* <MenuBar /> */}
       {/* </Route>
 //         <Route path="/"> */}
-      <MenuList menus={menus} choiceMenu={choiceMenu} />
+      <MenuList menus={MENUS} choiceMenu={choiceMenu} />
       <MenuCategory categoryMenu={categoryMenu} choiceDish={choiceDish} />
 
       {dish && <MenuDish dish={dish} addDish={addDish} />}

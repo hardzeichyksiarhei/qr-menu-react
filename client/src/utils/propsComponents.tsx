@@ -1,37 +1,19 @@
-// export type MenusProps = {
-//   menus: {
-//     id: number,
-//     title: string,
-//     photo: string,
-//     categories: {id:string, title: string, photo: any, dishes: { id:string, internalId:number, title: string, photo: any, isPublished: boolean,isEnabledToOrder: boolean, tags: [], options: [], optionsType: string, extras: [], description: string,ingredients:[], allergens: [], categoryId: string, vatRates: {}}[] }[],
-//   }[],
-//   menu:{id: number,
-//     title: string,
-//     photo: string,
-//     categories: {id:string, title: string, photo: any, dishes: { id:string, internalId:number, title: string, photo: any, isPublished: boolean,isEnabledToOrder: boolean, tags: [], options: [], optionsType: string, extras: [], description: string,ingredients:[], allergens: [], categoryId: string, vatRates: {}}[] }[],
-//   }
-// }
-
 export type Dish = {
   id: string,
-  internalId: string,
+  categoryId: string,
   title: string,
-  photo: any,
+  internalId: string,
+  description: string,
+  photo: string,
   isPublished: boolean,
   isEnabledToOrder: boolean,
   tags: [],
-  options: {}[],
-  optionsType: string,
-  extras: {}[],
-  description: string,
   ingredients: any,
   allergens: any,
-  categoryId: string,
-  vatRates: {},
 }
 
 export type CategoryProps = {
-  visibility: boolean
+  isVisible: boolean
   id: string,
   title: string,
   photo: any,
