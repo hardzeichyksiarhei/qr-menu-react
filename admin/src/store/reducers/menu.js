@@ -162,15 +162,18 @@ const reducer = (state = initialState, action) => {
       const { categoryId, dish } = action.payload
       return {
         ...state,
-        categories: state.menu.categories.map((category) => {
-          if (category.id === categoryId) {
-            return {
-              ...category,
-              dishes: category.dishes.concat(dish),
+        menu: {
+          ...state.menu,
+          categories: state.menu.categories.map((category) => {
+            if (category.id === categoryId) {
+              return {
+                ...category,
+                dishes: category.dishes.concat(dish),
+              }
             }
-          }
-          return category
-        }),
+            return category
+          }),
+        },
       }
     }
 
@@ -178,17 +181,20 @@ const reducer = (state = initialState, action) => {
       const { categoryId, dishId, data } = action.payload
       return {
         ...state,
-        categories: state.menu.categories.map((category) => {
-          if (category.id === categoryId) {
-            return {
-              ...category,
-              dishes: category.dishes.map((dish) =>
-                dish.id === dishId ? { ...dish, ...data } : dish,
-              ),
+        menu: {
+          ...state.menu,
+          categories: state.menu.categories.map((category) => {
+            if (category.id === categoryId) {
+              return {
+                ...category,
+                dishes: category.dishes.map((dish) =>
+                  dish.id === dishId ? { ...dish, ...data } : dish,
+                ),
+              }
             }
-          }
-          return category
-        }),
+            return category
+          }),
+        },
       }
     }
 
@@ -196,15 +202,18 @@ const reducer = (state = initialState, action) => {
       const { categoryId, dishId } = action.payload
       return {
         ...state,
-        categories: state.menu.categories.map((category) => {
-          if (category.id === categoryId) {
-            return {
-              ...category,
-              dishes: category.dishes.filter((dish) => dish.id !== dishId),
+        menu: {
+          ...state.menu,
+          categories: state.menu.categories.map((category) => {
+            if (category.id === categoryId) {
+              return {
+                ...category,
+                dishes: category.dishes.filter((dish) => dish.id !== dishId),
+              }
             }
-          }
-          return category
-        }),
+            return category
+          }),
+        },
       }
     }
 

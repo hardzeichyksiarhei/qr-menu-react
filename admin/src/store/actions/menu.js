@@ -51,6 +51,11 @@ export const setDishes = (categoryId, dishes) => ({
   payload: { categoryId, dishes },
 })
 
+export const deleteDish = (categoryId, dishId) => ({
+  type: types.DELETE_DISH,
+  payload: { categoryId, dishId },
+})
+
 // Other
 export const setSelectedCategoryId = (categoryId) => ({
   type: types.SET_SELECTED_CATEGORY_ID,
