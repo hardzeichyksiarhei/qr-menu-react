@@ -9,7 +9,7 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
   const [phone, setPhone] = useState(supplier.phone)
   const [website, setWebsite] = useState(supplier.website)
 
-  const setField = (subField, value) => changeField('supplier', subField, value)
+  const setField = (subField, value) => changeField('supplierSettings', subField, value)
 
   const onChangeRestaurantName = (e) => {
     setRestaurantName(e.target.value)

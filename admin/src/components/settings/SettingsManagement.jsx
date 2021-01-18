@@ -2,7 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PageHeader, Button, Spin } from 'antd'
 
-import { fetchSettings, clearSettings, updateSettings } from '../../store/actions/settings'
+import {
+  fetchSettings,
+  clearSettings,
+  updateSettings,
+  saveSettings,
+} from '../../store/actions/settings'
 import settingsSelectors from '../../store/selectors/settings'
 
 import './SettingsManagement.scss'
@@ -26,6 +31,10 @@ const SettingsManagement = () => {
     dispatch(updateSettings(settings, field, subField, value))
   }
 
+  const saveChanges = () => {
+    dispatch(saveSettings())
+  }
+
   if (!settings) {
     return (
       <div className="d-flex justify-content-center">
@@ -40,14 +49,14 @@ const SettingsManagement = () => {
         ghost={false}
         title="Settings"
         extra={[
-          <Button key="1" type="primary">
+          <Button key="1" type="primary" onClick={saveChanges}>
             Save
           </Button>,
         ]}
       />
       <div className="setting-cards">
         <SettingsRegionCard regionSettings={settings.regionSettings} changeField={changeField} />
-        <SettingsSupplierCard supplier={settings.supplier} changeField={changeField} />
+        <SettingsSupplierCard supplier={settings.supplierSettings} changeField={changeField} />
       </div>
     </>
   )
