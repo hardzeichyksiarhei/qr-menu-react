@@ -40,8 +40,10 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.statics.findByCredentials = async (email, password) => {
   // eslint-disable-next-line no-use-before-define
   const user = await User.findOne({ email })
+  if (!user) return null
+
   const isPasswordMatch = await bcrypt.compare(password, user.password)
-  if (!user || !isPasswordMatch) return null
+  if (!isPasswordMatch) return null
   return user
 }
 
