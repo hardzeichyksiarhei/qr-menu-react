@@ -11,7 +11,6 @@ export type Dish = {
   ingredients: any,
   allergens: any,
 }
-
 export type CategoryProps = {
   isVisible: boolean
   id: string,
@@ -19,7 +18,6 @@ export type CategoryProps = {
   photo: any,
   dishes: Dish[],
 }
-
 export type MenuProps = {
   id: number,
   title: string,
@@ -27,12 +25,11 @@ export type MenuProps = {
   categories: CategoryProps[],
   createdAt: any,
 }
-
+export type HeaderProps = { counrOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
   choiceMenu: (menu: MenuProps) => void,
 }
-
 export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void }
 export type DishProps = { dish: Dish }
 export type CardMenuProps = {
@@ -50,4 +47,14 @@ export type CardCategoryProps = {
 export type MenuCategoryProps = {
   categoryMenu: CategoryProps[],
   choiceDish: (dish: Dish) => void,
+}
+export type CartProps ={
+  orderUser:Dish[],
+  addDish: (dish: Dish) => void ,
+  deleteDish:(dish: Dish)=>void,
+}
+export type OrderDishProps={
+  dish:{id:Dish, sum: number} ,
+  addDish: (dish: Dish) => void ,
+  deleteDish:(dish: Dish)=>void,
 }

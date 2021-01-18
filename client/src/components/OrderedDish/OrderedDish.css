@@ -1,0 +1,15 @@
+.order-dish{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+.order-dish__info{
+    max-width: 60%;
+}
+.order-dish__management{
+
+}
+.order-dish__count{
+    padding: 0 5px;
+}
