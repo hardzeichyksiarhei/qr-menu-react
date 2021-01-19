@@ -5,7 +5,6 @@ const initialState = {
 
   isSettingsLoading: true,
   isErrors: false,
-  isSettingsBusy: false,
   settingsSaveError: null,
 }
 
@@ -54,14 +53,14 @@ const reducer = (state = initialState, action) => {
     case types.REQUESTED_SAVE_SETTINGS: {
       return {
         ...state,
-        isSettingsBusy: true,
+        isSettingsLoading: true,
       }
     }
 
     case types.REQUESTED_SAVE_SETTINGS_SUCCEEDED: {
       return {
         ...state,
-        isSettingsBusy: false,
+        isSettingsLoading: false,
       }
     }
 

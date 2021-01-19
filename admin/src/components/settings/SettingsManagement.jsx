@@ -17,7 +17,7 @@ import SettingsSupplierCard from './cards/SettingsSupplierCard'
 const SettingsManagement = () => {
   const dispatch = useDispatch()
 
-  const { settings } = useSelector(settingsSelectors.settings)
+  const { settings, isSettingsLoading } = useSelector(settingsSelectors.settings)
 
   useEffect(() => {
     dispatch(fetchSettings())
@@ -49,7 +49,7 @@ const SettingsManagement = () => {
         ghost={false}
         title="Settings"
         extra={[
-          <Button key="1" type="primary" onClick={saveChanges}>
+          <Button key="1" type="primary" onClick={saveChanges} loading={isSettingsLoading}>
             Save
           </Button>,
         ]}
