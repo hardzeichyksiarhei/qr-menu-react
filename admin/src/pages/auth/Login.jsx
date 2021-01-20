@@ -9,6 +9,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
 import translate from '../../intl/translate'
+
 import * as authActions from '../../store/actions/auth'
 
 import './Login.scss'

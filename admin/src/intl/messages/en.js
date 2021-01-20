@@ -10,6 +10,8 @@ export default {
     SignIn: 'Sign in',
     Register: 'Register',
     Logout: 'Logout',
+    PleaseConfirmPassword: 'Please confirm your password!',
+    ConfirmPassword: 'Confirm password',
     ResendLink: 'Resend link',
     EmailVerify: 'E-Mail verify',
     ResendVerLink: 'Resend verification link',
@@ -39,6 +41,7 @@ export default {
     VerifyEmail: 'Verify Email',
     UserVerifiedAlreadt: 'User verified already',
     VerifyEmailFailed: 'Failed to verify email',
+    TwoPasswordIsNotSame: 'The two passwords that you entered do not match!',
 
     // Validation
     PasswordConfirmed: 'Password confirmation does not match',

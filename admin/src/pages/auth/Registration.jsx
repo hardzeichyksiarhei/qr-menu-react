@@ -2,27 +2,22 @@
 import React, { useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { useIntl } from 'react-intl'
 import { Alert, Card, Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
+import translate from '../../intl/translate'
 
 import * as authActions from '../../store/actions/auth'
 
 import './Registration.scss'
 
-const validateMessages = {
-  required: 'This field is required.',
-  types: {
-    email: 'This field must be a valid email address.',
-  },
-}
-
 const Registration = () => {
   const dispatch = useDispatch()
   const auth = useAuth()
   const navigate = useNavigate()
+  const intl = useIntl()
 
   const redirectToRegistrationSuccessfully = useRef(() => {})
 
@@ -31,6 +26,13 @@ const Registration = () => {
   )
 
   const { registration } = auth
+
+  const validateMessages = {
+    required: intl.formatMessage({ id: 'FieldRequired' }),
+    types: {
+      email: intl.formatMessage({ id: 'Mail' }),
+    },
+  }
 
   const onFinish = ({ email, password, confirmPassword }) => {
     registration(email, password, confirmPassword)()
@@ -67,14 +69,14 @@ const Registration = () => {
           validateMessages={validateMessages}
           onFinish={onFinish}
         >
-          <h3 className="registration-form__title">Registration</h3>
+          <h3 className="registration-form__title">{translate('Registration')}</h3>
           <Form.Item name="email" rules={[{ type: 'email', required: true }]}>
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true }]} hasFeedback>
             <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
-              placeholder="Password"
+              placeholder={intl.formatMessage({ id: 'Password' })}
             />
           </Form.Item>
           <Form.Item
@@ -84,21 +86,21 @@ const Registration = () => {
             rules={[
               {
                 required: true,
-                message: 'Please confirm your password!',
+                message: intl.formatMessage({ id: 'PleaseConfirmPassword' }),
               },
               ({ getFieldValue }) => ({
                 validator(rule, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve()
                   }
-                  return Promise.reject('The two passwords that you entered do not match!')
+                  return Promise.reject(translate('TwoPasswordIsNotSame'))
                 },
               }),
             ]}
           >
             <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
-              placeholder="Confirm Password"
+              placeholder={intl.formatMessage({ id: 'ConfirmPassword' })}
             />
           </Form.Item>
 
@@ -109,22 +111,22 @@ const Registration = () => {
             loading={isLoading}
             block
           >
-            Sign Up
+            {translate('SignUp')}
           </Button>
         </Form>
         {isRegistrationError ? (
           <Alert
             className="registration-form__error mt-2"
-            message={errorMessage}
+            message={intl.formatMessage({ id: errorMessage })}
             type="error"
             showIcon
           />
         ) : null}
       </Card>
       <div className="registration__footer">
-        <span>Already have an account?</span>
+        <span>{translate('HaveAnAccount')}</span>
         <Link className="registration__sign-in" to="/login">
-          Sign In
+          {translate('SignIn')}
         </Link>
       </div>
     </div>

@@ -10,6 +10,8 @@ export default {
     SignIn: 'Войти',
     Register: 'Зарегистрироваться',
     Logout: 'Выйти',
+    PleaseConfirmPassword: 'Пожалуйста подтвердите свой пароль!',
+    ConfirmPassword: 'Подтвердите пароль',
     ResendLink: 'Послать ссылку повторно',
     EmailVerify: 'Подтверждение email',
     ResendVerLink: 'Повторно послать email для верификации',
@@ -40,6 +42,7 @@ export default {
     VerifyEmail: 'Подтвердить email',
     UserVerifiedAlreadt: 'Пользователь уже подтвержден',
     VerifyEmailFailed: 'Подтвердить email не удалось',
+    TwoPasswordIsNotSame: 'Два введенных вами пароля не совпадают!',
     // Validation
     PasswordConfirmed: 'Подтверждение пароля не совпадает',
     FieldRequired: 'Обязательное поле',
