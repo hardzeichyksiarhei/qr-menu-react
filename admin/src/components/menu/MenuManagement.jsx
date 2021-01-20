@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PageHeader, Button } from 'antd'
 
-import CategoryEditorCard from './cards/CategoryEditorCard'
+import CategoriesEditorCard from './cards/CategoriesEditorCard'
 import MenuEditorCard from './cards/MenuEditorCard'
 
 import './MenuManagement.scss'
@@ -22,7 +22,7 @@ const MenuManagement = () => (
 
     <div className="menu-constructor-grid">
       <div className="menu-constructor-col menu-constructor-col--one">
-        <CategoryEditorCard />
+        <CategoriesEditorCard />
       </div>
       <div className="menu-constructor-col menu-constructor-col--second">
         <MenuEditorCard />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { v4 as uuid } from 'uuid'
 
 import { Button, Image, Space } from 'antd'
 import {
@@ -19,6 +20,15 @@ const DishItem = ({ dish }) => {
   const dispatch = useDispatch()
   const selectedcategoryId = useSelector(menuSelectors.selectedCategoryId)
 
+  const handleClickDuplicateDish = () => {
+    dispatch(
+      menuActions.addDish(selectedcategoryId, {
+        ...dish,
+        id: uuid(),
+        title: `Copy of ${dish.title}`,
+      }),
+    )
+  }
   const handleClickDeleteDish = () => {
     dispatch(menuActions.deleteDish(selectedcategoryId, dish.id))
   }
@@ -39,7 +49,7 @@ const DishItem = ({ dish }) => {
       <div className="dish-item__actions">
         <div className="dish-item__controls">
           <Space>
-            <Button icon={<CopyOutlined />} />
+            <Button icon={<CopyOutlined />} onClick={handleClickDuplicateDish} />
             <Button type="primary" icon={<SettingOutlined />} />
             <Button type="danger" icon={<DeleteOutlined />} onClick={handleClickDeleteDish} />
           </Space>

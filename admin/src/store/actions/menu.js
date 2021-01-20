@@ -51,6 +51,11 @@ export const setDishes = (categoryId, dishes) => ({
   payload: { categoryId, dishes },
 })
 
+export const addDish = (categoryId, dish) => ({
+  type: types.ADD_DISH,
+  payload: { categoryId, dish },
+})
+
 export const deleteDish = (categoryId, dishId) => ({
   type: types.DELETE_DISH,
   payload: { categoryId, dishId },

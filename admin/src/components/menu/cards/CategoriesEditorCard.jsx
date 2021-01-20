@@ -11,9 +11,9 @@ import menuSelectors from '../../../store/selectors/menu'
 import VerticalScrolling from '../../VerticalScrolling'
 import CategoryItem from '../items/CategoryItem'
 
-import './CategoryEditorCard.scss'
+import './CategoriesEditorCard.scss'
 
-const CategoryEditorCard = () => {
+const CategoriesEditorCard = () => {
   const dispatch = useDispatch()
 
   const menuCategories = useSelector(menuSelectors.menuCategories)
@@ -55,4 +55,4 @@ const CategoryEditorCard = () => {
   )
 }
 
-export default CategoryEditorCard
+export default CategoriesEditorCard
