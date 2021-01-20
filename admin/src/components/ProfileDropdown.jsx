@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { Dropdown, Menu, Button } from 'antd'
 import { ProfileOutlined, LogoutOutlined } from '@ant-design/icons'
+import translate from '../intl/translate'
 
 import authSelectors from '../store/selectors/auth'
 import { useAuth } from '../auth/AuthProvider'
@@ -10,10 +11,10 @@ import { useAuth } from '../auth/AuthProvider'
 const getProfileMenu = (user, logout) => (
   <Menu className="profile-menu">
     <Menu.Item className="profile-menu__item" key="1" icon={<ProfileOutlined />}>
-      Profile
+      {translate('Profile')}
     </Menu.Item>
     <Menu.Item className="profile-menu__item" key="2" icon={<LogoutOutlined />} onClick={logout}>
-      Logout
+      {translate('Logout')}
     </Menu.Item>
   </Menu>
 )
@@ -25,7 +26,7 @@ const ProfileDropdown = () => {
   return (
     <Dropdown overlay={getProfileMenu(user, logout)} trigger="click">
       <Button type="dashed" size="large">
-        My Profile
+        {translate('MyProfile')}
       </Button>
     </Dropdown>
   )
