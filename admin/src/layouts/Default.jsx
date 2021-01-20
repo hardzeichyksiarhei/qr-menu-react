@@ -13,6 +13,7 @@ import {
 
 import ProfileDropdown from '../components/ProfileDropdown'
 import LanguageSelect from '../components/LanguageSelect'
+import translate from '../intl/translate'
 
 import { useAuth } from '../auth/AuthProvider'
 
@@ -21,22 +22,22 @@ const { Header, Content, Sider } = Layout
 const routes = [
   {
     path: '/dashboard',
-    label: 'Dashboard',
+    label: translate('Dashboard'),
     icon: <DashboardOutlined />,
   },
   {
     path: '/menus',
-    label: 'My menus',
+    label: translate('MyMenus'),
     icon: <AppstoreAddOutlined />,
   },
   {
     path: '/menus/trash',
-    label: 'Trash Menu',
+    label: translate('TrashMenu'),
     icon: <DeleteOutlined />,
   },
   {
     path: '/settings',
-    label: 'Settings',
+    label: translate('Settings'),
     icon: <SettingOutlined />,
   },
 ]
@@ -72,7 +73,7 @@ const Default = () => {
               </Menu.Item>
             ))}
             <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={auth.logout}>
-              Logout
+              {translate('Logout')}
             </Menu.Item>
           </Menu>
         </Sider>
