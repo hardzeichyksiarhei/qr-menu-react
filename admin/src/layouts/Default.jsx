@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons'
 
 import ProfileDropdown from '../components/ProfileDropdown'
+import LanguageSelect from '../components/LanguageSelect'
 
 import { useAuth } from '../auth/AuthProvider'
 
@@ -49,6 +50,7 @@ const Default = () => {
         <h2 className="app-header__logo">QR Menu Clone</h2>
         <div className="app-header__controls">
           <>
+            <LanguageSelect />
             <ProfileDropdown />
             <Button
               className="app-header__logout"
