@@ -3,30 +3,32 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { useIntl } from 'react-intl'
 import { Card, Form, Input, Button, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { useAuth } from '../../auth/AuthProvider'
-
+import translate from '../../intl/translate'
 import * as authActions from '../../store/actions/auth'
 
 import './Login.scss'
-
-const validateMessages = {
-  required: 'This field is required.',
-  types: {
-    email: 'This field must be a valid email address.',
-  },
-}
 
 const Login = () => {
   const dispatch = useDispatch()
   const auth = useAuth()
 
+  const intl = useIntl()
+
   const { isLoading, isLoginError, errorMessage } = useSelector((state) => state.auth)
 
   const { login } = auth
+
+  const validateMessages = {
+    required: intl.formatMessage({ id: 'FieldRequired' }),
+    types: {
+      email: intl.formatMessage({ id: 'Mail' }),
+    },
+  }
 
   useEffect(
     () => () => {
@@ -54,7 +56,7 @@ const Login = () => {
           validateMessages={validateMessages}
           onFinish={onFinish}
         >
-          <h3 className="login-form__title">Authorization</h3>
+          <h3 className="login-form__title">{translate('Authorization')}</h3>
           <Form.Item name="email" rules={[{ type: 'email', required: true }]}>
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
           </Form.Item>
@@ -62,7 +64,7 @@ const Login = () => {
           <Form.Item name="password" rules={[{ required: true }]}>
             <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
-              placeholder="Password"
+              placeholder={intl.formatMessage({ id: 'Password' })}
             />
           </Form.Item>
 
@@ -73,7 +75,7 @@ const Login = () => {
             loading={isLoading}
             block
           >
-            Sign In
+            {translate('SignIn')}
           </Button>
 
           {isLoginError ? (
@@ -88,9 +90,9 @@ const Login = () => {
       </Card>
 
       <div className="login__footer">
-        <span>Don&apos;t have an account?</span>
+        <span>{translate('DoNothaveAnAccount')}</span>
         <Link className="login__sign-up" to="/registration">
-          Sign Up
+          {translate('SignUp')}
         </Link>
       </div>
     </div>
