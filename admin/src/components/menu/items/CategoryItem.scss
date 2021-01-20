@@ -4,6 +4,11 @@
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
     cursor: pointer;
+    &.unvisible {
+      .category-item__photo, .category-item__content {
+        opacity: .2;
+      }
+    }
     &:focus {
       outline: none;
     }
@@ -32,6 +37,10 @@
     &__meta {
       font-size: 0.875rem;
       color: rgba(0, 0, 0, 0.6);
+    }
+    &__visible {
+      margin-right: 10px;
+      font-size: 16px;
     }
     &__move {
         margin-left: 10px;

@@ -121,13 +121,13 @@ const reducer = (state = initialState, action) => {
     }
 
     case types.UPDATE_CATEGORY: {
-      const { categoryId, data } = action.payload
+      const { categoryId, category } = action.payload
       return {
         ...state,
         menu: {
           ...state.menu,
-          categories: state.menu.categories.map((category) =>
-            category.id === categoryId ? { ...category, ...data } : category,
+          categories: state.menu.categories.map((categoryItem) =>
+            categoryItem.id === categoryId ? { ...categoryItem, ...category } : categoryItem,
           ),
         },
       }
