@@ -46,5 +46,8 @@ export default {
     MailRequired: 'E-mail is required',
     Mail: 'Must be a valid email address.',
     MinPassword: 'Password must have at least {number} letters.',
+    // Validation Backend
+    LoginFailed: 'Login failed! Check authentication credentials',
+    UserWithThisLoginAlreadyExists: 'User with this login already exists',
   },
 }

@@ -46,5 +46,8 @@ export default {
     MailRequired: 'Email обязателен',
     Mail: 'Адрес эл. почты должен быть действительным.',
     MinPassword: 'Пароль должен содержать не менее {number} букв.',
+    // Validation Backend
+    LoginFailed: 'Войти не удалось! Проверьте учетные данные для аутентификации',
+    UserWithThisLoginAlreadyExists: 'Пользователь с этой почтой уже существует',
   },
 }
