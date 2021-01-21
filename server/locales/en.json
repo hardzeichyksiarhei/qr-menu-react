@@ -1,0 +1,8 @@
+{
+    "validation": {
+        "email": "The \"E-mail\" must be a valid email address.",
+        "password": {
+            "length": "The password must be at least {{min}} characters"
+        }
+    }
+}

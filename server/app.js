@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 const { auth } = require('./middlewares')
+const i18n = require('./i18n')
 
 const authRouter = require('./resources/auth/auth.router')
 const userRouter = require('./resources/users/user.router')
@@ -14,6 +15,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(cors())
+
+app.use(i18n.init)
 
 app.use('/', (req, res, next) => {
   if (req.originalUrl === '/') {
