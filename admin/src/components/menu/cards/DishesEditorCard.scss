@@ -1,13 +1,16 @@
 .menu-editor {
-    width: 100%;
-    &__content {
-        width: 100%;
-        height: calc(100vh - 360px);
-        &--loading,
-        &--empty {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
+	width: 100%;
+	.ant-card-body {
+		padding: 0;
+	}
+	&__content {
+		width: 100%;
+		height: calc(100vh - 300px);
+		&--loading,
+		&--empty {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
 }

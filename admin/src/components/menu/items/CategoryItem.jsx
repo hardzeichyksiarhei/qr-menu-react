@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { Image, Dropdown, Button, Menu } from 'antd'
@@ -11,11 +11,13 @@ import {
 } from '@ant-design/icons'
 
 import * as menuActions from '../../../store/actions/menu'
+import menuSelectors from '../../../store/selectors/menu'
 
 import './CategoryItem.scss'
 
 const CategoryItem = ({ category, onAction }) => {
   const dispatch = useDispatch()
+  const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
 
   const handleClickCategory = () => {
     dispatch(menuActions.setSelectedCategoryId(category.id))
@@ -35,7 +37,9 @@ const CategoryItem = ({ category, onAction }) => {
 
   return (
     <div
-      className={`category-item ${!category.isVisible ? 'unvisible' : ''}`}
+      className={`category-item ${!category.isVisible ? 'unvisible' : ''}${
+        category.id === selectedCategoryId ? 'selected' : ''
+      }`}
       onClick={handleClickCategory}
       onKeyDown={handleClickCategory}
       role="button"
