@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Card, Button, Spin } from 'antd'
+import { Card, Button, Spin, Modal } from 'antd'
 
 import { ReactSortable } from 'react-sortablejs'
 
@@ -10,12 +10,16 @@ import menuSelectors from '../../../store/selectors/menu'
 
 import VerticalScrolling from '../../VerticalScrolling'
 import DishItem from '../items/DishItem'
+import DishEditorCard from './DishEditorCard'
 
-import './MenuEditorCard.scss'
+import './DishesEditorCard.scss'
 
-const MenuEditorCard = () => {
-  const [dishes, setDishes] = useState([])
+const DishesEditorCard = () => {
   const dispatch = useDispatch()
+
+  const [dishes, setDishes] = useState([])
+  const [isDishEditorVisible, setIsDishEditorVisible] = useState(false)
+  const [editDish, setEditDish] = useState(null)
 
   const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
   const selectedCategory = useSelector(menuSelectors.categoryById(selectedCategoryId))
@@ -26,8 +30,25 @@ const MenuEditorCard = () => {
   }, [selectedCategory])
 
   // eslint-disable-next-line no-shadow
-  const handleSetDishes = (dishes) => {
-    dispatch(menuActions.setDishes(selectedCategoryId, dishes))
+  const handleSetDishes = (dishes) => dispatch(menuActions.setDishes(selectedCategoryId, dishes))
+
+  const handleActionDish = (action, dish = null /* payload */) => {
+    switch (action) {
+      case 'dish:edit':
+        setIsDishEditorVisible(true)
+        setEditDish(dish)
+        break
+      case 'dish:create':
+        setIsDishEditorVisible(true)
+        break
+      case 'dish:editor.save':
+        break
+      case 'dish:editor.cancel':
+        break
+      default:
+        // eslint-disable-next-line no-console
+        console.warn('Dish action not found')
+    }
   }
 
   return (
@@ -50,7 +71,7 @@ const MenuEditorCard = () => {
                   animation={200}
                 >
                   {dishes.map((dish) => (
-                    <DishItem dish={dish} key={dish.id} />
+                    <DishItem dish={dish} key={dish.id} onAction={handleActionDish} />
                   ))}
                 </ReactSortable>
               </div>
@@ -58,8 +79,17 @@ const MenuEditorCard = () => {
           )}
         </div>
       </Card>
+
+      <Modal
+        title={editDish ? 'Edit Dish' : 'Create dish'}
+        visible={isDishEditorVisible}
+        footer={null}
+        closable={false}
+      >
+        <DishEditorCard editCategory={editDish} onAction={handleActionDish} />
+      </Modal>
     </div>
   )
 }
 
-export default MenuEditorCard
+export default DishesEditorCard

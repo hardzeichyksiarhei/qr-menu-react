@@ -46,7 +46,7 @@ const CategoriesEditorCard = () => {
         break
       default:
         // eslint-disable-next-line no-console
-        console.warning('Category action not found')
+        console.warn('Category action not found')
     }
   }
 

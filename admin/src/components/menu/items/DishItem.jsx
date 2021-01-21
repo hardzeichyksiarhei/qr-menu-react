@@ -16,7 +16,7 @@ import menuSelectors from '../../../store/selectors/menu'
 
 import './DishItem.scss'
 
-const DishItem = ({ dish }) => {
+const DishItem = ({ dish, onAction }) => {
   const dispatch = useDispatch()
   const selectedcategoryId = useSelector(menuSelectors.selectedCategoryId)
 
@@ -29,6 +29,11 @@ const DishItem = ({ dish }) => {
       }),
     )
   }
+
+  const handleClickEditDish = () => {
+    onAction('dish:edit', dish)
+  }
+
   const handleClickDeleteDish = () => {
     dispatch(menuActions.deleteDish(selectedcategoryId, dish.id))
   }
@@ -50,7 +55,7 @@ const DishItem = ({ dish }) => {
         <div className="dish-item__controls">
           <Space>
             <Button icon={<CopyOutlined />} onClick={handleClickDuplicateDish} />
-            <Button type="primary" icon={<SettingOutlined />} />
+            <Button type="primary" icon={<SettingOutlined />} onClick={handleClickEditDish} />
             <Button type="danger" icon={<DeleteOutlined />} onClick={handleClickDeleteDish} />
           </Space>
         </div>
@@ -62,8 +67,13 @@ const DishItem = ({ dish }) => {
   )
 }
 
+DishItem.defaultProps = {
+  onAction: () => {},
+}
+
 DishItem.propTypes = {
   dish: PropTypes.instanceOf(Object).isRequired,
+  onAction: PropTypes.func,
 }
 
 export default DishItem
