@@ -8,20 +8,27 @@ import { EditOutlined, EllipsisOutlined, EyeOutlined } from '@ant-design/icons'
 
 const { Meta } = Card
 
-const MenuCard = ({ menu }) => (
-  <Card
-    cover={<img alt={menu.title} src={menu.photo} />}
-    actions={[
-      <Link to={`/menus/${menu.id}/edit`}>
-        <EditOutlined key="edit" />
-      </Link>,
-      <EyeOutlined key="preview" />,
-      <EllipsisOutlined key="ellipsis" />,
-    ]}
-  >
-    <Meta title={menu.title} description="10 categories &bull; 20 items" />
-  </Card>
-)
+const MenuCard = ({ menu }) => {
+  const numberItems = menu.categories.reduce((acc, curr) => acc + curr.dishes.length, 0)
+
+  return (
+    <Card
+      cover={<img alt={menu.title} src={menu.photo} />}
+      actions={[
+        <Link to={`/menus/${menu.id}/edit`}>
+          <EditOutlined key="edit" />
+        </Link>,
+        <EyeOutlined key="preview" />,
+        <EllipsisOutlined key="ellipsis" />,
+      ]}
+    >
+      <Meta
+        title={menu.title}
+        description={`${menu.categories.length} categories, ${numberItems} items`}
+      />
+    </Card>
+  )
+}
 
 MenuCard.propTypes = {
   menu: PropTypes.instanceOf(Object).isRequired,
