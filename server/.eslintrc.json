@@ -12,6 +12,7 @@
         "semi": "off",
         "no-console": "off",
         "linebreak-style": 0,
-        "func-names":"off"
+        "func-names":"off",
+        "no-underscore-dangle": 0
     }
 }

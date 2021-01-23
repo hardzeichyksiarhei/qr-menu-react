@@ -1,57 +1,56 @@
 .dish-item {
-    display: flex;
-    border-bottom: 1px solid #ddd;
-    border-left: 5px solid transparent;
-    padding: 15px 16px;
-    padding-left: 0;
-    &:last-of-type {
-      border-bottom: none;
-    }
-    &__move {
-      align-self: center;
-      margin-right: 10px;
-      font-size: 24px;
-    }
-    &__photo {
-      margin-right: 12px;
-      img {
-        object-fit: cover;
-      }
-    }
-    &__internalId {
-      font-size: 0.875rem;
-      color: rgba(0, 0, 0, 0.6);
-    }
-    &__title {
-      margin-bottom: 0;
-      font-weight: 400;
-      font-size: 20px;
-      margin-bottom: 5px;
-      line-height: 1.4;
-    }
-    &__description {
-      flex-grow: 1;
-      font-size: 0.875rem;
-      color: rgba(0, 0, 0, 0.6);
-    }
-    &__content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-right: 12px;
-    }
-    &__actions {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    &__controls {
-      display: flex;
-    }
-    &__price {
-      font-size: 1rem;
-      color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  border-left: 5px solid transparent;
+  padding: 15px 10px;
+  &:last-of-type {
+    border-bottom: none;
+  }
+  &__move {
+    align-self: center;
+    margin-right: 10px;
+    font-size: 24px;
+  }
+  &__photo {
+    margin-right: 12px;
+    img {
+      object-fit: cover;
     }
   }
+  &__internalId {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  &__title {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  &__description {
+    flex-grow: 1;
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 12px;
+  }
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &__controls {
+    display: flex;
+  }
+  &__price {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}

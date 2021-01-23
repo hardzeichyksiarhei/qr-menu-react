@@ -45,10 +45,30 @@ export const setCategories = (categories) => ({
   payload: { categories },
 })
 
+export const addCategory = (category) => ({
+  type: types.ADD_CATEGORY,
+  payload: { category },
+})
+
+export const updateCategory = (categoryId, category) => ({
+  type: types.UPDATE_CATEGORY,
+  payload: { categoryId, category },
+})
+
+export const deleteCategory = (categoryId) => ({
+  type: types.DELETE_CATEGORY,
+  payload: { categoryId },
+})
+
 // Dishes
 export const setDishes = (categoryId, dishes) => ({
   type: types.SET_DISHES,
   payload: { categoryId, dishes },
+})
+
+export const addDish = (categoryId, dish) => ({
+  type: types.ADD_DISH,
+  payload: { categoryId, dish },
 })
 
 export const deleteDish = (categoryId, dishId) => ({

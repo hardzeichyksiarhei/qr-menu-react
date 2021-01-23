@@ -8,9 +8,15 @@ axios.interceptors.request.use((request) => {
   const state = store.getState()
 
   const { token } = state.auth
+  const { language } = state.language
 
   if (token) {
     request.headers.common.Authorization = `Bearer ${token}`
+  }
+
+  if (language) {
+    request.headers.common.Language = language
+    request.headers.common['Language-Code'] = 'ru'
   }
 
   return request

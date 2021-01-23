@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { v4 as uuid } from 'uuid'
 
 import { Button, Image, Space } from 'antd'
 import {
@@ -15,9 +16,23 @@ import menuSelectors from '../../../store/selectors/menu'
 
 import './DishItem.scss'
 
-const DishItem = ({ dish }) => {
+const DishItem = ({ dish, onAction }) => {
   const dispatch = useDispatch()
   const selectedcategoryId = useSelector(menuSelectors.selectedCategoryId)
+
+  const handleClickDuplicateDish = () => {
+    dispatch(
+      menuActions.addDish(selectedcategoryId, {
+        ...dish,
+        id: uuid(),
+        title: `Copy of ${dish.title}`,
+      }),
+    )
+  }
+
+  const handleClickEditDish = () => {
+    onAction('dish:edit', dish)
+  }
 
   const handleClickDeleteDish = () => {
     dispatch(menuActions.deleteDish(selectedcategoryId, dish.id))
@@ -39,8 +54,8 @@ const DishItem = ({ dish }) => {
       <div className="dish-item__actions">
         <div className="dish-item__controls">
           <Space>
-            <Button icon={<CopyOutlined />} />
-            <Button type="primary" icon={<SettingOutlined />} />
+            <Button icon={<CopyOutlined />} onClick={handleClickDuplicateDish} />
+            <Button type="primary" icon={<SettingOutlined />} onClick={handleClickEditDish} />
             <Button type="danger" icon={<DeleteOutlined />} onClick={handleClickDeleteDish} />
           </Space>
         </div>
@@ -52,8 +67,13 @@ const DishItem = ({ dish }) => {
   )
 }
 
+DishItem.defaultProps = {
+  onAction: () => {},
+}
+
 DishItem.propTypes = {
   dish: PropTypes.instanceOf(Object).isRequired,
+  onAction: PropTypes.func,
 }
 
 export default DishItem
