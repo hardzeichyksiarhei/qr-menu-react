@@ -25,7 +25,7 @@ export type MenuProps = {
   categories: CategoryProps[],
   createdAt: any,
 }
-export type HeaderProps = { counrOrder: number }
+export type HeaderProps = { countOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
   choiceMenu: (menu: MenuProps) => void,
@@ -57,4 +57,8 @@ export type OrderDishProps={
   dish:{id:Dish, sum: number} ,
   addDish: (dish: Dish) => void ,
   deleteDish:(dish: Dish)=>void,
+}
+
+export type DefaultLayoutProps={
+  children: any[]
 }

@@ -4,13 +4,13 @@ import { PageHeader, Button, Badge } from 'antd'
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { HeaderProps } from '../../utils/propsComponents'
 
-function Header({ counrOrder }: HeaderProps) {
+function Header({ countOrder }: HeaderProps) {
   return (
     <PageHeader
       title="QR Menu Clone"
       extra={[
         <Button key="2" icon={<ShoppingCartOutlined />}>
-          <Badge count={counrOrder}></Badge>
+          <Badge count={countOrder}></Badge>
         </Button>,
 
         <Button key="1" icon={<UserOutlined />}></Button>,

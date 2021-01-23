@@ -3,6 +3,7 @@ import Header from '../components/Header/Header'
 import MenuCategory from '../components/MenuCategory/MenuCategory'
 import MenuList from '../components/MenuList/MenuList'
 import MenuDish from '../components/MenuDish/MenuDish'
+import { Layout } from 'antd'
 // import MenuBar from '../components/Navigation/Navigation'
 
 // const routes = [
@@ -55,10 +56,10 @@ function Default() {
       localStorage.setItem('order', JSON.stringify(orderUser))
     }
   }
-  const counrOrder = useMemo(() => orderUser.length, [orderUser.length])
+  const countOrder = useMemo(() => orderUser.length, [orderUser.length])
   return (
-    <>
-      <Header counrOrder={counrOrder} />
+    <Layout className="default-layout">
+      <Header countOrder={countOrder} />
       {/* <Switch>
 //         <Route path="/menus/:id"> */}
       {/* <MenuBar /> */}
@@ -71,8 +72,7 @@ function Default() {
       <Cart orderUser={orderUser} addDish={addDish} deleteDish={deleteDish} />
       {/* </Route>
 //       </Switch> */}
-    </>
+    </Layout>
   )
 }
-
 export default Default
