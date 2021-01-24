@@ -1,33 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import Header from '../components/Header/Header'
+// import { Route } from 'react-router-dom'
 import MenuCategory from '../components/MenuCategory/MenuCategory'
 import MenuList from '../components/MenuList/MenuList'
 import MenuDish from '../components/MenuDish/MenuDish'
 import { Layout } from 'antd'
-// import MenuBar from '../components/Navigation/Navigation'
+import MenuBar from '../components/Navigation/Navigation'
 
-// const routes = [
-//   {
-//     path: '/dashboard',
-//     label: 'Dashboard',
-//     icon: <DashboardOutlined />,
-//   },
-//   {
-//     path: '/menus',
-//     label: 'My menus',
-//     icon: <AppstoreAddOutlined />,
-//   },
-//   {
-//     path: '/menus/trash',
-//     label: 'Trash Menu',
-//     icon: <DeleteOutlined />,
-//   },
-//   {
-//     path: '/settings',
-//     label: 'Settings',
-//     icon: <SettingOutlined />,
-//   },
-// ]
 // localStorage.clear()
 import { MENUS } from '../MENU/MENU'
 import { Dish } from '../utils/propsComponents'
@@ -56,22 +35,23 @@ function Default() {
       localStorage.setItem('order', JSON.stringify(orderUser))
     }
   }
-  const countOrder = useMemo(() => orderUser.length, [orderUser.length])
+  const countOrder = useMemo(() => {
+    return orderUser.length
+  }, [orderUser.length])
   return (
     <Layout className="default-layout">
       <Header countOrder={countOrder} />
-      {/* <Switch>
-//         <Route path="/menus/:id"> */}
-      {/* <MenuBar /> */}
-      {/* </Route>
-//         <Route path="/"> */}
+      {/* <Switch>*/}
+      {/* <Route path="*"> */}
+      <MenuBar />
       <MenuList menus={MENUS} choiceMenu={choiceMenu} />
       <MenuCategory categoryMenu={categoryMenu} choiceDish={choiceDish} />
 
       {dish && <MenuDish dish={dish} addDish={addDish} />}
       <Cart orderUser={orderUser} addDish={addDish} deleteDish={deleteDish} />
       {/* </Route>
-//       </Switch> */}
+      <Route path="/menus/:id"></Route> */}
+      {/*</Switch> */}
     </Layout>
   )
 }

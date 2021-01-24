@@ -1,8 +1,10 @@
 import React from 'react'
-import { List } from 'antd'
+import { List, Button, Typography } from 'antd'
 import { CartProps, Dish } from '../../utils/propsComponents'
 import OrderedDish from '../OrderedDish/OrderedDish'
+import './Cart.scss'
 
+const { Title } = Typography
 function Cart({ orderUser, deleteDish, addDish }: CartProps) {
   const getCountDish = (orderUser: any) => {
     const result: any = {}
@@ -27,6 +29,11 @@ function Cart({ orderUser, deleteDish, addDish }: CartProps) {
           </List.Item>
         )}
       />
+      <Title level={4} className="cart__title">
+        Total: {}
+      </Title>
+
+      <Button>I`m inside the place</Button>
     </>
   )
 }
