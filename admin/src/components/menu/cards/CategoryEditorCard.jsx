@@ -26,7 +26,7 @@ const CategoryEditorCard = ({ editCategory, onAction }) => {
   }, [categoryEditorForm, editCategory])
 
   const handleClickCancel = () => {
-    setTimeout(() => categoryEditorForm.resetFields(), 1000)
+    setTimeout(() => categoryEditorForm.resetFields(), 100)
     onAction('category:editor.cancel')
   }
 
@@ -34,7 +34,7 @@ const CategoryEditorCard = ({ editCategory, onAction }) => {
     if (editCategory) dispatch(menuActions.updateCategory(editCategory.id, values))
     else dispatch(menuActions.addCategory({ ...categorySchema(), ...values, id: uuid() }))
 
-    setTimeout(() => categoryEditorForm.resetFields(), 1000)
+    setTimeout(() => categoryEditorForm.resetFields(), 100)
     onAction('category:editor.save')
   }
 

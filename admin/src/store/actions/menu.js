@@ -71,6 +71,11 @@ export const addDish = (categoryId, dish) => ({
   payload: { categoryId, dish },
 })
 
+export const updateDish = (categoryId, dishId, dish) => ({
+  type: types.UPDATE_DISH,
+  payload: { categoryId, dishId, dish },
+})
+
 export const deleteDish = (categoryId, dishId) => ({
   type: types.DELETE_DISH,
   payload: { categoryId, dishId },
