@@ -41,17 +41,13 @@ function Default() {
   return (
     <Layout className="default-layout">
       <Header countOrder={countOrder} />
-      {/* <Switch>*/}
-      {/* <Route path="*"> */}
       <MenuBar />
       <MenuList menus={MENUS} choiceMenu={choiceMenu} />
       <MenuCategory categoryMenu={categoryMenu} choiceDish={choiceDish} />
-
       {dish && <MenuDish dish={dish} addDish={addDish} />}
-      <Cart orderUser={orderUser} addDish={addDish} deleteDish={deleteDish} />
-      {/* </Route>
-      <Route path="/menus/:id"></Route> */}
-      {/*</Switch> */}
+      <Cart
+      // orderUser={orderUser} addDish={addDish} deleteDish={deleteDish}
+      />
     </Layout>
   )
 }

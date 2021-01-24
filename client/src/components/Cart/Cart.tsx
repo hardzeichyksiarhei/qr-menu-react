@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { List, Button, Typography } from 'antd'
 import { CartProps, Dish } from '../../utils/propsComponents'
 import OrderedDish from '../OrderedDish/OrderedDish'
 import './Cart.scss'
 
 const { Title } = Typography
-function Cart({ orderUser, deleteDish, addDish }: CartProps) {
+function Cart() {
+  const [orderUser, setOrderUser] = useState(JSON.parse(localStorage.getItem('order') || '[]'))
+  const addDish = (dish: Dish) => {
+    orderUser.push(dish)
+    setOrderUser(orderUser)
+    localStorage.setItem('order', JSON.stringify(orderUser))
+  }
+  const deleteDish = (dish: Dish) => {
+    const definedDish = orderUser.findIndex((item: any) => item.id === dish.id)
+    if (definedDish >= 0) {
+      orderUser.splice(definedDish, 1)
+      setOrderUser(orderUser)
+      localStorage.setItem('order', JSON.stringify(orderUser))
+    }
+  }
   const getCountDish = (orderUser: any) => {
     const result: any = {}
     orderUser.forEach((dish: Dish) => (result[dish.id] ? result[dish.id]++ : (result[dish.id] = 1)))
