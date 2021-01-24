@@ -15,8 +15,7 @@ axios.interceptors.request.use((request) => {
   }
 
   if (language) {
-    request.headers.common.Language = language
-    request.headers.common['Language-Code'] = 'ru'
+    request.headers.common['Language-Code'] = language
   }
 
   return request

@@ -1,7 +1,7 @@
 import LOCALES from '../locales'
 
 export default {
-  [LOCALES.russian]: {
+  [LOCALES.ru]: {
     // Auth
     Authorization: 'Авторизация',
     Email: 'E-mail',

@@ -1,7 +1,7 @@
 import LOCALES from '../locales'
 
 export default {
-  [LOCALES.english]: {
+  [LOCALES.en]: {
     // Auth
     Authorization: 'Authorization',
     Email: 'E-mail',

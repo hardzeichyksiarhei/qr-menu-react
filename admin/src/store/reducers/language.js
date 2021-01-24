@@ -1,7 +1,7 @@
 import INTL_SET_LANGUAGE from '../types/language'
 
 const initialState = {
-  language: localStorage.getItem('language') || 'english',
+  language: localStorage.getItem('language') || 'en',
 }
 
 const reducer = (state = initialState, action) => {
