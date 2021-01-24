@@ -23,7 +23,53 @@ const MENUS = [
         isVisible: true,
         photo:
           'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-        dishes: [],
+        dishes: [
+          {
+            id: '15293994-4cd3-4fbc-92d0-a73b83c8c2e7',
+            categoryId: 'a946a5ae-1583-4e3a-8b74-b11952462e68',
+            title: 'Dish 1',
+            internalId: '',
+            description:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            photo:
+              'https://images.unsplash.com/photo-1551504734-b464946bb7f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            isPublished: true,
+            isEnabledToOrder: true,
+            tags: [],
+            ingredients: [],
+            allergens: [],
+          },
+          {
+            id: '9cabe36a-a814-488d-9f33-041dc70f08db',
+            categoryId: 'a946a5ae-1583-4e3a-8b74-b11952462e68',
+            title: 'Dish 2',
+            internalId: '',
+            description:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            photo:
+              'https://images.unsplash.com/photo-1542197745-c70e10f66af8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80',
+            isPublished: true,
+            isEnabledToOrder: true,
+            tags: [],
+            ingredients: [],
+            allergens: [],
+          },
+          {
+            id: 'd09990b2-b3d4-495f-837a-1e1daf5c4cb9',
+            categoryId: 'a946a5ae-1583-4e3a-8b74-b11952462e68',
+            title: 'Dish 3',
+            internalId: '',
+            description:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            photo:
+              'https://images.unsplash.com/photo-1588566565463-180a5b2090d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            isPublished: true,
+            isEnabledToOrder: true,
+            tags: [],
+            ingredients: [],
+            allergens: [],
+          },
+        ],
       },
       {
         id: 'd2412173-6a77-4168-8c3f-c7a608014c74',
@@ -85,7 +131,23 @@ const MENUS = [
         isVisible: true,
         photo:
           'https://images.unsplash.com/photo-1597315083776-7a6145780ed4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-        dishes: [],
+        dishes: [
+          {
+            id: '15293994-4cd3-4fbc-92d0-a73b63c8c2e7',
+            categoryId: 'c4e3cfe8-bcbd-4e59-b6a0-621d0c9bf07e',
+            title: 'Dish 1',
+            internalId: '',
+            description:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            photo:
+              'https://images.unsplash.com/photo-1551504734-b464946bb7f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            isPublished: true,
+            isEnabledToOrder: true,
+            tags: [],
+            ingredients: [],
+            allergens: [],
+          },
+        ],
       },
       {
         id: '29e36f86-39d2-475a-90c7-0d72d20b6013',
@@ -122,7 +184,7 @@ const getAll = async () =>
   new Promise((resolve) =>
     setTimeout(() => {
       resolve(MENUS)
-    }, 2000),
+    }, 1000),
   )
 
 const getById = async ({ menuId }) =>
@@ -131,7 +193,7 @@ const getById = async ({ menuId }) =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(MENUS.find((m) => m.id === menuId))
-    }, 2000)
+    }, 1000)
   })
 
 const save = async (menu) => {
