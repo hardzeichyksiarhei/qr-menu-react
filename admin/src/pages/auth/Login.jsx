@@ -82,7 +82,7 @@ const Login = () => {
           {isLoginError ? (
             <Alert
               className="login-form__error mt-2"
-              message={intl.formatMessage({ id: errorMessage })}
+              message={errorMessage}
               type="error"
               showIcon
             />

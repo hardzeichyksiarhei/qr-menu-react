@@ -1,6 +1,6 @@
 const LOCALES = {
-  english: 'en-us',
-  russian: 'ru-ru',
+  en: 'en-us',
+  ru: 'ru-ru',
 }
 
 export default LOCALES

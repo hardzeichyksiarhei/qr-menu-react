@@ -13,7 +13,7 @@ exports.login = catchErrors(async (req, res) => {
   if (!user) {
     return res.status(StatusCodes.FORBIDDEN).send({
       auth: false,
-      message: 'LoginFailed',
+      message: req.__('validation.LoginFailed'),
     })
   }
   const token = await user.generateAuthToken()
@@ -27,7 +27,7 @@ exports.register = catchErrors(async (req, res) => {
 
   if (candidate) {
     return res.status(StatusCodes.BAD_REQUEST).json({
-      message: 'UserWithThisLoginAlreadyExists',
+      message: req.__('UserWithThisLoginAlreadyExists'),
     })
   }
 
