@@ -44,7 +44,12 @@ const DishItem = ({ dish, onAction }) => {
         <VerticalAlignMiddleOutlined />
       </div>
       <div className="dish-item__photo">
-        <Image width={120} height={120} src={dish.photo} preview={false} />
+        <Image
+          width={120}
+          height={120}
+          src={dish.photo || 'https://via.placeholder.com/150?text=QR Menu'}
+          preview={false}
+        />
       </div>
       <div className="dish-item__content">
         <div className="dish-item__internalId">{dish.internalId}</div>

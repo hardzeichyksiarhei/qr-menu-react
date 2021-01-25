@@ -4,11 +4,23 @@ const photoSchema = new Schema({
   name: { type: String },
 })
 
+const dishSchema = new Schema({
+  title: { type: String },
+})
+
 const categorySchema = new Schema({
   title: { type: String },
   isVisible: { type: Boolean },
   photo: { type: photoSchema, default: null },
+  dishes: [{ type: dishSchema, default: [] }],
 })
+
+categorySchema.virtual('id').get(function () {
+  // eslint-disable-next-line no-underscore-dangle
+  return this._id.toHexString()
+})
+
+categorySchema.set('toJSON', { virtuals: true })
 
 const menuSchema = new Schema(
   {
@@ -23,6 +35,13 @@ const menuSchema = new Schema(
   },
   { timestamps: true },
 )
+
+menuSchema.virtual('id').get(function () {
+  // eslint-disable-next-line no-underscore-dangle
+  return this._id.toHexString()
+})
+
+menuSchema.set('toJSON', { virtuals: true })
 
 const Menu = model('Menu', menuSchema)
 

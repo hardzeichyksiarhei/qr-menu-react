@@ -46,7 +46,12 @@ const CategoryItem = ({ category, onAction }) => {
       tabIndex="0"
     >
       <div className="category-item__photo">
-        <Image width={60} height={60} src={category.photo} preview={false} />
+        <Image
+          width={60}
+          height={60}
+          src={category.photo || 'https://via.placeholder.com/150?text=QR Menu'}
+          preview={false}
+        />
       </div>
       <div className="category-item__content">
         <div className="category-item__title">{category.title}</div>

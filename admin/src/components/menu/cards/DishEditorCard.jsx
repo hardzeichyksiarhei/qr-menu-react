@@ -44,10 +44,36 @@ const DishEditorCard = ({ editDish, onAction }) => {
     onAction('dish:editor.cancel')
   }
 
-  const handleClickSave = (values) => {
-    if (editDish) dispatch(menuActions.updateDish(selectedCategoryId, editDish.id, values))
-    else
-      dispatch(menuActions.addDish(selectedCategoryId, { ...dishSchema(), ...values, id: uuid() }))
+  const handleClickSave = (dish) => {
+    switch (true) {
+      // Edit & Change CategoryId
+      case editDish && editDish.categoryId !== dish.categoryId:
+        dispatch(menuActions.deleteDish(selectedCategoryId, editDish.id))
+        dispatch(
+          menuActions.addDish(dish.categoryId, {
+            ...dishSchema(),
+            ...dish,
+            id: uuid(),
+          }),
+        )
+        break
+      // Edit & NOT Change CategoryId
+      case editDish && editDish.categoryId === dish.categoryId:
+        dispatch(menuActions.updateDish(editDish.categoryId, editDish.id, dish))
+        break
+      // NOT Edit
+      case !editDish:
+        dispatch(
+          menuActions.addDish(dish.categoryId, {
+            ...dishSchema(),
+            ...dish,
+            id: uuid(),
+          }),
+        )
+        break
+      default:
+        break
+    }
 
     setTimeout(() => dishEditorForm.resetFields(), 100)
     onAction('dish:editor.save')
@@ -62,6 +88,9 @@ const DishEditorCard = ({ editDish, onAction }) => {
         initialValues={dishSchema()}
         onFinish={handleClickSave}
       >
+        {/* <Form.Item name="photo" label="Photo">
+          <PhotoUploader />
+        </Form.Item> */}
         <Form.Item name="isPublished" label="Published" valuePropName="checked">
           <Switch />
         </Form.Item>

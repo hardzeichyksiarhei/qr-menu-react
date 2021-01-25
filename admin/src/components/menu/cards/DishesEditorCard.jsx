@@ -93,6 +93,7 @@ const DishesEditorCard = () => {
         visible={isDishEditorVisible}
         footer={null}
         closable={false}
+        destroyOnClose
       >
         <DishEditorCard editDish={editDish} onAction={handleActionDish} />
       </Modal>

@@ -5,7 +5,7 @@ const menuSchema = () => ({
   userId: null,
   isPublished: true,
   isEnabledToOrder: false,
-  title: '',
+  title: 'New menu',
   internalComment: '',
   photo: null,
   categories: [],

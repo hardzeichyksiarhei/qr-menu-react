@@ -95,6 +95,7 @@ const CategoriesEditorCard = () => {
         visible={isCategoryEditorVisible}
         footer={null}
         closable={false}
+        destroyOnClose
       >
         <CategoryEditorCard editCategory={editCategory} onAction={handleActionCategory} />
       </Modal>

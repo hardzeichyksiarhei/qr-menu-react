@@ -1,4 +1,5 @@
 const isMenuLoading = (state) => state.menu.isMenuLoading
+const isMenuBusy = (state) => state.menu.isMenuBusy
 const menu = (state) => state.menu.menu
 const menuCategories = (state) => state.menu.menu.categories
 
@@ -13,6 +14,7 @@ const selectedCategoryId = (state) => state.menu.selectedCategoryId
 
 export default {
   isMenuLoading,
+  isMenuBusy,
   menu,
   menuCategories,
   categoryById,
