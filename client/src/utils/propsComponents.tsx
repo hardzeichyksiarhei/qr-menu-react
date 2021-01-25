@@ -46,8 +46,12 @@ export type MenuCategoryProps = {
   menuId: number,
 
 }
+export type orderUserProps ={
+dish:Dish, 
+count: number
+}[]
 export type CartProps ={
-  orederUser:any,
+  orederUser:{dish:Dish, count: number}[],
   addDish: (dish: Dish) => void ,
   deleteDish:(dish: Dish)=>void,
 }

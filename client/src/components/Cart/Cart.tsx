@@ -6,6 +6,7 @@ import './Cart.scss'
 
 const { Title } = Typography
 function Cart({ orederUser, addDish, deleteDish }: CartProps) {
+  console.log(orederUser)
   return (
     <>
       <h2>YOUR ORDER</h2>

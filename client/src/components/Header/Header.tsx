@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom'
 function Header({ countOrder }: HeaderProps) {
   return (
     <PageHeader
+      className="header"
       title="QR Menu Clone"
       extra={[
         <NavLink key="1" to="/cart">

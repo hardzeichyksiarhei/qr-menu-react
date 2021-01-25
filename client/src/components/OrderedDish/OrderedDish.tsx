@@ -6,7 +6,8 @@ import './OrderedDish.css'
 
 const { Title } = Typography
 
-function OrderedDish({ dish, deleteDish, addDish }: OrderDishProps) {
+function OrderedDish({ dish, addDish, deleteDish }: OrderDishProps) {
+  console.log(dish)
   function dishDelete() {
     deleteDish(dish.dish)
   }
