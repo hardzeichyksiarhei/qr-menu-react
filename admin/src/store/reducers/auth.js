@@ -23,6 +23,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case types.REQUESTED_USER_SUCCEEDED: {
+      localStorage.setItem('userId', action.payload.user.id)
       return {
         ...state,
         user: action.payload.user,
