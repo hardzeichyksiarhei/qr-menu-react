@@ -47,12 +47,15 @@ export default {
     Settings: 'Настройки',
     Logout: 'Выйти',
     Save: 'Сохранить',
+    Download: 'Загрузить',
     // Admin layout
     Dashboard: 'Главная панель',
     MyMenus: 'Мои меню',
     TrashMenu: 'Удаленные меню',
     Profile: 'Профиль',
     MyProfile: 'Мой профиль',
+    // Dashboard
+    QRCode: 'QR код',
     // Settings
     RegionSettings: 'Настройки региона',
     Country: 'Страна',

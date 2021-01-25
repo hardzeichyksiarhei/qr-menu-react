@@ -1,0 +1,10 @@
+.QRCode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+}
+
+.QRCode__download {
+  margin-top: 5px;
+}
