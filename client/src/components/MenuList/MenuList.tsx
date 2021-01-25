@@ -1,16 +1,17 @@
 import React from 'react'
-import { MenuListProps, MenuProps } from '../../utils/propsComponents'
+import { NavLink } from 'react-router-dom'
+import { MenuListProps } from '../../utils/propsComponents'
 import CardMenu from '../CardMenu/CardMenu'
 
-function MenuList({ menus, choiceMenu }: MenuListProps) {
-  function menuClick(menu: MenuProps) {
-    choiceMenu(menu)
-  }
-
+function MenuList({ menus }: MenuListProps) {
   return (
     <>
       {menus.map((menu) => {
-        return <CardMenu key={menu.id} menu={menu} clickMenu={menuClick} />
+        return (
+          <NavLink to={`/menu=${menu.id}`}>
+            <CardMenu key={menu.id} menu={menu} />
+          </NavLink>
+        )
       })}
     </>
   )

@@ -13,8 +13,8 @@ const routes = () => [
     element: <DefaultLayout />,
     children: [
       { path: '/', element: <Dashboard /> },
-      { path: '/menu/:menuId', element: <MenuCategory /> },
-      { path: '/menu/:menuId/category/:dishId', element: <MenuDish /> },
+      { path: '/menu=:id', element: <MenuCategory /> },
+      { path: '/menu=:menuId/dish=:dishId', element: <MenuDish /> },
       { path: '/cart', element: <Cart /> },
     ],
   },

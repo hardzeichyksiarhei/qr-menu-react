@@ -28,13 +28,13 @@ export type MenuProps = {
 export type HeaderProps = { countOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
-  choiceMenu: (menu: MenuProps) => void,
+  // choiceMenu: (menu: MenuProps) => void,
 }
 export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void }
 export type DishProps = { dish: Dish }
 export type CardMenuProps = {
   menu: MenuProps,
-  clickMenu: (menu: MenuProps) => void,
+  // clickMenu: (menu: MenuProps) => void,
 }
 export type CardDishProps = {
   dish: any,
