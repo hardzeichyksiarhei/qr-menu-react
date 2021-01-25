@@ -3,17 +3,20 @@ import './Header.scss'
 import { PageHeader, Button, Badge } from 'antd'
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { HeaderProps } from '../../utils/propsComponents'
+import { NavLink } from 'react-router-dom'
 
 function Header({ countOrder }: HeaderProps) {
   return (
     <PageHeader
       title="QR Menu Clone"
       extra={[
-        <Button key="2" icon={<ShoppingCartOutlined />}>
-          <Badge count={countOrder}></Badge>
-        </Button>,
+        <NavLink key="1" to="/cart">
+          <Button icon={<ShoppingCartOutlined />}>
+            <Badge count={countOrder}></Badge>
+          </Button>
+        </NavLink>,
 
-        <Button key="1" icon={<UserOutlined />}></Button>,
+        <Button key="2" icon={<UserOutlined />}></Button>,
       ]}
     ></PageHeader>
   )

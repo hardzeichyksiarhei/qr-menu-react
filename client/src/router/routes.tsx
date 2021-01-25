@@ -1,12 +1,10 @@
 import React, { lazy } from 'react'
 
 import DefaultLayout from '../layouts/Default'
-// let LayoutDefault : InstanceType< DefaultLayout >;
 
-// const Settings = lazy(() => import('../pages/Settings'))
-
-const MenuCategory = lazy(() => import('../components/MenuCategory/MenuCategory'))
-const MenuDish = lazy(() => import('../components/MenuDish/MenuDish'))
+const Dashboard = lazy(() => import('../pages/Dashboard'))
+const MenuCategory = lazy(() => import('../pages/Category'))
+const MenuDish = lazy(() => import('../pages/Dish'))
 const Cart = lazy(() => import('../components/Cart/Cart'))
 
 const routes = () => [
@@ -14,8 +12,9 @@ const routes = () => [
     path: '/',
     element: <DefaultLayout />,
     children: [
-      //   { path: '/category/:id', element: <MenuCategory /> },
-      //   { path: '/dish', element: <MenuDish /> },
+      { path: '/', element: <Dashboard /> },
+      { path: '/menu/:menuId', element: <MenuCategory /> },
+      { path: '/menu/:menuId/category/:dishId', element: <MenuDish /> },
       { path: '/cart', element: <Cart /> },
     ],
   },

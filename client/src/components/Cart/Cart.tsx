@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import { List, Button, Typography } from 'antd'
-import { CartProps, Dish } from '../../utils/propsComponents'
+import { Dish } from '../../utils/propsComponents'
 import OrderedDish from '../OrderedDish/OrderedDish'
 import './Cart.scss'
+
+import Header from '../Header/Header'
 
 const { Title } = Typography
 function Cart() {
   const [orderUser, setOrderUser] = useState(JSON.parse(localStorage.getItem('order') || '[]'))
   const addDish = (dish: Dish) => {
-    orderUser.push(dish)
-    setOrderUser(orderUser)
+    setOrderUser((orderUser: Dish[]) => [...orderUser, dish])
     localStorage.setItem('order', JSON.stringify(orderUser))
   }
   const deleteDish = (dish: Dish) => {
     const definedDish = orderUser.findIndex((item: any) => item.id === dish.id)
     if (definedDish >= 0) {
-      orderUser.splice(definedDish, 1)
-      setOrderUser(orderUser)
+      setOrderUser((orderUser: Dish[]) => orderUser.splice(definedDish, 1))
       localStorage.setItem('order', JSON.stringify(orderUser))
     }
   }
@@ -32,6 +32,7 @@ function Cart() {
   }
   return (
     <>
+      <Header countOrder={orderUser.length} />
       <h2>YOUR ORDER</h2>
       <List
         className="User order"
