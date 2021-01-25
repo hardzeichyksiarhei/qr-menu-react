@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import MenuDish from '../MenuDish/MenuDish'
 import { MENUS } from '../../MENU/MENU'
