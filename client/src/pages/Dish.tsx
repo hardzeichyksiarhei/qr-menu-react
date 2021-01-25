@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DishPage from '../components/CategoryPage/CategoryPage'
+import DishPage from '../components/DishPage/DishPage'
 
 const PageDish = () => <DishPage />
 

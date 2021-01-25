@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { List, Button, Typography } from 'antd'
 import { Dish } from '../../utils/propsComponents'
 import OrderedDish from '../OrderedDish/OrderedDish'
@@ -9,15 +9,16 @@ import Header from '../Header/Header'
 const { Title } = Typography
 function Cart() {
   const [orderUser, setOrderUser] = useState(JSON.parse(localStorage.getItem('order') || '[]'))
+  useEffect(() => {
+    localStorage.setItem('order', JSON.stringify(orderUser))
+  }, [orderUser])
   const addDish = (dish: Dish) => {
     setOrderUser((orderUser: Dish[]) => [...orderUser, dish])
-    localStorage.setItem('order', JSON.stringify(orderUser))
   }
   const deleteDish = (dish: Dish) => {
     const definedDish = orderUser.findIndex((item: any) => item.id === dish.id)
     if (definedDish >= 0) {
       setOrderUser((orderUser: Dish[]) => orderUser.splice(definedDish, 1))
-      localStorage.setItem('order', JSON.stringify(orderUser))
     }
   }
   const getCountDish = (orderUser: any) => {

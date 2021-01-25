@@ -4,15 +4,9 @@ import './CardDish.scss'
 import { CardDishProps } from '../../utils/propsComponents'
 const { Meta } = Card
 
-function CardDish({ dish, choiceDish }: CardDishProps) {
-  const clickDish = () => {
-    choiceDish(dish)
-  }
+function CardDish({ dish }: CardDishProps) {
   return (
-    <Card
-      style={{ padding: '0', width: '100%', border: 'none', cursor: 'pointer' }}
-      onClick={clickDish}
-    >
+    <Card style={{ padding: '0', width: '100%', border: 'none', cursor: 'pointer' }}>
       <Meta className="dish__title" title={dish.title} />
     </Card>
   )

@@ -1,37 +1,44 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Header from '../Header/Header'
-// import { Route } from 'react-router-dom'
-
 import MenuDish from '../MenuDish/MenuDish'
-
-// localStorage.clear()
 import { MENUS } from '../../MENU/MENU'
 import { Dish } from '../../utils/propsComponents'
 import MenuBar from '../Navigation/Navigation'
 
-function Default() {
+function DishPage() {
   const [orderUser, setOrderUser] = useState(JSON.parse(localStorage.getItem('order') || '[]'))
-  const [categoryMenu, setCategoryMenu] = useState([])
-  const [dish, setDish] = useState<Dish | null>(null)
-  const choiceMenu = (menu: any) => {
-    setCategoryMenu(menu.categories)
-  }
-  const choiceDish = (dish: Dish) => {
-    setDish(dish)
-  }
-  const addDish = (dish: Dish) => {
-    orderUser.push(dish)
-    setOrderUser(orderUser)
+  useEffect(() => {
     localStorage.setItem('order', JSON.stringify(orderUser))
+  }, [orderUser])
+  const search = window.location.pathname
+    .substr(1)
+    .split('/')
+    .reduce(function (res: any, a) {
+      const t = a.split('=')
+      res[decodeURIComponent(t[0])] = t.length === 1 ? null : decodeURIComponent(t[1])
+      return res
+    }, {})
+  const category: any = MENUS.find((item) => item.id === +search.menu)
+  let dish: any
+  category.categories.forEach((item: any) => {
+    item.dishes.forEach((item: Dish) => {
+      if (item.id === search.dish) {
+        return (dish = item)
+      }
+    })
+  })
+  const addDish = (dish: Dish) => {
+    setOrderUser((orderUser: Dish[]) => [...orderUser, dish])
   }
+
   return (
     <>
       <Header countOrder={orderUser.length} />
 
-      {/* <MenuDish dish={dish} addDish={addDish} /> */}
+      <MenuDish dish={dish} addDish={addDish} />
 
       <MenuBar />
     </>
   )
 }
-export default Default
+export default DishPage
