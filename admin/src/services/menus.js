@@ -193,8 +193,33 @@ const save = async (menu) => {
   return [200, 201].includes(status) && data ? data : null
 }
 
+const duplicate = async ({ _id, id, createdAt, ...menu }) => {
+  const duplicateMenu = {
+    ...menu,
+    title: `Copy of ${menu.title}`,
+    isPublished: false,
+    isEnabledToOrder: false,
+  }
+
+  const { data, status } = await axios.post(`${API_URL}/menus`, { menu: duplicateMenu })
+
+  const duplicatedMenu = {
+    ...duplicateMenu,
+    id: data.menuId,
+  }
+
+  return [200, 201].includes(status) && duplicatedMenu ? duplicatedMenu : null
+}
+
+const deleteById = async (menuId) => {
+  const { data, status } = await axios.delete(`${API_URL}/menus/${menuId}`)
+  return status === 200 ? data : null
+}
+
 export default {
   getAll,
   getById,
   save,
+  duplicate,
+  deleteById,
 }

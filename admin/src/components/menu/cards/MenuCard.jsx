@@ -1,15 +1,31 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { Card } from 'antd'
+import { Card, Dropdown, Menu } from 'antd'
 
-import { EditOutlined, EllipsisOutlined, EyeOutlined } from '@ant-design/icons'
+import { EditOutlined, MenuOutlined, EyeOutlined } from '@ant-design/icons'
+
+import * as menusActions from '../../../store/actions/menus'
+import menusService from '../../../services/menus'
 
 const { Meta } = Card
 
 const MenuCard = ({ menu }) => {
+  const dispatch = useDispatch()
+
   const numberItems = menu.categories.reduce((acc, curr) => acc + curr.dishes.length, 0)
+
+  const handleClickDuplicateMenu = async () => {
+    const duplicatedMenu = await menusService.duplicate(menu)
+    dispatch(menusActions.addMenu(duplicatedMenu))
+  }
+
+  const handleClickDeleteMenu = async () => {
+    await menusService.deleteById(menu.id)
+    dispatch(menusActions.deleteMenu(menu.id))
+  }
 
   return (
     <Card
@@ -24,7 +40,20 @@ const MenuCard = ({ menu }) => {
           <EditOutlined key="edit" />
         </Link>,
         <EyeOutlined key="preview" />,
-        <EllipsisOutlined key="ellipsis" />,
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item onClick={handleClickDuplicateMenu}>Duplicate</Menu.Item>
+              <Menu.Item onClick={handleClickDeleteMenu} danger>
+                Delete
+              </Menu.Item>
+            </Menu>
+          }
+          placement="bottomCenter"
+          arrow
+        >
+          <MenuOutlined key="menu" />
+        </Dropdown>,
       ]}
     >
       <Meta

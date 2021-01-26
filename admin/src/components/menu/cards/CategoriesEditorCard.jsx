@@ -5,7 +5,7 @@ import { Card, Button, Spin, Modal } from 'antd'
 
 import { ReactSortable } from 'react-sortablejs'
 
-import * as menuService from '../../../store/actions/menu'
+import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
 import VerticalScrolling from '../../VerticalScrolling'
@@ -24,7 +24,7 @@ const CategoriesEditorCard = () => {
   const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
 
   const handleSetCategories = (categories) => {
-    dispatch(menuService.setCategories(categories))
+    dispatch(menuActions.setCategories(categories))
   }
 
   const handleActionCategory = (action, category = null /* payload */) => {

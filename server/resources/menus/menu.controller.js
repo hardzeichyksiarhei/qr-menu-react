@@ -36,3 +36,10 @@ module.exports.save = catchErrors(async (req, res) => {
     .status(StatusCodes.CREATED)
     .json({ menuId: createdMenu.id, message: 'Menu was created' })
 })
+
+module.exports.deleteById = catchErrors(async (req, res) => {
+  const { menuId } = req.params
+
+  const menu = await menuService.deleteById(menuId)
+  return res.status(StatusCodes.OK).json(menu)
+})
