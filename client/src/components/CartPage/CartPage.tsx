@@ -1,56 +1,40 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import MenuBar from '../Navigation/Navigation'
 import Cart from '../Cart/Cart'
-import { Dish, orderUserProps } from '../../utils/propsComponents'
+import { Dish } from '../../utils/propsComponents'
+import { renderCountOrderDish } from '../../utils/renderCountOrderDish'
 
 function CategoryPage() {
-  const [orderUser, setOrderUser] = useState(JSON.parse(localStorage.getItem('orderUser') || '[]'))
-  const [countUserOrder, setCountUserOrder] = useState(0)
+  let orderUser = JSON.parse(localStorage.getItem('orderUser') || '[]')
+  const [countOrderDish, setCountOrderDish] = useState(0)
   useEffect(() => {
-    localStorage.setItem('orderUser', JSON.stringify(orderUser))
-    setCountUserOrder(countOrderDish)
-  }, [orderUser])
-  const countOrderDish = useMemo(() => {
-    let count: number = 0
-    orderUser.forEach((item: { dish: Dish, count: number }) => (count += item.count))
-    return count
-  }, [orderUser])
-  console.log(countOrderDish)
+    setCountOrderDish(renderCountOrderDish(orderUser))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const addDish = (dish: Dish) => {
-    console.log(dish)
-    setOrderUser((orderUser: orderUserProps) => {
-      const resultOrder: any = orderUser.forEach((item: { dish: Dish, count: number }) => {
-        if (item.dish.id === dish.id) {
-          item.count = item.count + 1
-          return item
-        }
-        return item
-      })
-      return resultOrder
+    orderUser.map((item: { dish: Dish, count: number }) => {
+      if (item.dish.id === dish.id) {
+        return (item.count = item.count + 1)
+      }
+      return item
     })
+    localStorage.setItem('orderUser', JSON.stringify(orderUser))
+    setCountOrderDish(renderCountOrderDish(orderUser))
   }
   const deleteDish = (dish: Dish) => {
-    const definedDish = orderUser.findIndex((item: any) => item.id === dish.id)
-    if (definedDish >= 0) {
-      setOrderUser((orderUser: Dish[]) => orderUser.splice(definedDish, 1))
-    }
+    orderUser.map((item: { dish: Dish, count: number }) => {
+      if (item.dish.id === dish.id) {
+        return (item.count = item.count - 1)
+      }
+      return item
+    })
+    localStorage.setItem('orderUser', JSON.stringify(orderUser))
+    setCountOrderDish(renderCountOrderDish(orderUser))
   }
-
-  // const getCountDish = (orderUser: any) => {
-  //   const result: any = {}
-  //   orderUser.forEach((dish: Dish) => (result[dish.id] ? result[dish.id]++ : (result[dish.id] = 1)))
-  //   return Object.keys(result).map((item) => {
-  //     return {
-  //       dish: orderUser.find((dish: Dish) => dish.id === item),
-  //       count: result[item],
-  //     }
-  //   })
-  // }
-
   return (
     <>
-      <Header countOrder={countUserOrder} />
+      <Header countOrder={countOrderDish} />
       <Cart addDish={addDish} orederUser={orderUser} deleteDish={deleteDish} />
       <MenuBar />
     </>
