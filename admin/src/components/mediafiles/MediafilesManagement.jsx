@@ -1,27 +1,45 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-import { Modal } from 'antd'
+import { Button, Image } from 'antd'
+import { PlusCircleOutlined } from '@ant-design/icons'
 
-import mediafilesSelectors from '../../store/selectors/mediafiles'
-import { toggleMediafiles } from '../../store/actions/mediafiles'
+import { toggleModal } from '../../store/actions/mediafiles'
 
-// import MediafilesCard from './cards/MediafilesCard'
+import ModalCard from './cards/ModalCard'
+import './MediafilesManagement.scss'
 
-const MediafilesManagement = ({ isOpen }) => {
+const MediafilesManagement = () => {
   const dispatch = useDispatch()
-  const { isVisible } = useSelector(mediafilesSelectors.mediafiles)
+  const [selectedPhotoUrl] = useState(null)
+  const openModal = () => dispatch(toggleModal(true))
 
-  useEffect(() => {
-    dispatch(toggleMediafiles(isOpen))
-  }, [isOpen])
+  const selectButton = (
+    <div className="ph-upl-wr">
+      <Button className="ph-upl-btn" type="dashed" onClick={openModal}>
+        <PlusCircleOutlined />
+        <span className="ph-upl-title">Select Photo</span>
+      </Button>
+    </div>
+  )
 
-  return <Modal title="Basic" visible={isVisible} />
-}
-
-MediafilesManagement.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  return (
+    <>
+      {selectedPhotoUrl ? (
+        <Image
+          src={selectedPhotoUrl}
+          width={104}
+          height={104}
+          alt="dish photo"
+          style={{ width: '100%' }}
+          onClick={openModal}
+        />
+      ) : (
+        selectButton
+      )}
+      <ModalCard />
+    </>
+  )
 }
 
 export default MediafilesManagement
