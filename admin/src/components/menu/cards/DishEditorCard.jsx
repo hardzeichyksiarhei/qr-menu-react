@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
 
-import { Button, Space, Form, Input, Switch, Select } from 'antd'
+import { Button, Space, Form, Input, Switch, Select, InputNumber } from 'antd'
 
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
@@ -18,6 +18,7 @@ const dishSchema = () => ({
   photo: null,
   isPublished: true,
   isEnabledToOrder: true,
+  priceValue: null,
   tags: [],
   ingredients: [],
   allergens: [],
@@ -84,19 +85,22 @@ const DishEditorCard = ({ editDish, onAction }) => {
       <Form
         className="dish-editor-form"
         form={dishEditorForm}
-        layout="vertical"
+        layout="horizontal"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
         initialValues={dishSchema()}
         onFinish={handleClickSave}
       >
         {/* <Form.Item name="photo" label="Photo">
           <PhotoUploader />
         </Form.Item> */}
-        <Form.Item name="isPublished" label="Published" valuePropName="checked">
+        <Form.Item className="mb-0" name="isPublished" label="Published" valuePropName="checked">
           <Switch />
         </Form.Item>
         <Form.Item name="isEnabledToOrder" label="Enabled To Order" valuePropName="checked">
           <Switch />
         </Form.Item>
+
         <Form.Item label="Title" name="title" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
@@ -109,7 +113,16 @@ const DishEditorCard = ({ editDish, onAction }) => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item style={{ marginBottom: 0 }}>
+        <Form.Item label="Internal ID" name="internalId">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Description" name="description">
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item label="Price" name="priceValue">
+          <InputNumber min={0} />
+        </Form.Item>
+        <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="dish-editor-form__actions">
             <Space>
               <Button onClick={handleClickCancel}>Cancel</Button>

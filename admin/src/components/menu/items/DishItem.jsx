@@ -21,9 +21,10 @@ const DishItem = ({ dish, onAction }) => {
   const selectedcategoryId = useSelector(menuSelectors.selectedCategoryId)
 
   const handleClickDuplicateDish = () => {
+    const { _id, ...copyDish } = dish
     dispatch(
       menuActions.addDish(selectedcategoryId, {
-        ...dish,
+        ...copyDish,
         id: uuid(),
         title: `Copy of ${dish.title}`,
       }),
@@ -65,7 +66,7 @@ const DishItem = ({ dish, onAction }) => {
           </Space>
         </div>
         <div className="dish-item__price">
-          <b>100$</b>
+          <b>{dish.priceValue}</b>
         </div>
       </div>
     </div>

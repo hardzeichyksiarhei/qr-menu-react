@@ -91,6 +91,7 @@ const DishesEditorCard = () => {
       <Modal
         title={editDish ? 'Edit Dish' : 'Create dish'}
         visible={isDishEditorVisible}
+        width={720}
         footer={null}
         closable={false}
         destroyOnClose

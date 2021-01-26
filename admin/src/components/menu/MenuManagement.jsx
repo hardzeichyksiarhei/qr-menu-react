@@ -27,7 +27,7 @@ const MenuManagement = () => {
         ghost={false}
         title="Menu"
         extra={[
-          <Button type="primary" key="save" onClick={handleClickSaveMenu} disabled={isMenuBusy}>
+          <Button type="primary" key="save" onClick={handleClickSaveMenu} loading={isMenuBusy}>
             Save
           </Button>,
         ]}
