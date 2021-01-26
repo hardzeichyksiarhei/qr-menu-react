@@ -4,7 +4,7 @@ import Router from './router/Router'
 import { IntlProvider, LOCALES } from './intl'
 import languageSelectors from './store/selectors/language'
 
-import './App.scss'
+import './scss/main.scss'
 
 function App() {
   const { language } = useSelector(languageSelectors.language)

@@ -12,7 +12,7 @@ import menusService from '../../../services/menus'
 
 const { Meta } = Card
 
-const MenuCard = ({ menu }) => {
+const MenuCard = ({ menu, onShowPreviewDrawer }) => {
   const dispatch = useDispatch()
 
   const numberItems = menu.categories.reduce((acc, curr) => acc + curr.dishes.length, 0)
@@ -39,7 +39,7 @@ const MenuCard = ({ menu }) => {
         <Link to={`/menus/${menu.id}/edit`}>
           <EditOutlined key="edit" />
         </Link>,
-        <EyeOutlined key="preview" />,
+        <EyeOutlined key="preview" onClick={onShowPreviewDrawer} />,
         <Dropdown
           overlay={
             <Menu>
@@ -64,8 +64,13 @@ const MenuCard = ({ menu }) => {
   )
 }
 
+MenuCard.defaultProps = {
+  onShowPreviewDrawer: () => {},
+}
+
 MenuCard.propTypes = {
   menu: PropTypes.instanceOf(Object).isRequired,
+  onShowPreviewDrawer: PropTypes.func,
 }
 
 export default MenuCard
