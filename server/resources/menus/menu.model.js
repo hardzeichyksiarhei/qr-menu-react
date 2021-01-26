@@ -22,7 +22,8 @@ const categorySchema = new Schema({
 const menuSchema = new Schema(
   {
     userId: { type: Types.ObjectId, ref: 'User' },
-    status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
+    isPublished: { type: Boolean },
+    isEnabledToOrder: { type: Boolean },
     title: { type: String, default: 'New menu' },
     internalComment: { type: String },
     photo: { type: photoSchema, default: null },

@@ -4,7 +4,7 @@ const menuSchema = () => ({
   id: null,
   userId: null,
   isPublished: true,
-  isEnabledToOrder: false,
+  isEnabledToOrder: true,
   title: 'New menu',
   internalComment: '',
   photo: null,
@@ -79,6 +79,7 @@ const reducer = (state = initialState, action) => {
       }
     }
 
+    /* Menu */
     case types.UPDATE_MENU: {
       const { menu } = action.payload
       return {

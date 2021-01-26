@@ -39,6 +39,12 @@ export const requestedMenuError = (error) => ({
   payload: { error },
 })
 
+// Menu
+export const update = (menu) => ({
+  type: types.UPDATE_MENU,
+  payload: { menu },
+})
+
 // Categories
 export const setCategories = (categories) => ({
   type: types.SET_CATEGORIES,

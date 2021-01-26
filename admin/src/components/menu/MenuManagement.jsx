@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { PageHeader, Button } from 'antd'
+import { PageHeader, Button, Modal } from 'antd'
 
 import * as menuActions from '../../store/actions/menu'
 import menuSelectors from '../../store/selectors/menu'
@@ -10,11 +10,18 @@ import CategoriesEditorCard from './cards/CategoriesEditorCard'
 import DishesEditorCard from './cards/DishesEditorCard'
 
 import './MenuManagement.scss'
+import MenuSettingsEditorCard from './cards/MenuSettingsEditorCard'
 
 const MenuManagement = () => {
   const dispatch = useDispatch()
 
+  const [isSettingsEditorVisible, setIsSettingsEditorVisible] = useState(false)
+
   const isMenuBusy = useSelector(menuSelectors.isMenuBusy)
+
+  const handleClickSettingsMenu = () => {
+    setIsSettingsEditorVisible(true)
+  }
 
   const handleClickSaveMenu = () => {
     dispatch(menuActions.saveMenu())
@@ -27,6 +34,9 @@ const MenuManagement = () => {
         ghost={false}
         title="Menu"
         extra={[
+          <Button type="default" key="settings" onClick={handleClickSettingsMenu}>
+            Settings
+          </Button>,
           <Button type="primary" key="save" onClick={handleClickSaveMenu} loading={isMenuBusy}>
             Save
           </Button>,
@@ -41,6 +51,20 @@ const MenuManagement = () => {
           <DishesEditorCard />
         </div>
       </div>
+
+      <Modal
+        title="Settings"
+        visible={isSettingsEditorVisible}
+        width={720}
+        footer={null}
+        closable={false}
+        destroyOnClose
+      >
+        <MenuSettingsEditorCard
+          onCancel={() => setIsSettingsEditorVisible(false)}
+          onSave={() => setIsSettingsEditorVisible(false)}
+        />
+      </Modal>
     </div>
   )
 }
