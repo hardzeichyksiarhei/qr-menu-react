@@ -53,7 +53,7 @@ const CategoriesEditorCard = () => {
   return (
     <div className="category-editor">
       <Card
-        title="Categories"
+        title={<h3 className="mb-0">Categories</h3>}
         extra={
           <Button type="primary" onClick={() => handleActionCategory('category:create')}>
             Add new

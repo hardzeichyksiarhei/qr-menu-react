@@ -37,7 +37,7 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
   return (
     <Card
       className="card-item card-shadow"
-      title={<h2 className="mb-0">{translate('Supplier')}</h2>}
+      title={<h3 className="mb-0">{translate('Supplier')}</h3>}
     >
       <Form name="supplier-form" layout="vertical">
         <Form.Item

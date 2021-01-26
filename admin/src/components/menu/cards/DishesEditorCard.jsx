@@ -55,7 +55,7 @@ const DishesEditorCard = () => {
   return (
     <div className="menu-editor">
       <Card
-        title="Dishes"
+        title={<h3 className="mb-0">Dishes</h3>}
         extra={
           <Button type="primary" onClick={() => handleActionDish('dish:create')}>
             Add new
