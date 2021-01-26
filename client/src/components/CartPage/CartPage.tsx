@@ -12,7 +12,7 @@ function CategoryPage() {
     setCountOrderDish(renderCountOrderDish(orderUser))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  const addDish = (dish: Dish) => {
+  const dishCountIncrease = (dish: Dish) => {
     orderUser.map((item: { dish: Dish, count: number }) => {
       if (item.dish.id === dish.id) {
         return (item.count = item.count + 1)
@@ -22,7 +22,7 @@ function CategoryPage() {
     localStorage.setItem('orderUser', JSON.stringify(orderUser))
     setCountOrderDish(renderCountOrderDish(orderUser))
   }
-  const deleteDish = (dish: Dish) => {
+  const dishCountReduce = (dish: Dish) => {
     orderUser.map((item: { dish: Dish, count: number }) => {
       if (item.dish.id === dish.id) {
         return (item.count = item.count - 1)
@@ -32,10 +32,23 @@ function CategoryPage() {
     localStorage.setItem('orderUser', JSON.stringify(orderUser))
     setCountOrderDish(renderCountOrderDish(orderUser))
   }
+  const deleteDish = (dish: Dish) => {
+    const index = orderUser.findIndex(
+      (item: { dish: Dish, count: number }) => item.dish.id === dish.id,
+    )
+    orderUser.splice(index, 1)
+    localStorage.setItem('orderUser', JSON.stringify(orderUser))
+    setCountOrderDish(renderCountOrderDish(orderUser))
+  }
   return (
     <>
       <Header countOrder={countOrderDish} />
-      <Cart addDish={addDish} orederUser={orderUser} deleteDish={deleteDish} />
+      <Cart
+        dishCountIncrease={dishCountIncrease}
+        dishCountReduce={dishCountReduce}
+        orederUser={orderUser}
+        deleteDish={deleteDish}
+      />
       <MenuBar />
     </>
   )

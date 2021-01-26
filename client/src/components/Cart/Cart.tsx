@@ -5,8 +5,7 @@ import OrderedDish from '../OrderedDish/OrderedDish'
 import './Cart.scss'
 
 const { Title } = Typography
-function Cart({ orederUser, addDish, deleteDish }: CartProps) {
-  console.log(orederUser)
+function Cart({ orederUser, dishCountIncrease, dishCountReduce, deleteDish }: CartProps) {
   return (
     <>
       <h2>YOUR ORDER</h2>
@@ -16,7 +15,13 @@ function Cart({ orederUser, addDish, deleteDish }: CartProps) {
         dataSource={orederUser}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.dish.id}>
-            <OrderedDish key={item.dish.id} dish={item} addDish={addDish} deleteDish={deleteDish} />
+            <OrderedDish
+              key={item.dish.id}
+              dish={item}
+              dishCountReduce={dishCountReduce}
+              dishCountIncrease={dishCountIncrease}
+              deleteDish={deleteDish}
+            />
           </List.Item>
         )}
       />

@@ -52,12 +52,14 @@ count: number
 }[]
 export type CartProps ={
   orederUser:{dish:Dish, count: number}[],
-  addDish: (dish: Dish) => void ,
+  dishCountIncrease: (dish: Dish) => void ,
+  dishCountReduce: (dish: Dish) => void,
   deleteDish:(dish: Dish)=>void,
 }
 export type OrderDishProps={
   dish:{dish:Dish, count: number} ,
-  addDish: (dish: Dish) => void ,
+  dishCountIncrease: (dish: Dish) => void ,
+  dishCountReduce: (dish: Dish) => void,
   deleteDish:(dish: Dish)=>void,
 }
 
