@@ -34,7 +34,7 @@ const SettingsRegionCard = ({ regionSettings, changeField }) => {
   return (
     <Card
       className="card-item card-shadow"
-      title={<h2 className="mb-0">{translate('RegionSettings')}</h2>}
+      title={<h3 className="mb-0">{translate('RegionSettings')}</h3>}
     >
       <Form name="region-settings-form" layout="vertical">
         <Form.Item label={intl.formatMessage({ id: 'Country' })}>

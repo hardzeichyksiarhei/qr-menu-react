@@ -13,7 +13,12 @@ const MenuCard = ({ menu }) => {
 
   return (
     <Card
-      cover={<img alt={menu.title} src={menu.photo} />}
+      cover={
+        <img
+          alt={menu.title}
+          src={menu.photo || 'https://via.placeholder.com/600x360?text=QR Menu'}
+        />
+      }
       actions={[
         <Link to={`/menus/${menu.id}/edit`}>
           <EditOutlined key="edit" />

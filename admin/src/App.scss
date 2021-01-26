@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 /* Common */
 .d-block {
@@ -27,12 +27,20 @@
 
 /* Shadow */
 .card-shadow {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 /* Margin */
 .mt-2 {
     margin-top: 20px !important;
+}
+
+.mr-05 {
+    margin-right: 5px !important;
+}
+
+.mr-1 {
+    margin-right: 20px !important;
 }
 
 .mb-0 {

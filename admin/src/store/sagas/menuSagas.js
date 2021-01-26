@@ -2,6 +2,7 @@ import { put, takeEvery, call, select } from 'redux-saga/effects'
 
 import * as types from '../types/menu'
 import * as actions from '../actions/menu'
+import menuSelectors from '../selectors/menu'
 
 import menusService from '../../services/menus'
 
@@ -20,7 +21,7 @@ function* fetchMenu(action) {
 
 // Save Menu
 function* saveMenu() {
-  const menu = select((state) => state.menu.menu)
+  const menu = yield select(menuSelectors.menu)
 
   try {
     yield put(actions.requestedSaveMenu())

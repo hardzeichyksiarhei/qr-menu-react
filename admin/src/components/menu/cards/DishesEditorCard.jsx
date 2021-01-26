@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Card, Button, Spin, Modal } from 'antd'
 
@@ -17,20 +17,17 @@ import './DishesEditorCard.scss'
 const DishesEditorCard = () => {
   const dispatch = useDispatch()
 
-  const [dishes, setDishes] = useState([])
   const [isDishEditorVisible, setIsDishEditorVisible] = useState(false)
   const [editDish, setEditDish] = useState(null)
 
   const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
-  const selectedCategory = useSelector(menuSelectors.categoryById(selectedCategoryId))
+  const dishes = useSelector(menuSelectors.dishesByCategoryId(selectedCategoryId))
   const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
 
-  useEffect(() => {
-    if (selectedCategory) setDishes(selectedCategory.dishes)
-  }, [selectedCategory])
-
   // eslint-disable-next-line no-shadow
-  const handleSetDishes = (dishes) => dispatch(menuActions.setDishes(selectedCategoryId, dishes))
+  const handleSetDishes = (dishes) => {
+    dispatch(menuActions.setDishes(selectedCategoryId, dishes))
+  }
 
   const handleActionDish = (action, dish = null /* payload */) => {
     switch (action) {
@@ -42,8 +39,12 @@ const DishesEditorCard = () => {
         setIsDishEditorVisible(true)
         break
       case 'dish:editor.save':
+        setIsDishEditorVisible(false)
+        setEditDish(null)
         break
       case 'dish:editor.cancel':
+        setIsDishEditorVisible(false)
+        setEditDish(null)
         break
       default:
         // eslint-disable-next-line no-console
@@ -53,7 +54,14 @@ const DishesEditorCard = () => {
 
   return (
     <div className="menu-editor">
-      <Card title="Dishes" extra={<Button type="primary">Add new</Button>}>
+      <Card
+        title={<h3 className="mb-0">Dishes</h3>}
+        extra={
+          <Button type="primary" onClick={() => handleActionDish('dish:create')}>
+            Add new
+          </Button>
+        }
+      >
         <div
           className={`menu-editor__content ${
             isMenuLoading ? 'menu-editor__content--loading' : ''
@@ -83,10 +91,12 @@ const DishesEditorCard = () => {
       <Modal
         title={editDish ? 'Edit Dish' : 'Create dish'}
         visible={isDishEditorVisible}
+        width={720}
         footer={null}
         closable={false}
+        destroyOnClose
       >
-        <DishEditorCard editCategory={editDish} onAction={handleActionDish} />
+        <DishEditorCard editDish={editDish} onAction={handleActionDish} />
       </Modal>
     </div>
   )

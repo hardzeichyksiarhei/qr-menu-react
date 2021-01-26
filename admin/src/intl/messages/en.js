@@ -1,7 +1,7 @@
 import LOCALES from '../locales'
 
 export default {
-  [LOCALES.english]: {
+  [LOCALES.en]: {
     // Auth
     Authorization: 'Authorization',
     Email: 'E-mail',
@@ -45,12 +45,15 @@ export default {
     Settings: 'Settings',
     Logout: 'Logout',
     Save: 'Save',
+    Download: 'Download',
     // Admin layout
     Dashboard: 'Dashboard',
     MyMenus: 'My menus',
     TrashMenu: 'Trash menu',
     Profile: 'Profile',
     MyProfile: 'My Profile',
+    // Dashboard
+    QRCode: 'QR code',
     // Settings
     RegionSettings: 'Region Settings',
     Country: 'Country',

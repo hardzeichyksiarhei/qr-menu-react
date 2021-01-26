@@ -3,6 +3,9 @@
 		"email": "Поле \"E-mail\" должно быть действительным электронным адресом",
 		"password": {
 			"length": "Количество символов в пароле должно быть не менее {{min}}"
-		}
-	}
+		},
+		"UserWithThisLoginAlreadyExists": "Пользователь с этой почтой уже существует",
+		"LoginFailed": "Войти не удалось! Проверьте учетные данные для аутентификации"
+	},
+	"UserWithThisLoginAlreadyExists": "UserWithThisLoginAlreadyExists"
 }
