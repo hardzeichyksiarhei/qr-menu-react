@@ -1,9 +1,16 @@
 import React from 'react'
-import QRCodeComponent from '../components/qrCode/QRCodeComponent'
+
+import { Row, Col } from 'antd'
+
+import QRCodeCard from '../components/qrCode/QRCodeCard'
 
 const Dashboard = () => (
   <>
-    <QRCodeComponent />
+    <Row>
+      <Col span={6}>
+        <QRCodeCard />
+      </Col>
+    </Row>
   </>
 )
 
