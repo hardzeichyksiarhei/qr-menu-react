@@ -1,29 +1,42 @@
 import React from 'react'
 import { Button, Typography } from 'antd'
 import { OrderDishProps } from '../../utils/propsComponents'
-import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { DeleteOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import './OrderedDish.css'
 
 const { Title } = Typography
 
-function OrderedDish({ dish, deleteDish, addDish }: OrderDishProps) {
+function OrderedDish({ dish, dishCountIncrease, dishCountReduce, deleteDish }: OrderDishProps) {
   function dishDelete() {
-    deleteDish(dish.id)
+    deleteDish(dish.dish)
   }
-  function dishAdd() {
-    addDish(dish.id)
+  function countIncreaseDish() {
+    dishCountIncrease(dish.dish)
+  }
+  function countReduceDish() {
+    dishCountReduce(dish.dish)
   }
   return (
     <div className="order-dish">
       <div className="order-dish__info">
         <Title level={3} className="order-dish__title">
-          {dish.id.title}
+          {dish.dish.title}
         </Title>
       </div>
       <div className="order-dish__management">
-        <Button onClick={dishDelete} icon={<MinusCircleOutlined />}></Button>
-        <span className="order-dish__count">{dish.sum}</span>
-        <Button onClick={dishAdd} icon={<PlusCircleOutlined />}></Button>
+        {dish.count > 1 ? (
+          <Button onClick={countReduceDish} icon={<MinusCircleOutlined />}></Button>
+        ) : (
+          <></>
+        )}
+
+        <span className="order-dish__count">{dish.count}</span>
+        <Button onClick={countIncreaseDish} icon={<PlusCircleOutlined />}></Button>
+        <Button
+          className="btn__delete-dish"
+          onClick={dishDelete}
+          icon={<DeleteOutlined />}
+        ></Button>
       </div>
     </div>
   )

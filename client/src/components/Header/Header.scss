@@ -16,3 +16,17 @@
 [data-theme="dark"] .head-example {
   background: rgba(255,255,255,.12);
 }
+.header {
+  margin-bottom: 20px;
+}
+.btn__header{
+  display: flex;
+  align-items: center;
+}
+.btn__text{
+  min-width: 24px;
+  margin: 0  0 0 5px;
+  border-radius: 50%;
+  background-color: #ff9900;
+  padding: 2px;
+}

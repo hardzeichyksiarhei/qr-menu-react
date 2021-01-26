@@ -3,9 +3,10 @@ import { Card, List, Typography } from 'antd'
 import './CardCategory.scss'
 import CardDish from '../CardDish/CardDish'
 import { CardCategoryProps } from '../../utils/propsComponents'
+import { NavLink } from 'react-router-dom'
 const { Title } = Typography
 
-function CardCategory({ category, choiceDish }: CardCategoryProps) {
+function CardCategory({ category, menuId }: CardCategoryProps) {
   const [dishClass, setDishClass] = useState('dish')
   function clickCategory() {
     if (dishClass === 'dish') {
@@ -32,7 +33,9 @@ function CardCategory({ category, choiceDish }: CardCategoryProps) {
         dataSource={category.dishes}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
-            <CardDish key={item.title} dish={item} choiceDish={choiceDish} />
+            <NavLink to={`/menu=${menuId}/dish=${item.id}`}>
+              <CardDish key={item.title} dish={item} />
+            </NavLink>
           </List.Item>
         )}
       />

@@ -25,36 +25,44 @@ export type MenuProps = {
   categories: CategoryProps[],
   createdAt: any,
 }
-export type HeaderProps = { counrOrder: number }
+export type HeaderProps = { countOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
-  choiceMenu: (menu: MenuProps) => void,
 }
 export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void }
 export type DishProps = { dish: Dish }
 export type CardMenuProps = {
   menu: MenuProps,
-  clickMenu: (menu: MenuProps) => void,
 }
 export type CardDishProps = {
-  dish: any,
-  choiceDish: (dish: Dish) => void,
+  dish: Dish,
 }
 export type CardCategoryProps = {
   category: CategoryProps,
-  choiceDish: (dish: Dish) => void,
+  menuId: number,
 }
 export type MenuCategoryProps = {
   categoryMenu: CategoryProps[],
-  choiceDish: (dish: Dish) => void,
+  menuId: number,
+
+}
+export type OrderUserProps ={
+dish:Dish, 
+count: number
 }
 export type CartProps ={
-  orderUser:Dish[],
-  addDish: (dish: Dish) => void ,
+  orederUser:{dish:Dish, count: number}[],
+  dishCountIncrease: (dish: Dish) => void ,
+  dishCountReduce: (dish: Dish) => void,
   deleteDish:(dish: Dish)=>void,
 }
 export type OrderDishProps={
-  dish:{id:Dish, sum: number} ,
-  addDish: (dish: Dish) => void ,
+  dish:{dish:Dish, count: number} ,
+  dishCountIncrease: (dish: Dish) => void ,
+  dishCountReduce: (dish: Dish) => void,
   deleteDish:(dish: Dish)=>void,
+}
+
+export type DefaultLayoutProps={
+  children: any[]
 }
