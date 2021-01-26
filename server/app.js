@@ -10,6 +10,8 @@ const menuRouter = require('./resources/menus/menu.router')
 const settingsRouter = require('./resources/settings/settings.router')
 const QRCodeRouter = require('./resources/qr-code/qr-code.router')
 
+const menuPublicRouter = require('./resources/menus/menu.public.router')
+
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
@@ -26,6 +28,8 @@ app.use('/', (req, res, next) => {
   }
   next()
 })
+
+app.use('/api/public/menus', menuPublicRouter)
 
 app.use('/api/auth', authRouter)
 app.use('/api/users', auth, userRouter)
