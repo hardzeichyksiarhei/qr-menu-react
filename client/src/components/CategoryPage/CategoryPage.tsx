@@ -19,8 +19,7 @@ function CategoryPage() {
     }, {})
   useEffect(() => {
     setCountOrderDish(renderCountOrderDish(orderUser))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [orderUser])
   const category: any = MENUS.find((item) => item.id === +search.menu)
   return (
     <>

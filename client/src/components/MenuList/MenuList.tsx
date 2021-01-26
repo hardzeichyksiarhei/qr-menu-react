@@ -8,7 +8,7 @@ function MenuList({ menus }: MenuListProps) {
     <>
       {menus.map((menu) => {
         return (
-          <NavLink to={`/menu=${menu.id}`}>
+          <NavLink key={menu.id} to={`/menu=${menu.id}`}>
             <CardMenu key={menu.id} menu={menu} />
           </NavLink>
         )

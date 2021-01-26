@@ -46,10 +46,10 @@ export type MenuCategoryProps = {
   menuId: number,
 
 }
-export type orderUserProps ={
+export type OrderUserProps ={
 dish:Dish, 
 count: number
-}[]
+}
 export type CartProps ={
   orederUser:{dish:Dish, count: number}[],
   dishCountIncrease: (dish: Dish) => void ,

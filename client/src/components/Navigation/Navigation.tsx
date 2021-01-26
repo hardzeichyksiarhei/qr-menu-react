@@ -6,9 +6,12 @@ import { ArrowLeftOutlined, HomeOutlined, ShoppingCartOutlined } from '@ant-desi
 import './Navigation.scss'
 
 function MenuBar() {
+  const goBack = () => {
+    window.history.back()
+  }
   return (
     <Menu className="menu-bar" mode="horizontal">
-      <Menu.Item icon={<ArrowLeftOutlined />} key="back" />
+      <Menu.Item icon={<ArrowLeftOutlined />} onClick={goBack} key="back" />
       <Menu.Item icon={<HomeOutlined />} key="home">
         <NavLink to="/" />
       </Menu.Item>

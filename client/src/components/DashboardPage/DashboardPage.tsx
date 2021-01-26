@@ -10,8 +10,7 @@ function DashboardPage() {
   const [countOrderDish, setCountOrderDish] = useState(0)
   useEffect(() => {
     setCountOrderDish(renderCountOrderDish(orderUser))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [orderUser])
   return (
     <>
       <Header countOrder={countOrderDish} />
