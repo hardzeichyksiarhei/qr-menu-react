@@ -17,6 +17,8 @@ const MenusTrashList = lazy(() => import('../pages/menu/MenusTrashList'))
 const MenuCreate = lazy(() => import('../pages/menu/MenuCreate'))
 const MenuEdit = lazy(() => import('../pages/menu/MenuEdit'))
 
+const OrdersList = lazy(() => import('../pages/orders/Orders'))
+
 const routes = (isLoggedIn) => [
   {
     path: '/',
@@ -28,6 +30,7 @@ const routes = (isLoggedIn) => [
       { path: '/menus/create', element: <MenuCreate /> },
       { path: '/menus/:menuId/edit', element: <MenuEdit /> },
       { path: '/menus/trash', element: <MenusTrashList /> },
+      { path: '/orders', element: <OrdersList /> },
       { path: '/', element: <Navigate to="/dashboard" /> },
     ],
   },

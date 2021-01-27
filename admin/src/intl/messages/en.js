@@ -73,6 +73,8 @@ export default {
     Belarus: 'Belarus',
     Poland: 'Poland',
     FormatTimeWithNumber: '{num} global hours',
+    // Orders
+    Orders: 'Orders',
     // Validation
     PasswordConfirmed: 'Password confirmation does not match',
     FieldRequired: 'Field is required',

@@ -40,6 +40,11 @@ const routes = [
     label: translate('Settings'),
     icon: <SettingOutlined />,
   },
+  {
+    path: '/orders',
+    label: translate('Orders'),
+    icon: <SettingOutlined />,
+  },
 ]
 
 const Default = () => {
