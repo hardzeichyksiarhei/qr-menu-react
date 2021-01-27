@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "antd": "^4.9.4",
+    "antd-img-crop": "^3.13.2",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "history": "^5.0.0",
