@@ -1,13 +1,12 @@
 const { StatusCodes } = require('http-status-codes')
+const { validationResult } = require('express-validator')
 
-module.exports = (schema) => (req, res, next) => {
-  const { error } = schema.validate(req.body)
-  const valid = error == null
+module.exports = (req, res, next) => {
+  const { errors } = validationResult(req)
 
-  if (valid) return next()
+  if (!errors.length) return next()
 
-  const { details } = error
-  const message = details.map((i) => i.message).join(',')
+  const error = errors.pop()
 
-  return res.status(StatusCodes.BAD_REQUEST).json({ message })
+  return res.status(StatusCodes.BAD_REQUEST).json({ message: error.msg })
 }

@@ -18,6 +18,16 @@ export const requestedMenusError = () => ({
   type: types.REQUESTED_MENUS_FAILED,
 })
 
+export const addMenu = (menu) => ({
+  type: types.ADD_MENU,
+  payload: { menu },
+})
+
+export const deleteMenu = (menuId) => ({
+  type: types.DELETE_MENU,
+  payload: { menuId },
+})
+
 export const clearMenus = () => ({
   type: types.CLEAR_MENUS,
 })

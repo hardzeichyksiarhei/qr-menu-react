@@ -31,6 +31,22 @@ const reducer = (state = initialState, action) => {
       }
     }
 
+    case types.ADD_MENU: {
+      const { menu } = action.payload
+      return {
+        ...state,
+        menus: [...state.menus, menu],
+      }
+    }
+
+    case types.DELETE_MENU: {
+      const { menuId } = action.payload
+      return {
+        ...state,
+        menus: state.menus.filter((menu) => menu.id !== menuId),
+      }
+    }
+
     case types.CLEAR_MENUS: {
       return {
         ...state,

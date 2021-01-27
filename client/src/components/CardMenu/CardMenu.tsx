@@ -4,10 +4,7 @@ import './CardMenu.css'
 import { CardMenuProps } from '../../utils/propsComponents'
 const { Meta } = Card
 
-function CardMenu({ menu, clickMenu }: CardMenuProps) {
-  function clickCard() {
-    clickMenu(menu)
-  }
+function CardMenu({ menu }: CardMenuProps) {
   return (
     <Card
       className="menu-card"
@@ -20,7 +17,6 @@ function CardMenu({ menu, clickMenu }: CardMenuProps) {
           src={menu.photo}
         />
       }
-      onClick={clickCard}
     >
       <Meta title={menu.title} />
     </Card>

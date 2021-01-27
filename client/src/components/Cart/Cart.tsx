@@ -1,32 +1,35 @@
 import React from 'react'
-import { List } from 'antd'
-import { CartProps, Dish } from '../../utils/propsComponents'
+import { List, Button, Typography } from 'antd'
+import { CartProps } from '../../utils/propsComponents'
 import OrderedDish from '../OrderedDish/OrderedDish'
+import './Cart.scss'
 
-function Cart({ orderUser, deleteDish, addDish }: CartProps) {
-  const getCountDish = (orderUser: any) => {
-    const result: any = {}
-    orderUser.forEach((dish: Dish) => (result[dish.id] ? result[dish.id]++ : (result[dish.id] = 1)))
-    return Object.keys(result).map((item) => {
-      return {
-        id: orderUser.find((dish: Dish) => dish.id === item),
-        sum: result[item],
-      }
-    })
-  }
+const { Title } = Typography
+function Cart({ orederUser, dishCountIncrease, dishCountReduce, deleteDish }: CartProps) {
   return (
     <>
       <h2>YOUR ORDER</h2>
       <List
         className="User order"
         bordered
-        dataSource={getCountDish(orderUser)}
-        renderItem={(dish: any) => (
-          <List.Item style={{ padding: '0' }} key={dish.id.id}>
-            <OrderedDish key={dish.id.id} dish={dish} addDish={addDish} deleteDish={deleteDish} />
+        dataSource={orederUser}
+        renderItem={(item: any) => (
+          <List.Item style={{ padding: '0' }} key={item.dish.id}>
+            <OrderedDish
+              key={item.dish.id}
+              dish={item}
+              dishCountReduce={dishCountReduce}
+              dishCountIncrease={dishCountIncrease}
+              deleteDish={deleteDish}
+            />
           </List.Item>
         )}
       />
+      <Title level={4} className="cart__title">
+        Total: {}
+      </Title>
+
+      <Button>I`m inside the place</Button>
     </>
   )
 }

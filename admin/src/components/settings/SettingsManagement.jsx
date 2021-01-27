@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PageHeader, Button, Spin } from 'antd'
+import { useIntl } from 'react-intl'
 
 import {
   fetchSettings,
@@ -10,6 +11,8 @@ import {
 } from '../../store/actions/settings'
 import settingsSelectors from '../../store/selectors/settings'
 
+import translate from '../../intl/translate'
+
 import './SettingsManagement.scss'
 import SettingsRegionCard from './cards/SettingsRegionCard'
 import SettingsSupplierCard from './cards/SettingsSupplierCard'
@@ -18,6 +21,7 @@ const SettingsManagement = () => {
   const dispatch = useDispatch()
 
   const { settings, isSettingsLoading } = useSelector(settingsSelectors.settings)
+  const intl = useIntl()
 
   useEffect(() => {
     dispatch(fetchSettings())
@@ -47,10 +51,10 @@ const SettingsManagement = () => {
     <>
       <PageHeader
         ghost={false}
-        title="Settings"
+        title={intl.formatMessage({ id: 'Settings' })}
         extra={[
           <Button key="1" type="primary" onClick={saveChanges} loading={isSettingsLoading}>
-            Save
+            {translate('Save')}
           </Button>,
         ]}
       />

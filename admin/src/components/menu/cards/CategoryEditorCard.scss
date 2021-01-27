@@ -1,12 +1,6 @@
-.category-editor {
-    &__content {
-      width: 100%;
-      height: calc(100vh - 360px);
-      &--loading,
-      &--empty {
+.category-editor-form {
+    &__actions {
         display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+        justify-content: flex-end;
     }
-  }
+}

@@ -1,20 +1,20 @@
 .menu-constructor {
-    flex-grow: 1;
+  flex-grow: 1;
+}
+
+.menu-constructor-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(375px, 1fr) 2fr;
+  gap: 10px;
+}
+
+@media screen and (max-width: 991px) {
+  .menu-constructor {
+    margin-bottom: 60px;
   }
-  
+
   .menu-constructor-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: minmax(375px, 1fr) 2fr;
-    gap: 10px;
+    grid-template-columns: 100%;
   }
-  
-  @media screen and (max-width: 991px) {
-    .menu-constructor {
-      margin-bottom: 60px;
-    }
-  
-    .menu-constructor-grid {
-      grid-template-columns: 100%;
-    }
-  }
+}

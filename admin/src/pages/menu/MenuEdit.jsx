@@ -11,7 +11,7 @@ const MenuEdit = () => {
   const { menuId } = useParams()
 
   useEffect(() => {
-    dispatch(fetchMenu(Number(menuId)))
+    dispatch(fetchMenu(menuId))
   }, [dispatch, menuId])
 
   return (

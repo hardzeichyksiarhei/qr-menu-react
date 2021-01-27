@@ -1,58 +1,81 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
+import { v4 as uuid } from 'uuid'
 
-import { Card, Button, Spin } from 'antd'
+import { Button, Space, Form, Input, Switch } from 'antd'
 
-import { ReactSortable } from 'react-sortablejs'
-
-import * as menuService from '../../../store/actions/menu'
-import menuSelectors from '../../../store/selectors/menu'
-
-import VerticalScrolling from '../../VerticalScrolling'
-import CategoryItem from '../items/CategoryItem'
+import * as menuActions from '../../../store/actions/menu'
 
 import './CategoryEditorCard.scss'
 
-const CategoryEditorCard = () => {
+const categorySchema = () => ({
+  title: 'New category',
+  photo: null,
+  isVisible: true,
+  dishes: [],
+})
+
+const CategoryEditorCard = ({ editCategory, onAction }) => {
   const dispatch = useDispatch()
 
-  const menuCategories = useSelector(menuSelectors.menuCategories)
-  const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
+  const [categoryEditorForm] = Form.useForm()
 
-  const handleSetCategories = (categories) => {
-    dispatch(menuService.setCategories(categories))
+  useEffect(() => {
+    if (editCategory) categoryEditorForm.setFieldsValue(editCategory)
+  }, [categoryEditorForm, editCategory])
+
+  const handleClickCancel = () => {
+    setTimeout(() => categoryEditorForm.resetFields(), 100)
+    onAction('category:editor.cancel')
+  }
+
+  const handleClickSave = (category) => {
+    if (editCategory) dispatch(menuActions.updateCategory(editCategory.id, category))
+    else dispatch(menuActions.addCategory({ ...categorySchema(), ...category, id: uuid() }))
+
+    setTimeout(() => categoryEditorForm.resetFields(), 100)
+    onAction('category:editor.save')
   }
 
   return (
     <div className="category-editor">
-      <Card title="Categories" extra={<Button type="primary">Add new</Button>}>
-        <div
-          className={`category-editor__content ${
-            isMenuLoading ? 'category-editor__content--loading' : ''
-          } ${!isMenuLoading && !menuCategories.length ? 'category-editor__content--empty' : ''}`}
-        >
-          {isMenuLoading ? (
-            <Spin size="large" />
-          ) : (
-            <VerticalScrolling>
-              <div className="category-list">
-                <ReactSortable
-                  list={menuCategories}
-                  setList={handleSetCategories}
-                  handle=".move"
-                  animation={200}
-                >
-                  {menuCategories.map((category) => (
-                    <CategoryItem category={category} key={category.id} />
-                  ))}
-                </ReactSortable>
-              </div>
-            </VerticalScrolling>
-          )}
-        </div>
-      </Card>
+      <Form
+        className="category-editor-form"
+        form={categoryEditorForm}
+        layout="vertical"
+        initialValues={categorySchema()}
+        onFinish={handleClickSave}
+      >
+        <Form.Item name="isVisible" label="Visible" valuePropName="checked">
+          <Switch />
+        </Form.Item>
+        <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item style={{ marginBottom: 0 }}>
+          <div className="category-editor-form__actions">
+            <Space>
+              <Button onClick={handleClickCancel}>Cancel</Button>
+              <Button type="primary" htmlType="submit">
+                Save
+              </Button>
+            </Space>
+          </div>
+        </Form.Item>
+      </Form>
     </div>
   )
+}
+
+CategoryEditorCard.defaultProps = {
+  editCategory: null,
+  onAction: () => {},
+}
+
+CategoryEditorCard.propTypes = {
+  editCategory: PropTypes.instanceOf(Object),
+  onAction: PropTypes.func,
 }
 
 export default CategoryEditorCard

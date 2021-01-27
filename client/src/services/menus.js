@@ -45,7 +45,7 @@ const getAll = async () =>
   )
 
 const getById = async (menuId) => {
-  const { data, status } = await axios.get(`${API_URL}/menus/${menuId}`)
+  const { data, status } = await axios.get(`${API_URL}/public/menus?userId=${menuId}`)
   return status === 200 && data ? data : null
 }
 

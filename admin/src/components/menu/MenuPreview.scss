@@ -1,0 +1,26 @@
+.preview-device {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 auto;
+    &--mobile {
+        width: 100%;
+        max-width: 420px;
+    }
+    &--tablet {
+        width: 100%;
+        max-width: 576px;
+    }
+    &__toggle {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+}

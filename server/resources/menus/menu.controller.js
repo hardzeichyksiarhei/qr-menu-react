@@ -11,6 +11,13 @@ module.exports.getAll = catchErrors(async (req, res) => {
   return res.status(StatusCodes.OK).json(menus)
 })
 
+module.exports.getById = catchErrors(async (req, res) => {
+  const { menuId } = req.params
+
+  const menu = await menuService.getById(menuId)
+  return res.status(StatusCodes.OK).json(menu)
+})
+
 module.exports.save = catchErrors(async (req, res) => {
   const { user } = req
   const { menu } = req.body
@@ -28,4 +35,11 @@ module.exports.save = catchErrors(async (req, res) => {
   return res
     .status(StatusCodes.CREATED)
     .json({ menuId: createdMenu.id, message: 'Menu was created' })
+})
+
+module.exports.deleteById = catchErrors(async (req, res) => {
+  const { menuId } = req.params
+
+  const menu = await menuService.deleteById(menuId)
+  return res.status(StatusCodes.OK).json(menu)
 })

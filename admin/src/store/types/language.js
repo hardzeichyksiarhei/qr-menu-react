@@ -1,0 +1,3 @@
+const INTL_SET_LANGUAGE = 'INTL_SET_LANGUAGE'
+
+export default INTL_SET_LANGUAGE

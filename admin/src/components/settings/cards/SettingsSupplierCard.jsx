@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-
+import { useIntl } from 'react-intl'
 import { Card, Form, Input } from 'antd'
+import translate from '../../../intl/translate'
 
 const SettingsSupplierCard = ({ supplier, changeField }) => {
   const [restaurantName, setRestaurantName] = useState(supplier.restaurantName)
   const [companyName, setCompanyName] = useState(supplier.companyName)
   const [phone, setPhone] = useState(supplier.phone)
   const [website, setWebsite] = useState(supplier.website)
+
+  const intl = useIntl()
 
   const setField = (subField, value) => changeField('supplierSettings', subField, value)
 
@@ -32,27 +35,41 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
   }
 
   return (
-    <Card className="card-item card-shadow" title={<h2 className="mb-0">Supplier</h2>}>
+    <Card
+      className="card-item card-shadow"
+      title={<h3 className="mb-0">{translate('Supplier')}</h3>}
+    >
       <Form name="supplier-form" layout="vertical">
-        <Form.Item label="Restaurant name" rules={[{ required: true }]}>
+        <Form.Item
+          label={intl.formatMessage({ id: 'RestaurantName' })}
+          rules={[{ required: true }]}
+        >
           <Input
-            placeholder="Add restaurant name"
+            placeholder={intl.formatMessage({ id: 'AddRestaurantName' })}
             value={restaurantName}
             onChange={onChangeRestaurantName}
           />
         </Form.Item>
-        <Form.Item label="Company legal name (optional)">
+        <Form.Item label={intl.formatMessage({ id: 'CompanyLegalName' })}>
           <Input
-            placeholder="Add company name"
+            placeholder={intl.formatMessage({ id: 'AddCompanyName' })}
             value={companyName}
             onChange={onChangeCompanyName}
           />
         </Form.Item>
-        <Form.Item label="Phone (optional)">
-          <Input value={phone} onChange={onChangePhone} />
+        <Form.Item label={intl.formatMessage({ id: 'OptionalPhone' })}>
+          <Input
+            placeholder={intl.formatMessage({ id: 'AddPhone' })}
+            value={phone}
+            onChange={onChangePhone}
+          />
         </Form.Item>
-        <Form.Item label="Website (optional)">
-          <Input placeholder="Add website" value={website} onChange={onChangeWebsite} />
+        <Form.Item label={intl.formatMessage({ id: 'OptionalWebsite' })}>
+          <Input
+            placeholder={intl.formatMessage({ id: 'AddWebsite' })}
+            value={website}
+            onChange={onChangeWebsite}
+          />
         </Form.Item>
       </Form>
     </Card>

@@ -39,16 +39,47 @@ export const requestedMenuError = (error) => ({
   payload: { error },
 })
 
+// Menu
+export const update = (menu) => ({
+  type: types.UPDATE_MENU,
+  payload: { menu },
+})
+
 // Categories
 export const setCategories = (categories) => ({
   type: types.SET_CATEGORIES,
   payload: { categories },
 })
 
+export const addCategory = (category) => ({
+  type: types.ADD_CATEGORY,
+  payload: { category },
+})
+
+export const updateCategory = (categoryId, category) => ({
+  type: types.UPDATE_CATEGORY,
+  payload: { categoryId, category },
+})
+
+export const deleteCategory = (categoryId) => ({
+  type: types.DELETE_CATEGORY,
+  payload: { categoryId },
+})
+
 // Dishes
 export const setDishes = (categoryId, dishes) => ({
   type: types.SET_DISHES,
   payload: { categoryId, dishes },
+})
+
+export const addDish = (categoryId, dish) => ({
+  type: types.ADD_DISH,
+  payload: { categoryId, dish },
+})
+
+export const updateDish = (categoryId, dishId, dish) => ({
+  type: types.UPDATE_DISH,
+  payload: { categoryId, dishId, dish },
 })
 
 export const deleteDish = (categoryId, dishId) => ({

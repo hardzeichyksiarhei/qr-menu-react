@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { v4 as uuid } from 'uuid'
 
 import { Button, Image, Space } from 'antd'
 import {
@@ -15,9 +16,24 @@ import menuSelectors from '../../../store/selectors/menu'
 
 import './DishItem.scss'
 
-const DishItem = ({ dish }) => {
+const DishItem = ({ dish, onAction }) => {
   const dispatch = useDispatch()
   const selectedcategoryId = useSelector(menuSelectors.selectedCategoryId)
+
+  const handleClickDuplicateDish = () => {
+    const { _id, ...copyDish } = dish
+    dispatch(
+      menuActions.addDish(selectedcategoryId, {
+        ...copyDish,
+        id: uuid(),
+        title: `Copy of ${dish.title}`,
+      }),
+    )
+  }
+
+  const handleClickEditDish = () => {
+    onAction('dish:edit', dish)
+  }
 
   const handleClickDeleteDish = () => {
     dispatch(menuActions.deleteDish(selectedcategoryId, dish.id))
@@ -29,7 +45,12 @@ const DishItem = ({ dish }) => {
         <VerticalAlignMiddleOutlined />
       </div>
       <div className="dish-item__photo">
-        <Image width={120} height={120} src={dish.photo} preview={false} />
+        <Image
+          width={120}
+          height={120}
+          src={dish.photo || 'https://via.placeholder.com/150?text=QR Menu'}
+          preview={false}
+        />
       </div>
       <div className="dish-item__content">
         <div className="dish-item__internalId">{dish.internalId}</div>
@@ -39,21 +60,26 @@ const DishItem = ({ dish }) => {
       <div className="dish-item__actions">
         <div className="dish-item__controls">
           <Space>
-            <Button icon={<CopyOutlined />} />
-            <Button type="primary" icon={<SettingOutlined />} />
+            <Button icon={<CopyOutlined />} onClick={handleClickDuplicateDish} />
+            <Button type="primary" icon={<SettingOutlined />} onClick={handleClickEditDish} />
             <Button type="danger" icon={<DeleteOutlined />} onClick={handleClickDeleteDish} />
           </Space>
         </div>
         <div className="dish-item__price">
-          <b>100$</b>
+          <b>{dish.priceValue}</b>
         </div>
       </div>
     </div>
   )
 }
 
+DishItem.defaultProps = {
+  onAction: () => {},
+}
+
 DishItem.propTypes = {
   dish: PropTypes.instanceOf(Object).isRequired,
+  onAction: PropTypes.func,
 }
 
 export default DishItem

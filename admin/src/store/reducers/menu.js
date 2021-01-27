@@ -4,8 +4,8 @@ const menuSchema = () => ({
   id: null,
   userId: null,
   isPublished: true,
-  isEnabledToOrder: false,
-  title: '',
+  isEnabledToOrder: true,
+  title: 'New menu',
   internalComment: '',
   photo: null,
   categories: [],
@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
         menu,
         isMenuLoading: false,
 
-        selectedCategoryId: firstCategory || null,
+        selectedCategoryId: firstCategory.id || null,
       }
     }
     case types.REQUESTED_MENU_FAILED: {
@@ -79,6 +79,7 @@ const reducer = (state = initialState, action) => {
       }
     }
 
+    /* Menu */
     case types.UPDATE_MENU: {
       const { menu } = action.payload
       return {
@@ -121,13 +122,13 @@ const reducer = (state = initialState, action) => {
     }
 
     case types.UPDATE_CATEGORY: {
-      const { categoryId, data } = action.payload
+      const { categoryId, category } = action.payload
       return {
         ...state,
         menu: {
           ...state.menu,
-          categories: state.menu.categories.map((category) =>
-            category.id === categoryId ? { ...category, ...data } : category,
+          categories: state.menu.categories.map((categoryItem) =>
+            categoryItem.id === categoryId ? { ...categoryItem, ...category } : categoryItem,
           ),
         },
       }
@@ -178,7 +179,7 @@ const reducer = (state = initialState, action) => {
     }
 
     case types.UPDATE_DISH: {
-      const { categoryId, dishId, data } = action.payload
+      const { categoryId, dishId, dish } = action.payload
       return {
         ...state,
         menu: {
@@ -187,8 +188,8 @@ const reducer = (state = initialState, action) => {
             if (category.id === categoryId) {
               return {
                 ...category,
-                dishes: category.dishes.map((dish) =>
-                  dish.id === dishId ? { ...dish, ...data } : dish,
+                dishes: category.dishes.map((dishItem) =>
+                  dishItem.id === dishId ? { ...dishItem, ...dish } : dishItem,
                 ),
               }
             }

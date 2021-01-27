@@ -1,0 +1,10 @@
+.qr-code-card {
+  .ant-card-body {
+    padding: 10px;
+  }
+  .qr-code-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
