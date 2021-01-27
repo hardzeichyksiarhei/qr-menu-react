@@ -1,7 +1,7 @@
 const Image = require('./image.model')
 
 exports.getAll = async (userId) => {
-  const images = await Image.find({ userId })
+  const images = await Image.find({ userId }).sort({ createdAt: 'desc' })
   return images
 }
 
