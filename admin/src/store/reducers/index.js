@@ -3,7 +3,6 @@ import auth from './auth'
 import menu from './menu'
 import menus from './menus'
 import settings from './settings'
-import mediafiles from './mediafiles'
 import language from './language'
 
 export default combineReducers({
@@ -11,6 +10,5 @@ export default combineReducers({
   menu,
   menus,
   settings,
-  mediafiles,
   language,
 })

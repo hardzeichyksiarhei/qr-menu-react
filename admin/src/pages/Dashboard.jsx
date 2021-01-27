@@ -1,9 +1,33 @@
 import React from 'react'
 import { Row, Col } from 'antd'
 
-import MediafilesManagement from '../components/mediafiles/MediafilesManagement'
+import ImagesManagement from '../components/images/ImagesManagement'
 
 import QRCodeCard from '../components/qrCode/QRCodeCard'
+
+const IMAGES = [
+  {
+    id: '6011a093adcd8c1f8c3aee6e',
+    sizes: {
+      original: 'hput68ckkfp0xgk-kanwardeep-kaur-jTv_cWxEtFs-unsplash-original.jpeg',
+      large: 'hput68ckkfp0xgk-kanwardeep-kaur-jTv_cWxEtFs-unsplash-large.jpeg',
+      medium: 'hput68ckkfp0xgk-kanwardeep-kaur-jTv_cWxEtFs-unsplash-medium.jpeg',
+      thumbnail: 'hput68ckkfp0xgk-kanwardeep-kaur-jTv_cWxEtFs-unsplash-thumbnail.jpeg',
+    },
+    userId: '6000a32e85ed5f1094076150',
+  },
+  {
+    id: '6011a226c11bc0201ae8f503',
+    sizes: {
+      original: 'hput6cakkfp9kdw-tamanna-rumee-P90xikFA__4-unsplash-original.jpeg',
+      large: 'hput6cakkfp9kdw-tamanna-rumee-P90xikFA__4-unsplash-large.jpeg',
+      medium: 'hput6cakkfp9kdw-tamanna-rumee-P90xikFA__4-unsplash-medium.jpeg',
+      thumbnail: 'hput6cakkfp9kdw-tamanna-rumee-P90xikFA__4-unsplash-thumbnail.jpeg',
+    },
+    userId: '6000a32e85ed5f1094076150',
+  },
+  null,
+]
 
 const Dashboard = () => (
   <>
@@ -12,9 +36,9 @@ const Dashboard = () => (
         <QRCodeCard />
       </Col>
     </Row>
-    <MediafilesManagement url={null} />
-    <MediafilesManagement url="https://images.unsplash.com/photo-1516685018646-549198525c1b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-    <MediafilesManagement url="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+    {IMAGES.map((image, idx) => (
+      <ImagesManagement onSelectImage={() => {}} image={image} key={image?.id || idx} />
+    ))}
   </>
 )
 
