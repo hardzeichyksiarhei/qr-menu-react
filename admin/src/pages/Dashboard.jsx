@@ -37,7 +37,12 @@ const Dashboard = () => (
       </Col>
     </Row>
     {IMAGES.map((image, idx) => (
-      <ImagesManagement onSelectImage={() => {}} image={image} key={image?.id || idx} />
+      <ImagesManagement
+        previewSettings={{ width: 104, height: 104 }}
+        onSelectImage={() => {}}
+        image={image}
+        key={image?.id || idx}
+      />
     ))}
   </>
 )
