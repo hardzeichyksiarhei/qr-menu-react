@@ -23,6 +23,11 @@ export const addMenu = (menu) => ({
   payload: { menu },
 })
 
+export const updateMenu = (menuId, data) => ({
+  type: types.UPDATE_MENU,
+  payload: { menuId, data },
+})
+
 export const deleteMenu = (menuId) => ({
   type: types.DELETE_MENU,
   payload: { menuId },

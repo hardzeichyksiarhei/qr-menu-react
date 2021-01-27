@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import { Card, Dropdown, Menu } from 'antd'
 
@@ -22,9 +23,10 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
     dispatch(menusActions.addMenu(duplicatedMenu))
   }
 
-  const handleClickDeleteMenu = async () => {
-    await menusService.deleteById(menu.id)
-    dispatch(menusActions.deleteMenu(menu.id))
+  const handleClickMoveToTrashMenu = async () => {
+    const deletedAt = moment()
+    await menusService.updateById(menu.id, { deletedAt })
+    dispatch(menusActions.updateMenu({ deletedAt }))
   }
 
   return (
@@ -44,8 +46,8 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
           overlay={
             <Menu>
               <Menu.Item onClick={handleClickDuplicateMenu}>Duplicate</Menu.Item>
-              <Menu.Item onClick={handleClickDeleteMenu} danger>
-                Delete
+              <Menu.Item onClick={handleClickMoveToTrashMenu} danger>
+                Move To Trash
               </Menu.Item>
             </Menu>
           }

@@ -37,6 +37,14 @@ module.exports.save = catchErrors(async (req, res) => {
     .json({ menuId: createdMenu.id, message: 'Menu was created' })
 })
 
+module.exports.updateById = catchErrors(async (req, res) => {
+  const { menuId } = req.params
+  const { data } = req.body
+
+  const menu = await menuService.updateById(menuId, data)
+  return res.status(StatusCodes.OK).json(menu)
+})
+
 module.exports.deleteById = catchErrors(async (req, res) => {
   const { menuId } = req.params
 

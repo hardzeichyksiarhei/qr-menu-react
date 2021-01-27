@@ -39,6 +39,21 @@ const reducer = (state = initialState, action) => {
       }
     }
 
+    case types.UPDATE_MENU: {
+      const { menuId, data } = action.payload
+      return {
+        ...state,
+        menus: state.menus.map((menu) =>
+          menu.id === menuId
+            ? {
+                ...menu,
+                ...data,
+              }
+            : menu,
+        ),
+      }
+    }
+
     case types.DELETE_MENU: {
       const { menuId } = action.payload
       return {
