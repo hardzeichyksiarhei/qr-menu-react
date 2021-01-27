@@ -16,6 +16,16 @@
   width: 90%;
 }
 
+.ant-modal-title > .ph-upl-modal-header {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+
+  h4 {
+    margin: 0;
+  }
+}
+
 .ph-item-cont {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

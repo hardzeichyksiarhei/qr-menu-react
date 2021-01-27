@@ -1,28 +1,9 @@
-// import React from 'react'
-
-// import { Upload } from 'antd'
-
-// import UploadButton from '../items/UploadButton'
-
-// const UploadImageCard = () => (
-//   <Upload
-//     name="photo"
-//     listType="picture-card"
-//     className="photo-uploader ph-item-marg"
-//     showUploadList={false}
-//   >
-//     <UploadButton />
-//   </Upload>
-// )
-
-// export default UploadImageCard
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Upload, message } from 'antd'
 import imagesService from '../../../services/images'
-import UploadButton from '../items/UploadButton'
 
-const UploadImageCard = ({ onUploadSuccess }) => {
+const UploadImageCard = ({ onUploadSuccess, children, listType }) => {
   async function uploadImage({ onSuccess, onError, file }) {
     try {
       const data = await imagesService.upload(file)
@@ -36,7 +17,7 @@ const UploadImageCard = ({ onUploadSuccess }) => {
   const props = {
     name: 'file',
     showUploadList: false,
-    listType: 'picture-card',
+    listType,
     customRequest: uploadImage,
     beforeUpload: (file) => {
       message.loading({ content: 'Loading...', key: 'imported' })
@@ -63,17 +44,20 @@ const UploadImageCard = ({ onUploadSuccess }) => {
 
   return (
     <Upload {...props} className="photo-uploader ph-item-marg">
-      <UploadButton />
+      {children}
     </Upload>
   )
 }
 
 UploadImageCard.defaultProps = {
   onUploadSuccess: () => {},
+  listType: 'text',
 }
 
 UploadImageCard.propTypes = {
   onUploadSuccess: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  listType: PropTypes.string,
 }
 
 export default UploadImageCard

@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useAsync } from 'react-use'
 
-import { Modal, Spin } from 'antd'
+import { Modal, Spin, Button } from 'antd'
+import { PlusCircleOutlined } from '@ant-design/icons'
 
 import UploadImageCard from './UploadImageCard'
 import ImageItem from '../items/ImageItem'
+import UploadButton from '../items/UploadButton'
 
 import imagesService from '../../../services/images'
 
@@ -24,7 +26,14 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
   return (
     <Modal
       className="ph-upl-modal"
-      title="Photos"
+      title={
+        <div className="ph-upl-modal-header">
+          <h4>Images</h4>
+          <UploadImageCard onUploadSuccess={handleUploadSuccess}>
+            <Button icon={<PlusCircleOutlined />} />
+          </UploadImageCard>
+        </div>
+      }
       visible={visible}
       onOk={handleSave}
       onCancel={handleCancel}
@@ -38,7 +47,9 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
         </div>
       ) : (
         <div className="ph-item-cont">
-          <UploadImageCard onUploadSuccess={handleUploadSuccess} />
+          <UploadImageCard onUploadSuccess={handleUploadSuccess} listType="picture-card">
+            <UploadButton />
+          </UploadImageCard>
           {imagesList.map((image) => (
             <ImageItem liftedSelectImage={liftedSelectImage} image={image} key={image.id} />
           ))}
