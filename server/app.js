@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 
 const { auth } = require('./middlewares')
 const i18n = require('./i18n')
@@ -29,6 +30,8 @@ app.use('/', (req, res, next) => {
   }
   next()
 })
+
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use('/api/public/menus', menuPublicRouter)
 
