@@ -9,6 +9,7 @@ const userRouter = require('./resources/users/user.router')
 const menuRouter = require('./resources/menus/menu.router')
 const settingsRouter = require('./resources/settings/settings.router')
 const QRCodeRouter = require('./resources/qr-code/qr-code.router')
+const ImageRouter = require('./resources/images/image.router')
 
 const menuPublicRouter = require('./resources/menus/menu.public.router')
 
@@ -36,5 +37,6 @@ app.use('/api/users', auth, userRouter)
 app.use('/api/menus', auth, menuRouter)
 app.use('/api/settings', auth, settingsRouter)
 app.use('/api/qr-code', QRCodeRouter)
+app.use('/api/images', auth, ImageRouter)
 
 module.exports = app
