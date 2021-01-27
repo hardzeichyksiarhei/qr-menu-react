@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { API_URL } from '../config'
 
-export const getAll = async () =>
+const getAll = async () =>
   //   const { data, status } = await axios.get(`${API_URL}/menus`)
   //   return status === 200 && data ? data : []
   new Promise((resolve) =>
@@ -44,12 +44,18 @@ export const getAll = async () =>
     }, 2000),
   )
 
-export const getById = async (menuId) => {
+const getById = async (menuId) => {
   const { data, status } = await axios.get(`${API_URL}/public/menus?userId=${menuId}`)
   return status === 200 && data ? data : null
 }
 
-export const save = async (menu) => {
+const save = async (menu) => {
   const { data, status } = await axios.post(`${API_URL}/menus`, menu)
   return status === 200 && data ? data : null
+}
+
+export default {
+  getAll,
+  getById,
+  save,
 }
