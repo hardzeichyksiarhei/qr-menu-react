@@ -23,10 +23,20 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
     dispatch(menusActions.addMenu(duplicatedMenu))
   }
 
+  const handleClickRestoreMenu = async () => {
+    await menusService.updateById(menu.id, { deletedAt: null })
+    dispatch(menusActions.updateMenu(menu.id, { deletedAt: null }))
+  }
+
   const handleClickMoveToTrashMenu = async () => {
     const deletedAt = moment()
     await menusService.updateById(menu.id, { deletedAt })
-    dispatch(menusActions.updateMenu({ deletedAt }))
+    dispatch(menusActions.updateMenu(menu.id, { deletedAt }))
+  }
+
+  const handleClickDeleteMenu = async () => {
+    await menusService.deleteById(menu.id)
+    dispatch(menusActions.deleteMenu(menu.id))
   }
 
   return (
@@ -46,9 +56,18 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
           overlay={
             <Menu>
               <Menu.Item onClick={handleClickDuplicateMenu}>Duplicate</Menu.Item>
-              <Menu.Item onClick={handleClickMoveToTrashMenu} danger>
-                Move To Trash
-              </Menu.Item>
+              {!menu.deletedAt ? (
+                <Menu.Item onClick={handleClickMoveToTrashMenu} danger>
+                  Move To Trash
+                </Menu.Item>
+              ) : (
+                [
+                  <Menu.Item onClick={handleClickRestoreMenu}>Restore</Menu.Item>,
+                  <Menu.Item onClick={handleClickDeleteMenu} danger>
+                    Delete
+                  </Menu.Item>,
+                ]
+              )}
             </Menu>
           }
           placement="bottomCenter"

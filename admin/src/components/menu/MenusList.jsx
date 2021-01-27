@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { Spin, Row, Col, Drawer } from 'antd'
-import { fetchMenus, clearMenus } from '../../store/actions/menus'
-import menusSelectors from '../../store/selectors/menus'
 
 import MenuCard from './cards/MenuCard'
 import MenuPreview from './MenuPreview'
 
-const MenuList = () => {
-  const dispatch = useDispatch()
-
+const MenuList = ({ menus, isMenusLoading }) => {
+  // const [localMenus, setLocalMenus] = useState(menus)
   const [isMenuPreviewVisible, setIsMenuPreviewVisible] = useState(false)
 
-  const { menus, isMenusLoading } = useSelector(menusSelectors.menus)
-
-  useEffect(() => {
-    dispatch(fetchMenus())
-
-    return () => {
-      dispatch(clearMenus())
-    }
-  }, [dispatch])
+  // useEffect(() => {
+  //   console.log(menus)
+  //   setLocalMenus(menus)
+  // }, [menus])
 
   if (!menus.length && isMenusLoading) {
     return (
@@ -56,6 +48,11 @@ const MenuList = () => {
       </Drawer>
     </div>
   )
+}
+
+MenuList.propTypes = {
+  menus: PropTypes.instanceOf(Object).isRequired,
+  isMenusLoading: PropTypes.bool.isRequired,
 }
 
 export default MenuList

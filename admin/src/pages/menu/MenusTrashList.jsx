@@ -1,5 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-const MenusTrashList = () => <>MenusTrashList</>
+import { fetchMenus, clearMenus } from '../../store/actions/menus'
+import menusSelectors from '../../store/selectors/menus'
+
+import MenuList from '../../components/menu/MenusList'
+
+const MenusTrashList = () => {
+  const dispatch = useDispatch()
+
+  const isMenusLoading = useSelector(menusSelectors.isMenusLoading)
+  const menus = useSelector(menusSelectors.deletedMenus)
+
+  useEffect(() => {
+    dispatch(fetchMenus())
+
+    return () => {
+      dispatch(clearMenus())
+    }
+  }, [dispatch])
+
+  return (
+    <div className="menus-list-page">
+      <MenuList menus={menus} isMenusLoading={isMenusLoading} />
+    </div>
+  )
+}
 
 export default MenusTrashList

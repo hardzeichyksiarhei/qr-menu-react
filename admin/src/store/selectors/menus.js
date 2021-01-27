@@ -1,9 +1,9 @@
-const menus = (state) => state.menus
-const allMenus = (state) => state.menus.menus
+const isMenusLoading = (state) => state.menus.isMenusLoading
+const allMenus = (state) => state.menus.menus.filter((menu) => !menu.deletedAt)
 const deletedMenus = (state) => state.menus.menus.filter((menu) => menu.deletedAt)
 
 export default {
-  menus,
+  isMenusLoading,
   allMenus,
   deletedMenus,
 }
