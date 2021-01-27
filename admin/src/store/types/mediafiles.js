@@ -1,5 +1,3 @@
-export const TOGGLE_MODAL = 'PHOTOS/TOGGLE_MODAL'
-
 // Fetch Photos
 export const FETCH_PHOTOS = 'PHOTOS/FETCH_PHOTOS'
 export const REQUESTED_PHOTOS = 'PHOTOS/REQUESTED_PHOTOS'

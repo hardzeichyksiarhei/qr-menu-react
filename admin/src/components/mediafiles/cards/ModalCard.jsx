@@ -1,56 +1,73 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Modal, Spin } from 'antd'
 
 import mediafilesSelectors from '../../../store/selectors/mediafiles'
-import { toggleModal, fetchPhotos, clearPhotos } from '../../../store/actions/mediafiles'
+import { fetchPhotos } from '../../../store/actions/mediafiles'
 
 import UploadCard from './UploadCard'
 import PhotoItem from '../items/PhotoItem'
 
-const ModalCard = () => {
+const ModalCard = ({ onSelectPhoto, visible, onCloseModal }) => {
+  const { photos, isPhotosLoading } = useSelector(mediafilesSelectors.mediafiles)
+  const photoList = useRef(photos)
   const dispatch = useDispatch()
-  const { photos, isPhotosLoading, isModalVisible } = useSelector(mediafilesSelectors.mediafiles)
+
+  useEffect(() => {
+    photoList.current = photos
+  })
 
   useEffect(() => {
     dispatch(fetchPhotos())
-
-    return () => {
-      dispatch(clearPhotos())
-    }
   }, [dispatch])
 
-  const closeModal = () => dispatch(toggleModal(false))
-  const handleOk = () => closeModal()
-  const handleCancel = () => closeModal()
+  const deletePhotoItem = (id) => {
+    const newArr = photoList.current.filter((photo) => photo.id !== id)
+    photoList.current = newArr
+  }
+
+  const liftedUrl = (url) => onSelectPhoto(url)
+  const handleSave = () => onCloseModal()
+  const handleCancel = () => onCloseModal()
 
   return (
     <Modal
       className="ph-upl-modal"
       title="Photos"
-      visible={isModalVisible}
-      onOk={handleOk}
+      visible={visible}
+      onOk={handleSave}
       onCancel={handleCancel}
       okText="Save"
       cancelText="Close"
-      destroyOnClose
       centered
     >
-      {isPhotosLoading ? (
+      {isPhotosLoading || !photoList ? (
         <div className="ph-item-cont spin">
           <Spin size="medium" />
         </div>
       ) : (
         <div className="ph-item-cont">
           <UploadCard />
-          {photos.map((photo) => (
-            <PhotoItem photo={photo} key={photo.id} />
+          {photoList.current.map((photo) => (
+            <PhotoItem
+              liftedUrl={liftedUrl}
+              deletePhotoItem={deletePhotoItem}
+              photo={photo}
+              key={photo.id}
+            />
           ))}
         </div>
       )}
     </Modal>
   )
+}
+
+ModalCard.propTypes = {
+  onSelectPhoto: PropTypes.instanceOf(Function).isRequired,
+  onCloseModal: PropTypes.instanceOf(Function).isRequired,
+  visible: PropTypes.bool.isRequired,
 }
 
 export default ModalCard

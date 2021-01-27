@@ -1,6 +1,6 @@
 .ant-btn.ph-upl-btn {
-  width: 102px;
-  height: 102px;
+  width: 104px;
+  height: 104px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,6 +42,10 @@
 }
 
 .ph-item-img-cont {
+  .ant-card-body {
+    padding: 0;
+  }
+
   border: 1px solid rgba(0, 0, 0, 0.18);
   display: flex;
   align-items: center;
@@ -83,6 +87,7 @@
 }
 
 .ph-item-img-cont:after { 
+  cursor: pointer;
   content: ''; 
   position: absolute; 
   top: 0; 
@@ -97,4 +102,12 @@
 
 .ph-item-img-cont:hover:after {
   opacity: 1;
+}
+
+// Img Spin
+
+.img-spin-center {
+  display: flex;
+  align-self: center;
+  justify-self: center;
 }

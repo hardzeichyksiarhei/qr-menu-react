@@ -1,45 +1,42 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { Button, Image } from 'antd'
-import { PlusCircleOutlined } from '@ant-design/icons'
-
-import { toggleModal } from '../../store/actions/mediafiles'
+import PropTypes from 'prop-types'
 
 import ModalCard from './cards/ModalCard'
+import SelectedPhotoCard from './cards/SelectedPhotoCard'
+import SelectButton from './items/SelectButton'
+
 import './MediafilesManagement.scss'
 
-const MediafilesManagement = () => {
-  const dispatch = useDispatch()
-  const [selectedPhotoUrl] = useState(null)
-  const openModal = () => dispatch(toggleModal(true))
+const MediafilesManagement = ({ url }) => {
+  const [selectedUrl, setSelectedUrl] = useState(url)
+  const [visible, setVisible] = useState(false)
 
-  const selectButton = (
-    <div className="ph-upl-wr">
-      <Button className="ph-upl-btn" type="dashed" onClick={openModal}>
-        <PlusCircleOutlined />
-        <span className="ph-upl-title">Select Photo</span>
-      </Button>
-    </div>
-  )
-
+  const onOpenModal = () => setVisible(true)
+  const onCloseModal = () => setVisible(false)
+  const onSelectPhoto = (photoUrl) => setSelectedUrl(photoUrl)
+  const onClearPhoto = () => setSelectedUrl(null)
   return (
     <>
-      {selectedPhotoUrl ? (
-        <Image
-          src={selectedPhotoUrl}
-          width={104}
-          height={104}
-          alt="dish photo"
-          style={{ width: '100%' }}
-          onClick={openModal}
+      {selectedUrl ? (
+        <SelectedPhotoCard
+          selectedUrl={selectedUrl}
+          onOpenModal={onOpenModal}
+          onClearPhoto={onClearPhoto}
         />
       ) : (
-        selectButton
+        <SelectButton onOpenModal={onOpenModal} />
       )}
-      <ModalCard />
+      <ModalCard onSelectPhoto={onSelectPhoto} visible={visible} onCloseModal={onCloseModal} />
     </>
   )
+}
+
+MediafilesManagement.defaultProps = {
+  url: null,
+}
+MediafilesManagement.propTypes = {
+  url: PropTypes.string,
 }
 
 export default MediafilesManagement

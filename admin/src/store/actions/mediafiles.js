@@ -1,11 +1,5 @@
 import * as types from '../types/mediafiles'
 
-// Modal
-export const toggleModal = (toggle) => ({
-  type: types.TOGGLE_MODAL,
-  payload: { toggle },
-})
-
 // Fetch Photos
 export const fetchPhotos = () => ({
   type: types.FETCH_PHOTOS,

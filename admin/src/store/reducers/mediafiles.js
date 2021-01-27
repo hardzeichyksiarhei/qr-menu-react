@@ -2,20 +2,12 @@ import * as types from '../types/mediafiles'
 
 const initialState = {
   photos: [],
-  isModalVisible: false,
   isPhotosLoading: false,
   isPhotosLoadingError: false,
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.TOGGLE_MODAL: {
-      const { toggle } = action.payload
-      return {
-        ...state,
-        isModalVisible: toggle,
-      }
-    }
     /* Fetch Photos */
     case types.REQUESTED_PHOTOS: {
       return {
@@ -40,6 +32,7 @@ const reducer = (state = initialState, action) => {
       }
     }
 
+    // Clear Photos
     case types.CLEAR_PHOTOS: {
       return {
         ...state,
