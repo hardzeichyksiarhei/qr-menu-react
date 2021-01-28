@@ -12,15 +12,15 @@ import imagesService from '../../../services/images'
 
 const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal }) => {
   const [imagesList, setImagesList] = useState([])
-  const [localSelectedImage, setLocalSelectedImage] = useState(currentImage)
+  const [localCurrentImage, setLocalCurrentImage] = useState(currentImage)
 
   useAsync(async () => {
     const imagesResponse = await imagesService.getAll()
     setImagesList(imagesResponse)
   })
-  const liftedSelectImage = (selectedImage) => setLocalSelectedImage(selectedImage) // onSelectImage(selectedImage)
+  const changeCurrentImage = (selectedImage) => setLocalCurrentImage(selectedImage)
   const handleSave = () => {
-    onSelectImage(localSelectedImage)
+    onSelectImage(localCurrentImage)
     onCloseModal()
   }
 
@@ -50,7 +50,7 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
     >
       <div className="image-uploader-grid">
         {imagesList?.map((image) => (
-          <ImageItem liftedSelectImage={liftedSelectImage} image={image} key={image.id} />
+          <ImageItem changeCurrentImage={changeCurrentImage} image={image} key={image.id} />
         ))}
       </div>
     </Modal>

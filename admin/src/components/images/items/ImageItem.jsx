@@ -8,8 +8,8 @@ import { Image, Spin } from 'antd'
 
 import { SERVER_URL } from '../../../config'
 
-const ImageItem = ({ liftedSelectImage, image }) => {
-  const onSelected = () => liftedSelectImage(image)
+const ImageItem = ({ changeCurrentImage, image }) => {
+  const onSelected = () => changeCurrentImage(image)
 
   return (
     <div className="image-uploader-item" onClick={onSelected}>
@@ -28,7 +28,7 @@ const ImageItem = ({ liftedSelectImage, image }) => {
 
 ImageItem.propTypes = {
   image: PropTypes.instanceOf(Object).isRequired,
-  liftedSelectImage: PropTypes.instanceOf(Function).isRequired,
+  changeCurrentImage: PropTypes.instanceOf(Function).isRequired,
 }
 
 export default ImageItem
