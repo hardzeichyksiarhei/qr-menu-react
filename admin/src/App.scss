@@ -1,0 +1,73 @@
+@import '~antd/dist/antd.css';
+
+/* Common */
+.d-block {
+    display: block !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+/* Shadow */
+.card-shadow {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/* Margin */
+.mt-2 {
+    margin-top: 20px !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+/* Default Layout */
+.default-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    &__container {
+        flex-grow: 1;
+    }
+    &__content {
+        background-color: #fff;
+        padding: 24px;
+        margin: 0;
+    }
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    &__logo {
+        font-size: 24px;
+    }
+}
+
+/* Auth Layout */
+.auth-layout {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -21,12 +23,11 @@ const ImageItem = ({ liftedSelectImage, liftedDeleteImage, image }) => {
       />
       <SelectOutlined
         className="image-uploader-item__icon image-uploader-item__icon--select"
-        size=""
         onClick={handleClickSelect}
       />
       <DeleteOutlined
-        className="image-uploader-item__icon image-uploader-item__icon--delete"
         onClick={handleClickDelete}
+        className="image-uploader-item__icon image-uploader-item__icon--delete-select"
       />
     </div>
   )

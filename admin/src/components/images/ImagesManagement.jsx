@@ -36,6 +36,7 @@ const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
         <SelectButton previewSettings={previewSettings} onOpenModal={onOpenModal} />
       )}
       <SelectImageCard
+        currentImage={localImage}
         onSelectImage={onLocalSelectImage}
         visible={visible}
         onCloseModal={onCloseModal}

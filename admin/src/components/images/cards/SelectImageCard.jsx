@@ -10,20 +10,26 @@ import ImageItem from '../items/ImageItem'
 
 import imagesService from '../../../services/images'
 
-const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
+const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal }) => {
   const [imagesList, setImagesList] = useState([])
+  const [localCurrentImage, setLocalCurrentImage] = useState(currentImage)
 
   useAsync(async () => {
     const imagesResponse = await imagesService.getAll()
     setImagesList(imagesResponse)
   })
-  const liftedSelectImage = (image) => onSelectImage(image)
+
+  const liftedSelectImage = (image) => setLocalCurrentImage(image)
   const liftedDeleteImage = async (imageId) => {
     await imagesService.deleteById(imageId)
     setImagesList((prevState) => prevState.filter((image) => image.id !== imageId))
   }
 
-  const handleSave = () => onCloseModal()
+  const handleSave = () => {
+    onSelectImage(localCurrentImage)
+    onCloseModal()
+  }
+
   const handleCancel = () => onCloseModal()
   const handleUploadSuccess = (image) => setImagesList((prevState) => [image, ...prevState])
 
@@ -62,7 +68,12 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
   )
 }
 
+SelectImageCard.defaultProps = {
+  currentImage: null,
+}
+
 SelectImageCard.propTypes = {
+  currentImage: PropTypes.instanceOf(Object),
   onSelectImage: PropTypes.instanceOf(Function).isRequired,
   onCloseModal: PropTypes.instanceOf(Function).isRequired,
   visible: PropTypes.bool.isRequired,
