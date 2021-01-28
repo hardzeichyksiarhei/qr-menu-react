@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { Card, Dropdown, Menu } from 'antd'
+import { Card, Dropdown, Menu, Image } from 'antd'
 
 import { EditOutlined, MenuOutlined, EyeOutlined } from '@ant-design/icons'
 
 import * as menusActions from '../../../store/actions/menus'
 import menusService from '../../../services/menus'
+
+import { SERVER_URL } from '../../../config'
 
 const { Meta } = Card
 
@@ -42,9 +44,14 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
   return (
     <Card
       cover={
-        <img
+        <Image
+          src={
+            menu.photo
+              ? `${SERVER_URL}/uploads/${menu.userId}/large/${menu.photo.sizes.large}`
+              : 'https://via.placeholder.com/1366x768?text=QR Menu'
+          }
+          fallback="https://via.placeholder.com/1366x768?text=QR Menu"
           alt={menu.title}
-          src={menu.photo || 'https://via.placeholder.com/600x360?text=QR Menu'}
         />
       }
       actions={[
