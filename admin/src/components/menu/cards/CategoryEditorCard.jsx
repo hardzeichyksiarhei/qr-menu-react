@@ -5,6 +5,8 @@ import { v4 as uuid } from 'uuid'
 
 import { Button, Space, Form, Input, Switch } from 'antd'
 
+import ImagesManagement from '../../images/ImagesManagement'
+
 import * as menuActions from '../../../store/actions/menu'
 
 import './CategoryEditorCard.scss'
@@ -43,17 +45,22 @@ const CategoryEditorCard = ({ editCategory, onAction }) => {
       <Form
         className="category-editor-form"
         form={categoryEditorForm}
-        layout="vertical"
+        layout="horizontal"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
         initialValues={categorySchema()}
         onFinish={handleClickSave}
       >
+        <Form.Item name="photo" label="Photo">
+          <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
+        </Form.Item>
         <Form.Item name="isVisible" label="Visible" valuePropName="checked">
           <Switch />
         </Form.Item>
         <Form.Item label="Title" name="title" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item style={{ marginBottom: 0 }}>
+        <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="category-editor-form__actions">
             <Space>
               <Button onClick={handleClickCancel}>Cancel</Button>
