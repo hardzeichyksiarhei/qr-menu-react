@@ -8,8 +8,8 @@ import SelectButton from './items/SelectButton'
 
 import './ImagesManagement.scss'
 
-const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
-  const [localImage, setLocalImage] = useState(image)
+const ImagesManagement = ({ image, value, onSelectImage, onChange, previewSettings }) => {
+  const [localImage, setLocalImage] = useState(image || value)
   const [visible, setVisible] = useState(false)
 
   const onOpenModal = () => setVisible(true)
@@ -17,16 +17,20 @@ const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
 
   const onLocalSelectImage = (selectedImage) => {
     setLocalImage(selectedImage)
+
     onSelectImage(selectedImage)
+    onChange(selectedImage)
   }
 
   useEffect(() => {
-    setLocalImage(image)
-  }, [image])
+    setLocalImage(image || value)
+  }, [image, value])
 
   const onClearImage = () => {
     setLocalImage(null)
+
     onSelectImage(null)
+    onChange(null)
   }
 
   return (
@@ -51,20 +55,26 @@ const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
   )
 }
 
-MediafilesManagement.defaultProps = {
+ImagesManagement.defaultProps = {
+  value: null,
   image: null,
   previewSettings: PropTypes.shape({
     width: 100,
     height: 100,
   }),
+  onSelectImage: () => {},
+  onChange: () => {},
 }
-MediafilesManagement.propTypes = {
+
+ImagesManagement.propTypes = {
+  value: PropTypes.instanceOf(Object),
   image: PropTypes.instanceOf(Object),
-  onSelectImage: PropTypes.instanceOf(Function).isRequired,
+  onSelectImage: PropTypes.instanceOf(Function),
+  onChange: PropTypes.instanceOf(Function),
   previewSettings: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
   }),
 }
 
-export default MediafilesManagement
+export default ImagesManagement
