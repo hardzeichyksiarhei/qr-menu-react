@@ -20,14 +20,16 @@ const ImagePreview = ({ image, onOpenModal, onClearImage, previewSettings }) => 
       alt="dish photo"
       style={{ width: '100%' }}
     />
-    <EditOutlined
-      className="image-uploader-preview-icon image-uploader-preview-icon--select"
-      onClick={onOpenModal}
-    />
-    <DeleteOutlined
-      className="image-uploader-preview-icon image-uploader-preview-icon--delete"
-      onClick={onClearImage}
-    />
+    <div className="image-uploader-preview-controls">
+      <EditOutlined
+        className="image-uploader-preview-icon image-uploader-preview-icon--select"
+        onClick={onOpenModal}
+      />
+      <DeleteOutlined
+        className="image-uploader-preview-icon image-uploader-preview-icon--delete"
+        onClick={onClearImage}
+      />
+    </div>
   </div>
 )
 

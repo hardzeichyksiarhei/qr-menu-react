@@ -1,55 +1,33 @@
-@mixin icon {
-  opacity: 0;
-  position: absolute;
-  top: 45%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color: #fff !important;
-  transition: all 0.5s ease-in-out;
-  z-index: 2;
-  &--select {
-    right: 30%;
-  }
-  &--delete {
-    left: 40%;
-  }
-  &--delete-select {
-    top: 3%;
-    left: 85%;
-  }
-}
-
 .image-uploader-preview {
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.18);
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+
+.image-uploader-preview-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.25s all ease;
   &:hover {
-    &:after {
-      opacity: 1;
-    }
-    .image-uploader-preview-icon {
-      opacity: 1;
-    }
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    z-index: 1;
-    transition: all 0.5s ease-in-out;
-    cursor: pointer;
+    opacity: 1;
   }
 
   .image-uploader-preview-icon {
-    @include icon;
+    color: #fff;
+    font-size: 22px;
   }
 }
 
@@ -103,14 +81,32 @@
 
 .image-uploader-item {
   position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+  &.active {
+    &:after {
+      opacity: 1;
+      background-color: rgba(24, 144, 255, 0.5);
+    }
+    &:before {
+      content: "✓";
+      position: absolute;
+      z-index: 1001;
+      top: calc(50% - 25px);
+      left: calc(50% - 25px);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
   &:hover {
     &:after {
       opacity: 1;
     }
-    .image-uploader-item__icon {
+    .image-uploader-item__delete {
       opacity: 1;
     }
   }
@@ -121,19 +117,31 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(24, 144, 255, 0.2);
     opacity: 0;
     z-index: 1;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.25s ease;
     cursor: pointer;
   }
-  &__image {
-    display: flex;
+  .ant-image {
+    display: block;
+  }
+  &__delete {
+    display: flex !important;
     justify-content: center;
     align-items: center;
-  }
-  &__icon {
-    @include icon;
+    position: absolute;
+    z-index: 1000;
+    top: -10px;
+    right: -10px;
     font-size: 28px;
+    color: #fff !important;
+    opacity: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: red;
+    font-size: 22px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
 }

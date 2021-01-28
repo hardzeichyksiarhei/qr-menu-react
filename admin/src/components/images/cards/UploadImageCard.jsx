@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Upload, message } from 'antd'
 import imagesService from '../../../services/images'
 
-const UploadImageCard = ({ onUploadSuccess, children, listType }) => {
+const UploadImageCard = ({ onUploadSuccess, children }) => {
   async function uploadImage({ onSuccess, onError, file }) {
     try {
       const data = await imagesService.upload(file)
@@ -17,7 +17,6 @@ const UploadImageCard = ({ onUploadSuccess, children, listType }) => {
   const props = {
     name: 'file',
     showUploadList: false,
-    listType,
     customRequest: uploadImage,
     beforeUpload: (file) => {
       message.loading({ content: 'Loading...', key: 'imported' })
@@ -51,13 +50,11 @@ const UploadImageCard = ({ onUploadSuccess, children, listType }) => {
 
 UploadImageCard.defaultProps = {
   onUploadSuccess: () => {},
-  listType: 'text',
 }
 
 UploadImageCard.propTypes = {
   onUploadSuccess: PropTypes.func,
   children: PropTypes.node.isRequired,
-  listType: PropTypes.string,
 }
 
 export default UploadImageCard

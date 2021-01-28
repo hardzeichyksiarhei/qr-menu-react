@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -14,10 +14,16 @@ const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
 
   const onOpenModal = () => setVisible(true)
   const onCloseModal = () => setVisible(false)
+
   const onLocalSelectImage = (selectedImage) => {
     setLocalImage(selectedImage)
     onSelectImage(selectedImage)
   }
+
+  useEffect(() => {
+    setLocalImage(image)
+  }, [image])
+
   const onClearImage = () => {
     setLocalImage(null)
     onSelectImage(null)

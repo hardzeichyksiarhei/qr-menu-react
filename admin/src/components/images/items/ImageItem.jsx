@@ -3,17 +3,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { SelectOutlined, DeleteOutlined } from '@ant-design/icons'
+import { DeleteOutlined } from '@ant-design/icons'
 import { Image, Spin } from 'antd'
 
 import { SERVER_URL } from '../../../config'
 
-const ImageItem = ({ liftedSelectImage, liftedDeleteImage, image }) => {
-  const handleClickSelect = () => liftedSelectImage(image)
-  const handleClickDelete = () => liftedDeleteImage(image.id)
+const ImageItem = ({ image, isSelected, onSelectImage, onDeleteImage }) => {
+  const handleClickSelect = () => onSelectImage(image)
+  const handleClickDelete = () => onDeleteImage(image.id)
 
   return (
-    <div className="image-uploader-item">
+    <div
+      className={`image-uploader-item ${isSelected ? 'active' : ''}`}
+      onClick={handleClickSelect}
+    >
       <Image
         className="image-uploader-item__image"
         src={`${SERVER_URL}/uploads/${image.userId}/thumbnail/${image.sizes.thumbnail}`}
@@ -21,22 +24,16 @@ const ImageItem = ({ liftedSelectImage, liftedDeleteImage, image }) => {
         fallback="https://via.placeholder.com/300?text=QR Menu"
         placeholder={<Spin size="small" />}
       />
-      <SelectOutlined
-        className="image-uploader-item__icon image-uploader-item__icon--select"
-        onClick={handleClickSelect}
-      />
-      <DeleteOutlined
-        onClick={handleClickDelete}
-        className="image-uploader-item__icon image-uploader-item__icon--delete-select"
-      />
+      <DeleteOutlined onClick={handleClickDelete} className="image-uploader-item__delete" />
     </div>
   )
 }
 
 ImageItem.propTypes = {
   image: PropTypes.instanceOf(Object).isRequired,
-  liftedSelectImage: PropTypes.instanceOf(Function).isRequired,
-  liftedDeleteImage: PropTypes.instanceOf(Function).isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectImage: PropTypes.instanceOf(Function).isRequired,
+  onDeleteImage: PropTypes.instanceOf(Function).isRequired,
 }
 
 export default ImageItem

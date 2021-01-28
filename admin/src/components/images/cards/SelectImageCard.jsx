@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useAsync } from 'react-use'
 
-import { Modal, Button } from 'antd'
+import { Modal, Button, Spin } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
 import UploadImageCard from './UploadImageCard'
@@ -11,16 +11,22 @@ import ImageItem from '../items/ImageItem'
 import imagesService from '../../../services/images'
 
 const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal }) => {
+  const [isImageLoading, setIsImageLoading] = useState(true)
   const [imagesList, setImagesList] = useState([])
   const [localCurrentImage, setLocalCurrentImage] = useState(currentImage)
 
   useAsync(async () => {
     const imagesResponse = await imagesService.getAll()
+    setIsImageLoading(false)
     setImagesList(imagesResponse)
   })
 
-  const liftedSelectImage = (image) => setLocalCurrentImage(image)
-  const liftedDeleteImage = async (imageId) => {
+  useEffect(() => {
+    setLocalCurrentImage(currentImage)
+  }, [currentImage])
+
+  const handleSelectImage = (image) => setLocalCurrentImage(image)
+  const handleDeleteImage = async (imageId) => {
     await imagesService.deleteById(imageId)
     setImagesList((prevState) => prevState.filter((image) => image.id !== imageId))
   }
@@ -54,16 +60,21 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
       cancelText="Close"
       centered
     >
-      <div className="image-uploader-grid">
-        {imagesList?.map((image) => (
-          <ImageItem
-            liftedSelectImage={liftedSelectImage}
-            liftedDeleteImage={liftedDeleteImage}
-            image={image}
-            key={image.id}
-          />
-        ))}
-      </div>
+      {!imagesList.length && isImageLoading ? (
+        <Spin />
+      ) : (
+        <div className="image-uploader-grid">
+          {imagesList.map((image) => (
+            <ImageItem
+              image={image}
+              isSelected={!!localCurrentImage && localCurrentImage.id === image.id}
+              onSelectImage={handleSelectImage}
+              onDeleteImage={handleDeleteImage}
+              key={image.id}
+            />
+          ))}
+        </div>
+      )}
     </Modal>
   )
 }
