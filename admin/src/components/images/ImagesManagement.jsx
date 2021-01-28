@@ -33,7 +33,7 @@ const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
           onClearImage={onClearImage}
         />
       ) : (
-        <SelectButton onOpenModal={onOpenModal} />
+        <SelectButton previewSettings={previewSettings} onOpenModal={onOpenModal} />
       )}
       <SelectImageCard
         onSelectImage={onLocalSelectImage}
@@ -47,8 +47,8 @@ const MediafilesManagement = ({ image, onSelectImage, previewSettings }) => {
 MediafilesManagement.defaultProps = {
   image: null,
   previewSettings: PropTypes.shape({
-    width: null,
-    height: null,
+    width: 100,
+    height: 100,
   }),
 }
 MediafilesManagement.propTypes = {

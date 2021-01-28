@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 
-import { Image, Card } from 'antd'
+import { Image } from 'antd'
 
 import { SERVER_URL } from '../../config'
 
 const ImagePreview = ({ image, onOpenModal, onClearImage, previewSettings }) => (
-  <Card className="ph-item-img-cont">
+  <div
+    style={{ width: `${previewSettings.width}px`, height: `${previewSettings.height}px` }}
+    className="image-uploader-preview"
+  >
     <Image
       width={previewSettings.width}
       height={previewSettings.height}
@@ -17,9 +20,15 @@ const ImagePreview = ({ image, onOpenModal, onClearImage, previewSettings }) => 
       alt="dish photo"
       style={{ width: '100%' }}
     />
-    <EditOutlined className="ph-item-icon select" onClick={onOpenModal} />
-    <DeleteOutlined className="ph-item-icon delete" onClick={onClearImage} />
-  </Card>
+    <EditOutlined
+      className="image-uploader-preview-icon image-uploader-preview-icon--select"
+      onClick={onOpenModal}
+    />
+    <DeleteOutlined
+      className="image-uploader-preview-icon image-uploader-preview-icon--delete"
+      onClick={onClearImage}
+    />
+  </div>
 )
 
 ImagePreview.defaultProps = {

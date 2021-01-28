@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useAsync } from 'react-use'
 
-import { Modal, Spin, Button } from 'antd'
-import { PlusCircleOutlined } from '@ant-design/icons'
+import { Modal, Button } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 
 import UploadImageCard from './UploadImageCard'
 import ImageItem from '../items/ImageItem'
-import UploadButton from '../items/UploadButton'
 
 import imagesService from '../../../services/images'
 
@@ -25,36 +24,30 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
 
   return (
     <Modal
-      className="ph-upl-modal"
+      className="image-uploader-modal"
       title={
-        <div className="ph-upl-modal-header">
+        <div className="image-uploader-modal__header">
           <h4>Images</h4>
           <UploadImageCard onUploadSuccess={handleUploadSuccess}>
-            <Button icon={<PlusCircleOutlined />} />
+            <Button type="primary" icon={<UploadOutlined />}>
+              Upload
+            </Button>
           </UploadImageCard>
         </div>
       }
       visible={visible}
+      width="80%"
       onOk={handleSave}
       onCancel={handleCancel}
       okText="Save"
       cancelText="Close"
       centered
     >
-      {!imagesList.length ? (
-        <div className="ph-item-cont spin">
-          <Spin size="medium" />
-        </div>
-      ) : (
-        <div className="ph-item-cont">
-          <UploadImageCard onUploadSuccess={handleUploadSuccess} listType="picture-card">
-            <UploadButton />
-          </UploadImageCard>
-          {imagesList.map((image) => (
-            <ImageItem liftedSelectImage={liftedSelectImage} image={image} key={image.id} />
-          ))}
-        </div>
-      )}
+      <div className="image-uploader-grid">
+        {imagesList?.map((image) => (
+          <ImageItem liftedSelectImage={liftedSelectImage} image={image} key={image.id} />
+        ))}
+      </div>
     </Modal>
   )
 }

@@ -11,14 +11,20 @@ const ImageItem = ({ liftedSelectImage, image }) => {
   // console.log(image)
 
   return (
-    <div className="ph-item-img-cont">
+    <div className="image-uploader-item">
       <Image
+        className="image-uploader-item__image"
         src={`${SERVER_URL}/uploads/${image.userId}/thumbnail/${image.sizes.thumbnail}`}
         preview={false}
-        placeholder={<Spin className="img-spin-center" size="small" />}
+        fallback="https://via.placeholder.com/300?text=QR Menu"
+        placeholder={<Spin size="small" />}
       />
-      <SelectOutlined className="ph-item-icon select" onClick={onSelected} />
-      <DeleteOutlined className="ph-item-icon delete" />
+      <SelectOutlined
+        className="image-uploader-item__icon image-uploader-item__icon--select"
+        size=""
+        onClick={onSelected}
+      />
+      <DeleteOutlined className="image-uploader-item__icon image-uploader-item__icon--delete" />
     </div>
   )
 }
