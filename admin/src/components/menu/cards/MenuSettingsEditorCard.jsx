@@ -24,7 +24,6 @@ const MenuSettingsEditorCard = ({ onCancel, onSave }) => {
   }
 
   const handleClickSave = (menuSettings) => {
-    console.log(menuSettings)
     dispatch(menuActions.update(menuSettings))
 
     setTimeout(() => menuSettingsEditorForm.resetFields(), 100)
