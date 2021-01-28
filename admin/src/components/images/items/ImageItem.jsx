@@ -1,30 +1,27 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { SelectOutlined, DeleteOutlined } from '@ant-design/icons'
+import { DeleteOutlined } from '@ant-design/icons'
 import { Image, Spin } from 'antd'
 
 import { SERVER_URL } from '../../../config'
 
 const ImageItem = ({ liftedSelectImage, image }) => {
   const onSelected = () => liftedSelectImage(image)
-  // console.log(image)
 
   return (
-    <div className="image-uploader-item">
+    <div className="image-uploader-item" onClick={onSelected}>
       <Image
         className="image-uploader-item__image"
         src={`${SERVER_URL}/uploads/${image.userId}/thumbnail/${image.sizes.thumbnail}`}
         preview={false}
         fallback="https://via.placeholder.com/300?text=QR Menu"
         placeholder={<Spin size="small" />}
-      />
-      <SelectOutlined
-        className="image-uploader-item__icon image-uploader-item__icon--select"
-        size=""
         onClick={onSelected}
       />
-      <DeleteOutlined className="image-uploader-item__icon image-uploader-item__icon--delete" />
+      <DeleteOutlined className="image-uploader-item__icon image-uploader-item__icon--delete-select" />
     </div>
   )
 }

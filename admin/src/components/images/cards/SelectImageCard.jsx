@@ -10,15 +10,20 @@ import ImageItem from '../items/ImageItem'
 
 import imagesService from '../../../services/images'
 
-const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
+const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal }) => {
   const [imagesList, setImagesList] = useState([])
+  const [localSelectedImage, setLocalSelectedImage] = useState(currentImage)
 
   useAsync(async () => {
     const imagesResponse = await imagesService.getAll()
     setImagesList(imagesResponse)
   })
-  const liftedSelectImage = (selectedImage) => onSelectImage(selectedImage)
-  const handleSave = () => onCloseModal()
+  const liftedSelectImage = (selectedImage) => setLocalSelectedImage(selectedImage) // onSelectImage(selectedImage)
+  const handleSave = () => {
+    onSelectImage(localSelectedImage)
+    onCloseModal()
+  }
+
   const handleCancel = () => onCloseModal()
   const handleUploadSuccess = (image) => setImagesList((prevState) => [image, ...prevState])
 
@@ -52,7 +57,12 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
   )
 }
 
+SelectImageCard.defaultProps = {
+  currentImage: null,
+}
+
 SelectImageCard.propTypes = {
+  currentImage: PropTypes.instanceOf(Object),
   onSelectImage: PropTypes.instanceOf(Function).isRequired,
   onCloseModal: PropTypes.instanceOf(Function).isRequired,
   visible: PropTypes.bool.isRequired,
