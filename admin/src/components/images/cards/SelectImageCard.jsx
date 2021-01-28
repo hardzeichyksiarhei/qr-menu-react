@@ -41,7 +41,7 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
         </div>
       }
       visible={visible}
-      width="80%"
+      width="80vw"
       onOk={handleSave}
       onCancel={handleCancel}
       okText="Save"
