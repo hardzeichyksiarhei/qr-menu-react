@@ -6,3 +6,8 @@ exports.getAll = async (userId) => {
 }
 
 exports.create = async (image) => new Image(image).save()
+
+exports.deleteById = async (imageId) => {
+  const status = await Image.findOneAndDelete({ _id: imageId })
+  return status
+}

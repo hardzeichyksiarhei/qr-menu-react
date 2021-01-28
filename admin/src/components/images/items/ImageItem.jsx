@@ -6,9 +6,9 @@ import { Image, Spin } from 'antd'
 
 import { SERVER_URL } from '../../../config'
 
-const ImageItem = ({ liftedSelectImage, image }) => {
-  const onSelected = () => liftedSelectImage(image)
-  // console.log(image)
+const ImageItem = ({ liftedSelectImage, liftedDeleteImage, image }) => {
+  const handleClickSelect = () => liftedSelectImage(image)
+  const handleClickDelete = () => liftedDeleteImage(image.id)
 
   return (
     <div className="image-uploader-item">
@@ -22,9 +22,12 @@ const ImageItem = ({ liftedSelectImage, image }) => {
       <SelectOutlined
         className="image-uploader-item__icon image-uploader-item__icon--select"
         size=""
-        onClick={onSelected}
+        onClick={handleClickSelect}
       />
-      <DeleteOutlined className="image-uploader-item__icon image-uploader-item__icon--delete" />
+      <DeleteOutlined
+        className="image-uploader-item__icon image-uploader-item__icon--delete"
+        onClick={handleClickDelete}
+      />
     </div>
   )
 }
@@ -32,6 +35,7 @@ const ImageItem = ({ liftedSelectImage, image }) => {
 ImageItem.propTypes = {
   image: PropTypes.instanceOf(Object).isRequired,
   liftedSelectImage: PropTypes.instanceOf(Function).isRequired,
+  liftedDeleteImage: PropTypes.instanceOf(Function).isRequired,
 }
 
 export default ImageItem

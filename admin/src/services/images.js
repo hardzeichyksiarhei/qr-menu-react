@@ -18,7 +18,13 @@ const upload = async (file) => {
   return status === 200 && data ? data : null
 }
 
+const deleteById = async (imageId) => {
+  const { data, status } = await axios.delete(`${API_URL}/images/${imageId}`)
+  return status === 200 ? data : null
+}
+
 export default {
   getAll,
   upload,
+  deleteById,
 }

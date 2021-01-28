@@ -20,3 +20,10 @@ exports.upload = catchErrors(async (req, res) => {
   const savedImage = await imageService.create(image)
   return res.status(StatusCodes.OK).json(savedImage.toResponse())
 })
+
+module.exports.deleteById = catchErrors(async (req, res) => {
+  const { imageId } = req.params
+
+  const image = await imageService.deleteById(imageId)
+  return res.status(StatusCodes.OK).json(image)
+})

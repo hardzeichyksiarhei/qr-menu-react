@@ -17,7 +17,12 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
     const imagesResponse = await imagesService.getAll()
     setImagesList(imagesResponse)
   })
-  const liftedSelectImage = (selectedImage) => onSelectImage(selectedImage)
+  const liftedSelectImage = (image) => onSelectImage(image)
+  const liftedDeleteImage = async (imageId) => {
+    await imagesService.deleteById(imageId)
+    setImagesList((prevState) => prevState.filter((image) => image.id !== imageId))
+  }
+
   const handleSave = () => onCloseModal()
   const handleCancel = () => onCloseModal()
   const handleUploadSuccess = (image) => setImagesList((prevState) => [image, ...prevState])
@@ -45,7 +50,12 @@ const SelectImageCard = ({ onSelectImage, visible, onCloseModal }) => {
     >
       <div className="image-uploader-grid">
         {imagesList?.map((image) => (
-          <ImageItem liftedSelectImage={liftedSelectImage} image={image} key={image.id} />
+          <ImageItem
+            liftedSelectImage={liftedSelectImage}
+            liftedDeleteImage={liftedDeleteImage}
+            image={image}
+            key={image.id}
+          />
         ))}
       </div>
     </Modal>
