@@ -15,11 +15,12 @@ const menuSchema = () => ({
 })
 
 const initialState = {
+  cacheMenu: null,
   menu: menuSchema(),
 
   selectedCategoryId: null,
 
-  isMenuLoading: false,
+  isMenuLoading: true,
   isMenuBusy: false,
   menuError: null,
 }
@@ -40,6 +41,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         menu,
+        cacheMenu: menu,
         isMenuLoading: false,
 
         selectedCategoryId: firstCategory.id || null,
@@ -62,12 +64,11 @@ const reducer = (state = initialState, action) => {
     }
     case types.REQUESTED_SAVE_MENU_SUCCEEDED: {
       const { menuId } = action.payload
+      const menu = { ...state.menu, id: menuId }
       return {
         ...state,
-        menu: {
-          ...state.menu,
-          id: menuId,
-        },
+        menu,
+        cacheMenu: menu,
         isMenuBusy: false,
       }
     }
@@ -91,8 +92,16 @@ const reducer = (state = initialState, action) => {
       }
     }
 
+    case types.DISCARD_MENU: {
+      return {
+        ...state,
+        menu: state.cacheMenu,
+      }
+    }
+
     case types.CLEAR_MENU: {
       return {
+        cacheMenu: null,
         menu: menuSchema(),
 
         isMenuLoading: false,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Card, Button, Spin, Modal } from 'antd'
@@ -16,6 +16,7 @@ import './DishesEditorCard.scss'
 
 const DishesEditorCard = () => {
   const dispatch = useDispatch()
+  const isSortingRef = useRef(false)
 
   const [isDishEditorVisible, setIsDishEditorVisible] = useState(false)
   const [editDish, setEditDish] = useState(null)
@@ -24,9 +25,14 @@ const DishesEditorCard = () => {
   const dishes = useSelector(menuSelectors.dishesByCategoryId(selectedCategoryId))
   const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
 
-  // eslint-disable-next-line no-shadow
-  const handleSetDishes = (dishes) => {
-    dispatch(menuActions.setDishes(selectedCategoryId, dishes))
+  const handleSetDishes = (sortedDishes) => {
+    if (!isSortingRef.current) return
+    isSortingRef.current = false
+    dispatch(menuActions.setDishes(selectedCategoryId, sortedDishes))
+  }
+
+  const handleUpdateDishes = () => {
+    isSortingRef.current = true
   }
 
   const handleActionDish = (action, dish = null /* payload */) => {
@@ -75,6 +81,7 @@ const DishesEditorCard = () => {
                 <ReactSortable
                   list={dishes}
                   setList={handleSetDishes}
+                  onUpdate={handleUpdateDishes}
                   handle=".move"
                   animation={200}
                 >

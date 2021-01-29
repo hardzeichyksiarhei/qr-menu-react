@@ -14,6 +14,7 @@ export const REQUESTED_SAVE_MENU_FAILED = 'MENU/REQUESTED_SAVE_MENU_FAILED'
 
 /* Menu */
 export const UPDATE_MENU = 'MENU/UPDATE_MENU'
+export const DISCARD_MENU = 'MENU/DISCARD_MENU'
 export const CLEAR_MENU = 'MENU/CLEAR_MENU'
 
 /* Categories */

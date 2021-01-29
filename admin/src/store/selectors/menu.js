@@ -1,7 +1,11 @@
+import isEqual from 'react-fast-compare'
+
 const isMenuLoading = (state) => state.menu.isMenuLoading
 const isMenuBusy = (state) => state.menu.isMenuBusy
 const menu = (state) => state.menu.menu
 const menuCategories = (state) => state.menu.menu.categories
+
+const isMenuEqualCache = (state) => isEqual(state.menu.menu, state.menu.cacheMenu)
 
 const categoryById = (categoryId) => (state) =>
   state.menu.menu.categories.find((category) => category.id === categoryId)
@@ -17,6 +21,7 @@ export default {
   isMenuBusy,
   menu,
   menuCategories,
+  isMenuEqualCache,
   categoryById,
   dishesByCategoryId,
   selectedCategoryId,

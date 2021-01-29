@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Card, Button, Spin, Modal } from 'antd'
@@ -16,6 +16,7 @@ import './CategoriesEditorCard.scss'
 
 const CategoriesEditorCard = () => {
   const dispatch = useDispatch()
+  const isSortingRef = useRef(false)
 
   const [isCategoryEditorVisible, setIsCategoryEditorVisible] = useState(false)
   const [editCategory, setEditCategory] = useState(null)
@@ -23,8 +24,14 @@ const CategoriesEditorCard = () => {
   const menuCategories = useSelector(menuSelectors.menuCategories)
   const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
 
-  const handleSetCategories = (categories) => {
-    dispatch(menuActions.setCategories(categories))
+  const handleSetCategories = (sortedCategories) => {
+    if (!isSortingRef.current) return
+    isSortingRef.current = false
+    dispatch(menuActions.setCategories(sortedCategories))
+  }
+
+  const handleUpdateCategories = () => {
+    isSortingRef.current = true
   }
 
   const handleActionCategory = (action, category = null /* payload */) => {
@@ -73,6 +80,7 @@ const CategoriesEditorCard = () => {
                 <ReactSortable
                   list={menuCategories}
                   setList={handleSetCategories}
+                  onUpdate={handleUpdateCategories}
                   handle=".move"
                   animation={200}
                 >

@@ -45,6 +45,14 @@ export const update = (menu) => ({
   payload: { menu },
 })
 
+export const discardMenu = () => ({
+  type: types.DISCARD_MENU,
+})
+
+export const clearMenu = () => ({
+  type: types.CLEAR_MENU,
+})
+
 // Categories
 export const setCategories = (categories) => ({
   type: types.SET_CATEGORIES,

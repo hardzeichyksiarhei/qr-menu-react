@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { PageHeader, Button, Modal } from 'antd'
+import { PageHeader, Button, Modal, notification, Space } from 'antd'
 
 import * as menuActions from '../../store/actions/menu'
 import menuSelectors from '../../store/selectors/menu'
@@ -15,11 +15,41 @@ import MenuSettingsEditorCard from './cards/MenuSettingsEditorCard'
 const MenuManagement = () => {
   const dispatch = useDispatch()
 
+  const [isMenuNotSave, setIsMenuNotSave] = useState(false)
   const [isSettingsEditorVisible, setIsSettingsEditorVisible] = useState(false)
 
   const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
   const isMenuBusy = useSelector(menuSelectors.isMenuBusy)
+  const isMenuEqualCache = useSelector(menuSelectors.isMenuEqualCache)
   const menu = useSelector(menuSelectors.menu)
+
+  const handleDiscardMenu = useCallback(() => {
+    dispatch(menuActions.discardMenu())
+    notification.close('menu-not-save')
+  }, [dispatch])
+
+  useEffect(() => {
+    setIsMenuNotSave(!isMenuLoading && !isMenuEqualCache)
+    if (!isMenuLoading && !isMenuEqualCache) {
+      notification.warning({
+        message: 'Warning',
+        description: (
+          <div>
+            <p>Changes have been made to the menu! Please save your changes or discard them.</p>
+            <Space>
+              <Button onClick={() => notification.close('menu-not-save')}>Cancel</Button>
+              <Button type="danger" onClick={handleDiscardMenu}>
+                Discord
+              </Button>
+            </Space>
+          </div>
+        ),
+        placement: 'bottomLeft',
+        duration: 0,
+        key: 'menu-not-save',
+      })
+    }
+  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu])
 
   const handleClickSettingsMenu = () => {
     setIsSettingsEditorVisible(true)
@@ -27,14 +57,23 @@ const MenuManagement = () => {
 
   const handleClickSaveMenu = () => {
     dispatch(menuActions.saveMenu())
+    notification.close('menu-not-save')
   }
+
+  const menuTitle = (
+    <div className="menu-title">
+      <span>{isMenuNotSave ? <span style={{ color: '#faad14' }}>* </span> : ''}Menu</span>
+      {!isMenuLoading && menu.title ? `: ${menu.title}` : null}
+      {isMenuNotSave ? <span style={{ color: '#faad14' }}> - not saved</span> : null}
+    </div>
+  )
 
   return (
     <div id="menu-constructor" className="menu-constructor">
       <PageHeader
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ghost={false}
-        title={!isMenuLoading && menu.title ? `Menu: ${menu.title}` : 'Menu'}
+        title={menuTitle}
         extra={[
           <Button type="default" key="settings" onClick={handleClickSettingsMenu}>
             Settings
