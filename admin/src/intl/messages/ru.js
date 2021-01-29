@@ -75,6 +75,8 @@ export default {
     Belarus: 'Беларусь',
     Poland: 'Польша',
     FormatTimeWithNumber: '{num} часовой пояс',
+    // Orders
+    Orders: 'Заказы',
     // Validation
     PasswordConfirmed: 'Подтверждение пароля не совпадает',
     FieldRequired: 'Обязательное поле',

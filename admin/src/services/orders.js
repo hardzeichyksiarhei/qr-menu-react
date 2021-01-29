@@ -1,0 +1,18 @@
+import axios from 'axios'
+
+import { API_URL } from '../config'
+
+const getAll = async () => {
+  const { data, status } = await axios.get(`${API_URL}/orders`)
+  return status === 200 && data ? data : []
+}
+
+const getById = async ({ orderId }) => {
+  const { data, status } = await axios.get(`${API_URL}/orders/${orderId}`)
+  return status === 200 && data ? data : null
+}
+
+export default {
+  getAll,
+  getById,
+}
