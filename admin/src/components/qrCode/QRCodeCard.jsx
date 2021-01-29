@@ -1,5 +1,4 @@
 import React from 'react'
-// import QRCode from 'react-qr-code'
 
 import { Button, Card, Image } from 'antd'
 import { DownloadOutlined, EyeOutlined } from '@ant-design/icons'
@@ -13,7 +12,7 @@ import './QRCodeCard.scss'
 const QRCodeCard = () => {
   const userId = localStorage.getItem('userId')
 
-  const qrCodeUrl = `${API_URL}/qr-code/users/${userId}`
+  const qrCodeUrl = `${API_URL}/public/qr-code/users/${userId}`
 
   const downloadQRCode = (event) => {
     event.preventDefault()
