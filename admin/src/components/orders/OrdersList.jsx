@@ -5,21 +5,21 @@ import { useIntl } from 'react-intl'
 const { Option } = Select
 
 const dataSource = [
-  {
-    OrderId: 1,
-    Created: '3 days ago',
-    Customer: 'Robert Vawer',
-    Total: 303,
-    Profit: 134,
-    Status: 'Pending',
-  },
+  // {
+  //   OrderId: 1,
+  //   Created: '3 days ago',
+  //   Customer: 'Robert Vawer',
+  //   Total: 303,
+  //   Profit: 134,
+  //   Status: 'Pending',
+  // },
 ]
 
 const columns = [
   {
     title: 'Order ID',
     dataIndex: 'OrderId',
-    key: 'name',
+    key: 'OrderId',
   },
   {
     title: 'Created',
