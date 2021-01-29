@@ -13,6 +13,8 @@ import {
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
+import { SERVER_URL } from '../../../config'
+
 import './CategoryItem.scss'
 
 const CategoryItem = ({ category, onAction }) => {
@@ -49,7 +51,12 @@ const CategoryItem = ({ category, onAction }) => {
         <Image
           width={60}
           height={60}
-          src={category.photo || 'https://via.placeholder.com/150?text=QR Menu'}
+          src={
+            category.photo
+              ? `${SERVER_URL}/uploads/${category.photo.userId}/thumbnail/${category.photo.sizes.thumbnail}`
+              : 'https://via.placeholder.com/300?text=QR Menu'
+          }
+          fallback="https://via.placeholder.com/300?text=QR Menu"
           preview={false}
         />
       </div>

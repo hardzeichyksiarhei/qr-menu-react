@@ -1,11 +1,13 @@
 const { Schema, Types, model } = require('mongoose')
 
 const photoSchema = new Schema({
-  name: { type: String },
+  userId: { type: Types.ObjectId },
+  sizes: { type: Object },
 })
 
 const dishSchema = new Schema({
   title: { type: String },
+  photo: { type: photoSchema, default: null },
   description: { type: String },
   isPublished: { type: Boolean },
   isEnabledToOrder: { type: Boolean },
@@ -39,6 +41,7 @@ menuSchema.virtual('id').get(function () {
   return this._id.toHexString()
 })
 
+photoSchema.set('toJSON', { virtuals: true })
 dishSchema.set('toJSON', { virtuals: true })
 categorySchema.set('toJSON', { virtuals: true })
 menuSchema.set('toJSON', { virtuals: true })

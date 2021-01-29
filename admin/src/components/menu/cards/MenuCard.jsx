@@ -2,13 +2,16 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
-import { Card, Dropdown, Menu } from 'antd'
+import { Card, Dropdown, Menu, Image } from 'antd'
 
 import { EditOutlined, MenuOutlined, EyeOutlined } from '@ant-design/icons'
 
 import * as menusActions from '../../../store/actions/menus'
 import menusService from '../../../services/menus'
+
+import { SERVER_URL } from '../../../config'
 
 const { Meta } = Card
 
@@ -22,6 +25,17 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
     dispatch(menusActions.addMenu(duplicatedMenu))
   }
 
+  const handleClickRestoreMenu = async () => {
+    await menusService.updateById(menu.id, { deletedAt: null })
+    dispatch(menusActions.updateMenu(menu.id, { deletedAt: null }))
+  }
+
+  const handleClickMoveToTrashMenu = async () => {
+    const deletedAt = moment()
+    await menusService.updateById(menu.id, { deletedAt })
+    dispatch(menusActions.updateMenu(menu.id, { deletedAt }))
+  }
+
   const handleClickDeleteMenu = async () => {
     await menusService.deleteById(menu.id)
     dispatch(menusActions.deleteMenu(menu.id))
@@ -30,9 +44,14 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
   return (
     <Card
       cover={
-        <img
+        <Image
+          src={
+            menu.photo
+              ? `${SERVER_URL}/uploads/${menu.userId}/large/${menu.photo.sizes.large}`
+              : 'https://via.placeholder.com/1366x768?text=QR Menu'
+          }
+          fallback="https://via.placeholder.com/1366x768?text=QR Menu"
           alt={menu.title}
-          src={menu.photo || 'https://via.placeholder.com/600x360?text=QR Menu'}
         />
       }
       actions={[
@@ -44,9 +63,18 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
           overlay={
             <Menu>
               <Menu.Item onClick={handleClickDuplicateMenu}>Duplicate</Menu.Item>
-              <Menu.Item onClick={handleClickDeleteMenu} danger>
-                Delete
-              </Menu.Item>
+              {!menu.deletedAt ? (
+                <Menu.Item onClick={handleClickMoveToTrashMenu} danger>
+                  Move To Trash
+                </Menu.Item>
+              ) : (
+                [
+                  <Menu.Item onClick={handleClickRestoreMenu}>Restore</Menu.Item>,
+                  <Menu.Item onClick={handleClickDeleteMenu} danger>
+                    Delete
+                  </Menu.Item>,
+                ]
+              )}
             </Menu>
           }
           placement="bottomCenter"

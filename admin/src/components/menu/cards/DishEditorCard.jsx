@@ -5,6 +5,8 @@ import { v4 as uuid } from 'uuid'
 
 import { Button, Space, Form, Input, Switch, Select, InputNumber } from 'antd'
 
+import ImagesManagement from '../../images/ImagesManagement'
+
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
@@ -45,10 +47,12 @@ const DishEditorCard = ({ editDish, onAction }) => {
     onAction('dish:editor.cancel')
   }
 
-  const handleClickSave = (dish) => {
+  const handleClickSave = ({ categoryId, ...dish }) => {
+    const isEdit = !!editDish
+
     switch (true) {
       // Edit & Change CategoryId
-      case editDish && editDish.categoryId !== dish.categoryId:
+      case isEdit && selectedCategoryId !== categoryId:
         dispatch(menuActions.deleteDish(selectedCategoryId, editDish.id))
         dispatch(
           menuActions.addDish(dish.categoryId, {
@@ -59,13 +63,13 @@ const DishEditorCard = ({ editDish, onAction }) => {
         )
         break
       // Edit & NOT Change CategoryId
-      case editDish && editDish.categoryId === dish.categoryId:
-        dispatch(menuActions.updateDish(editDish.categoryId, editDish.id, dish))
+      case isEdit && selectedCategoryId === categoryId:
+        dispatch(menuActions.updateDish(selectedCategoryId, editDish.id, dish))
         break
       // NOT Edit
-      case !editDish:
+      case !isEdit:
         dispatch(
-          menuActions.addDish(dish.categoryId, {
+          menuActions.addDish(categoryId, {
             ...dishSchema(),
             ...dish,
             id: uuid(),
@@ -91,9 +95,9 @@ const DishEditorCard = ({ editDish, onAction }) => {
         initialValues={dishSchema()}
         onFinish={handleClickSave}
       >
-        {/* <Form.Item name="photo" label="Photo">
-          <PhotoUploader />
-        </Form.Item> */}
+        <Form.Item name="photo" label="Photo">
+          <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
+        </Form.Item>
         <Form.Item className="mb-0" name="isPublished" label="Published" valuePropName="checked">
           <Switch />
         </Form.Item>

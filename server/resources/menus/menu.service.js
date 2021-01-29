@@ -17,6 +17,11 @@ exports.update = async ({ id, userId, ...payload }) => {
   return menu
 }
 
+exports.updateById = async (menuId, data) => {
+  const menu = await Menu.findOneAndUpdate({ _id: menuId }, data)
+  return menu
+}
+
 exports.deleteById = async (menuId) => {
   const status = await Menu.findOneAndDelete({ _id: menuId })
   return status

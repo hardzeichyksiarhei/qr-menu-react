@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 
 import { Button, Space, Form, Input, Switch } from 'antd'
 
+import ImagesManagement from '../../images/ImagesManagement'
+
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
@@ -40,6 +42,9 @@ const MenuSettingsEditorCard = ({ onCancel, onSave }) => {
         initialValues={menu}
         onFinish={handleClickSave}
       >
+        <Form.Item name="photo" label="Photo">
+          <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
+        </Form.Item>
         <Form.Item className="mb-0" name="isPublished" label="Published" valuePropName="checked">
           <Switch />
         </Form.Item>

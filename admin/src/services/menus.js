@@ -211,6 +211,11 @@ const duplicate = async ({ _id, id, createdAt, ...menu }) => {
   return [200, 201].includes(status) && duplicatedMenu ? duplicatedMenu : null
 }
 
+const updateById = async (menuId, data) => {
+  const { status } = await axios.patch(`${API_URL}/menus/${menuId}`, { data })
+  return status === 200
+}
+
 const deleteById = async (menuId) => {
   const { data, status } = await axios.delete(`${API_URL}/menus/${menuId}`)
   return status === 200 ? data : null
@@ -221,5 +226,6 @@ export default {
   getById,
   save,
   duplicate,
+  updateById,
   deleteById,
 }
