@@ -14,16 +14,18 @@ import {
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
+import { SERVER_URL } from '../../../config'
+
 import './DishItem.scss'
 
 const DishItem = ({ dish, onAction }) => {
   const dispatch = useDispatch()
-  const selectedcategoryId = useSelector(menuSelectors.selectedCategoryId)
+  const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
 
   const handleClickDuplicateDish = () => {
     const { _id, ...copyDish } = dish
     dispatch(
-      menuActions.addDish(selectedcategoryId, {
+      menuActions.addDish(selectedCategoryId, {
         ...copyDish,
         id: uuid(),
         title: `Copy of ${dish.title}`,
@@ -36,7 +38,7 @@ const DishItem = ({ dish, onAction }) => {
   }
 
   const handleClickDeleteDish = () => {
-    dispatch(menuActions.deleteDish(selectedcategoryId, dish.id))
+    dispatch(menuActions.deleteDish(selectedCategoryId, dish.id))
   }
 
   return (
@@ -48,7 +50,12 @@ const DishItem = ({ dish, onAction }) => {
         <Image
           width={120}
           height={120}
-          src={dish.photo || 'https://via.placeholder.com/150?text=QR Menu'}
+          src={
+            dish.photo
+              ? `${SERVER_URL}/uploads/${dish.photo.userId}/thumbnail/${dish.photo.sizes.thumbnail}`
+              : 'https://via.placeholder.com/300?text=QR Menu'
+          }
+          fallback="https://via.placeholder.com/300?text=QR Menu"
           preview={false}
         />
       </div>

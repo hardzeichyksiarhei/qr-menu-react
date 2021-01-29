@@ -7,6 +7,7 @@ const photoSchema = new Schema({
 
 const dishSchema = new Schema({
   title: { type: String },
+  photo: { type: photoSchema, default: null },
   description: { type: String },
   isPublished: { type: Boolean },
   isEnabledToOrder: { type: Boolean },
