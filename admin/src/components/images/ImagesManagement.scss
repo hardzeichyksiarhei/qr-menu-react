@@ -73,6 +73,12 @@
   }
 }
 
+.image-uploader-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .image-uploader-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

@@ -16,10 +16,13 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
   const [localCurrentImage, setLocalCurrentImage] = useState(currentImage)
 
   useAsync(async () => {
-    const imagesResponse = await imagesService.getAll()
-    setIsImageLoading(false)
-    setImagesList(imagesResponse)
-  })
+    if (visible) {
+      setIsImageLoading(true)
+      const imagesResponse = await imagesService.getAll()
+      setIsImageLoading(false)
+      setImagesList(imagesResponse)
+    }
+  }, [visible])
 
   useEffect(() => {
     setLocalCurrentImage(currentImage)
@@ -61,7 +64,9 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
       centered
     >
       {!imagesList.length && isImageLoading ? (
-        <Spin />
+        <div className="image-uploader-loader">
+          <Spin />
+        </div>
       ) : (
         <div className="image-uploader-grid">
           {imagesList.map((image) => (
