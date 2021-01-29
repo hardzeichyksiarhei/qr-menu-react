@@ -1,6 +1,9 @@
 {
   "name": "qr-menu-react-client",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.x"
+  },
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
