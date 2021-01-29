@@ -126,6 +126,9 @@ const DishEditorCard = ({ editDish, onAction }) => {
         <Form.Item label="Price" name="priceValue">
           <InputNumber min={0} />
         </Form.Item>
+        <Form.Item label="Ingredients" name="ingredients">
+          <Select mode="tags" />
+        </Form.Item>
         <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="dish-editor-form__actions">
             <Space>
