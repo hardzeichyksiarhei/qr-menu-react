@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { Spin, Row, Col, Drawer } from 'antd'
+import { Spin, Row, Col, Drawer, Empty } from 'antd'
 
 import MenuCard from './cards/MenuCard'
 import MenuPreview from './MenuPreview'
 
-const MenuList = ({ menus, isMenusLoading }) => {
-  // const [localMenus, setLocalMenus] = useState(menus)
-  const [isMenuPreviewVisible, setIsMenuPreviewVisible] = useState(false)
+import { CLIENT_URL } from '../../config'
 
-  // useEffect(() => {
-  //   console.log(menus)
-  //   setLocalMenus(menus)
-  // }, [menus])
+const MenuList = ({ menus, isMenusLoading }) => {
+  const [isMenuPreviewVisible, setIsMenuPreviewVisible] = useState(false)
 
   if (!menus.length && isMenusLoading) {
     return (
@@ -21,6 +17,10 @@ const MenuList = ({ menus, isMenusLoading }) => {
         <Spin size="large" />
       </div>
     )
+  }
+
+  if (!menus.length && !isMenusLoading) {
+    return <Empty />
   }
 
   const handleShowPreviewDrawer = () => {
@@ -44,7 +44,7 @@ const MenuList = ({ menus, isMenusLoading }) => {
         width={600}
         destroyOnClose
       >
-        <MenuPreview url="https://ant.design/" />
+        <MenuPreview url={CLIENT_URL} />
       </Drawer>
     </div>
   )

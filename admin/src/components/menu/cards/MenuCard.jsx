@@ -51,6 +51,7 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
               : 'https://via.placeholder.com/1366x768?text=QR Menu'
           }
           fallback="https://via.placeholder.com/1366x768?text=QR Menu"
+          preview={false}
           alt={menu.title}
         />
       }

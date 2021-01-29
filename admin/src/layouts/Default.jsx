@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
-import { Layout, Menu, Button } from 'antd'
+import { Layout, Menu, Button, Space } from 'antd'
 import {
   PoweroffOutlined,
   AppstoreAddOutlined,
@@ -57,18 +57,17 @@ const Default = () => {
       <Header className="app-header">
         <h2 className="app-header__logo">QR Menu Clone</h2>
         <div className="app-header__controls">
-          <>
+          <Space>
             <LanguageSelect />
             <ProfileDropdown />
             <Button
               className="app-header__logout"
-              style={{ marginLeft: 10 }}
               type="danger"
               size="large"
               icon={<PoweroffOutlined />}
               onClick={auth.logout}
             />
-          </>
+          </Space>
         </div>
       </Header>
       <Layout className="default-layout__container">
