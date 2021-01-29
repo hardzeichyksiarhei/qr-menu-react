@@ -20,7 +20,7 @@ const initialState = {
 
   selectedCategoryId: null,
 
-  isMenuLoading: true,
+  isMenuLoading: false,
   isMenuBusy: false,
   menuError: null,
 }

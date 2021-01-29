@@ -78,6 +78,14 @@
     }
 }
 
+.left-navigation {
+    &__item {
+        &--create-menu {
+            background-color: #e6f7ff;
+        }
+    }
+}
+
 /* Auth Layout */
 .auth-layout {
     justify-content: center;

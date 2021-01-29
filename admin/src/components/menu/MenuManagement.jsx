@@ -29,8 +29,8 @@ const MenuManagement = () => {
   }, [dispatch])
 
   useEffect(() => {
-    setIsMenuNotSave(!isMenuLoading && !isMenuEqualCache)
-    if (!isMenuLoading && !isMenuEqualCache) {
+    setIsMenuNotSave(menu.id && !isMenuLoading && !isMenuEqualCache)
+    if (menu.id && !isMenuLoading && !isMenuEqualCache) {
       notification.warning({
         message: 'Warning',
         description: (
@@ -49,7 +49,7 @@ const MenuManagement = () => {
         key: 'menu-not-save',
       })
     }
-  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu])
+  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu, menu.id])
 
   const handleClickSettingsMenu = () => {
     setIsSettingsEditorVisible(true)

@@ -10,6 +10,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
+  PlusOutlined,
 } from '@ant-design/icons'
 
 import ProfileDropdown from '../components/ProfileDropdown'
@@ -71,8 +72,14 @@ const Default = () => {
         </div>
       </Header>
       <Layout className="default-layout__container">
-        <Sider width={280} className="site-layout-background">
+        <Sider className="left-navigation" width={280}>
           <Menu mode="inline" style={{ height: '100%', borderRight: 0 }}>
+            <Menu.Item
+              className="left-navigation__item left-navigation__item--create-menu"
+              icon={<PlusOutlined />}
+            >
+              <Link to="/menus/create">Menu Create</Link>
+            </Menu.Item>
             {routes.map((route) => (
               <Menu.Item key={route.path} icon={route.icon}>
                 <Link to={route.path}>{route.label}</Link>

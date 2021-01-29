@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { fetchMenu } from '../../store/actions/menu'
+import { fetchMenu, clearMenu } from '../../store/actions/menu'
 
 import MenuManagement from '../../components/menu/MenuManagement'
 
@@ -12,6 +12,9 @@ const MenuEdit = () => {
 
   useEffect(() => {
     dispatch(fetchMenu(menuId))
+    return () => {
+      dispatch(clearMenu())
+    }
   }, [dispatch, menuId])
 
   return (
