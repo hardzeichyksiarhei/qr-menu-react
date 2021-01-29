@@ -17,7 +17,9 @@ const MenuManagement = () => {
 
   const [isSettingsEditorVisible, setIsSettingsEditorVisible] = useState(false)
 
+  const isMenuLoading = useSelector(menuSelectors.isMenuLoading)
   const isMenuBusy = useSelector(menuSelectors.isMenuBusy)
+  const menu = useSelector(menuSelectors.menu)
 
   const handleClickSettingsMenu = () => {
     setIsSettingsEditorVisible(true)
@@ -32,7 +34,7 @@ const MenuManagement = () => {
       <PageHeader
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ghost={false}
-        title="Menu"
+        title={!isMenuLoading && menu.title ? `Menu: ${menu.title}` : 'Menu'}
         extra={[
           <Button type="default" key="settings" onClick={handleClickSettingsMenu}>
             Settings

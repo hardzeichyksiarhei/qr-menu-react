@@ -73,9 +73,11 @@ const CategoryItem = ({ category, onAction }) => {
       </div>
       <div className="category-item__actions">
         <Dropdown
+          trigger={['click']}
           overlay={
             <Menu style={{ minWidth: '100px' }}>
               <Menu.Item onClick={handleClickEditCategory}>Edit</Menu.Item>
+
               <Menu.Item onClick={handleClickDeleteCategory} danger>
                 Delete
               </Menu.Item>
@@ -83,7 +85,7 @@ const CategoryItem = ({ category, onAction }) => {
           }
           arrow
         >
-          <Button icon={<EllipsisOutlined />} />
+          <Button onClick={(event) => event.stopPropagation()} icon={<EllipsisOutlined />} />
         </Dropdown>
       </div>
       <div className="category-item__move move">

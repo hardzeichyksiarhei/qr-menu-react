@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
 
-import { Button, Image, Space } from 'antd'
+import { Button, Image, Space, Popconfirm } from 'antd'
 import {
   CopyOutlined,
   SettingOutlined,
@@ -69,7 +69,15 @@ const DishItem = ({ dish, onAction }) => {
           <Space>
             <Button icon={<CopyOutlined />} onClick={handleClickDuplicateDish} />
             <Button type="primary" icon={<SettingOutlined />} onClick={handleClickEditDish} />
-            <Button type="danger" icon={<DeleteOutlined />} onClick={handleClickDeleteDish} />
+            <Popconfirm
+              title="Are you sure to delete this item?"
+              onConfirm={handleClickDeleteDish}
+              okText="Yes"
+              cancelText="No"
+              placement="topRight"
+            >
+              <Button type="danger" icon={<DeleteOutlined />} />
+            </Popconfirm>
           </Space>
         </div>
         <div className="dish-item__price">

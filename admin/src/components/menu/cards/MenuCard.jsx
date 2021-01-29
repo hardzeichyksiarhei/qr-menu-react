@@ -83,6 +83,7 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
           <MenuOutlined key="menu" />
         </Dropdown>,
       ]}
+      hoverable
     >
       <Meta
         title={menu.title}

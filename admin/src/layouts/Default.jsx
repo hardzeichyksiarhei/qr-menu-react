@@ -9,6 +9,7 @@ import {
   DeleteOutlined,
   SettingOutlined,
   LogoutOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons'
 
 import ProfileDropdown from '../components/ProfileDropdown'
@@ -43,7 +44,7 @@ const routes = [
   {
     path: '/orders',
     label: translate('Orders'),
-    icon: <SettingOutlined />,
+    icon: <ShoppingCartOutlined />,
   },
 ]
 

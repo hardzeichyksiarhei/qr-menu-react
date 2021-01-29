@@ -23,8 +23,10 @@ module.exports.save = catchErrors(async (req, res) => {
   const { menu } = req.body
 
   if (menu.id) {
-    await menuService.update(menu)
-    return res.status(StatusCodes.CREATED).json({ message: 'Menu was updated' })
+    const updatedMenu = await menuService.update(menu)
+    return res
+      .status(StatusCodes.CREATED)
+      .json({ menuId: updatedMenu.id, message: 'Menu was updated' })
   }
 
   const createdMenu = await menuService.create({
