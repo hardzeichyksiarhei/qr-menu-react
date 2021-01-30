@@ -53,6 +53,15 @@
     cursor: move !important;
 }
 
+/* Button */
+.btn {
+    &--warning {
+        background-color: #fa8c16 !important;
+        border-color: #fa8c16 !important;
+        color: #fff !important;
+    }
+}
+
 /* Default Layout */
 .default-layout {
     display: flex;

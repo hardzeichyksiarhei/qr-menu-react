@@ -28,6 +28,11 @@ const MenuManagement = () => {
     notification.close('menu-not-save')
   }, [dispatch])
 
+  const handleClickSaveMenu = useCallback(() => {
+    dispatch(menuActions.saveMenu())
+    notification.close('menu-not-save')
+  }, [dispatch])
+
   useEffect(() => {
     setIsMenuNotSave(menu.id && !isMenuLoading && !isMenuEqualCache)
     if (menu.id && !isMenuLoading && !isMenuEqualCache) {
@@ -37,34 +42,42 @@ const MenuManagement = () => {
           <div>
             <p>Changes have been made to the menu! Please save your changes or discard them.</p>
             <Space>
-              <Button onClick={() => notification.close('menu-not-save')}>Cancel</Button>
-              <Button type="danger" onClick={handleDiscardMenu}>
+              <Button
+                onClick={() => notification.close('menu-not-save')}
+                key="cancel-menu-notification"
+              >
+                Cancel
+              </Button>
+              <Button
+                className="btn btn--warning"
+                onClick={handleDiscardMenu}
+                key="discard-menu-notification"
+              >
                 Discord
+              </Button>
+              <Button type="primary" onClick={handleClickSaveMenu} key="save-menu-notification">
+                Save
               </Button>
             </Space>
           </div>
         ),
         placement: 'bottomLeft',
         duration: 0,
+        closeIcon: <></>,
         key: 'menu-not-save',
       })
     }
-  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu, menu.id])
+  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu, menu.id, handleClickSaveMenu])
 
   const handleClickSettingsMenu = () => {
     setIsSettingsEditorVisible(true)
   }
 
-  const handleClickSaveMenu = () => {
-    dispatch(menuActions.saveMenu())
-    notification.close('menu-not-save')
-  }
-
   const menuTitle = (
     <div className="menu-title">
-      <span>{isMenuNotSave ? <span style={{ color: '#faad14' }}>* </span> : ''}Menu</span>
+      <span>{isMenuNotSave ? <span style={{ color: '#fa8c16' }}>* </span> : ''}Menu</span>
       {!isMenuLoading && menu.title ? `: ${menu.title}` : null}
-      {isMenuNotSave ? <span style={{ color: '#faad14' }}> - not saved</span> : null}
+      {isMenuNotSave ? <span style={{ color: '#fa8c16' }}> - not saved</span> : null}
     </div>
   )
 
@@ -75,11 +88,16 @@ const MenuManagement = () => {
         ghost={false}
         title={menuTitle}
         extra={[
-          <Button type="default" key="settings" onClick={handleClickSettingsMenu}>
-            Settings
-          </Button>,
-          <Button type="primary" key="save" onClick={handleClickSaveMenu} loading={isMenuBusy}>
+          isMenuNotSave ? (
+            <Button className="btn btn--warning" onClick={handleDiscardMenu} key="discard-menu">
+              Discord
+            </Button>
+          ) : null,
+          <Button type="primary" onClick={handleClickSaveMenu} loading={isMenuBusy} key="save-menu">
             Save
+          </Button>,
+          <Button type="default" onClick={handleClickSettingsMenu} key="settings-menu">
+            Settings
           </Button>,
         ]}
       />
