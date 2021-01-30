@@ -21,10 +21,24 @@ const dishSchema = () => ({
   isPublished: true,
   isEnabledToOrder: true,
   priceValue: null,
-  tags: [],
+  tags: [1, 2, 3],
   ingredients: [],
   allergens: [],
 })
+
+const TAGS = [
+  { id: 1, icon: '🌾', label: 'Gluten-free' },
+  { id: 2, icon: '☘️', label: 'Bio' },
+  { id: 3, icon: '🥑', label: 'Suitable for vegetarians' },
+  { id: 4, icon: '🥦', label: 'Suitable for vegans' },
+  { id: 5, icon: '🌶️', label: 'Slightly hot' },
+  { id: 6, icon: '🌶️🌶️', label: 'Hot' },
+  { id: 7, icon: '🌶️🌶️🌶️', label: 'Very hot' },
+  { id: 8, icon: '☪️', label: 'Halal' },
+  { id: 9, icon: '✡️', label: 'Kosher' },
+  { id: 10, icon: '🥩', label: 'Real meat!' },
+  { id: 11, icon: '🐷', label: 'Pork' },
+]
 
 const DishEditorCard = ({ editDish, onAction }) => {
   const dispatch = useDispatch()
@@ -35,7 +49,10 @@ const DishEditorCard = ({ editDish, onAction }) => {
   const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
 
   useEffect(() => {
-    if (editDish) dishEditorForm.setFieldsValue(editDish)
+    if (editDish) {
+      const tags = editDish.tags.map((tag) => tag.id)
+      dishEditorForm.setFieldsValue({ ...editDish, tags })
+    }
   }, [dishEditorForm, editDish])
 
   useEffect(() => {
@@ -50,21 +67,20 @@ const DishEditorCard = ({ editDish, onAction }) => {
   const handleClickSave = ({ categoryId, ...dish }) => {
     const isEdit = !!editDish
 
+    const tags = dish.tags.reduce(
+      (acc, tagId) => [...acc, TAGS.find((tag) => tag.id === tagId)],
+      [],
+    )
+
     switch (true) {
       // Edit & Change CategoryId
       case isEdit && selectedCategoryId !== categoryId:
         dispatch(menuActions.deleteDish(selectedCategoryId, editDish.id))
-        dispatch(
-          menuActions.addDish(dish.categoryId, {
-            ...dishSchema(),
-            ...dish,
-            id: uuid(),
-          }),
-        )
+        dispatch(menuActions.addDish(dish.categoryId, { ...dish, tags }))
         break
       // Edit & NOT Change CategoryId
       case isEdit && selectedCategoryId === categoryId:
-        dispatch(menuActions.updateDish(selectedCategoryId, editDish.id, dish))
+        dispatch(menuActions.updateDish(selectedCategoryId, editDish.id, { ...dish, tags }))
         break
       // NOT Edit
       case !isEdit:
@@ -72,6 +88,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
           menuActions.addDish(categoryId, {
             ...dishSchema(),
             ...dish,
+            tags,
             id: uuid(),
           }),
         )
@@ -128,6 +145,18 @@ const DishEditorCard = ({ editDish, onAction }) => {
         </Form.Item>
         <Form.Item label="Ingredients" name="ingredients">
           <Select mode="tags" />
+        </Form.Item>
+        <Form.Item label="Tags" name="tags">
+          <Select className="tags-list" mode="multiple">
+            {TAGS.map((tag) => (
+              <Select.Option className="tags-item" value={tag.id} key={tag.id}>
+                <div className="tags-item-content">
+                  <span>{tag.label}</span>
+                  <span>{tag.icon}</span>
+                </div>
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="dish-editor-form__actions">
