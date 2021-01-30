@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, PageHeader, Select, Spin, Empty } from 'antd'
+import { Table, PageHeader, Select, Spin, Empty, Space, Button } from 'antd'
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
 
 const { Option } = Select
@@ -47,7 +48,7 @@ const columns = [
     dataIndex: 'Status',
     key: 'Status',
     render: () => (
-      <Select defaultValue="New">
+      <Select style={{ width: '120px' }} defaultValue="New">
         <Option value="New" key="New">
           New
         </Option>
@@ -61,6 +62,20 @@ const columns = [
           Cancelled
         </Option>
       </Select>
+    ),
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: () => (
+      <Space size="middle">
+        <Button>
+          <EyeOutlined />
+        </Button>
+        <Button>
+          <DeleteOutlined />
+        </Button>
+      </Space>
     ),
   },
 ]
@@ -92,9 +107,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       <PageHeader ghost={false} title={intl.formatMessage({ id: 'Orders' })} />
 
       <Table
-        rowSelection={{
-          type: 'checkbox',
-        }}
+        bordered
         dataSource={orders.map((order) => ({
           // eslint-disable-next-line no-underscore-dangle
           key: order._id,
