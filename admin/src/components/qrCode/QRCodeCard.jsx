@@ -23,7 +23,10 @@ const QRCodeCard = () => {
   }
 
   return (
-    <Card className="qr-code-card" cover={<Image src={`${qrCodeUrl}`} />} hoverable>
+    <Card className="qr-code-card" hoverable>
+      <div className="qr-code-image">
+        <Image width="100%" src={`${qrCodeUrl}`} />
+      </div>
       <div className="qr-code-actions">
         <Button
           type="primary"
@@ -32,7 +35,7 @@ const QRCodeCard = () => {
         >
           {translate('Download')}
         </Button>
-        <Button icon={<EyeOutlined className="mr-05" />}>{translate('View')}</Button>
+        <Button icon={<EyeOutlined className="mr-05" />}>View</Button>
       </div>
     </Card>
   )

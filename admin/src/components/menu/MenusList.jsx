@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { Spin, Row, Col, Drawer, Empty } from 'antd'
+import { Spin, Row, Col, Drawer, Empty, PageHeader } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
+import ButtonLink from '../ButtonLink'
 import MenuCard from './cards/MenuCard'
 import MenuPreview from './MenuPreview'
 
@@ -29,6 +31,17 @@ const MenuList = ({ menus, isMenusLoading }) => {
 
   return (
     <div className="menus-list">
+      <PageHeader
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        ghost={false}
+        title="Menus"
+        extra={[
+          <ButtonLink linkTo="/menus/create" type="primary" icon={<PlusOutlined />} key="add-menu">
+            Add menu
+          </ButtonLink>,
+        ]}
+      />
+
       <Row gutter={[20, 20]}>
         {menus.map((menu) => (
           <Col span={6} key={menu.id}>

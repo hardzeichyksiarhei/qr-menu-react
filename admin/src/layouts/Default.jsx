@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import React, { Suspense, useState } from 'react'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 
-import { Layout, Menu, Button, Space } from 'antd'
+import { Layout, Menu, Button, Space, Popover } from 'antd'
 import {
   PoweroffOutlined,
   AppstoreAddOutlined,
@@ -11,6 +11,7 @@ import {
   LogoutOutlined,
   ShoppingCartOutlined,
   PlusOutlined,
+  MenuOutlined,
 } from '@ant-design/icons'
 
 import ProfileDropdown from '../components/ProfileDropdown'
@@ -18,6 +19,7 @@ import LanguageSelect from '../components/LanguageSelect'
 import translate from '../intl/translate'
 
 import { useAuth } from '../auth/AuthProvider'
+import ButtonLink from '../components/ButtonLink'
 
 const { Header, Content, Sider } = Layout
 
@@ -51,51 +53,86 @@ const routes = [
 
 const Default = () => {
   const auth = useAuth()
+  const location = useLocation()
+
+  const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
-    <Layout className="default-layout">
-      <Header className="app-header">
-        <h2 className="app-header__logo">QR Menu Clone</h2>
-        <div className="app-header__controls">
-          <Space>
-            <LanguageSelect />
-            <ProfileDropdown />
-            <Button
-              className="app-header__logout"
-              type="danger"
-              size="large"
-              icon={<PoweroffOutlined />}
-              onClick={auth.logout}
-            />
-          </Space>
-        </div>
-      </Header>
+    <Layout className="default-layout" hasSider>
+      <Sider
+        className="left-navigation"
+        breakpoint="lg"
+        width={280}
+        collapsed={isCollapsed}
+        collapsedWidth={0}
+        zeroWidthTriggerStyle={{ display: 'none' }}
+        onBreakpoint={setIsCollapsed}
+      >
+        <h2 className="left-navigation__logo">QR Menu</h2>
+        <ButtonLink
+          linkTo="/menus/create"
+          className="left-navigation__create-menu"
+          icon={<PlusOutlined />}
+        >
+          Menu Create
+        </ButtonLink>
+        <Menu theme="dark" selectedKeys={[location.pathname]}>
+          {routes.map((route) => (
+            <Menu.Item className="left-navigation__item" key={route.path} icon={route.icon}>
+              <Link to={route.path}>{route.label}</Link>
+            </Menu.Item>
+          ))}
+          <Menu.Item
+            className="left-navigation__item"
+            icon={<LogoutOutlined />}
+            onClick={auth.logout}
+            key="logout"
+          >
+            {translate('Logout')}
+          </Menu.Item>
+        </Menu>
+      </Sider>
+
       <Layout className="default-layout__container">
-        <Sider className="left-navigation" width={280}>
-          <Menu mode="inline" style={{ height: '100%', borderRight: 0 }}>
-            <Menu.Item
-              className="left-navigation__item left-navigation__item--create-menu"
-              icon={<PlusOutlined />}
+        <Header className="app-header">
+          {isCollapsed ? (
+            <Popover
+              overlayClassName="popover-navigation"
+              placement="bottomLeft"
+              content={
+                <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
+                  {routes.map((route) => (
+                    <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
+                      <Link to={route.path}>{route.label}</Link>
+                    </Menu.Item>
+                  ))}
+                </Menu>
+              }
+              trigger="click"
             >
-              <Link to="/menus/create">Menu Create</Link>
-            </Menu.Item>
-            {routes.map((route) => (
-              <Menu.Item key={route.path} icon={route.icon}>
-                <Link to={route.path}>{route.label}</Link>
-              </Menu.Item>
-            ))}
-            <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={auth.logout}>
-              {translate('Logout')}
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout style={{ padding: '24px' }}>
-          <Content className="default-layout__content">
-            <Suspense fallback={null}>
-              <Outlet />
-            </Suspense>
-          </Content>
-        </Layout>
+              <Button icon={<MenuOutlined />} />
+            </Popover>
+          ) : (
+            <div />
+          )}
+          <div className="app-header__controls">
+            <Space>
+              <LanguageSelect />
+              <ProfileDropdown />
+              <Button
+                className="app-header__logout"
+                type="danger"
+                icon={<PoweroffOutlined />}
+                onClick={auth.logout}
+              />
+            </Space>
+          </div>
+        </Header>
+        <Content className="default-layout__content" style={{ margin: '24px' }}>
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
+        </Content>
       </Layout>
     </Layout>
   )
