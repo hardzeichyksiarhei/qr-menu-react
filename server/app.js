@@ -5,6 +5,8 @@ const path = require('path')
 const { auth } = require('./middlewares')
 const i18n = require('./i18n')
 
+const { CLIENT_URL } = require('./helpers/config')
+
 const authRouter = require('./resources/auth/auth.router')
 const userRouter = require('./resources/users/user.router')
 const menuRouter = require('./resources/menus/menu.router')
@@ -17,6 +19,25 @@ const QRCodePublicRouter = require('./resources/qr-code/qr-code.public.router')
 const ordersPublicRouter = require('./resources/orders/orders.public.router')
 
 const app = express()
+const http = require('http').createServer(app)
+const io = require('socket.io')(http, {
+  cors: {
+    origin: CLIENT_URL,
+    methods: ['GET', 'POST'],
+  },
+})
+
+io.on('connection', (socket) => {
+  socket.on('ROOM:JOIN', (userId) => {
+    socket.join(userId)
+  })
+  console.log('user connected', socket.id)
+})
+
+app.use((req, res, next) => {
+  req.io = io
+  next()
+})
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -47,4 +68,4 @@ app.use('/api/settings', auth, settingsRouter)
 app.use('/api/orders', auth, ordersRouter)
 app.use('/api/images', auth, ImageRouter)
 
-module.exports = app
+module.exports = http

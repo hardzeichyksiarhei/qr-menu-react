@@ -1,6 +1,6 @@
 const { PORT } = require('./helpers/config')
 
-const app = require('./app')
+const http = require('./app')
 
 const { connectDb, models } = require('./db')
 
@@ -18,7 +18,9 @@ async function start() {
       ])
     }
 
-    const server = app.listen(PORT, () => console.log(`App is running on http://localhost:${PORT}`))
+    const server = http.listen(PORT, () =>
+      console.log(`App is running on http://localhost:${PORT}`),
+    )
 
     process.on('uncaughtException', () => {
       server.close(() => {

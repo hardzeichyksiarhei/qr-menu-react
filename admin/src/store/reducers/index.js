@@ -4,6 +4,7 @@ import menu from './menu'
 import menus from './menus'
 import settings from './settings'
 import language from './language'
+import orders from './orders'
 
 export default combineReducers({
   auth,
@@ -11,4 +12,5 @@ export default combineReducers({
   menus,
   settings,
   language,
+  orders,
 })
