@@ -14,3 +14,12 @@
     }
   }
 }
+
+@media screen and (max-width: 1600px) {
+  .category-editor {
+    &__content {
+      height: auto;
+      max-height: calc(100vh - 300px);
+    }
+  }
+}

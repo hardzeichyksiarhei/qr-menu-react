@@ -52,15 +52,10 @@ const Registration = () => {
     [dispatch],
   )
 
-  // if (isRegistrated) {
-  //   return <Navigate to="/registration/successfully" />
-  // }
-
   return (
     <div className="registration">
       <Card
         className="registration-card"
-        style={{ width: 500 }}
         title={<h2 className="registration-card__title">QR Menu Clone</h2>}
       >
         <Form

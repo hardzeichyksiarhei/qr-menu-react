@@ -44,7 +44,7 @@ const MenuList = ({ menus, isMenusLoading }) => {
 
       <Row gutter={[20, 20]}>
         {menus.map((menu) => (
-          <Col span={6} key={menu.id}>
+          <Col span={24} xxl={6} xl={8} md={12} sm={24} key={menu.id}>
             <MenuCard menu={menu} onShowPreviewDrawer={handleShowPreviewDrawer} />
           </Col>
         ))}

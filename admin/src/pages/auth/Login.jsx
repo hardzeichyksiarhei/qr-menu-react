@@ -46,11 +46,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <Card
-        className="login-card"
-        style={{ width: 500 }}
-        title={<h2 className="login-card__title">QR Menu Clone</h2>}
-      >
+      <Card className="login-card" title={<h2 className="login-card__title">QR Menu Clone</h2>}>
         <Form
           className="login-form"
           layout="vertical"

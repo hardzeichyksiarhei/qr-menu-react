@@ -1,4 +1,6 @@
 .login {
+    width: 100%;
+    max-width: 500px;
     &__footer {
         display: flex;
         justify-content: center;
@@ -24,4 +26,7 @@
     &__sign-in {
         text-transform: uppercase;
     }
+}
+
+@media screen and (max-width: 576px) {
 }

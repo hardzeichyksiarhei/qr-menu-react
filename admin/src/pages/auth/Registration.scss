@@ -1,27 +1,29 @@
 .registration {
+  width: 100%;
+  max-width: 500px;
   &__footer {
-      display: flex;
-      justify-content: center;
-      padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
   }
   &__sign-in {
-      text-transform: uppercase;
-      margin-left: 10px;
+    text-transform: uppercase;
+    margin-left: 10px;
   }
 }
 
 .registration-card {
   &__title {
-      margin-bottom: 0;
-      font-size: 22px;
+    margin-bottom: 0;
+    font-size: 22px;
   }
 }
 
 .registration-form {
   &__title {
-      font-size: 18px;
+    font-size: 18px;
   }
   &__sign-up {
-      text-transform: uppercase;
+    text-transform: uppercase;
   }
 }
