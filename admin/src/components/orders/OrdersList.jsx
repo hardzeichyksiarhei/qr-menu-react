@@ -13,8 +13,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
   const [selectedOrderList, setSelectedOrderList] = useState([])
 
   const showModal = (orderId) => {
-    // eslint-disable-next-line no-underscore-dangle
-    const order = orders.find((el) => el._id === orderId)
+    const order = orders.find((el) => el.orderNumber === orderId)
     setSelectedOrder(order)
     setSelectedOrderList(order.list)
     setIsModalVisible(true)
@@ -106,18 +105,15 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       <Table
         bordered
         dataSource={orders.map((order) => ({
-          // eslint-disable-next-line no-underscore-dangle
-          key: order._id,
-          // eslint-disable-next-line no-underscore-dangle
-          OrderId: order._id,
+          key: order.orderNumber,
+          OrderId: order.orderNumber,
           TableNumber: order.tableNumber,
           Total: order.totalPrice,
         }))}
         columns={columns}
       />
       <Modal
-        // eslint-disable-next-line no-underscore-dangle
-        title={`Order ${selectedOrder._id}`}
+        title={`Order ${selectedOrder.orderNumber}`}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
