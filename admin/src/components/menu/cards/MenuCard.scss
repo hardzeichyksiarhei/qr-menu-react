@@ -1,0 +1,13 @@
+.menu-availability-block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    .menu-published,
+    .menu-enabled-order {
+        display: flex;
+        align-items: center;
+        &__label {
+            margin-left: 5px;
+        }
+    }
+}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { Card, Dropdown, Menu, Image } from 'antd'
+import { Card, Dropdown, Menu, Image, Switch } from 'antd'
 
 import { EditOutlined, MenuOutlined, EyeOutlined } from '@ant-design/icons'
 
@@ -12,6 +12,8 @@ import * as menusActions from '../../../store/actions/menus'
 import menusService from '../../../services/menus'
 
 import { SERVER_URL } from '../../../config'
+
+import './MenuCard.scss'
 
 const { Meta } = Card
 
@@ -43,6 +45,7 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
 
   return (
     <Card
+      bodyStyle={{ padding: 10 }}
       cover={
         <Image
           src={
@@ -86,6 +89,14 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
       ]}
       hoverable
     >
+      <div className="menu-availability-block">
+        <div className="menu-published">
+          <div className="menu-published__switch">
+            <Switch defaultChecked={menu.isPublished} />
+          </div>
+          <div className="menu-published__label">PUBLISHED</div>
+        </div>
+      </div>
       <Meta
         title={menu.title}
         description={`${menu.categories.length} categories, ${numberItems} items`}
