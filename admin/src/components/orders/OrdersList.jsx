@@ -1,87 +1,92 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Table, PageHeader, Select, Spin, Empty, Space, Button } from 'antd'
+import { Table, PageHeader, Select, Spin, Empty, Space, Button, Modal, List } from 'antd'
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
 
 const { Option } = Select
 
-// const dataSource = [
-// {
-//   OrderId: 1,
-//   Created: '3 days ago',
-//   Customer: 'Robert Vawer',
-//   Total: 303,
-//   Profit: 134,
-//   Status: 'Pending',
-// },
-// ]
-
-const columns = [
-  {
-    title: 'Order ID',
-    dataIndex: 'OrderId',
-    key: 'OrderId',
-  },
-  {
-    title: 'Created',
-    dataIndex: 'Created',
-    key: 'Created',
-  },
-  {
-    title: 'Table number',
-    dataIndex: 'TableNumber',
-    key: 'TableNumber',
-  },
-  {
-    title: 'Total',
-    dataIndex: 'Total',
-    key: 'Total',
-  },
-  {
-    title: 'Profit',
-    dataIndex: 'Profit',
-    key: 'Profit',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'Status',
-    key: 'Status',
-    render: () => (
-      <Select style={{ width: '120px' }} defaultValue="New">
-        <Option value="New" key="New">
-          New
-        </Option>
-        <Option value="Pending" key="Pending">
-          Pending
-        </Option>
-        <Option value="Confirmed" key="Confirmed">
-          Confirmed
-        </Option>
-        <Option value="Cancelled" key="Cancelled">
-          Cancelled
-        </Option>
-      </Select>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: () => (
-      <Space size="middle">
-        <Button>
-          <EyeOutlined />
-        </Button>
-        <Button>
-          <DeleteOutlined />
-        </Button>
-      </Space>
-    ),
-  },
-]
-
 const OrdersList = ({ orders, isOrdersLoading }) => {
   const intl = useIntl()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [selectedOrder, setSelectedOrder] = useState({})
+  const [selectedOrderList, setSelectedOrderList] = useState([])
+
+  const showModal = (orderId) => {
+    // eslint-disable-next-line no-underscore-dangle
+    const order = orders.find((el) => el._id === orderId)
+    setSelectedOrder(order)
+    setSelectedOrderList(order.list)
+    setIsModalVisible(true)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
+  const columns = [
+    {
+      title: 'Order Id',
+      dataIndex: 'OrderId',
+      key: 'OrderId',
+    },
+    {
+      title: 'Created',
+      dataIndex: 'Created',
+      key: 'Created',
+    },
+    {
+      title: 'Table number',
+      dataIndex: 'TableNumber',
+      key: 'TableNumber',
+    },
+    {
+      title: 'Total',
+      dataIndex: 'Total',
+      key: 'Total',
+    },
+    {
+      title: 'Profit',
+      dataIndex: 'Profit',
+      key: 'Profit',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'Status',
+      key: 'Status',
+      render: () => (
+        <Select style={{ width: '120px' }} defaultValue="New">
+          <Option value="New" key="New">
+            New
+          </Option>
+          <Option value="Pending" key="Pending">
+            Pending
+          </Option>
+          <Option value="Confirmed" key="Confirmed">
+            Confirmed
+          </Option>
+          <Option value="Cancelled" key="Cancelled">
+            Cancelled
+          </Option>
+        </Select>
+      ),
+    },
+    {
+      title: 'Action',
+      dataIndex: 'Action',
+      key: 'Action',
+      render: (__, record) => (
+        <Space size="middle">
+          <Button key="show_modal" onClick={() => showModal(record.OrderId)}>
+            <EyeOutlined />
+          </Button>
+          <Button key="delete_order">
+            <DeleteOutlined />
+          </Button>
+        </Space>
+      ),
+    },
+  ]
 
   if (!orders.length && isOrdersLoading) {
     return (
@@ -95,28 +100,35 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
     return <Empty />
   }
 
-  // const dataSource = orders.map((order) => ({
-  //   OrderId: order.id,
-  //   Created: order.createdAt,
-  //   TableNumber: order.tableNumber,
-  //   Total: order.totalPrice,
-  // }))
-
   return (
     <>
       <PageHeader ghost={false} title={intl.formatMessage({ id: 'Orders' })} />
-
       <Table
         bordered
         dataSource={orders.map((order) => ({
           // eslint-disable-next-line no-underscore-dangle
           key: order._id,
-          Created: order.createdAt,
+          // eslint-disable-next-line no-underscore-dangle
+          OrderId: order._id,
           TableNumber: order.tableNumber,
           Total: order.totalPrice,
         }))}
         columns={columns}
       />
+      <Modal
+        // eslint-disable-next-line no-underscore-dangle
+        title={`Order ${selectedOrder._id}`}
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <List
+          size="large"
+          header={<div>List:</div>}
+          dataSource={selectedOrderList.map((order) => `${order.name} | x${order.quantity}`)}
+          renderItem={(item) => <List.Item>{item}</List.Item>}
+        />
+      </Modal>
     </>
   )
 }
