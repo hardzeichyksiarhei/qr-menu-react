@@ -13,6 +13,8 @@ module.exports.save = catchErrors(async (req, res) => {
     totalPrice,
   }).save()
 
+  req.io.to(userId).emit('ROOM:ADD_ORDER', createdOrder)
+
   return res
     .status(StatusCodes.CREATED)
     .json({ orderId: createdOrder.id, message: 'order was created' })
