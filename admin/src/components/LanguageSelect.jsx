@@ -17,7 +17,6 @@ const LanguageSelect = () => {
     <Select
       defaultValue={language === 'en' ? 'English' : 'Russian'}
       onChange={changeLanguage}
-      size="large"
       style={{ width: 120 }}
     >
       <Option value="en">English</Option>

@@ -1,4 +1,6 @@
 @import "~antd/dist/antd.css";
+
+@import "variables";
 @import "./devices/mobile";
 @import "./devices/tablet";
 
@@ -82,16 +84,61 @@
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    &__logo {
-        font-size: 24px;
+    .trigger {
+        font-size: 22px;
+        margin-right: 20px;
     }
 }
 
 .left-navigation {
-    &__item {
-        &--create-menu {
-            background-color: #e6f7ff;
+    a,
+    span {
+        color: #fff !important;
+        &.anticon {
+            font-size: 18px;
         }
+    }
+    &__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 64px;
+        font-size: 22px;
+        margin-bottom: 0;
+        line-height: 1;
+        color: #fff;
+        span {
+            margin-left: 10px;
+        }
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+    }
+    &__create-menu {
+        width: calc(100% - 32px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        background-color: $primary-color;
+        border-color: $primary-color;
+        margin: 15px !important;
+        padding: 0 !important;
+        transition: 0.25 all ease;
+        text-transform: uppercase;
+        &:hover,
+        &:focus {
+            background-color: darken($primary-color, 10%) !important;
+        }
+    }
+}
+
+/* Popover Navifation */
+.popover-navigation {
+    width: 300px;
+    .ant-popover-inner-content {
+        padding: 0;
     }
 }
 
