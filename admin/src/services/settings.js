@@ -7,6 +7,11 @@ const getSettings = async () => {
   return status === 200 && data ? data : null
 }
 
+const getFieldsSettings = async (fields = []) => {
+  const { data, status } = await axios.post(`${API_URL}/settings`, { fields })
+  return status === 200 && data ? data : null
+}
+
 const saveSettings = async (settings) => {
   const { data, status } = await axios.patch(`${API_URL}/settings`, settings)
   return status === 200 && data ? data : null
@@ -14,5 +19,6 @@ const saveSettings = async (settings) => {
 
 export default {
   getSettings,
+  getFieldsSettings,
   saveSettings,
 }

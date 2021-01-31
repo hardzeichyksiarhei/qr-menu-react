@@ -3,6 +3,8 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import * as types from '../types/auth'
 import * as actions from '../actions/auth'
 
+import * as appActions from '../actions/app'
+
 import * as userService from '../../services/users'
 import * as authService from '../../services/auth'
 
@@ -17,6 +19,9 @@ export function* fetchUser() {
     yield put(actions.requestedUser())
     const user = yield call(asyncUser)
     yield put(actions.requestedUserSuccess(user))
+
+    // Fetch Settings
+    yield put(appActions.fetchSettings())
   } catch (error) {
     const { data } = error.response
     yield put(actions.requestedUserError(data.message))
