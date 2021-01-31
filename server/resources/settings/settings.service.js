@@ -13,8 +13,6 @@ exports.getFieldsByUserId = async (userId, fields = []) => {
 exports.create = async (payload) => new Settings(payload).save()
 
 exports.update = async (userId, payload) => {
-  console.log(payload)
   const settings = Settings.findOneAndUpdate({ userId }, payload, { new: true })
-  console.log(settings.supplierSettings)
   return settings
 }

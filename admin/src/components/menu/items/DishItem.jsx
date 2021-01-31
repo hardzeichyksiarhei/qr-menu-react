@@ -87,7 +87,7 @@ const DishItem = ({ dish, onAction }) => {
         <div className="dish-item__price">
           <b>
             {dish.priceValue
-              ? `${dish.priceValue}&nbsp;${menu.priceCurrency || defaultCurrency}`
+              ? `${dish.priceValue} ${menu.priceCurrency || defaultCurrency}`
               : 'Free'}
           </b>
         </div>
