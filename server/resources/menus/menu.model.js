@@ -27,8 +27,10 @@ const categorySchema = new Schema({
 const menuSchema = new Schema(
   {
     userId: { type: Types.ObjectId, ref: 'User' },
-    isPublished: { type: Boolean },
-    isEnabledToOrder: { type: Boolean },
+    isPublished: { type: Boolean, default: true },
+    isEnabledToOrder: { type: Boolean, default: true },
+    isPriceVisible: { type: Boolean, default: true },
+    isEnergyVisible: { type: Boolean, default: true },
     title: { type: String, default: 'New menu' },
     internalComment: { type: String },
     photo: { type: photoSchema, default: null },

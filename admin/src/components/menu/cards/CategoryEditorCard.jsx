@@ -65,7 +65,7 @@ const CategoryEditorCard = ({ editCategory, onAction }) => {
             <Space>
               <Button onClick={handleClickCancel}>Cancel</Button>
               <Button type="primary" htmlType="submit">
-                Save
+                Ok
               </Button>
             </Space>
           </div>

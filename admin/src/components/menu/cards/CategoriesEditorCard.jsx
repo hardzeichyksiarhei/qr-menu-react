@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Card, Button, Spin, Modal, Empty } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
 import { ReactSortable } from 'react-sortablejs'
 
@@ -88,7 +89,11 @@ const CategoriesEditorCard = () => {
       <Card
         title={<h3 className="mb-0">Categories</h3>}
         extra={
-          <Button type="primary" onClick={() => handleActionCategory('category:create')}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => handleActionCategory('category:create')}
+          >
             Add new
           </Button>
         }
