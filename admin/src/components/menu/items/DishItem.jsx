@@ -69,8 +69,8 @@ const DishItem = ({ dish, onAction }) => {
         <div className="dish-item__description">{dish.description}</div>
         <div className="dish-item__meta">
           {dish.ingredients.length ? <span>{dish.ingredients.length} ingredients</span> : null}
-
           {dish.tags.length ? <span>{dish.tags.length} tags</span> : null}
+          {dish.allergens.length ? <span>{dish.allergens.length} allergens</span> : null}
         </div>
       </div>
       <div className="dish-item__actions">

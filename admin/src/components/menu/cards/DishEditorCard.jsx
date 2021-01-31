@@ -10,7 +10,7 @@ import ImagesManagement from '../../images/ImagesManagement'
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
-import { INGREDIENTS, TAGS } from '../../../default/menus.default'
+import { INGREDIENTS, TAGS, ALLERGENS } from '../../../default/menus.default'
 
 import './DishEditorCard.scss'
 
@@ -39,7 +39,8 @@ const DishEditorCard = ({ editDish, onAction }) => {
   useEffect(() => {
     if (editDish) {
       const tags = editDish.tags.map((tag) => tag.id)
-      dishEditorForm.setFieldsValue({ ...editDish, tags })
+      const allergens = editDish.allergens.map((allergen) => allergen.number)
+      dishEditorForm.setFieldsValue({ ...editDish, tags, allergens })
     }
   }, [dishEditorForm, editDish])
 
@@ -60,15 +61,25 @@ const DishEditorCard = ({ editDish, onAction }) => {
       [],
     )
 
+    const allergens = dish.allergens.reduce(
+      (acc, allergenNumber) => [
+        ...acc,
+        ALLERGENS.find((allergen) => allergen.number === allergenNumber),
+      ],
+      [],
+    )
+
     switch (true) {
       // Edit & Change CategoryId
       case isEdit && selectedCategoryId !== categoryId:
         dispatch(menuActions.deleteDish(selectedCategoryId, editDish.id))
-        dispatch(menuActions.addDish(categoryId, { ...dish, tags }))
+        dispatch(menuActions.addDish(categoryId, { ...dish, tags, allergens }))
         break
       // Edit & NOT Change CategoryId
       case isEdit && selectedCategoryId === categoryId:
-        dispatch(menuActions.updateDish(selectedCategoryId, editDish.id, { ...dish, tags }))
+        dispatch(
+          menuActions.updateDish(selectedCategoryId, editDish.id, { ...dish, tags, allergens }),
+        )
         break
       // NOT Edit
       case !isEdit:
@@ -77,6 +88,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
             ...dishSchema(),
             ...dish,
             tags,
+            allergens,
             id: uuid(),
           }),
         )
@@ -126,13 +138,28 @@ const DishEditorCard = ({ editDish, onAction }) => {
           <Input />
         </Form.Item>
         <Form.Item label="Description" name="description">
-          <Input.TextArea />
+          <Input.TextArea autoSize />
         </Form.Item>
         <Form.Item label="Price" name="priceValue">
           <InputNumber min={0} />
         </Form.Item>
         <Form.Item label="Ingredients" name="ingredients">
           <Select mode="tags" options={INGREDIENTS} />
+        </Form.Item>
+        <Form.Item label="Allergens" name="allergens">
+          <Select className="allergens-list" mode="multiple">
+            {ALLERGENS.map((allergen) => (
+              <Select.Option
+                className="allergens-item"
+                value={allergen.number}
+                key={allergen.number}
+              >
+                <div className="allergens-item-content">
+                  <span>{allergen.number}</span> - <span>{allergen.label}</span>
+                </div>
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item label="Tags" name="tags">
           <Select className="tags-list" mode="multiple">

@@ -102,6 +102,7 @@ const DishesEditorCard = () => {
         footer={null}
         closable={false}
         destroyOnClose
+        centered
       >
         <DishEditorCard editDish={editDish} onAction={handleActionDish} />
       </Modal>

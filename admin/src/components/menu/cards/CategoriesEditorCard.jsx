@@ -108,6 +108,7 @@ const CategoriesEditorCard = () => {
         footer={null}
         closable={false}
         destroyOnClose
+        centered
       >
         <CategoryEditorCard editCategory={editCategory} onAction={handleActionCategory} />
       </Modal>

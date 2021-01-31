@@ -13,7 +13,8 @@ const dishSchema = new Schema({
   isEnabledToOrder: { type: Boolean },
   priceValue: { type: Number, default: null },
   ingredients: [String],
-  tags: [{ type: new Schema({ id: Number, icon: String, label: String }), default: null }],
+  allergens: [{ type: new Schema({ number: Number, label: String }), default: [] }],
+  tags: [{ type: new Schema({ id: Number, icon: String, label: String }), default: [] }],
 })
 
 const categorySchema = new Schema({
