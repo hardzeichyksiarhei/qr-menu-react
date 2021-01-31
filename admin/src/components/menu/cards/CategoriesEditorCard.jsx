@@ -1,7 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Card, Button, Spin, Modal } from 'antd'
+import { Card, Button, Spin, Modal, Empty } from 'antd'
 
 import { ReactSortable } from 'react-sortablejs'
 
@@ -57,6 +58,31 @@ const CategoriesEditorCard = () => {
     }
   }
 
+  let categoryList = null
+  if (isMenuLoading) {
+    categoryList = <Spin size="large" />
+  } else if (!menuCategories.length && !isMenuLoading) {
+    categoryList = <Empty />
+  } else {
+    categoryList = (
+      <VerticalScrolling>
+        <div className="category-list">
+          <ReactSortable
+            list={menuCategories}
+            setList={handleSetCategories}
+            onUpdate={handleUpdateCategories}
+            handle=".move"
+            animation={200}
+          >
+            {menuCategories.map((category) => (
+              <CategoryItem category={category} key={category.id} onAction={handleActionCategory} />
+            ))}
+          </ReactSortable>
+        </div>
+      </VerticalScrolling>
+    )
+  }
+
   return (
     <div className="category-editor">
       <Card
@@ -72,29 +98,7 @@ const CategoriesEditorCard = () => {
             isMenuLoading ? 'category-editor__content--loading' : ''
           } ${!isMenuLoading && !menuCategories.length ? 'category-editor__content--empty' : ''}`}
         >
-          {isMenuLoading ? (
-            <Spin size="large" />
-          ) : (
-            <VerticalScrolling>
-              <div className="category-list">
-                <ReactSortable
-                  list={menuCategories}
-                  setList={handleSetCategories}
-                  onUpdate={handleUpdateCategories}
-                  handle=".move"
-                  animation={200}
-                >
-                  {menuCategories.map((category) => (
-                    <CategoryItem
-                      category={category}
-                      key={category.id}
-                      onAction={handleActionCategory}
-                    />
-                  ))}
-                </ReactSortable>
-              </div>
-            </VerticalScrolling>
-          )}
+          {categoryList}
         </div>
       </Card>
 

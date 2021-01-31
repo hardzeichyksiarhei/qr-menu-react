@@ -8,7 +8,10 @@ import { SERVER_URL } from '../../../config'
 
 const ImageItem = ({ image, isSelected, onSelectImage, onDeleteImage }) => {
   const handleClickSelect = () => onSelectImage(image)
-  const handleClickDelete = () => onDeleteImage(image.id)
+  const handleClickDelete = (event) => {
+    onDeleteImage(image.id)
+    event.stopPropagation()
+  }
 
   return (
     <div

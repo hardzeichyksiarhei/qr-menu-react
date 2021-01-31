@@ -1,7 +1,7 @@
 const Menu = require('./menu.model')
 
-exports.getAll = async (userId) => {
-  const menus = await Menu.find({ userId })
+exports.getAll = async (userId, filters = {}) => {
+  const menus = await Menu.find({ userId, ...filters }).sort({ createdAt: 'desc' })
   return menus
 }
 
