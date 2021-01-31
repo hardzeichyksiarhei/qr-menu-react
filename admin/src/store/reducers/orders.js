@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
       const { order } = action.payload
       return {
         ...state,
-        orders: [...state.orders, order],
+        orders: [order, ...state.orders],
       }
     }
 
