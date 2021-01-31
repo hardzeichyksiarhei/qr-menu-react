@@ -15,7 +15,7 @@ import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 import appSelectors from '../../../store/selectors/app'
 
-import { SERVER_URL } from '../../../config'
+import { SERVER_URL, CURRENCIES } from '../../../config'
 
 import './DishItem.scss'
 
@@ -92,7 +92,7 @@ const DishItem = ({ dish, onAction }) => {
         <div className="dish-item__price">
           <b>
             {dish.priceValue
-              ? `${dish.priceValue} ${menu.priceCurrency || defaultCurrency}`
+              ? `${dish.priceValue} ${CURRENCIES[menu.priceCurrency || defaultCurrency]}`
               : 'Free'}
           </b>
         </div>
