@@ -7,6 +7,8 @@ const Role = require('./resources/roles/role.model')
 const Settings = require('./resources/settings/settings.model')
 const Menu = require('./resources/menus/menu.model')
 
+console.log(MONGO_CONNECTION_STRING)
+
 const connectDb = () =>
   // eslint-disable-next-line implicit-arrow-linebreak
   mongoose.connect(MONGO_CONNECTION_STRING, {

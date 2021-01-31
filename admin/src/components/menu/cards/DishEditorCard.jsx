@@ -64,7 +64,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
       // Edit & Change CategoryId
       case isEdit && selectedCategoryId !== categoryId:
         dispatch(menuActions.deleteDish(selectedCategoryId, editDish.id))
-        dispatch(menuActions.addDish(dish.categoryId, { ...dish, tags }))
+        dispatch(menuActions.addDish(categoryId, { ...dish, tags }))
         break
       // Edit & NOT Change CategoryId
       case isEdit && selectedCategoryId === categoryId:
