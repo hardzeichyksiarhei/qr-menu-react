@@ -15,7 +15,7 @@ const getById = async ({ menuId }) => {
 }
 
 const save = async (menu) => {
-  const { data, status } = await axios.post(`${API_URL}/menus`, menu)
+  const { data, status } = await axios.post(`${API_URL}/menus`, { menu })
   return [200, 201].includes(status) && data ? data : null
 }
 

@@ -21,7 +21,7 @@ const dishSchema = () => ({
   isPublished: true,
   isEnabledToOrder: true,
   priceValue: null,
-  tags: [1, 2, 3],
+  tags: [],
   ingredients: [],
   allergens: [],
 })

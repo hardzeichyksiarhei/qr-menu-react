@@ -5,6 +5,7 @@ import { message } from 'antd'
 import * as types from '../types/menu'
 import * as actions from '../actions/menu'
 import menuSelectors from '../selectors/menu'
+import appSelectors from '../selectors/app'
 
 import menusService from '../../services/menus'
 
@@ -35,11 +36,15 @@ function* fetchDefaultMenu() {
 // Save Menu
 function* saveMenu() {
   const menu = yield select(menuSelectors.menu)
+  const { defaultCurrency } = yield select(appSelectors.settings)
 
   try {
     message.loading({ content: 'Save in progress...', key: 'save-menu' })
     yield put(actions.requestedSaveMenu())
-    const { menuId } = yield call(menusService.save, { menu })
+    const { menuId } = yield call(menusService.save, {
+      ...menu,
+      priceCurrency: menu.priceCurrency || defaultCurrency,
+    })
     yield put(actions.requestedSaveMenuSuccess(menuId))
     message.success({ content: 'Saved!', key: 'save-menu', duration: 2 })
   } catch (error) {

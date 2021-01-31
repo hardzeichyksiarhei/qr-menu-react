@@ -13,6 +13,7 @@ import {
 
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
+import appSelectors from '../../../store/selectors/app'
 
 import { SERVER_URL } from '../../../config'
 
@@ -20,7 +21,10 @@ import './DishItem.scss'
 
 const DishItem = ({ dish, onAction }) => {
   const dispatch = useDispatch()
+
   const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
+  const menu = useSelector(menuSelectors.menu)
+  const { defaultCurrency } = useSelector(appSelectors.settings)
 
   const handleClickDuplicateDish = () => {
     const { _id, ...copyDish } = dish
@@ -81,7 +85,11 @@ const DishItem = ({ dish, onAction }) => {
           </Space>
         </div>
         <div className="dish-item__price">
-          <b>{dish.priceValue}</b>
+          <b>
+            {dish.priceValue
+              ? `${dish.priceValue}&nbsp;${menu.priceCurrency || defaultCurrency}`
+              : 'Free'}
+          </b>
         </div>
       </div>
     </div>
