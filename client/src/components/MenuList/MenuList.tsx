@@ -19,7 +19,6 @@ function MenuList() {
   useEffect(() => {
     menu()
   }, [])
-  console.log(menus)
   return (
     <>
       {menus.map((menu) => {
