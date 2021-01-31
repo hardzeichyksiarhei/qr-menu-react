@@ -19,7 +19,7 @@ export type CategoryProps = {
   dishes: Dish[],
 }
 export type MenuProps = {
-  id: number,
+  id: string,
   title: string,
   photo: string,
   categories: CategoryProps[],
@@ -39,11 +39,11 @@ export type CardDishProps = {
 }
 export type CardCategoryProps = {
   category: CategoryProps,
-  menuId: number,
+  menuId: string,
 }
 export type MenuCategoryProps = {
   categoryMenu: CategoryProps[],
-  menuId: number,
+  menuId: string,
 
 }
 export type OrderUserProps ={

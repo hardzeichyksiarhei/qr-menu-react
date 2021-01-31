@@ -6,6 +6,12 @@
     top: 10px;
     left: 10px;
 }
+.card__image{
+    object-fit: cover;
+     width: 100%; 
+     height: 200px;
+     cursor: pointer;
+}
 .dish{
  display: none;
 }
