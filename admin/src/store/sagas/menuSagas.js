@@ -21,6 +21,17 @@ function* fetchMenu(action) {
   }
 }
 
+// Fetch Default Menu
+function* fetchDefaultMenu() {
+  try {
+    yield put(actions.requestedMenu())
+    const menu = yield call(menusService.getDefaultMenu)
+    yield put(actions.requestedMenuSuccess(menu))
+  } catch (error) {
+    yield put(actions.requestedMenuError(error.response))
+  }
+}
+
 // Save Menu
 function* saveMenu() {
   const menu = yield select(menuSelectors.menu)
@@ -39,5 +50,6 @@ function* saveMenu() {
 
 export default function* watchMenus() {
   yield takeEvery(types.FETCH_MENU, fetchMenu)
+  yield takeEvery(types.FETCH_DEFAULT_MENU, fetchDefaultMenu)
   yield takeEvery(types.SAVE_MENU, saveMenu)
 }

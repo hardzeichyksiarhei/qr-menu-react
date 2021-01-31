@@ -39,6 +39,11 @@ export const requestedMenuError = (error) => ({
   payload: { error },
 })
 
+// Fetch Default Menu
+export const fetchDefaultMenu = () => ({
+  type: types.FETCH_DEFAULT_MENU,
+})
+
 // Menu
 export const update = (menu) => ({
   type: types.UPDATE_MENU,
