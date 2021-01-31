@@ -8,11 +8,13 @@ const { Title } = Typography
 
 function CardCategory({ category, menuId }: CardCategoryProps) {
   const [dishClass, setDishClass] = useState('dish')
+
   function clickCategory() {
     if (dishClass === 'dish') {
       return setDishClass('dish_visable')
     } else return setDishClass('dish')
   }
+
   return (
     <Card
       className="category"
@@ -20,7 +22,6 @@ function CardCategory({ category, menuId }: CardCategoryProps) {
       cover={
         <img
           className="card__image"
-          style={{ width: '100%', height: '200px', cursor: 'pointer' }}
           alt={category.title}
           src={category.photo}
           onClick={clickCategory}
@@ -33,7 +34,7 @@ function CardCategory({ category, menuId }: CardCategoryProps) {
         dataSource={category.dishes}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
-            <NavLink to={`/menu=${menuId}/dish=${item.id}`}>
+            <NavLink to={`/menu=${menuId}/category=${category.id}/dish=${item.id}`}>
               <CardDish key={item.title} dish={item} />
             </NavLink>
           </List.Item>

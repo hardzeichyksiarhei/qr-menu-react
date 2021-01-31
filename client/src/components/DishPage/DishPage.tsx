@@ -1,34 +1,47 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Header from '../Header/Header'
 import MenuDish from '../MenuDish/MenuDish'
-import { MENUS } from '../../MENU/MENU'
-import { Dish, OrderUserProps } from '../../utils/propsComponents'
+import menusService from '../../services/menus'
+import { Dish, MenuProps, OrderUserProps } from '../../utils/propsComponents'
 import MenuBar from '../Navigation/Navigation'
 import { renderCountOrderDish } from '../../utils/renderCountOrderDish'
+import { useParams } from 'react-router-dom'
 
 function DishPage() {
   const [orderUser, setOrderUser] = useState<OrderUserProps[]>(
     JSON.parse(localStorage.getItem('orderUser') || '[]'),
   )
-  // let orderUser
   const [countOrderDish, setCountOrderDish] = useState(0)
-  const search = window.location.pathname
-    .substr(1)
-    .split('/')
-    .reduce(function (res: any, a) {
-      const t = a.split('=')
-      res[decodeURIComponent(t[0])] = t.length === 1 ? null : decodeURIComponent(t[1])
-      return res
-    }, {})
-  const category: any = MENUS.find((item) => item.id === +search.menu)
-  let dish: any
-  category.categories.forEach((item: any) => {
-    item.dishes.forEach((item: Dish) => {
-      if (item.id === search.dish) {
-        return (dish = item)
-      }
-    })
-  })
+  const [menus, setMenus] = useState<MenuProps[]>([])
+  const getMenus = async () => {
+    await menusService
+      .getById('6000a32e85ed5f1094076150')
+      .then((menu) => {
+        setMenus(menu)
+      })
+      .catch(() => {
+        console.log('Не удалось загрузить меню')
+      })
+  }
+  useEffect(() => {
+    getMenus()
+  }, [])
+  const { menuId, categoryId, dishId } = useParams()
+  useEffect(() => {
+    setCountOrderDish(renderCountOrderDish(orderUser))
+  }, [orderUser])
+
+  const menu = useMemo<MenuProps | undefined>(() => {
+    return menus.find((item) => item.id === menuId)
+  }, [menus, menuId])
+  const dish = useMemo<Dish | undefined>(() => {
+    if (!menu) {
+      return undefined
+    }
+    return menu.categories
+      .find((category) => category.id === categoryId)
+      ?.dishes.find((dish) => dish.id === dishId)
+  }, [menu, categoryId, dishId])
   const saveOrder = useCallback(() => {
     localStorage.setItem('orderUser', JSON.stringify(orderUser))
   }, [orderUser])
@@ -58,7 +71,7 @@ function DishPage() {
   return (
     <>
       <Header countOrder={countOrderDish} />
-      <MenuDish dish={dish} addDish={addDish} />
+      {dish && <MenuDish dish={dish} addDish={addDish} />}
       <MenuBar />
     </>
   )
