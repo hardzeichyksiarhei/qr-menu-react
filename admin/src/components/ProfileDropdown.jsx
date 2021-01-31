@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { Dropdown, Menu, Button, Grid } from 'antd'
 import { UserOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons'
@@ -13,7 +14,7 @@ const { useBreakpoint } = Grid
 const getProfileMenu = (user, logout) => (
   <Menu className="profile-menu">
     <Menu.Item className="profile-menu__item" key="1" icon={<SettingOutlined />}>
-      {translate('Settings')}
+      <Link to="/settings">{translate('Settings')}</Link>
     </Menu.Item>
     <Menu.Item className="profile-menu__item" key="2" icon={<LogoutOutlined />} onClick={logout}>
       {translate('Logout')}

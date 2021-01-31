@@ -2,6 +2,11 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 
+const app = express()
+
+const http = require('http').createServer(app)
+const SocketIO = require('socket.io')
+
 const { auth } = require('./middlewares')
 const i18n = require('./i18n')
 
@@ -18,9 +23,7 @@ const menuPublicRouter = require('./resources/menus/menu.public.router')
 const QRCodePublicRouter = require('./resources/qr-code/qr-code.public.router')
 const ordersPublicRouter = require('./resources/orders/orders.public.router')
 
-const app = express()
-const http = require('http').createServer(app)
-const io = require('socket.io')(http, {
+const io = SocketIO(http, {
   cors: {
     origin: CLIENT_URL,
     methods: ['GET', 'POST'],

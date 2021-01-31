@@ -57,6 +57,7 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
 
   return (
     <Card
+      className="menu-card"
       bodyStyle={{ padding: 10 }}
       cover={
         <Image

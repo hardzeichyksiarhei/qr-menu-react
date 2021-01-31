@@ -1,3 +1,9 @@
+.menu-card {
+    &:hover {
+        cursor: default !important;
+    }
+}
+
 .menu-availability-block {
     display: flex;
     align-items: center;

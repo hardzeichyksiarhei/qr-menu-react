@@ -1,3 +1,5 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 const { PORT } = require('./helpers/config')
 
 const http = require('./app')

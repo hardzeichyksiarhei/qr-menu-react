@@ -4,10 +4,18 @@ const catchErrors = require('../../helpers/catchErrors')
 
 const settingsService = require('./settings.service')
 
-module.exports.get = catchErrors(async (req, res) => {
+module.exports.getByUserId = catchErrors(async (req, res) => {
   const { user } = req
 
   const settings = await settingsService.getByUserId(user.id)
+  return res.status(StatusCodes.OK).json(settings)
+})
+
+module.exports.getFieldsByUserId = catchErrors(async (req, res) => {
+  const { user } = req
+  const { fields } = req.body
+
+  const settings = await settingsService.getFieldsByUserId(user.id, fields)
   return res.status(StatusCodes.OK).json(settings)
 })
 
