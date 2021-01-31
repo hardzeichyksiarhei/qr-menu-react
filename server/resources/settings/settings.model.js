@@ -2,7 +2,7 @@ const { Schema, Types, model } = require('mongoose')
 
 const regionSettingsSchema = new Schema({
   country: { type: String, default: null },
-  currency: { type: String, default: null },
+  currency: { type: String, default: 'USD' },
   timeFormat: { type: Number, default: 24 },
 })
 
@@ -17,16 +17,6 @@ const dayHourSchema = new Schema({
   timeWindows: [{ type: timeWindowsSchema, default: [] }],
 })
 
-const DEFAULT_OPEN_HOURS = [
-  { day: 0, dayCode: 'sun' },
-  { day: 1, dayCode: 'mon' },
-  { day: 2, dayCode: 'tue' },
-  { day: 3, dayCode: 'wed' },
-  { day: 4, dayCode: 'thu' },
-  { day: 5, dayCode: 'fri' },
-  { day: 6, dayCode: 'sat' },
-]
-
 const supplierSchema = new Schema({
   restaurantName: { type: String, default: null },
   companyName: { type: String, default: null },
@@ -39,7 +29,22 @@ const supplierSchema = new Schema({
   website: { type: String, default: null },
   address: { type: String, default: null },
   googleMapsLink: { type: String, default: null },
-  openHours: [{ type: dayHourSchema, default: DEFAULT_OPEN_HOURS }],
+  openHours: [{ type: dayHourSchema, default: [] }],
+})
+
+supplierSchema.pre('save', function (next) {
+  if (this.openHours.length === 0) {
+    this.openHours = [
+      { day: 0, dayCode: 'sun' },
+      { day: 1, dayCode: 'mon' },
+      { day: 2, dayCode: 'tue' },
+      { day: 3, dayCode: 'wed' },
+      { day: 4, dayCode: 'thu' },
+      { day: 5, dayCode: 'fri' },
+      { day: 6, dayCode: 'sat' },
+    ]
+  }
+  next()
 })
 
 const settingsSchema = new Schema(
