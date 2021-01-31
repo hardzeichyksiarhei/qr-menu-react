@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -19,6 +19,7 @@ const { Meta } = Card
 
 const MenuCard = ({ menu, onShowPreviewDrawer }) => {
   const dispatch = useDispatch()
+  const [isPublishedLoading, setIsPublishedLoading] = useState(false)
 
   const numberItems = menu.categories.reduce((acc, curr) => acc + curr.dishes.length, 0)
 
@@ -41,6 +42,17 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
   const handleClickDeleteMenu = async () => {
     await menusService.deleteById(menu.id)
     dispatch(menusActions.deleteMenu(menu.id))
+  }
+
+  const handleChangePublishedMenu = async (isPublished) => {
+    setIsPublishedLoading(true)
+    const payload = {
+      isPublished,
+      isEnabledToOrder: isPublished ? menu.isEnabledToOrder : false,
+    }
+    await menusService.updateById(menu.id, payload)
+    dispatch(menusActions.updateMenu(menu.id, payload))
+    setIsPublishedLoading(false)
   }
 
   return (
@@ -90,11 +102,17 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
       hoverable
     >
       <div className="menu-availability-block">
-        <div className="menu-published">
+        <div className={`menu-published ${menu.isPublished ? 'published' : 'unpublished'}`}>
           <div className="menu-published__switch">
-            <Switch defaultChecked={menu.isPublished} />
+            <Switch
+              defaultChecked={menu.isPublished}
+              loading={isPublishedLoading}
+              onChange={handleChangePublishedMenu}
+            />
           </div>
-          <div className="menu-published__label">PUBLISHED</div>
+          <div className="menu-published__label">
+            {menu.isPublished ? 'Published' : 'Unpublished'}
+          </div>
         </div>
       </div>
       <Meta
