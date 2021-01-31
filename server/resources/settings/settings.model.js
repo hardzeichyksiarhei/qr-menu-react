@@ -11,29 +11,10 @@ const timeWindowsSchema = new Schema({
   end: { type: String, default: null },
 })
 
-const openHoursSchema = new Schema({
-  0: {
-    dayCode: { type: String, default: 'Sunday' },
-    timeWindows: [{ type: timeWindowsSchema }],
-  },
-  1: {
-    dayCode: { type: String, default: 'Monday' },
-  },
-  2: {
-    dayCode: { type: String, default: 'Tuesday' },
-  },
-  3: {
-    dayCode: { type: String, default: 'Wednesday' },
-  },
-  4: {
-    dayCode: { type: String, default: 'Thursday' },
-  },
-  5: {
-    dayCode: { type: String, default: 'Friday' },
-  },
-  6: {
-    dayCode: { type: String, default: 'Saturday' },
-  },
+const dayHourSchema = new Schema({
+  day: Number,
+  dayCode: String,
+  timeWindows: [{ type: timeWindowsSchema, default: [] }],
 })
 
 const supplierSchema = new Schema({
@@ -48,7 +29,22 @@ const supplierSchema = new Schema({
   website: { type: String, default: null },
   address: { type: String, default: null },
   googleMapsLink: { type: String, default: null },
-  openHours: { type: openHoursSchema, default: () => ({}) },
+  openHours: [{ type: dayHourSchema, default: [] }],
+})
+
+supplierSchema.pre('save', function (next) {
+  if (this.openHours.length === 0) {
+    this.openHours = [
+      { day: 0, dayCode: 'sun' },
+      { day: 1, dayCode: 'mon' },
+      { day: 2, dayCode: 'tue' },
+      { day: 3, dayCode: 'wed' },
+      { day: 4, dayCode: 'thu' },
+      { day: 5, dayCode: 'fri' },
+      { day: 6, dayCode: 'sat' },
+    ]
+  }
+  next()
 })
 
 const settingsSchema = new Schema(
