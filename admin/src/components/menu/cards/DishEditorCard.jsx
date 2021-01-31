@@ -10,6 +10,8 @@ import ImagesManagement from '../../images/ImagesManagement'
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
+import { INGREDIENTS, TAGS } from '../../../default/menus.default'
+
 import './DishEditorCard.scss'
 
 const dishSchema = () => ({
@@ -25,20 +27,6 @@ const dishSchema = () => ({
   ingredients: [],
   allergens: [],
 })
-
-const TAGS = [
-  { id: 1, icon: '🌾', label: 'Gluten-free' },
-  { id: 2, icon: '☘️', label: 'Bio' },
-  { id: 3, icon: '🥑', label: 'Suitable for vegetarians' },
-  { id: 4, icon: '🥦', label: 'Suitable for vegans' },
-  { id: 5, icon: '🌶️', label: 'Slightly hot' },
-  { id: 6, icon: '🌶️🌶️', label: 'Hot' },
-  { id: 7, icon: '🌶️🌶️🌶️', label: 'Very hot' },
-  { id: 8, icon: '☪️', label: 'Halal' },
-  { id: 9, icon: '✡️', label: 'Kosher' },
-  { id: 10, icon: '🥩', label: 'Real meat!' },
-  { id: 11, icon: '🐷', label: 'Pork' },
-]
 
 const DishEditorCard = ({ editDish, onAction }) => {
   const dispatch = useDispatch()
@@ -125,7 +113,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
         <Form.Item label="Title" name="title" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name="categoryId" label="Category">
+        <Form.Item name="categoryId" label="Category" rules={[{ required: true }]}>
           <Select>
             {menuCategories.map((category) => (
               <Select.Option value={category.id} key={category.id}>
@@ -144,7 +132,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
           <InputNumber min={0} />
         </Form.Item>
         <Form.Item label="Ingredients" name="ingredients">
-          <Select mode="tags" />
+          <Select mode="tags" options={INGREDIENTS} />
         </Form.Item>
         <Form.Item label="Tags" name="tags">
           <Select className="tags-list" mode="multiple">
