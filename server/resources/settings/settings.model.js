@@ -2,7 +2,7 @@ const { Schema, Types, model } = require('mongoose')
 
 const regionSettingsSchema = new Schema({
   country: { type: String, default: null },
-  currency: { type: String, default: null },
+  currency: { type: String, default: 'USD' },
   timeFormat: { type: Number, default: 24 },
 })
 
