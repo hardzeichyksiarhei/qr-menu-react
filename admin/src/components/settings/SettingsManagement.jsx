@@ -34,7 +34,7 @@ const SettingsManagement = () => {
   const changeField = (field, subField, value) => {
     dispatch(updateSettings(settings, field, subField, value))
   }
-
+  console.log(settings)
   const saveChanges = () => {
     dispatch(saveSettings())
   }
