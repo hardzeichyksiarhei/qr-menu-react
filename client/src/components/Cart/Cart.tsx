@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { List, Button, Typography } from 'antd'
-import { CartProps } from '../../utils/propsComponents'
+import { CartProps, OrderUserProps } from '../../utils/propsComponents'
 import OrderedDish from '../OrderedDish/OrderedDish'
 import './Cart.scss'
 
 const { Title } = Typography
 function Cart({ orederUser, dishCountIncrease, dishCountReduce, deleteDish }: CartProps) {
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const calcTotalPrice = (orederUser: OrderUserProps[]) => {
+    let sum: number = 0
+    orederUser.forEach((item) => {
+      sum = sum + item.count * item.dish.priceValue
+    })
+    return sum
+  }
+  useEffect(() => {
+    setTotalPrice(calcTotalPrice(orederUser))
+  }, [orederUser])
   return (
     <>
       <h2>YOUR ORDER</h2>
@@ -26,7 +37,8 @@ function Cart({ orederUser, dishCountIncrease, dishCountReduce, deleteDish }: Ca
         )}
       />
       <Title level={4} className="cart__title">
-        Total: {}
+        <span>Total:</span>
+        <span>{totalPrice} USD</span>
       </Title>
 
       <Button>I`m inside the place</Button>

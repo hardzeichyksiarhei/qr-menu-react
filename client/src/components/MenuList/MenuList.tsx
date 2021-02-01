@@ -11,6 +11,7 @@ function MenuList() {
   const menu = async () => {
     await menusService
       .getById(userId)
+
       .then((menu) => {
         setMenus(menu)
       })
