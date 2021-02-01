@@ -1,7 +1,10 @@
 .dashboard-grid {
     display: grid;
-    grid-template-areas: "a b b c";
+    grid-template-areas:
+        "a b b c"
+        "d d d d";
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 360px;
     gap: 20px;
 }
 
@@ -12,24 +15,26 @@
     &--create-menu {
         grid-area: b;
     }
+    &--empty {
+        grid-area: c;
+    }
+    &--orders-stats {
+        grid-area: d;
+    }
 }
 
 @media screen and (max-width: 1600px) {
     .dashboard-grid {
         grid-template-areas:
             "a b b"
-            "c . .";
+            "d d d";
         grid-template-columns: repeat(3, 1fr);
     }
-}
 
-@media screen and (max-width: 991px) {
-    .dashboard-grid {
-        grid-template-areas:
-            "b b"
-            "a c";
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 300px;
+    .dashboard-col {
+        &--empty {
+            display: none;
+        }
     }
 }
 
@@ -41,11 +46,6 @@
     }
 
     .dashboard-col {
-        &--qr-code {
-            grid-area: auto;
-        }
-        &--create-menu {
-            grid-area: auto;
-        }
+        grid-area: auto;
     }
 }
