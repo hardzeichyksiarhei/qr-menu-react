@@ -6,6 +6,11 @@ module.exports.getAll = catchErrors(async (req, res) => {
   const { id: userId } = req.user
 
   const orders = await Orders.find({ userId })
+
+  if (orders) {
+    orders.reverse()
+  }
+
   return res.status(StatusCodes.OK).json(orders)
 })
 

@@ -14,4 +14,11 @@ module.exports = {
       label: 'Русский',
     },
   ],
+
+  CURRENCIES: {
+    BYN: 'BYN',
+    USD: '$',
+    EUR: '€',
+    CZK: 'Kč',
+  },
 }

@@ -9,14 +9,16 @@ import settingsService from '../../services/settings'
 function* fetchSettings() {
   try {
     yield put(actions.requestedSettings())
-    const { regionSettings } = yield call(settingsService.getFieldsSettings, [
+    const { regionSettings, supplierSettings } = yield call(settingsService.getFieldsSettings, [
       'regionSettings.timeFormat',
       'regionSettings.currency',
+      'supplierSettings.restaurantName',
     ])
     yield put(
       actions.requestedSettingsSuccess({
         timeFormat: regionSettings.timeFormat,
         defaultCurrency: regionSettings.currency,
+        restaurantName: supplierSettings.restaurantName,
       }),
     )
   } catch (error) {

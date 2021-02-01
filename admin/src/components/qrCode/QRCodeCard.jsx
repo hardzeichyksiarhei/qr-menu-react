@@ -5,7 +5,7 @@ import { DownloadOutlined, EyeOutlined } from '@ant-design/icons'
 
 import translate from '../../intl/translate'
 
-import { API_URL } from '../../config'
+import { API_URL, CLIENT_URL } from '../../config'
 
 import './QRCodeCard.scss'
 
@@ -28,14 +28,12 @@ const QRCodeCard = () => {
         <Image width="100%" src={`${qrCodeUrl}`} />
       </div>
       <div className="qr-code-actions">
-        <Button
-          type="primary"
-          icon={<DownloadOutlined className="mr-05" />}
-          onClick={downloadQRCode}
-        >
-          {translate('Download')}
+        <Button type="primary" icon={<DownloadOutlined />} onClick={downloadQRCode}>
+          <span>{translate('Download')}</span>
         </Button>
-        <Button icon={<EyeOutlined className="mr-05" />}>View</Button>
+        <Button href={`${CLIENT_URL}/${userId}`} target="_blank" icon={<EyeOutlined />}>
+          <span>View</span>
+        </Button>
       </div>
     </Card>
   )

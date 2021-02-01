@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import socket from '../socket'
 
 import * as authActions from '../store/actions/auth'
 
@@ -37,6 +38,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = useCallback(() => {
     dispatch(authActions.logout())
+    socket.emit('ROOM:LEAVE', localStorage.getItem('userId'))
   }, [dispatch])
 
   return (
