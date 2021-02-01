@@ -82,7 +82,6 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
   }
 
   const onChangeTimeWindows = (changerOpenHours) => {
-    console.log(openHours)
     setField('openHours', changerOpenHours)
   }
 

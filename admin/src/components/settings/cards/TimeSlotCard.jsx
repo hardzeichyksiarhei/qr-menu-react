@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'

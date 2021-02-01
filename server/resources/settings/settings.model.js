@@ -58,4 +58,11 @@ const settingsSchema = new Schema(
 
 const Settings = model('Settings', settingsSchema)
 
+timeWindowsSchema.virtual('id').get(function () {
+  // eslint-disable-next-line no-underscore-dangle
+  return this._id.toHexString()
+})
+
+timeWindowsSchema.set('toJSON', { virtuals: true })
+
 module.exports = Settings
