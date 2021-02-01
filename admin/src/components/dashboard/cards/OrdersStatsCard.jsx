@@ -4,6 +4,8 @@ import { Card } from 'antd'
 
 import { Chart } from 'react-charts'
 
+import translate from '../../../intl/translate'
+
 import './OrdersStatsCard.scss'
 
 const OrdersStatsCard = () => {
@@ -37,7 +39,7 @@ const OrdersStatsCard = () => {
 
   return (
     <Card className="orders-stats-card" bodyStyle={{ padding: '10px 20px' }} hoverable>
-      <h3 className="orders-stats-card__title">Orders history</h3>
+      <h3 className="orders-stats-card__title">{translate('HistoryOrders')}</h3>
       <div
         style={{
           height: '300px',
