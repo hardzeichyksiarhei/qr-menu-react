@@ -1,14 +1,21 @@
 import React from 'react'
-import { Row, Col } from 'antd'
+
+// import { Row, Col } from 'antd'
 
 import QRCodeCard from '../components/qrCode/QRCodeCard'
+import CreateCardMenu from '../components/dashboard/cards/CreateCardMenu'
+
+import './Dashboard.scss'
 
 const Dashboard = () => (
-  <Row>
-    <Col span={24} xl={6} md={12} sm={24}>
+  <div className="dashboard-grid">
+    <div className="dashboard-col dashboard-col--qr-code">
       <QRCodeCard />
-    </Col>
-  </Row>
+    </div>
+    <div className="dashboard-col dashboard-col--create-menu">
+      <CreateCardMenu />
+    </div>
+  </div>
 )
 
 export default Dashboard

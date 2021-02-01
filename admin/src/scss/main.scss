@@ -75,7 +75,7 @@
     &__content {
         background-color: #fff;
         padding: 24px;
-        margin: 0;
+        margin: 24px;
     }
 }
 
@@ -148,4 +148,16 @@
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+}
+
+/* Media */
+@media screen and (max-width: 576px) {
+    /* Default Layout */
+    .default-layout {
+        &__content {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px;
+        }
+    }
 }

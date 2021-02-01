@@ -128,7 +128,7 @@ const Default = () => {
             </Space>
           </div>
         </Header>
-        <Content className="default-layout__content" style={{ margin: '24px' }}>
+        <Content className="default-layout__content">
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>
