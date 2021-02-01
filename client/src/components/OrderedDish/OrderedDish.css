@@ -5,7 +5,7 @@
     padding: 8px;
 }
 .order-dish__info{
-    max-width: 60%;
+    max-width: 40%;
 }
 
 .order-dish__count{
@@ -13,4 +13,7 @@
 }
 .btn__delete-dish{
     margin-left: 20px;
+}
+.order-dish__title{
+    text-align: left;
 }

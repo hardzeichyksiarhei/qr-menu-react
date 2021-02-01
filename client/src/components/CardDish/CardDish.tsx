@@ -5,15 +5,11 @@ import { CardDishProps } from '../../utils/propsComponents'
 const { Meta } = Card
 
 function CardDish({ dish, priceCurrency }: CardDishProps) {
-  console.log(dish)
+  const title = `${dish.title}`
+  const price = `${dish.priceValue ? `${dish.priceValue} ${priceCurrency}` : `Free`}`
   return (
     <Card style={{ padding: '0', width: '100%', border: 'none', cursor: 'pointer' }}>
-      <div>
-        <h3 className="dish__title">{dish.title}</h3>
-        <p>
-          {dish.priceValue} {priceCurrency}
-        </p>
-      </div>
+      <Meta className="dish__title" title={`${title} ${price}`} />
     </Card>
   )
 }

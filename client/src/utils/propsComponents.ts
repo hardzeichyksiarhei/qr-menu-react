@@ -31,7 +31,7 @@ export type HeaderProps = { countOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
 }
-export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void }
+export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void, priceCurrency:string }
 export type DishProps = { dish: Dish }
 export type CardMenuProps = {
   menu: MenuProps,

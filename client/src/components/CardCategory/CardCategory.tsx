@@ -34,7 +34,10 @@ function CardCategory({ category, menuId, priceCurrency }: CardCategoryProps) {
         dataSource={category.dishes}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
-            <NavLink to={`/menu=${menuId}/category=${category.id}/dish=${item.id}`}>
+            <NavLink
+              className="link"
+              to={`/menu=${menuId}/category=${category.id}/dish=${item.id}`}
+            >
               <CardDish key={item.title} dish={item} priceCurrency={priceCurrency} />
             </NavLink>
           </List.Item>
