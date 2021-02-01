@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { Layout, Menu, Button, Space, Popover } from 'antd'
 import {
@@ -14,11 +15,13 @@ import {
   MenuOutlined,
 } from '@ant-design/icons'
 
+import translate from '../intl/translate'
+import { useAuth } from '../auth/AuthProvider'
+
+import appSelectors from '../store/selectors/app'
+
 import ProfileDropdown from '../components/ProfileDropdown'
 import LanguageSelect from '../components/LanguageSelect'
-import translate from '../intl/translate'
-
-import { useAuth } from '../auth/AuthProvider'
 import ButtonLink from '../components/ButtonLink'
 
 const { Header, Content, Sider } = Layout
@@ -56,6 +59,7 @@ const Default = () => {
   const location = useLocation()
 
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const { restaurantName } = useSelector(appSelectors.settings)
 
   return (
     <Layout className="default-layout" hasSider>
@@ -95,33 +99,34 @@ const Default = () => {
 
       <Layout className="default-layout__container">
         <Header className="app-header">
-          {isCollapsed ? (
-            <Popover
-              overlayClassName="popover-navigation"
-              placement="bottomLeft"
-              content={[
-                <ButtonLink
-                  linkTo="/menus/create"
-                  className="popover-menu__create-menu"
-                  icon={<PlusOutlined />}
-                >
-                  Menu Create
-                </ButtonLink>,
-                <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
-                  {routes.map((route) => (
-                    <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
-                      <Link to={route.path}>{route.label}</Link>
-                    </Menu.Item>
-                  ))}
-                </Menu>,
-              ]}
-              trigger="focus"
-            >
-              <Button icon={<MenuOutlined />} />
-            </Popover>
-          ) : (
-            <div />
-          )}
+          <Space className="d-flex align-items-center">
+            {isCollapsed ? (
+              <Popover
+                overlayClassName="popover-navigation"
+                placement="bottomLeft"
+                content={[
+                  <ButtonLink
+                    linkTo="/menus/create"
+                    className="popover-menu__create-menu"
+                    icon={<PlusOutlined />}
+                  >
+                    Menu Create
+                  </ButtonLink>,
+                  <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
+                    {routes.map((route) => (
+                      <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
+                        <Link to={route.path}>{route.label}</Link>
+                      </Menu.Item>
+                    ))}
+                  </Menu>,
+                ]}
+                trigger="focus"
+              >
+                <Button icon={<MenuOutlined />} />
+              </Popover>
+            ) : null}
+            <h1 className="app-header__restaurant-name">{restaurantName}</h1>
+          </Space>
           <div className="app-header__controls">
             <Space>
               <LanguageSelect />

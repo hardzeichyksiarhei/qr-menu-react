@@ -88,6 +88,11 @@
         font-size: 22px;
         margin-right: 20px;
     }
+    &__restaurant-name {
+        margin: 0;
+        font-size: 22px;
+        font-weight: normal;
+    }
 }
 
 .left-navigation {
@@ -175,6 +180,14 @@
 }
 
 /* Media */
+@media screen and (max-width: 768px) {
+    .app-header {
+        &__restaurant-name {
+            font-size: 16px;
+        }
+    }
+}
+
 @media screen and (max-width: 576px) {
     /* Default Layout */
     .default-layout {
@@ -182,6 +195,12 @@
             background-color: #fff;
             padding: 10px;
             margin: 10px;
+        }
+    }
+
+    .app-header {
+        &__restaurant-name {
+            display: none;
         }
     }
 }
