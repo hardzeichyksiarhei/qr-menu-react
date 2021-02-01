@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 import { SERVER_URL } from '../../config'
 const { Title } = Typography
 
-function CardCategory({ category, menuId }: CardCategoryProps) {
+function CardCategory({ category, menuId, priceCurrency }: CardCategoryProps) {
   const [dishClass, setDishClass] = useState('dish')
   function clickCategory() {
     if (dishClass === 'dish') {
@@ -38,8 +38,9 @@ function CardCategory({ category, menuId }: CardCategoryProps) {
         dataSource={category.dishes}
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
+
             <NavLink to={`/menu/${menuId}/category/${category.id}/dish/${item.id}`}>
-              <CardDish key={item.title} dish={item} />
+              <CardDish key={item.title} priceCurrency={priceCurrency} dish={item} />
             </NavLink>
           </List.Item>
         )}

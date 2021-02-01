@@ -8,6 +8,7 @@ export type Dish = {
   isPublished: boolean,
   isEnabledToOrder: boolean,
   tags: [],
+  priceValue: number,
   ingredients: any,
   allergens: any,
 }
@@ -33,27 +34,31 @@ export type MenuProps = {
     sizes: any
   },
   categories: CategoryProps[],
+  priceCurrency: string,
   createdAt: any,
 }
 export type HeaderProps = { countOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
 }
-export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void }
+export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void, priceCurrency:string }
 export type DishProps = { dish: Dish }
 export type CardMenuProps = {
   menu: MenuProps,
 }
 export type CardDishProps = {
   dish: Dish,
+  priceCurrency: string
 }
 export type CardCategoryProps = {
   category: CategoryProps,
   menuId: string,
+  priceCurrency: string
 }
 export type MenuCategoryProps = {
   categoryMenu: CategoryProps[],
   menuId: string,
+  priceCurrency: string,
 
 }
 export type OrderUserProps ={
