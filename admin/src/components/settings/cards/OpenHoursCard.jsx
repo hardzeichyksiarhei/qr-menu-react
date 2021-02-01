@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-
+import { useIntl } from 'react-intl'
 import { Collapse } from 'antd'
 import OpenHoursList from './OpenHoursList'
 
@@ -8,15 +8,16 @@ const { Panel } = Collapse
 
 const OpenHoursCard = ({ openHours, onChangeTimeWindows }) => {
   const [localOpenHours, setLocalOpenHours] = useState(openHours)
+  const intl = useIntl()
 
   const DAYS = {
-    sun: 'Sunday',
-    mon: 'Monday',
-    tue: 'Tuesday',
-    wed: 'Wednesday',
-    thu: 'Thursday',
-    fri: 'Friday',
-    sat: 'Saturday',
+    sun: intl.formatMessage({ id: 'Sunday' }),
+    mon: intl.formatMessage({ id: 'Monday' }),
+    tue: intl.formatMessage({ id: 'Tuesday' }),
+    wed: intl.formatMessage({ id: 'Wednesday' }),
+    thu: intl.formatMessage({ id: 'Thursday' }),
+    fri: intl.formatMessage({ id: 'Friday' }),
+    sat: intl.formatMessage({ id: 'Saturday' }),
   }
 
   const changeTimeWindows = (dayCode, array) => {

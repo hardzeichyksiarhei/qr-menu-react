@@ -32,7 +32,7 @@ const QRCodeCard = () => {
           <span>{translate('Download')}</span>
         </Button>
         <Button href={`${CLIENT_URL}/${userId}`} target="_blank" icon={<EyeOutlined />}>
-          <span>View</span>
+          <span>{translate('View')}</span>
         </Button>
       </div>
     </Card>

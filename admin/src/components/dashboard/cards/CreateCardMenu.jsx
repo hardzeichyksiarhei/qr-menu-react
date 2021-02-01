@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import { Card } from 'antd'
 
+import translate from '../../../intl/translate'
 import './CreateCardMenu.scss'
 
 const CreateCardMenu = () => {
@@ -16,7 +16,7 @@ const CreateCardMenu = () => {
       hoverable
     >
       <div className="create-menu-card__cover" />
-      <h3 className="create-menu-card__title">Create menu</h3>
+      <h3 className="create-menu-card__title">{translate('CreateMenu')}</h3>
     </Card>
   )
 }
