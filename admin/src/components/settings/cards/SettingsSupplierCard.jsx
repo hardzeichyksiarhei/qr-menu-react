@@ -20,11 +20,9 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
   const [descLong, setDescLong] = useState(supplier.descLong)
   const [descShort, setDescShort] = useState(supplier.descShort)
   const [logo] = useState(supplier.logo)
-  // const [backgroundImage, setBackgroundImage] = useState(supplier.backgroundImage)
+  const [backgroundImage] = useState(supplier.backgroundImage)
   const [googleMapsLink, setGoogleMapsLink] = useState(supplier.googleMapsLink)
-
   const [openHours] = useState(supplier.openHours)
-  console.log(openHours)
 
   const intl = useIntl()
 
@@ -75,8 +73,17 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
     setField(`${id}`, value)
   }
 
-  const onChangeImage = (e) => {
-    setField('logo', e)
+  const onChangeLogo = (changedLogo) => {
+    setField('logo', changedLogo)
+  }
+
+  const onChangeBackgroundImage = (changedBackgroundImage) => {
+    setField('background', changedBackgroundImage)
+  }
+
+  const onChangeTimeWindows = (changerOpenHours) => {
+    console.log(openHours)
+    setField('openHours', changerOpenHours)
   }
 
   return (
@@ -88,7 +95,14 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
         <Form.Item label="Logo">
           <ImagesManagement
             image={logo}
-            onChange={onChangeImage}
+            onChange={onChangeLogo}
+            previewSettings={{ width: 104, height: 104 }}
+          />
+        </Form.Item>
+        <Form.Item label="Background">
+          <ImagesManagement
+            image={backgroundImage}
+            onChange={onChangeBackgroundImage}
             previewSettings={{ width: 104, height: 104 }}
           />
         </Form.Item>
@@ -165,9 +179,7 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
           />
         </Form.Item>
         <Form.Item label="Opening Hours">
-          {openHours.map((dayItem) => (
-            <OpenHoursCard day={dayItem} key={dayItem.day} />
-          ))}
+          <OpenHoursCard openHours={openHours} onChangeTimeWindows={onChangeTimeWindows} />
         </Form.Item>
       </Form>
     </Card>

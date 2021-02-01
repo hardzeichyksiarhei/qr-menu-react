@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const OpenHoursCard = ({ day }) => {
-  console.log(day)
+import { Collapse } from 'antd'
+import OpenHoursList from './OpenHoursList'
+
+const { Panel } = Collapse
+
+const OpenHoursCard = ({ openHours, onChangeTimeWindows }) => {
+  const [localOpenHours, setLocalOpenHours] = useState(openHours)
 
   const DAYS = {
     sun: 'Sunday',
@@ -14,11 +19,37 @@ const OpenHoursCard = ({ day }) => {
     sat: 'Saturday',
   }
 
-  return <h1>{DAYS[day.dayCode]}</h1>
+  const changeTimeWindows = (dayCode, array) => {
+    setLocalOpenHours((prev) => {
+      const newArr = [...prev]
+      const arrItem = newArr.find((item) => item.dayCode === dayCode)
+      arrItem.timeWindows = array
+      return newArr
+    })
+    onChangeTimeWindows(localOpenHours)
+  }
+
+  return (
+    <Collapse bordered={false} accordion>
+      {localOpenHours.map((dayItem) => (
+        <Panel
+          header={`${DAYS[dayItem.dayCode]} - ${dayItem.timeWindows.length ? 'OPEN' : 'CLOSE'}`}
+          key={dayItem.dayCode}
+        >
+          <OpenHoursList
+            dayItem={dayItem}
+            key={dayItem.day}
+            changeTimeWindows={changeTimeWindows}
+          />
+        </Panel>
+      ))}
+    </Collapse>
+  )
 }
 
 OpenHoursCard.propTypes = {
-  day: PropTypes.instanceOf(Object).isRequired,
+  openHours: PropTypes.instanceOf(Array).isRequired,
+  onChangeTimeWindows: PropTypes.instanceOf(Function).isRequired,
 }
 
 export default OpenHoursCard
