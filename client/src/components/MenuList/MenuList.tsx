@@ -8,7 +8,7 @@ function MenuList() {
   const [menus, setMenus] = useState<MenuProps[]>([])
   const menu = async () => {
     await menusService
-      .getById('6000a32e85ed5f1094076150')
+      .getById('601711883dc50e3dc485a56a')
       .then((menu) => {
         setMenus(menu)
       })

@@ -6,7 +6,7 @@ import { CardCategoryProps } from '../../utils/propsComponents'
 import { NavLink } from 'react-router-dom'
 const { Title } = Typography
 
-function CardCategory({ category, menuId }: CardCategoryProps) {
+function CardCategory({ category, menuId, priceCurrency }: CardCategoryProps) {
   const [dishClass, setDishClass] = useState('dish')
 
   function clickCategory() {
@@ -35,7 +35,7 @@ function CardCategory({ category, menuId }: CardCategoryProps) {
         renderItem={(item: any) => (
           <List.Item style={{ padding: '0' }} key={item.title}>
             <NavLink to={`/menu=${menuId}/category=${category.id}/dish=${item.id}`}>
-              <CardDish key={item.title} dish={item} />
+              <CardDish key={item.title} dish={item} priceCurrency={priceCurrency} />
             </NavLink>
           </List.Item>
         )}
