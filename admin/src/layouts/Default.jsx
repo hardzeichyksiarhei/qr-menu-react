@@ -99,16 +99,23 @@ const Default = () => {
             <Popover
               overlayClassName="popover-navigation"
               placement="bottomLeft"
-              content={
+              content={[
+                <ButtonLink
+                  linkTo="/menus/create"
+                  className="popover-menu__create-menu"
+                  icon={<PlusOutlined />}
+                >
+                  Menu Create
+                </ButtonLink>,
                 <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
                   {routes.map((route) => (
                     <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
                       <Link to={route.path}>{route.label}</Link>
                     </Menu.Item>
                   ))}
-                </Menu>
-              }
-              trigger="click"
+                </Menu>,
+              ]}
+              trigger="focus"
             >
               <Button icon={<MenuOutlined />} />
             </Popover>

@@ -139,6 +139,30 @@
     width: 300px;
     .ant-popover-inner-content {
         padding: 0;
+        padding-top: 15px;
+    }
+}
+
+.popover-menu {
+    &__create-menu {
+        width: calc(100% - 32px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        background-color: $primary-color;
+        border-color: $primary-color;
+        margin: 15px;
+        margin-top: 0;
+        padding: 0;
+        transition: 0.25 all ease;
+        text-transform: uppercase;
+        color: #fff;
+        &:hover,
+        &:focus {
+            color: #fff;
+            background-color: darken($primary-color, 10%);
+        }
     }
 }
 
