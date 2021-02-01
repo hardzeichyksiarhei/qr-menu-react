@@ -15,7 +15,7 @@ import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 import appSelectors from '../../../store/selectors/app'
 
-import { SERVER_URL } from '../../../config'
+import { SERVER_URL, CURRENCIES } from '../../../config'
 
 import './DishItem.scss'
 
@@ -67,6 +67,11 @@ const DishItem = ({ dish, onAction }) => {
         <div className="dish-item__internalId">{dish.internalId}</div>
         <div className="dish-item__title">{dish.title}</div>
         <div className="dish-item__description">{dish.description}</div>
+        <div className="dish-item__meta">
+          {dish.ingredients.length ? <span>{dish.ingredients.length} ingredients</span> : null}
+          {dish.tags.length ? <span>{dish.tags.length} tags</span> : null}
+          {dish.allergens.length ? <span>{dish.allergens.length} allergens</span> : null}
+        </div>
       </div>
       <div className="dish-item__actions">
         <div className="dish-item__controls">
@@ -87,7 +92,7 @@ const DishItem = ({ dish, onAction }) => {
         <div className="dish-item__price">
           <b>
             {dish.priceValue
-              ? `${dish.priceValue}&nbsp;${menu.priceCurrency || defaultCurrency}`
+              ? `${dish.priceValue} ${CURRENCIES[menu.priceCurrency || defaultCurrency]}`
               : 'Free'}
           </b>
         </div>

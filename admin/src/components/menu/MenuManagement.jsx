@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { PageHeader, Button, Modal, notification, Space } from 'antd'
+import { SaveOutlined, SettingOutlined } from '@ant-design/icons'
 
 import * as menuActions from '../../store/actions/menu'
 import menuSelectors from '../../store/selectors/menu'
@@ -93,10 +94,21 @@ const MenuManagement = () => {
               Discord
             </Button>
           ) : null,
-          <Button type="primary" onClick={handleClickSaveMenu} loading={isMenuBusy} key="save-menu">
+          <Button
+            type="primary"
+            icon={<SaveOutlined />}
+            onClick={handleClickSaveMenu}
+            loading={isMenuBusy}
+            key="save-menu"
+          >
             Save
           </Button>,
-          <Button type="default" onClick={handleClickSettingsMenu} key="settings-menu">
+          <Button
+            type="default"
+            icon={<SettingOutlined />}
+            onClick={handleClickSettingsMenu}
+            key="settings-menu"
+          >
             Settings
           </Button>,
         ]}

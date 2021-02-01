@@ -75,7 +75,7 @@
     &__content {
         background-color: #fff;
         padding: 24px;
-        margin: 0;
+        margin: 24px;
     }
 }
 
@@ -87,6 +87,11 @@
     .trigger {
         font-size: 22px;
         margin-right: 20px;
+    }
+    &__restaurant-name {
+        margin: 0;
+        font-size: 22px;
+        font-weight: normal;
     }
 }
 
@@ -139,6 +144,30 @@
     width: 300px;
     .ant-popover-inner-content {
         padding: 0;
+        padding-top: 15px;
+    }
+}
+
+.popover-menu {
+    &__create-menu {
+        width: calc(100% - 32px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        background-color: $primary-color;
+        border-color: $primary-color;
+        margin: 15px;
+        margin-top: 0;
+        padding: 0;
+        transition: 0.25 all ease;
+        text-transform: uppercase;
+        color: #fff;
+        &:hover,
+        &:focus {
+            color: #fff;
+            background-color: darken($primary-color, 10%);
+        }
     }
 }
 
@@ -148,4 +177,30 @@
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+}
+
+/* Media */
+@media screen and (max-width: 768px) {
+    .app-header {
+        &__restaurant-name {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    /* Default Layout */
+    .default-layout {
+        &__content {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px;
+        }
+    }
+
+    .app-header {
+        &__restaurant-name {
+            display: none;
+        }
+    }
 }

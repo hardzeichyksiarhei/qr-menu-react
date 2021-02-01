@@ -42,24 +42,38 @@ const MenuSettingsEditorCard = ({ onCancel, onSave }) => {
         initialValues={menu}
         onFinish={handleClickSave}
       >
-        <Form.Item name="photo" label="Photo">
-          <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
-        </Form.Item>
         <Form.Item className="mb-0" name="isPublished" label="Published" valuePropName="checked">
           <Switch />
         </Form.Item>
         <Form.Item name="isEnabledToOrder" label="Enabled To Order" valuePropName="checked">
           <Switch />
         </Form.Item>
+        <Form.Item name="photo" label="Photo">
+          <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
+        </Form.Item>
         <Form.Item label="Title" name="title" rules={[{ required: true }]}>
           <Input />
+        </Form.Item>
+        <Form.Item label="Internal comment" name="internalComment">
+          <Input.TextArea autoSize />
+        </Form.Item>
+        <Form.Item
+          className="mb-0"
+          name="isPriceVisible"
+          label="Price Visible"
+          valuePropName="checked"
+        >
+          <Switch />
+        </Form.Item>
+        <Form.Item name="isEnergyVisible" label="Energy Visible" valuePropName="checked">
+          <Switch />
         </Form.Item>
         <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="category-editor-form__actions">
             <Space>
               <Button onClick={handleClickCancel}>Cancel</Button>
               <Button type="primary" htmlType="submit">
-                Save
+                Ok
               </Button>
             </Space>
           </div>

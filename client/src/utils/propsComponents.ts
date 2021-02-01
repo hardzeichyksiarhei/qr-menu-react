@@ -15,14 +15,24 @@ export type Dish = {
 export type CategoryProps = {
   isVisible: boolean
   id: string,
+  
   title: string,
-  photo: any,
+  photo:{
+    id: string,
+    sizes: any,
+    userId: string,
+  } ,
   dishes: Dish[],
 }
 export type MenuProps = {
   id: string,
   title: string,
-  photo: string,
+  userId: string,
+  photo: {
+    id: string,
+    userId:string,
+    sizes: any
+  },
   categories: CategoryProps[],
   priceCurrency: string,
   createdAt: any,

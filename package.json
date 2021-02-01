@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "install": "concurrently \"cd ./admin && npm install\" \"cd ./server && npm install\"",
-    "start:admin": "concurrently \"cd ./admin && npm start\" \"cd ./server && npm run server\"",
-    "start:client": "concurrently \"cd ./client && npm start\" \"cd ./server && npm run server\"",
-    "start": "concurrently \"npm run start:admin\" \"npm run start:client\""
+    "server": "concurrently \"cd ./server && npm run server\"",
+    "start:admin": "concurrently \"cd ./admin && npm start\"",
+    "start:client": "concurrently \"cd ./client && npm start\"",
+    "start": "concurrently \"cd ./server && npm run server\" \"npm run start:admin\" \"npm run start:client\""
   },
   "repository": {
     "type": "git",

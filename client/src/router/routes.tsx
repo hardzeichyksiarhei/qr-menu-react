@@ -12,10 +12,10 @@ const routes = () => [
     path: '/',
     element: <DefaultLayout />,
     children: [
-      { path: '/', element: <Dashboard /> },
-      { path: '/menu=:id', element: <MenuCategory /> },
-      { path: '/menu=:menuId/category=:categoryId/dish=:dishId', element: <MenuDish /> },
-      { path: '/cart', element: <PageCart /> },
+      { path: '/:userId', element: <Dashboard /> },
+      { path: '/:userId/menu/:menuId', element: <MenuCategory /> },
+      { path: '/:userId/menu/:menuId/category/:categoryId/dish/:dishId', element: <MenuDish /> },
+      { path: '/:userId/cart', element: <PageCart /> },
     ],
   },
 ]

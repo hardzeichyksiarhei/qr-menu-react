@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Card, Button, Spin, Modal } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
 import { ReactSortable } from 'react-sortablejs'
 
@@ -63,7 +64,11 @@ const DishesEditorCard = () => {
       <Card
         title={<h3 className="mb-0">Dishes</h3>}
         extra={
-          <Button type="primary" onClick={() => handleActionDish('dish:create')}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => handleActionDish('dish:create')}
+          >
             Add new
           </Button>
         }
@@ -102,6 +107,7 @@ const DishesEditorCard = () => {
         footer={null}
         closable={false}
         destroyOnClose
+        centered
       >
         <DishEditorCard editDish={editDish} onAction={handleActionDish} />
       </Modal>

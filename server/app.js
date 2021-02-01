@@ -35,6 +35,9 @@ io.on('connection', (socket) => {
     socket.join(userId)
   })
   console.log('user connected', socket.id)
+  socket.on('ROOM:LEAVE', (userId) => {
+    socket.leave(userId)
+  })
 })
 
 app.use((req, res, next) => {

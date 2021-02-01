@@ -12,9 +12,12 @@ function CategoryPage() {
   const [countOrderDish, setCountOrderDish] = useState(0)
   const [menus, setMenus] = useState<MenuProps[]>([])
   const [priceCurrency, setPriceCurrency] = useState<string | undefined>('')
+
+  const {userId, menuId } = useParams()
   const getMenus = async () => {
     await menusService
-      .getById('601711883dc50e3dc485a56a')
+      .getById(userId)
+
       .then((menu) => {
         setMenus(menu)
       })
@@ -25,19 +28,21 @@ function CategoryPage() {
   useEffect(() => {
     getMenus()
   }, [])
-  const { id } = useParams()
   useEffect(() => {
     setCountOrderDish(renderCountOrderDish(orderUser))
   }, [orderUser])
   const menu = useMemo<MenuProps | undefined>(() => {
-    return menus.find((item) => item.id === id)
-  }, [menus, id])
+    return menus.find((item) => item.id === menuId)
+  }, [menus, menuId])
   useEffect(() => {
     if (menu) {
       setPriceCurrency(menu.priceCurrency)
     }
   }, [menu])
-  console.log(menu)
+
+
+ 
+
   return (
     <>
       <Header countOrder={countOrderDish} />

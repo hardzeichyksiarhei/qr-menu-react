@@ -1,7 +1,8 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { Layout, Menu, Button, Space, Popover } from 'antd'
+import { Layout, Menu, Button, Space, Popover, message } from 'antd'
 import {
   PoweroffOutlined,
   AppstoreAddOutlined,
@@ -14,11 +15,15 @@ import {
   MenuOutlined,
 } from '@ant-design/icons'
 
+import { addOrder } from '../store/actions/orders'
+import socket from '../socket'
+import translate from '../intl/translate'
+import { useAuth } from '../auth/AuthProvider'
+
+import appSelectors from '../store/selectors/app'
+
 import ProfileDropdown from '../components/ProfileDropdown'
 import LanguageSelect from '../components/LanguageSelect'
-import translate from '../intl/translate'
-
-import { useAuth } from '../auth/AuthProvider'
 import ButtonLink from '../components/ButtonLink'
 
 const { Header, Content, Sider } = Layout
@@ -55,7 +60,20 @@ const Default = () => {
   const auth = useAuth()
   const location = useLocation()
 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    socket.emit('ROOM:JOIN', localStorage.getItem('userId'))
+  }, [])
+
+  useEffect(() => {
+    socket.on('ROOM:ADD_ORDER', (order) => {
+      message.info('Added a new order')
+      dispatch(addOrder(order))
+    })
+  }, [dispatch])
+
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const { restaurantName } = useSelector(appSelectors.settings)
 
   return (
     <Layout className="default-layout" hasSider>
@@ -74,7 +92,7 @@ const Default = () => {
           className="left-navigation__create-menu"
           icon={<PlusOutlined />}
         >
-          Menu Create
+          {translate('CreateMenu')}
         </ButtonLink>
         <Menu theme="dark" selectedKeys={[location.pathname]}>
           {routes.map((route) => (
@@ -95,26 +113,34 @@ const Default = () => {
 
       <Layout className="default-layout__container">
         <Header className="app-header">
-          {isCollapsed ? (
-            <Popover
-              overlayClassName="popover-navigation"
-              placement="bottomLeft"
-              content={
-                <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
-                  {routes.map((route) => (
-                    <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
-                      <Link to={route.path}>{route.label}</Link>
-                    </Menu.Item>
-                  ))}
-                </Menu>
-              }
-              trigger="click"
-            >
-              <Button icon={<MenuOutlined />} />
-            </Popover>
-          ) : (
-            <div />
-          )}
+          <Space className="d-flex align-items-center">
+            {isCollapsed ? (
+              <Popover
+                overlayClassName="popover-navigation"
+                placement="bottomLeft"
+                content={[
+                  <ButtonLink
+                    linkTo="/menus/create"
+                    className="popover-menu__create-menu"
+                    icon={<PlusOutlined />}
+                  >
+                    Menu Create
+                  </ButtonLink>,
+                  <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
+                    {routes.map((route) => (
+                      <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
+                        <Link to={route.path}>{route.label}</Link>
+                      </Menu.Item>
+                    ))}
+                  </Menu>,
+                ]}
+                trigger="focus"
+              >
+                <Button icon={<MenuOutlined />} />
+              </Popover>
+            ) : null}
+            <h1 className="app-header__restaurant-name">{restaurantName}</h1>
+          </Space>
           <div className="app-header__controls">
             <Space>
               <LanguageSelect />
@@ -128,7 +154,7 @@ const Default = () => {
             </Space>
           </div>
         </Header>
-        <Content className="default-layout__content" style={{ margin: '24px' }}>
+        <Content className="default-layout__content">
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>
