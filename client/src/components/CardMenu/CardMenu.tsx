@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card } from 'antd'
+import { Card, Image } from 'antd'
 import './CardMenu.css'
 import { CardMenuProps } from '../../utils/propsComponents'
+import { SERVER_URL } from '../../config'
 const { Meta } = Card
 
 function CardMenu({ menu }: CardMenuProps) {
@@ -10,11 +11,15 @@ function CardMenu({ menu }: CardMenuProps) {
       className="menu-card"
       style={{ width: '100%', cursor: 'pointer' }}
       cover={
-        <img
-          className="card__image"
-          style={{ width: '100%', height: '200px' }}
+        <Image
+          src={
+            menu.photo
+              ? `${SERVER_URL}/uploads/${menu.userId}/large/${menu.photo.sizes.large}`
+              : 'https://via.placeholder.com/1366x768?text=QR Menu'
+          }
+          fallback="https://via.placeholder.com/1366x768?text=QR Menu"
+          preview={false} 
           alt={menu.title}
-          src={menu.photo}
         />
       }
     >
