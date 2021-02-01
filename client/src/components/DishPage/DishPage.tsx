@@ -13,9 +13,10 @@ function DishPage() {
   )
   const [countOrderDish, setCountOrderDish] = useState(0)
   const [menus, setMenus] = useState<MenuProps[]>([])
+  const [priceCurrency, setPriceCurrency] = useState<string>('')
   const getMenus = async () => {
     await menusService
-      .getById('6000a32e85ed5f1094076150')
+      .getById('601711883dc50e3dc485a56a')
       .then((menu) => {
         setMenus(menu)
       })
@@ -34,6 +35,11 @@ function DishPage() {
   const menu = useMemo<MenuProps | undefined>(() => {
     return menus.find((item) => item.id === menuId)
   }, [menus, menuId])
+  useEffect(() => {
+    if (menu) {
+      setPriceCurrency(menu.priceCurrency)
+    }
+  }, [menu])
   const dish = useMemo<Dish | undefined>(() => {
     if (!menu) {
       return undefined
@@ -71,7 +77,7 @@ function DishPage() {
   return (
     <>
       <Header countOrder={countOrderDish} />
-      {dish && <MenuDish dish={dish} addDish={addDish} />}
+      {dish && <MenuDish dish={dish} addDish={addDish}  priceCurrency={priceCurrency}/>}
       <MenuBar />
     </>
   )

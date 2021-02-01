@@ -5,9 +5,6 @@ dotenv.config({
   path: path.join(__dirname, '../.env'),
 })
 
-console.log(process.env.NODE_ENV)
-console.log(process.env.MONGO_CONNECTION_STRING)
-
 module.exports = {
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,

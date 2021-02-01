@@ -91,14 +91,14 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
       title={<h3 className="mb-0">{translate('Supplier')}</h3>}
     >
       <Form name="supplier-form" layout="vertical">
-        <Form.Item label="Logo">
+        <Form.Item label={intl.formatMessage({ id: 'Logo' })}>
           <ImagesManagement
             image={logo}
             onChange={onChangeLogo}
             previewSettings={{ width: 104, height: 104 }}
           />
         </Form.Item>
-        <Form.Item label="Background">
+        <Form.Item label={intl.formatMessage({ id: 'Background' })}>
           <ImagesManagement
             image={backgroundImage}
             onChange={onChangeBackgroundImage}
@@ -124,13 +124,18 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
             onChange={onChangeField}
           />
         </Form.Item>
-        <Form.Item label="Restaurant Address">
-          <Input id="address" placeholder="Add address" value={address} onChange={onChangeField} />
+        <Form.Item label={intl.formatMessage({ id: 'RestaurantAddress' })}>
+          <Input
+            id="address"
+            placeholder={intl.formatMessage({ id: 'AddRestaurantAddress' })}
+            value={address}
+            onChange={onChangeField}
+          />
         </Form.Item>
-        <Form.Item label="Maps Link (optional)">
+        <Form.Item label={intl.formatMessage({ id: 'MapsLink' })}>
           <Input
             id="googleMapsLink"
-            placeholder="Add google maps link to your restaurant"
+            placeholder={intl.formatMessage({ id: 'AddMaps' })}
             value={googleMapsLink}
             onChange={onChangeField}
           />
@@ -143,10 +148,10 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
             onChange={onChangeField}
           />
         </Form.Item>
-        <Form.Item label="Messenger (optional)">
+        <Form.Item label={intl.formatMessage({ id: 'Messenger' })}>
           <Input
             id="messenger"
-            placeholder="Add messenger number"
+            placeholder={intl.formatMessage({ id: 'AddMessengerNumber' })}
             value={messenger}
             onChange={onChangeField}
           />
@@ -159,19 +164,19 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
             onChange={onChangeField}
           />
         </Form.Item>
-        <Form.Item label="Short Description (optional)">
+        <Form.Item label={intl.formatMessage({ id: 'ShortDescription' })}>
           <TextArea
             id="descShort"
-            placeholder="Add short description"
+            placeholder={intl.formatMessage({ id: 'AddShortDescription' })}
             value={descShort}
             onChange={onChangeField}
             autoSize
           />
         </Form.Item>
-        <Form.Item label="Full Description (optional)">
+        <Form.Item label={intl.formatMessage({ id: 'FullDescription' })}>
           <TextArea
             id="descLong"
-            placeholder="Add a detailed description"
+            placeholder={intl.formatMessage({ id: 'AddDetailedDescription' })}
             value={descLong}
             onChange={onChangeField}
             autoSize

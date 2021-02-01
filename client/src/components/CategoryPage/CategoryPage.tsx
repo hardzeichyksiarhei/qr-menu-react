@@ -11,9 +11,13 @@ function CategoryPage() {
   const orderUser = JSON.parse(localStorage.getItem('orderUser') || '[]')
   const [countOrderDish, setCountOrderDish] = useState(0)
   const [menus, setMenus] = useState<MenuProps[]>([])
+  const [priceCurrency, setPriceCurrency] = useState<string | undefined>('')
+
+  const {userId, menuId } = useParams()
   const getMenus = async () => {
     await menusService
-      .getById('6000a32e85ed5f1094076150')
+      .getById(userId)
+
       .then((menu) => {
         setMenus(menu)
       })
@@ -24,17 +28,31 @@ function CategoryPage() {
   useEffect(() => {
     getMenus()
   }, [])
-  const { id } = useParams()
   useEffect(() => {
     setCountOrderDish(renderCountOrderDish(orderUser))
   }, [orderUser])
   const menu = useMemo<MenuProps | undefined>(() => {
-    return menus.find((item) => item.id === id)
-  }, [menus, id])
+    return menus.find((item) => item.id === menuId)
+  }, [menus, menuId])
+  useEffect(() => {
+    if (menu) {
+      setPriceCurrency(menu.priceCurrency)
+    }
+  }, [menu])
+
+
+ 
+
   return (
     <>
       <Header countOrder={countOrderDish} />
-      {menu && <MenuCategory categoryMenu={menu.categories} menuId={menu.id} />}
+      {menu && priceCurrency && (
+        <MenuCategory
+          priceCurrency={priceCurrency}
+          categoryMenu={menu.categories}
+          menuId={menu.id}
+        />
+      )}
       <MenuBar />
     </>
   )
