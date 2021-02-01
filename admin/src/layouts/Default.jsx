@@ -1,8 +1,8 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { Layout, Menu, Button, Space, Popover } from 'antd'
+import { Layout, Menu, Button, Space, Popover, message } from 'antd'
 import {
   PoweroffOutlined,
   AppstoreAddOutlined,
@@ -15,6 +15,8 @@ import {
   MenuOutlined,
 } from '@ant-design/icons'
 
+import { addOrder } from '../store/actions/orders'
+import socket from '../socket'
 import translate from '../intl/translate'
 import { useAuth } from '../auth/AuthProvider'
 
@@ -57,6 +59,18 @@ const routes = [
 const Default = () => {
   const auth = useAuth()
   const location = useLocation()
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    socket.emit('ROOM:JOIN', localStorage.getItem('userId'))
+  }, [])
+
+  useEffect(() => {
+    socket.on('ROOM:ADD_ORDER', (order) => {
+      message.info('Added a new order')
+      dispatch(addOrder(order))
+    })
+  }, [dispatch])
 
   const [isCollapsed, setIsCollapsed] = useState(false)
   const { restaurantName } = useSelector(appSelectors.settings)
