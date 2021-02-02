@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { PageHeader, Button, Spin } from 'antd'
+import { PageHeader, Button, Spin, Alert, message } from 'antd'
 import { useIntl } from 'react-intl'
 
 import {
@@ -20,7 +21,9 @@ import SettingsSupplierCard from './cards/SettingsSupplierCard'
 const SettingsManagement = () => {
   const dispatch = useDispatch()
 
-  const { settings, isSettingsLoading } = useSelector(settingsSelectors.settings)
+  const { settings, isSettingsLoading, isSettingsBusy, settingsSaveError } = useSelector(
+    settingsSelectors.settings,
+  )
   const intl = useIntl()
 
   useEffect(() => {
@@ -37,9 +40,10 @@ const SettingsManagement = () => {
 
   const saveChanges = () => {
     dispatch(saveSettings())
+    !isSettingsBusy && !settingsSaveError ? message.info('Settings was saved') : null
   }
 
-  if (!settings) {
+  if (isSettingsLoading || !settings) {
     return (
       <div className="d-flex justify-content-center">
         <Spin size="large" />
@@ -49,11 +53,12 @@ const SettingsManagement = () => {
 
   return (
     <>
+      {settingsSaveError ? <Alert type="error" message={settingsSaveError} banner /> : null}
       <PageHeader
         ghost={false}
         title={intl.formatMessage({ id: 'Settings' })}
         extra={[
-          <Button key="1" type="primary" onClick={saveChanges} loading={isSettingsLoading}>
+          <Button key="1" type="primary" onClick={saveChanges} loading={isSettingsBusy}>
             {translate('Save')}
           </Button>,
         ]}
