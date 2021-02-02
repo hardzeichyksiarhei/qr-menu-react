@@ -3,21 +3,20 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Card } from 'antd'
 import { SaveFilled } from '@ant-design/icons'
+import { v4 as uuid } from 'uuid'
 
 import TimeSlotCard from './TimeSlotCard'
 
 const OpenHoursList = ({ dayItem, changeTimeWindows }) => {
   const { dayCode } = dayItem
   const [timeWindows, setTimeWindows] = useState(dayItem.timeWindows)
-  const [id, setId] = useState(0)
 
   const addTimeSlot = () => {
     const timeSlot = {
-      id,
+      id: uuid(),
       start: '00:00',
       end: '00:15',
     }
-    setId((prev) => prev + 1)
     setTimeWindows((prev) => [...prev, timeSlot])
   }
 
