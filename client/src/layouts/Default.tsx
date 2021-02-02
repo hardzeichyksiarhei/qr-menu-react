@@ -16,6 +16,7 @@ const { useBreakpoint } = Grid
 
 function Default() {
   const { userId } = useParams()
+  localStorage.setItem('userId', userId)
   const quantity = useSelector(orderSelectors.quantity)
   const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
 
