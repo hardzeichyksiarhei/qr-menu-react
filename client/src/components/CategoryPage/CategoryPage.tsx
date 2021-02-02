@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Masonry from 'react-masonry-css'
 
-import { PageHeader, Row, Col } from 'antd'
+import { PageHeader, Statistic } from 'antd'
 import CardCategory from '../CardCategory/CardCategory'
 
 import * as menusActions from '../../store/actions/menus'
@@ -33,7 +33,9 @@ const CategoryPage = () => {
         title="Categories"
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ghost={false}
-      />
+      >
+        <Statistic title="Menu" value={menu.title} />
+      </PageHeader>
       {menu && (
         <Masonry
           breakpointCols={{
