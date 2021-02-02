@@ -1,3 +1,14 @@
+type Tag = {
+  icon: String,
+  label: String
+}
+
+type Allergen = {
+  number: Number,
+  label: String
+}
+
+
 export type Dish = {
   id: string,
   categoryId: string,
@@ -11,10 +22,10 @@ export type Dish = {
   },
   isPublished: boolean,
   isEnabledToOrder: boolean,
-  tags: [],
+  tags: Tag[],
   priceValue: number,
-  ingredients: any,
-  allergens: any,
+  ingredients: String[],
+  allergens: Allergen[],
   priceCurrency: String,
 
 }

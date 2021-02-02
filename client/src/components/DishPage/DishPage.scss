@@ -1,0 +1,90 @@
+.dish {
+    display: grid;
+    grid-template-columns: minmax(360px, 1fr) 2fr;
+    gap: 30px;
+    &__content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    &__category-title {
+        span {
+            color: #8c8c8c;
+            font-weight: normal;
+        }
+    }
+    &__title {
+        font-size: 32px;
+        font-weight: normal;
+    }
+    &__description {
+        font-size: 16px;
+    }
+    &__price {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 28px;
+        font-weight: 600;
+    }
+    &__add-to-cart {
+        display: flex;
+        justify-content: space-between;
+        width: 240px;
+        margin-top: 30px;
+    }
+
+    &__meta {
+        h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+    }
+
+    &__tags,
+    &__ingredients,
+    &__allergens {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        gap: 10px;
+        font-size: 16px;
+    }
+
+    .dish-tag {
+        &__icon {
+            margin-right: 10px;
+        }
+    }
+
+    .dish-ingredient {
+        &:after {
+            content: ", ";
+        }
+        &:last-of-type {
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .dish {
+        grid-template-columns: 100%;
+        &__image {
+            width: 60%;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .dish {
+        &__image {
+            width: 100%;
+        }
+    }
+}
