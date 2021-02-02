@@ -2,7 +2,6 @@ import * as types from '../types/app'
 
 const initialState = {
   settings: {
-    timeFormat: null,
     defaultCurrency: null,
     restaurantName: null,
   },

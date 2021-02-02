@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card } from 'antd'
+import { Button, Card, Space, Divider } from 'antd'
 import { SaveFilled } from '@ant-design/icons'
 import { v4 as uuid } from 'uuid'
 
@@ -44,7 +44,7 @@ const OpenHoursList = ({ dayItem, changeTimeWindows }) => {
     <>
       {timeWindows.length
         ? timeWindows.map((slot, idx) => (
-            <Card key={idx}>
+            <Card key={idx} bodyStyle={{ padding: '10px' }} bordered={false}>
               <TimeSlotCard
                 slot={slot}
                 key={slot.id}
@@ -54,14 +54,14 @@ const OpenHoursList = ({ dayItem, changeTimeWindows }) => {
             </Card>
           ))
         : null}
-      <>
+      <Space size="default" split={<Divider type="vertical" />}>
         <Button type="dashed" onClick={addTimeSlot}>
           + Add new time slot
         </Button>
         <Button icon={<SaveFilled />} type="primary" onClick={saveTimeSlots}>
           Save
         </Button>
-      </>
+      </Space>
     </>
   )
 }

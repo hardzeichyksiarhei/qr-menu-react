@@ -28,11 +28,44 @@
     }
 }
 
+.dishes-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .dish-item {
+    width: 100%;
     display: flex;
     gap: 10px;
+    &__photo {
+        .ant-image,
+        .ant-image img {
+            display: block;
+        }
+    }
+    &__title {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
     &__meta {
         display: flex;
-        flex-direction: column;
+        span {
+            margin-right: 5px;
+            &:after {
+                content: ", ";
+            }
+            &:last-of-type {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .dish-item {
+        padding: 0 16px;
     }
 }

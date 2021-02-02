@@ -70,7 +70,7 @@ const MenuManagement = () => {
         key: 'menu-not-save',
       })
     }
-  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu, menu.id, handleClickSaveMenu])
+  }, [isMenuLoading, isMenuEqualCache, handleDiscardMenu, menu.id, handleClickSaveMenu, intl])
 
   const handleClickSettingsMenu = () => {
     setIsSettingsEditorVisible(true)
