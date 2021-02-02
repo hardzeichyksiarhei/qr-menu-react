@@ -38,7 +38,28 @@ function Default() {
           <Outlet />
         </Suspense>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>©2020 QR Menu Clone</Footer>
+      <Footer style={{ textAlign: 'center' }}>
+        © 2021 Developed by
+        <a href="https://github.com/hardzeichyksiarhei" target="_blank" rel="noreferrer">
+          &nbsp;hardz&nbsp;
+        </a>
+        /
+        <a href="https://github.com/IKLOA" target="_blank" rel="noreferrer">
+          &nbsp;IKLOA&nbsp;
+        </a>
+        /
+        <a href="https://github.com/Mobidikt" target="_blank" rel="noreferrer">
+          &nbsp;Mobidikt&nbsp;
+        </a>
+        /
+        <a href="https://github.com/Grenzen" target="_blank" rel="noreferrer">
+          &nbsp;Grenzen&nbsp;
+        </a>
+        &nbsp;for&nbsp;
+        <a href="https://rs.school/" target="_blank" rel="noreferrer">
+          RS School
+        </a>
+      </Footer>
 
       {screen.xs ? <MenuBar /> : null}
 
