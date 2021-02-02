@@ -9,8 +9,9 @@ import MenuBar from '../components/Navigation/Navigation'
 import Basket from '../components/Basket/Basket'
 
 import * as appActions from '../store/actions/app'
-import orderSelectors from '../store/selectors/order'
+import appSelectors from '../store/selectors/app'
 import menusSelectors from '../store/selectors/menus'
+import orderSelectors from '../store/selectors/order'
 
 const { Header, Content, Footer } = Layout
 const { useBreakpoint } = Grid
@@ -18,8 +19,10 @@ const { useBreakpoint } = Grid
 function Default() {
   const dispatch = useDispatch()
   const { userId } = useParams()
-  const quantity = useSelector(orderSelectors.quantity)
+
   const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
+  const quantity = useSelector(orderSelectors.quantity)
+  const { restaurantName } = useSelector(appSelectors.settings)
 
   const [isCartVisible, setIsCartVisible] = useState(false)
   const screen = useBreakpoint()
@@ -32,7 +35,7 @@ function Default() {
     <Layout className="default-layout">
       <Header className="default-layout__header">
         <div className="header-logo">
-          <Link to={`/${userId}`}>QR Menu Clone</Link>
+          <Link to={`/${userId}`}>{restaurantName || 'QR Menu Clone'}</Link>
         </div>
         <div className="header-cart">
           <Badge count={quantity}>
