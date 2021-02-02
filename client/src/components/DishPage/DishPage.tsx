@@ -53,32 +53,44 @@ const DishPage = () => {
         <p className="dish__description">{dish.description}</p>
         <div className="dish__meta">
           <h4>Tags</h4>
-          <ul className="dish__tags dish-tags">
-            {dish.tags.map((tag, idx) => (
-              <li className="dish-tag" key={idx}>
-                <span className="dish-tag__icon">{tag.icon}</span>
-                <span>{tag.label}</span>
-              </li>
-            ))}
-          </ul>
+          {dish.tags.length ? (
+            <ul className="dish__tags dish-tags">
+              {dish.tags.map((tag, idx) => (
+                <li className="dish-tag" key={idx}>
+                  <span className="dish-tag__icon">{tag.icon}</span>
+                  <span>{tag.label}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            '—'
+          )}
           <br />
           <h4>Ingredients</h4>
-          <ul className="dish__ingredients dish-ingredients">
-            {dish.ingredients.map((ingredient: String, idx) => (
-              <li className="dish-ingredient" key={idx}>
-                <span>{ingredient}</span>
-              </li>
-            ))}
-          </ul>
+          {dish.ingredients.length ? (
+            <ul className="dish__ingredients dish-ingredients">
+              {dish.ingredients.map((ingredient: String, idx) => (
+                <li className="dish-ingredient" key={idx}>
+                  <span>{ingredient}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            '—'
+          )}
           <br />
           <h4>Allergens</h4>
-          <ul className="dish__ingredients dish-ingredients">
-            {dish.allergens.map((allergen, idx) => (
-              <li className="dish-ingredient" key={idx}>
-                <b>{allergen.number}</b> - <span>{allergen.label}</span>
-              </li>
-            ))}
-          </ul>
+          {dish.allergens.length ? (
+            <ul className="dish__ingredients dish-ingredients">
+              {dish.allergens.map((allergen, idx) => (
+                <li className="dish-ingredient" key={idx}>
+                  <b>{allergen.number}</b> - <span>{allergen.label}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            '—'
+          )}
         </div>
         <span className="dish__price">
           {dish.priceValue ? `${dish.priceValue} ${menu.priceCurrency}` : `Free`}
