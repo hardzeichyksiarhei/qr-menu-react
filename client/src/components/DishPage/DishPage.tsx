@@ -1,85 +1,35 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import Header from '../Header/Header'
-import MenuDish from '../MenuDish/MenuDish'
-import menusService from '../../services/menus'
-import { Dish, MenuProps, OrderUserProps } from '../../utils/propsComponents'
-import MenuBar from '../Navigation/Navigation'
-import { renderCountOrderDish } from '../../utils/renderCountOrderDish'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-function DishPage() {
-  const [orderUser, setOrderUser] = useState<OrderUserProps[]>(
-    JSON.parse(localStorage.getItem('orderUser') || '[]'),
-  )
-  const [countOrderDish, setCountOrderDish] = useState(0)
-  const [menus, setMenus] = useState<MenuProps[]>([])
-  const [priceCurrency, setPriceCurrency] = useState<string>('')
-  const getMenus = async () => {
-    await menusService
-      .getById('601711883dc50e3dc485a56a')
-      .then((menu) => {
-        setMenus(menu)
-      })
-      .catch(() => {
-        console.log('Не удалось загрузить меню')
-      })
-  }
-  useEffect(() => {
-    getMenus()
-  }, [])
-  const { menuId, categoryId, dishId } = useParams()
-  useEffect(() => {
-    setCountOrderDish(renderCountOrderDish(orderUser))
-  }, [orderUser])
+import MenuDish from '../MenuDish/MenuDish'
 
-  const menu = useMemo<MenuProps | undefined>(() => {
-    return menus.find((item) => item.id === menuId)
-  }, [menus, menuId])
-  useEffect(() => {
-    if (menu) {
-      setPriceCurrency(menu.priceCurrency)
-    }
-  }, [menu])
-  const dish = useMemo<Dish | undefined>(() => {
-    if (!menu) {
-      return undefined
-    }
-    return menu.categories
-      .find((category) => category.id === categoryId)
-      ?.dishes.find((dish) => dish.id === dishId)
-  }, [menu, categoryId, dishId])
-  const saveOrder = useCallback(() => {
-    localStorage.setItem('orderUser', JSON.stringify(orderUser))
-  }, [orderUser])
+import * as menusActions from '../../store/actions/menus'
+import * as orderActions from '../../store/actions/order'
+import menusSelectors from '../../store/selectors/menus'
+
+import { Dish } from '../../utils/propsComponents'
+
+const DishPage = () => {
+  const dispatch = useDispatch()
+
+  const { userId, menuId, categoryId, dishId } = useParams()
+
+  const menu: Dish | null = useSelector(menusSelectors.dish(menuId))
+  const dish: Dish | null = useSelector(menusSelectors.dish(menuId)(categoryId)(dishId))
 
   useEffect(() => {
-    setCountOrderDish(renderCountOrderDish(orderUser))
-    saveOrder()
-  }, [orderUser, saveOrder])
+    console.log(1)
+
+    dispatch(menusActions.fetchMenus(userId))
+  }, [dispatch, userId])
+
   const addDish = (dish: Dish) => {
-    const orderTry: any = orderUser.find(
-      (item: { dish: Dish, count: number }) => item.dish.id === dish.id,
-    )
-    if (orderTry) {
-      setOrderUser([
-        ...orderUser.map((item) => {
-          if (item.dish.id === dish.id) {
-            item.count = item.count + 1
-          }
-          return item
-        }),
-      ])
-    } else {
-      setOrderUser([...orderUser, { dish: dish, count: 1 }])
-    }
+    dispatch(orderActions.addItem(dish))
   }
 
   return (
-    <>
-      <Header countOrder={countOrderDish} />
-      {dish && <MenuDish dish={dish} addDish={addDish}  priceCurrency={priceCurrency}/>}
-      <MenuBar />
-    </>
+    <>{dish && <MenuDish dish={dish} addDish={addDish} priceCurrency={menu?.priceCurrency} />}</>
   )
 }
 export default DishPage

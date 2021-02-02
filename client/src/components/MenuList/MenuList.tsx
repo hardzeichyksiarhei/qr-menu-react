@@ -1,37 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink, useParams, Link } from 'react-router-dom'
-import menusService from '../../services/menus'
+import React from 'react'
+import { useSelector } from 'react-redux'
+
+import { Row, Col } from 'antd'
 import CardMenu from '../CardMenu/CardMenu'
+
+import menusSelectors from '../../store/selectors/menus'
+
 import { MenuProps } from '../../utils/propsComponents'
 
+const MenuList = () => {
+  const menus: MenuProps[] = useSelector(menusSelectors.menus)
 
-function MenuList() {
-  const [menus, setMenus] = useState<MenuProps[]>([])
-  const {userId} = useParams()
-  const menu = async () => {
-    await menusService
-      .getById(userId)
-
-      .then((menu) => {
-        setMenus(menu)
-      })
-      .catch(() => {
-        console.log('Не удалось загрузить меню')
-      })
+  if (!menus.length) {
+    return null
   }
-  useEffect(() => {
-    menu()
-  }, [])
+
   return (
-    <>
-      {menus.map((menu) => {
-        return (
-          <Link key={menu.id} to={`${userId}/menu/${menu.id}`}>
-            <CardMenu key={menu.id} menu={menu} />
-          </Link>
-        )
-      })}
-    </>
+    <div className="menus-list">
+      <Row gutter={20}>
+        {menus.map((menu) => (
+          <Col span={24} xxl={6} xl={8} md={12} sm={24} key={menu.id}>
+            <CardMenu menu={menu} />
+          </Col>
+        ))}
+      </Row>
+    </div>
   )
 }
 

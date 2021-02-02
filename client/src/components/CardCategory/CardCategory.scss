@@ -1,23 +1,18 @@
-.category{
-    position: relative;
+.category-card {
+    &__title {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #fff !important;
+        font-weight: normal !important;
+    }
 }
-.category__title{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-.card__image{
-    object-fit: cover;
-     width: 100%; 
-     height: 200px;
-     cursor: pointer;
-}
-.dish{
- display: none;
-}
-.dish_visable {
-    display: block;
-}
-.link{
-    width: 100%;
+
+.dish-item {
+    display: flex;
+    gap: 10px;
+    &__meta {
+        display: flex;
+        flex-direction: column;
+    }
 }

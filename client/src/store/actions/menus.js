@@ -1,8 +1,9 @@
 import * as types from '../types/menus'
 
 // Menus
-export const fetchMenus = () => ({
+export const fetchMenus = (userId) => ({
   type: types.FETCH_MENUS,
+  payload: { userId },
 })
 
 export const requestedMenus = () => ({

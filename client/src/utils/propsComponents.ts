@@ -11,6 +11,7 @@ export type Dish = {
   priceValue: number,
   ingredients: any,
   allergens: any,
+  priceCurrency: String
 }
 export type CategoryProps = {
   isVisible: boolean
@@ -41,7 +42,7 @@ export type HeaderProps = { countOrder: number }
 export type MenuListProps = {
   menus: MenuProps[],
 }
-export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void, priceCurrency:string }
+export type MenuDishProps = { dish: Dish, addDish: (dish: Dish) => void, priceCurrency: String | undefined }
 export type DishProps = { dish: Dish }
 export type CardMenuProps = {
   menu: MenuProps,
@@ -62,8 +63,8 @@ export type MenuCategoryProps = {
 
 }
 export type OrderUserProps ={
-dish:Dish, 
-count: number
+  dish: Dish, 
+  count: number
 }
 export type CartProps ={
   orederUser:{dish:Dish, count: number}[],
