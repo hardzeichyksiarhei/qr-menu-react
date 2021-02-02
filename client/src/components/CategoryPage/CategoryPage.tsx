@@ -45,20 +45,18 @@ const CategoryPage = () => {
           className="categories-masonry-grid"
           columnClassName="categories-masonry-grid__column"
         >
-          {[...categoriesByMenuId, ...categoriesByMenuId, ...categoriesByMenuId].map(
-            (category: CategoryProps) => {
-              return (
-                <div className="categories-masonry-grid__item">
-                  <CardCategory
-                    menuId={menuId}
-                    category={category}
-                    priceCurrency={menu.priceCurrency}
-                    key={category.id}
-                  />
-                </div>
-              )
-            },
-          )}
+          {categoriesByMenuId.map((category: CategoryProps) => {
+            return (
+              <div className="categories-masonry-grid__item">
+                <CardCategory
+                  menuId={menuId}
+                  category={category}
+                  priceCurrency={menu.priceCurrency}
+                  key={category.id}
+                />
+              </div>
+            )
+          })}
         </Masonry>
       )}
     </div>
