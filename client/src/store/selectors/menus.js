@@ -3,7 +3,9 @@ const menus = (state) => state.menus.menus
 const menuById = (menuId) => (state) => state.menus.menus.find((menu) => menu.id === menuId)
 
 const categoriesByMenuId = (menuId) => (state) =>
-  state.menus.menus.find((menu) => menu.id === menuId).categories
+  state.menus.menus
+    .find((menu) => menu.id === menuId)
+    ?.categories.filter((category) => category.isVisible)
 
 const category = (menuId) => (categoryId) => (state) =>
   state.menus.menus
