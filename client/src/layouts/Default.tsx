@@ -1,6 +1,6 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { Link, Outlet, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Badge, Layout, Drawer, Grid } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
@@ -8,6 +8,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons'
 import MenuBar from '../components/Navigation/Navigation'
 import Basket from '../components/Basket/Basket'
 
+import * as appActions from '../store/actions/app'
 import orderSelectors from '../store/selectors/order'
 import menusSelectors from '../store/selectors/menus'
 
@@ -15,12 +16,17 @@ const { Header, Content, Footer } = Layout
 const { useBreakpoint } = Grid
 
 function Default() {
+  const dispatch = useDispatch()
   const { userId } = useParams()
   const quantity = useSelector(orderSelectors.quantity)
   const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
 
   const [isCartVisible, setIsCartVisible] = useState(false)
   const screen = useBreakpoint()
+
+  useEffect(() => {
+    if (userId) dispatch(appActions.fetchSettings(userId))
+  }, [dispatch, userId])
 
   return (
     <Layout className="default-layout">
