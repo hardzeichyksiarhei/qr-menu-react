@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { Table, Button, Input, Typography, Empty, Space, notification } from 'antd'
 import orderSelectors from '../../store/selectors/order'
 import * as orderActions from '../../store/actions/order'
@@ -17,6 +18,7 @@ const openNotificationWithIcon = () => {
 }
 
 const Basket = () => {
+  const { userId } = useParams()
   const [tableNumber, setTableNumber] = useState('')
   const [orderComment, setOrderComment] = useState('')
   const dispatch = useDispatch()
@@ -41,17 +43,10 @@ const Basket = () => {
   }
 
   const sendOrder = () => {
-    const list = order.items.map((el: any) => {
-      return {
-        title: el.item.title,
-        priceValue: el.item.priceValue,
-        quantity: el.quantity,
-      }
-    })
     const newOrder = {
-      userId: localStorage.getItem('userId'),
+      userId: userId,
       totalPrice: order.totalPrice,
-      list: list,
+      items: order.items,
       tableNumber: tableNumber,
       comment: orderComment,
     }

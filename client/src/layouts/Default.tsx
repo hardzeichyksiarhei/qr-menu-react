@@ -20,8 +20,6 @@ function Default() {
   const dispatch = useDispatch()
   const { userId } = useParams()
 
-  localStorage.setItem('userId', userId)
-
   const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
   const quantity = useSelector(orderSelectors.quantity)
   const { restaurantName } = useSelector(appSelectors.settings)
