@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Table, PageHeader, Select, Spin, Empty, Space, Button, Modal, List } from 'antd'
-import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
+import moment from 'moment'
+
+import { Table, PageHeader, Select, Space, Button, Modal, List, Popconfirm } from 'antd'
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+
+import './OrdersList.scss'
 
 const { Option } = Select
+
+const ORDER_STATUS = [
+  { key: 'NEW', label: 'NEW', color: '#FF9800' },
+  { key: 'PENDING', label: 'PENDING', color: '#4CAF50' },
+  { key: 'CONFIRMED', label: 'CONFIRMED', color: '#607D8B' },
+  { key: 'CANCELLED', label: 'CANCELLED', color: '#EF5350' },
+]
 
 const OrdersList = ({ orders, isOrdersLoading }) => {
   const intl = useIntl()
@@ -12,10 +23,10 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
   const [selectedOrder, setSelectedOrder] = useState({})
   const [selectedOrderList, setSelectedOrderList] = useState([])
 
-  const showModal = (orderId) => {
-    const order = orders.find((el) => el.orderNumber === orderId)
+  const showModal = (orderNumber) => {
+    const order = orders.find((el) => el.orderNumber === orderNumber)
     setSelectedOrder(order)
-    setSelectedOrderList(order.list)
+    setSelectedOrderList(order.items)
     setIsModalVisible(true)
   }
 
@@ -26,47 +37,47 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
   const columns = [
     {
       title: 'Order Id',
-      dataIndex: 'OrderId',
-      key: 'OrderId',
+      dataIndex: 'orderNumber',
+      key: 'orderNumber',
+      width: '100px',
     },
     {
       title: 'Created',
-      dataIndex: 'Created',
-      key: 'Created',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (value) => moment(value).fromNow(),
     },
     {
       title: 'Table number',
-      dataIndex: 'TableNumber',
-      key: 'TableNumber',
+      dataIndex: 'tableNumber',
+      key: 'tableNumber',
+    },
+    {
+      title: 'Comment',
+      dataIndex: 'comment',
+      key: 'comment',
     },
     {
       title: 'Total',
-      dataIndex: 'Total',
-      key: 'Total',
-    },
-    {
-      title: 'Profit',
-      dataIndex: 'Profit',
-      key: 'Profit',
+      dataIndex: 'totalPrice',
+      key: 'totalPrice',
+      width: '150px',
     },
     {
       title: 'Status',
-      dataIndex: 'Status',
-      key: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      width: '200px',
       render: () => (
-        <Select style={{ width: '120px' }} defaultValue="New">
-          <Option value="New" key="New">
-            New
-          </Option>
-          <Option value="Pending" key="Pending">
-            Pending
-          </Option>
-          <Option value="Confirmed" key="Confirmed">
-            Confirmed
-          </Option>
-          <Option value="Cancelled" key="Cancelled">
-            Cancelled
-          </Option>
+        <Select style={{ minWidth: '150px' }} defaultValue="New" dropdownMatchSelectWidth={false}>
+          {ORDER_STATUS.map((status) => (
+            <Option value={status.key} key={status.key}>
+              <div className="status-item">
+                <span className="status-mark" style={{ backgroundColor: status.color }} />
+                {status.label}
+              </div>
+            </Option>
+          ))}
         </Select>
       ),
     },
@@ -74,44 +85,37 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       title: 'Action',
       dataIndex: 'Action',
       key: 'Action',
+      width: '100px',
       render: (__, record) => (
-        <Space size="middle">
-          <Button key="show_modal" onClick={() => showModal(record.OrderId)}>
-            <EyeOutlined />
-          </Button>
-          <Button key="delete_order">
-            <DeleteOutlined />
-          </Button>
+        <Space>
+          <Button
+            key="show_modal"
+            onClick={() => showModal(record.orderNumber)}
+            icon={<EyeOutlined />}
+          />
+          <Popconfirm
+            title="Are you sure to delete this task?"
+            placement="topRight"
+            onConfirm={() => {}}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="danger" key="delete_order" icon={<DeleteOutlined />} />
+          </Popconfirm>
         </Space>
       ),
     },
   ]
 
-  if (!orders.length && isOrdersLoading) {
-    return (
-      <div className="d-flex justify-content-center">
-        <Spin size="large" />
-      </div>
-    )
-  }
-
-  if (!orders.length && !isOrdersLoading) {
-    return <Empty />
-  }
-
   return (
-    <>
-      <PageHeader ghost={false} title={intl.formatMessage({ id: 'Orders' })} />
-      <Table
-        bordered
-        dataSource={orders.map((order) => ({
-          key: order.orderNumber,
-          OrderId: order.orderNumber,
-          TableNumber: order.tableNumber,
-          Total: order.totalPrice,
-        }))}
-        columns={columns}
+    <div className="orders-list">
+      <PageHeader
+        style={{ paddingLeft: 0, paddingRight: 0 }}
+        ghost={false}
+        title={intl.formatMessage({ id: 'Orders' })}
       />
+      <Table bordered dataSource={orders} loading={isOrdersLoading} columns={columns} />
+
       <Modal
         title={`Order ${selectedOrder.orderNumber}`}
         visible={isModalVisible}
@@ -125,7 +129,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
           renderItem={(item) => <List.Item>{item}</List.Item>}
         />
       </Modal>
-    </>
+    </div>
   )
 }
 
