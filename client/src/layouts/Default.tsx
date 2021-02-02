@@ -6,6 +6,7 @@ import { Badge, Layout, Drawer, Grid } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 
 import MenuBar from '../components/Navigation/Navigation'
+import Basket from '../components/Basket/Basket'
 
 import orderSelectors from '../store/selectors/order'
 
@@ -48,9 +49,7 @@ function Default() {
         visible={isCartVisible}
         onClose={() => setIsCartVisible(false)}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <Basket />
       </Drawer>
     </Layout>
   )
