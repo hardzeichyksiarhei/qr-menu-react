@@ -1,5 +1,9 @@
 @import "~antd/dist/antd.css";
 
+html {
+  overflow-y: scroll;
+}
+
 /* Common */
 .d-block {
   display: block !important;
