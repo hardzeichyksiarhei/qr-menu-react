@@ -38,6 +38,13 @@ const ordersSchema = new Schema(
   },
 )
 
+ordersSchema.virtual('id').get(function () {
+  // eslint-disable-next-line no-underscore-dangle
+  return this._id.toHexString()
+})
+
+ordersSchema.set('toJSON', { virtuals: true })
+
 const Orders = model('Orders', ordersSchema)
 
 module.exports = Orders

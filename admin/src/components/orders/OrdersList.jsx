@@ -114,7 +114,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
         ghost={false}
         title={intl.formatMessage({ id: 'Orders' })}
       />
-      <Table bordered dataSource={orders} loading={isOrdersLoading} columns={columns} />
+      <Table bordered dataSource={orders} loading={isOrdersLoading} columns={columns} rowKey="id" />
 
       <Modal
         title={`Order ${selectedOrder.orderNumber}`}
