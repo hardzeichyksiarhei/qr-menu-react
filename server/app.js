@@ -22,6 +22,7 @@ const ImageRouter = require('./resources/images/image.router')
 const menuPublicRouter = require('./resources/menus/menu.public.router')
 const QRCodePublicRouter = require('./resources/qr-code/qr-code.public.router')
 const ordersPublicRouter = require('./resources/orders/orders.public.router')
+const settingsPublicRouter = require('./resources/settings/settings.public.router')
 
 const io = SocketIO(http, {
   cors: {
@@ -65,8 +66,9 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 app.use('/api/auth', authRouter)
 
 app.use('/api/public/menus', menuPublicRouter)
-app.use('/api/public/orders', ordersPublicRouter)
 app.use('/api/public/qr-code', QRCodePublicRouter)
+app.use('/api/public/orders', ordersPublicRouter)
+app.use('/api/public/settings', settingsPublicRouter)
 
 app.use('/api/users', auth, userRouter)
 app.use('/api/menus', auth, menuRouter)
