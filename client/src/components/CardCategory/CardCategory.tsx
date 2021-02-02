@@ -44,7 +44,7 @@ function CardCategory({ category, menuId, priceCurrency }: CardCategoryProps) {
               </div>
             }
             key={dish.id}
-            disabled={!dish.isEnabledToOrder}
+            collapsible={!dish.isEnabledToOrder ? 'disabled' : undefined}
           >
             <div
               className="dish-item"

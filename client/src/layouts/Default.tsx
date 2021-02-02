@@ -19,8 +19,6 @@ function Default() {
   const [isCartVisible, setIsCartVisible] = useState(false)
   const screen = useBreakpoint()
 
-  console.log(screen)
-
   return (
     <Layout className="default-layout">
       <Header className="default-layout__header">

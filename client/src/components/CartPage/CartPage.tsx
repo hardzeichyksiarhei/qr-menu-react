@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../Header/Header'
-import MenuBar from '../Navigation/Navigation'
 import Cart from '../Cart/Cart'
 import { Dish } from '../../utils/propsComponents'
 import { renderCountOrderDish } from '../../utils/renderCountOrderDish'

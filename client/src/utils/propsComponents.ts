@@ -60,11 +60,11 @@ export type CardCategoryProps = {
   category: CategoryProps,
   menuId: string,
   priceCurrency: string,
-  photo: {
-    id: string,
-    userId:string,
-    sizes: any
-  },
+  // photo: {
+  //   id: string,
+  //   userId:string,
+  //   sizes: any
+  // },
 }
 export type MenuCategoryProps = {
   categoryMenu: CategoryProps[],

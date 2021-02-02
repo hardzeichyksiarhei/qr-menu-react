@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { Spin, Row, Col, Drawer, Empty, PageHeader } from 'antd'
@@ -8,10 +9,13 @@ import ButtonLink from '../ButtonLink'
 import MenuCard from './cards/MenuCard'
 import MenuPreview from './MenuPreview'
 
+import authSelectors from '../../store/selectors/auth'
+
 import { CLIENT_URL } from '../../config'
 
 const MenuList = ({ menus, isMenusLoading }) => {
   const [isMenuPreviewVisible, setIsMenuPreviewVisible] = useState(false)
+  const user = useSelector(authSelectors.user)
 
   if (!menus.length && isMenusLoading) {
     return (
@@ -57,7 +61,7 @@ const MenuList = ({ menus, isMenusLoading }) => {
         width={600}
         destroyOnClose
       >
-        <MenuPreview url={CLIENT_URL} />
+        <MenuPreview url={`${CLIENT_URL}/${user.id}`} />
       </Drawer>
     </div>
   )
