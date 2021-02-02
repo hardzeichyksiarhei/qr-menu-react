@@ -2,6 +2,8 @@ const { Schema, Types, model } = require('mongoose')
 
 const { dishSchema } = require('../menus/menu.model')
 
+console.log(dishSchema)
+
 const orderPosition = new Schema({
   item: [{ type: dishSchema, default: [] }],
   quantity: { type: Number },
