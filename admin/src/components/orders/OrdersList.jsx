@@ -121,7 +121,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
         <List
           size="large"
           header={<div>List:</div>}
-          dataSource={selectedOrderList.map((order) => `${order.name} | x${order.quantity}`)}
+          dataSource={selectedOrderList.map((order) => `${order.title} | x${order.quantity}`)}
           renderItem={(item) => <List.Item>{item}</List.Item>}
         />
       </Modal>

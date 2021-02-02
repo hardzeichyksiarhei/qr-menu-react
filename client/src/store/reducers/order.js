@@ -18,6 +18,7 @@ import * as types from '../types/order'
 const initialState = {
   items: [],
   totalPrice: 0,
+  currency: null,
 }
 
 const reducer = (state = initialState, action) => {
