@@ -52,9 +52,10 @@ const SettingsManagement = () => {
   }
 
   return (
-    <>
+    <div className="settings-management">
       {settingsSaveError ? <Alert type="error" message={settingsSaveError} banner /> : null}
       <PageHeader
+        style={{ paddingLeft: 0, paddingRight: 0 }}
         ghost={false}
         title={intl.formatMessage({ id: 'Settings' })}
         extra={[
@@ -63,11 +64,15 @@ const SettingsManagement = () => {
           </Button>,
         ]}
       />
-      <div className="setting-cards">
-        <SettingsRegionCard regionSettings={settings.regionSettings} changeField={changeField} />
-        <SettingsSupplierCard supplier={settings.supplierSettings} changeField={changeField} />
+      <div className="settings-grid">
+        <div className="settings-col settings-col--region">
+          <SettingsRegionCard regionSettings={settings.regionSettings} changeField={changeField} />
+        </div>
+        <div className="settings-col settings-col--supplier">
+          <SettingsSupplierCard supplier={settings.supplierSettings} changeField={changeField} />
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 export default SettingsManagement

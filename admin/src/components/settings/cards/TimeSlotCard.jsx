@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { TimePicker, Button } from 'antd'
+import { TimePicker, Button, Space } from 'antd'
 import { DeleteFilled } from '@ant-design/icons'
 import moment from 'moment'
 
@@ -31,7 +31,7 @@ const TimeSlotCard = ({ slot, deleteTimeSlot, changeTimeSlot }) => {
   }
 
   return (
-    <>
+    <Space>
       <span>Start work</span>
       <TimePicker
         defaultValue={moment(localSlot.start, 'HH:mm')}
@@ -47,7 +47,7 @@ const TimeSlotCard = ({ slot, deleteTimeSlot, changeTimeSlot }) => {
         onChange={onChangeEnd}
       />
       <Button icon={<DeleteFilled />} type="danger" onClick={onDeleteTimeSlot} />
-    </>
+    </Space>
   )
 }
 
