@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
@@ -5,31 +6,41 @@ import { useIntl } from 'react-intl'
 import { Card, Select, Form, Radio } from 'antd'
 import translate from '../../../intl/translate'
 
+import countries from '../../../countries.json'
+
+const countriesName = []
+countries.map((country) => {
+  const { name } = country
+  countriesName.push({ value: name })
+})
+
 const { Option } = Select
 
 const SettingsRegionCard = ({ regionSettings, changeField }) => {
   const [country, setCountry] = useState(regionSettings.country)
   const [currency, setCurrency] = useState(regionSettings.currency)
   const [timeFormat, setTimeFormat] = useState(regionSettings.timeFormat)
-
   const intl = useIntl()
 
   const setField = (subField, value) => changeField('regionSettings', subField, value)
 
-  const onChangeCountry = (e) => {
-    setCountry(e)
-    setField('country', e)
+  const onChangeCountry = (changedCountry) => {
+    setCountry(changedCountry)
+    setField('country', changedCountry)
   }
 
-  const onChangeCurrency = (e) => {
-    setCurrency(e)
-    setField('currency', e)
+  const onChangeCurrency = (changedCurrency) => {
+    setCurrency(changedCurrency)
+    setField('currency', changedCurrency)
   }
 
-  const onChangeTimeFormat = (e) => {
-    setTimeFormat(e.target.value)
-    setField('timeFormat', e.target.value)
+  const onChangeTimeFormat = (changerTime) => {
+    setTimeFormat(changerTime.target.value)
+    setField('timeFormat', changerTime.target.value)
   }
+
+  const onFiltered = (input, option) =>
+    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
 
   return (
     <Card
@@ -39,12 +50,17 @@ const SettingsRegionCard = ({ regionSettings, changeField }) => {
       <Form name="region-settings-form" layout="vertical">
         <Form.Item label={intl.formatMessage({ id: 'Country' })}>
           <Select
-            placeholder={intl.formatMessage({ id: 'SelectCountry' })}
+            showSearch
             value={country}
+            placeholder={intl.formatMessage({ id: 'SelectCountry' })}
+            filterOption={onFiltered}
             onChange={onChangeCountry}
           >
-            <Option value="Belarus">{translate('Belarus')}</Option>
-            <Option value="Poland">{translate('Poland')}</Option>
+            {countriesName.map((countryItem) => (
+              <Option value={countryItem.value} key={countryItem.value}>
+                {countryItem.value}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item label={intl.formatMessage({ id: 'DefaultCurrency' })}>
