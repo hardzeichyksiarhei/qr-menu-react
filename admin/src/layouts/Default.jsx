@@ -26,7 +26,7 @@ import ProfileDropdown from '../components/ProfileDropdown'
 import LanguageSelect from '../components/LanguageSelect'
 import ButtonLink from '../components/ButtonLink'
 
-const { Header, Content, Sider } = Layout
+const { Header, Content, Sider, Footer } = Layout
 
 const routes = [
   {
@@ -159,6 +159,28 @@ const Default = () => {
             <Outlet />
           </Suspense>
         </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          © 2021 Developed by
+          <a href="https://github.com/hardzeichyksiarhei" target="_blank" rel="noreferrer">
+            &nbsp;hardz&nbsp;
+          </a>
+          /
+          <a href="https://github.com/IKLOA" target="_blank" rel="noreferrer">
+            &nbsp;IKLOA&nbsp;
+          </a>
+          /
+          <a href="https://github.com/Mobidikt" target="_blank" rel="noreferrer">
+            &nbsp;Mobidikt&nbsp;
+          </a>
+          /
+          <a href="https://github.com/Grenzen" target="_blank" rel="noreferrer">
+            &nbsp;Grenzen&nbsp;
+          </a>
+          &nbsp;for&nbsp;
+          <a href="https://rs.school/" target="_blank" rel="noreferrer">
+            RS School
+          </a>
+        </Footer>
       </Layout>
     </Layout>
   )
