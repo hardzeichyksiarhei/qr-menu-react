@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { PageHeader, Space, Statistic } from 'antd'
+import { PageHeader, Space, Statistic, Spin } from 'antd'
 import MenuList from '../MenuList/MenuList'
 
 import * as menusActions from '../../store/actions/menus'
@@ -14,6 +14,7 @@ const DashboardPage = () => {
   const { userId } = useParams()
   const dispatch = useDispatch()
 
+  const isMenusLoading: MenuProps[] = useSelector(menusSelectors.isMenusLoading)
   const menus: MenuProps[] = useSelector(menusSelectors.menus)
 
   useEffect(() => {
@@ -33,6 +34,10 @@ const DashboardPage = () => {
         0,
       )
   }, [menus])
+
+  if (isMenusLoading) {
+    return <Spin size="large" />
+  }
 
   return (
     <div className="menus-page">

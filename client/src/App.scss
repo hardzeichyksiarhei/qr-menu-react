@@ -62,6 +62,11 @@ html {
     align-items: center;
   }
   &__content {
+    &.loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     min-height: 280px;
     margin: 50px;
     padding: 24px;

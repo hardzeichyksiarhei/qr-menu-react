@@ -1,3 +1,5 @@
+const isMenusLoading = (state) => state.menus.isMenusLoading
+
 const menus = (state) => state.menus.menus
 
 const menuById = (menuId) => (state) => state.menus.menus.find((menu) => menu.id === menuId)
@@ -18,4 +20,4 @@ const dish = (menuId) => (categoryId) => (dishId) => (state) =>
     ?.categories.find((category) => category.id === categoryId)
     ?.dishes.find((dish) => dish.id === dishId)
 
-export default { menus, menuById, categoriesByMenuId, category, dish }
+export default { isMenusLoading, menus, menuById, categoriesByMenuId, category, dish }
