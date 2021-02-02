@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
+import { useIntl } from 'react-intl'
 
 import { Button, Image, Space, Popconfirm } from 'antd'
 import {
@@ -16,23 +17,24 @@ import menuSelectors from '../../../store/selectors/menu'
 import appSelectors from '../../../store/selectors/app'
 
 import { SERVER_URL, CURRENCIES } from '../../../config'
-
+import translate from '../../../intl/translate'
 import './DishItem.scss'
 
 const DishItem = ({ dish, onAction }) => {
+  const intl = useIntl()
   const dispatch = useDispatch()
 
   const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
   const menu = useSelector(menuSelectors.menu)
   const { defaultCurrency } = useSelector(appSelectors.settings)
-
+  const copyOfTranslate = intl.formatMessage({ id: 'CopyOf' })
   const handleClickDuplicateDish = () => {
     const { _id, ...copyDish } = dish
     dispatch(
       menuActions.addDish(selectedCategoryId, {
         ...copyDish,
         id: uuid(),
-        title: `Copy of ${dish.title}`,
+        title: `${copyOfTranslate} ${dish.title}`,
       }),
     )
   }
@@ -68,9 +70,21 @@ const DishItem = ({ dish, onAction }) => {
         <div className="dish-item__title">{dish.title}</div>
         <div className="dish-item__description">{dish.description}</div>
         <div className="dish-item__meta">
-          {dish.ingredients.length ? <span>{dish.ingredients.length} ingredients</span> : null}
-          {dish.tags.length ? <span>{dish.tags.length} tags</span> : null}
-          {dish.allergens.length ? <span>{dish.allergens.length} allergens</span> : null}
+          {dish.ingredients.length ? (
+            <span>
+              {dish.ingredients.length} {translate('ingredients')}
+            </span>
+          ) : null}
+          {dish.tags.length ? (
+            <span>
+              {dish.tags.length} {translate('tags')}
+            </span>
+          ) : null}
+          {dish.allergens.length ? (
+            <span>
+              {dish.allergens.length} {translate('allergens')}
+            </span>
+          ) : null}
         </div>
       </div>
       <div className="dish-item__actions">
@@ -79,10 +93,10 @@ const DishItem = ({ dish, onAction }) => {
             <Button icon={<CopyOutlined />} onClick={handleClickDuplicateDish} />
             <Button type="primary" icon={<SettingOutlined />} onClick={handleClickEditDish} />
             <Popconfirm
-              title="Are you sure to delete this item?"
+              title={intl.formatMessage({ id: 'AreYouSureToDeleteThisItem' })}
               onConfirm={handleClickDeleteDish}
-              okText="Yes"
-              cancelText="No"
+              okText={intl.formatMessage({ id: 'Yes' })}
+              cancelText={intl.formatMessage({ id: 'No' })}
               placement="topRight"
             >
               <Button type="danger" icon={<DeleteOutlined />} />

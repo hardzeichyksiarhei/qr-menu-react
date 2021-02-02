@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
+import { useIntl } from 'react-intl'
 
 import { Button, Space, Form, Input, Switch } from 'antd'
 
@@ -19,6 +20,7 @@ const categorySchema = () => ({
 })
 
 const CategoryEditorCard = ({ editCategory, onAction }) => {
+  const intl = useIntl()
   const dispatch = useDispatch()
 
   const [categoryEditorForm] = Form.useForm()
@@ -51,19 +53,27 @@ const CategoryEditorCard = ({ editCategory, onAction }) => {
         initialValues={categorySchema()}
         onFinish={handleClickSave}
       >
-        <Form.Item name="photo" label="Photo">
+        <Form.Item name="photo" label={intl.formatMessage({ id: 'Photo' })}>
           <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
         </Form.Item>
-        <Form.Item name="isVisible" label="Visible" valuePropName="checked">
+        <Form.Item
+          name="isVisible"
+          label={intl.formatMessage({ id: 'Visible' })}
+          valuePropName="checked"
+        >
           <Switch />
         </Form.Item>
-        <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+        <Form.Item
+          label={intl.formatMessage({ id: 'Title' })}
+          name="title"
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="category-editor-form__actions">
             <Space>
-              <Button onClick={handleClickCancel}>Cancel</Button>
+              <Button onClick={handleClickCancel}>{intl.formatMessage({ id: 'Cancel' })}</Button>
               <Button type="primary" htmlType="submit">
                 Ok
               </Button>

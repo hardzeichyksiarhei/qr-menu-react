@@ -14,7 +14,7 @@ import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 
 import { SERVER_URL } from '../../../config'
-
+import translate from '../../../intl/translate'
 import './CategoryItem.scss'
 
 const CategoryItem = ({ category, onAction }) => {
@@ -62,7 +62,9 @@ const CategoryItem = ({ category, onAction }) => {
       </div>
       <div className="category-item__content">
         <div className="category-item__title">{category.title}</div>
-        <div className="category-item__meta">{category.dishes.length} items</div>
+        <div className="category-item__meta">
+          {category.dishes.length} {translate('items')}
+        </div>
       </div>
       <div className="category-item__visible">
         {category.isVisible ? (
@@ -76,10 +78,10 @@ const CategoryItem = ({ category, onAction }) => {
           trigger={['click']}
           overlay={
             <Menu style={{ minWidth: '100px' }}>
-              <Menu.Item onClick={handleClickEditCategory}>Edit</Menu.Item>
+              <Menu.Item onClick={handleClickEditCategory}>{translate('Edit')}</Menu.Item>
 
               <Menu.Item onClick={handleClickDeleteCategory} danger>
-                Delete
+                {translate('Delete')}
               </Menu.Item>
             </Menu>
           }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
-
+import { useIntl } from 'react-intl'
 import { Button, Space, Form, Input, Switch, Select, InputNumber } from 'antd'
 
 import ImagesManagement from '../../images/ImagesManagement'
@@ -29,6 +29,7 @@ const dishSchema = () => ({
 })
 
 const DishEditorCard = ({ editDish, onAction }) => {
+  const intl = useIntl()
   const dispatch = useDispatch()
 
   const [dishEditorForm] = Form.useForm()
@@ -112,20 +113,37 @@ const DishEditorCard = ({ editDish, onAction }) => {
         initialValues={dishSchema()}
         onFinish={handleClickSave}
       >
-        <Form.Item name="photo" label="Photo">
+        <Form.Item name="photo" label={intl.formatMessage({ id: 'Photo' })}>
           <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
         </Form.Item>
-        <Form.Item className="mb-0" name="isPublished" label="Published" valuePropName="checked">
+        <Form.Item
+          className="mb-0"
+          name="isPublished"
+          label={intl.formatMessage({ id: 'Published' })}
+          valuePropName="checked"
+        >
           <Switch />
         </Form.Item>
-        <Form.Item name="isEnabledToOrder" label="Enabled To Order" valuePropName="checked">
+        <Form.Item
+          name="isEnabledToOrder"
+          label={intl.formatMessage({ id: 'EnabledToOrder' })}
+          valuePropName="checked"
+        >
           <Switch />
         </Form.Item>
 
-        <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+        <Form.Item
+          label={intl.formatMessage({ id: 'Title' })}
+          name="title"
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="categoryId" label="Category" rules={[{ required: true }]}>
+        <Form.Item
+          name="categoryId"
+          label={intl.formatMessage({ id: 'Category' })}
+          rules={[{ required: true }]}
+        >
           <Select>
             {menuCategories.map((category) => (
               <Select.Option value={category.id} key={category.id}>
@@ -134,19 +152,19 @@ const DishEditorCard = ({ editDish, onAction }) => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item label="Internal ID" name="internalId">
+        <Form.Item label={intl.formatMessage({ id: 'InternalId' })} name="internalId">
           <Input />
         </Form.Item>
-        <Form.Item label="Description" name="description">
+        <Form.Item label={intl.formatMessage({ id: 'Description' })} name="description">
           <Input.TextArea autoSize />
         </Form.Item>
-        <Form.Item label="Price" name="priceValue">
+        <Form.Item label={intl.formatMessage({ id: 'Price' })} name="priceValue">
           <InputNumber min={0} />
         </Form.Item>
-        <Form.Item label="Ingredients" name="ingredients">
+        <Form.Item label={intl.formatMessage({ id: 'Ingredients' })} name="ingredients">
           <Select mode="tags" options={INGREDIENTS} />
         </Form.Item>
-        <Form.Item label="Allergens" name="allergens">
+        <Form.Item label={intl.formatMessage({ id: 'Allergens' })} name="allergens">
           <Select className="allergens-list" mode="multiple">
             {ALLERGENS.map((allergen) => (
               <Select.Option
@@ -161,7 +179,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item label="Tags" name="tags">
+        <Form.Item label={intl.formatMessage({ id: 'Tags' })} name="tags">
           <Select className="tags-list" mode="multiple">
             {TAGS.map((tag) => (
               <Select.Option className="tags-item" value={tag.id} key={tag.id}>
@@ -176,7 +194,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
         <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="dish-editor-form__actions">
             <Space>
-              <Button onClick={handleClickCancel}>Cancel</Button>
+              <Button onClick={handleClickCancel}>{intl.formatMessage({ id: 'Cancel' })}</Button>
               <Button type="primary" htmlType="submit">
                 Ok
               </Button>

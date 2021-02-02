@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useIntl } from 'react-intl'
 import PropTypes from 'prop-types'
 
 import { Button, Space, Form, Input, Switch } from 'antd'
@@ -8,10 +9,12 @@ import ImagesManagement from '../../images/ImagesManagement'
 
 import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
+import translate from '../../../intl/translate'
 
 import './MenuSettingsEditorCard.scss'
 
 const MenuSettingsEditorCard = ({ onCancel, onSave }) => {
+  const intl = useIntl()
   const dispatch = useDispatch()
   const menu = useSelector(menuSelectors.menu)
 
@@ -42,36 +45,53 @@ const MenuSettingsEditorCard = ({ onCancel, onSave }) => {
         initialValues={menu}
         onFinish={handleClickSave}
       >
-        <Form.Item className="mb-0" name="isPublished" label="Published" valuePropName="checked">
+        <Form.Item
+          className="mb-0"
+          name="isPublished"
+          label={intl.formatMessage({ id: 'Published' })}
+          valuePropName="checked"
+        >
           <Switch />
         </Form.Item>
-        <Form.Item name="isEnabledToOrder" label="Enabled To Order" valuePropName="checked">
+        <Form.Item
+          name="isEnabledToOrder"
+          label={intl.formatMessage({ id: 'EnabledToOrder' })}
+          valuePropName="checked"
+        >
           <Switch />
         </Form.Item>
-        <Form.Item name="photo" label="Photo">
+        <Form.Item name="photo" label={intl.formatMessage({ id: 'Photo' })}>
           <ImagesManagement previewSettings={{ width: 104, height: 104 }} />
         </Form.Item>
-        <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+        <Form.Item
+          label={intl.formatMessage({ id: 'Title' })}
+          name="title"
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item label="Internal comment" name="internalComment">
+        <Form.Item label={intl.formatMessage({ id: 'InternalComment' })} name="internalComment">
           <Input.TextArea autoSize />
         </Form.Item>
         <Form.Item
           className="mb-0"
           name="isPriceVisible"
-          label="Price Visible"
+          label={intl.formatMessage({ id: 'PriceVisible' })}
           valuePropName="checked"
         >
           <Switch />
         </Form.Item>
-        <Form.Item name="isEnergyVisible" label="Energy Visible" valuePropName="checked">
+        <Form.Item
+          name="isEnergyVisible"
+          label={intl.formatMessage({ id: 'EnergyVisible' })}
+          valuePropName="checked"
+        >
           <Switch />
         </Form.Item>
         <Form.Item className="mb-0" wrapperCol={{ span: 24 }}>
           <div className="category-editor-form__actions">
             <Space>
-              <Button onClick={handleClickCancel}>Cancel</Button>
+              <Button onClick={handleClickCancel}>{translate('Cancel')}</Button>
               <Button type="primary" htmlType="submit">
                 Ok
               </Button>
