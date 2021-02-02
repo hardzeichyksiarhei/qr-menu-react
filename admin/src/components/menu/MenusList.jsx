@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 
 import { Spin, Row, Col, Drawer, Empty, PageHeader } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
@@ -7,10 +8,12 @@ import { PlusOutlined } from '@ant-design/icons'
 import ButtonLink from '../ButtonLink'
 import MenuCard from './cards/MenuCard'
 import MenuPreview from './MenuPreview'
+import translate from '../../intl/translate'
 
 import { CLIENT_URL } from '../../config'
 
 const MenuList = ({ menus, isMenusLoading }) => {
+  const intl = useIntl()
   const [isMenuPreviewVisible, setIsMenuPreviewVisible] = useState(false)
 
   if (!menus.length && isMenusLoading) {
@@ -34,10 +37,10 @@ const MenuList = ({ menus, isMenusLoading }) => {
       <PageHeader
         style={{ paddingLeft: 0, paddingRight: 0 }}
         ghost={false}
-        title="Menus"
+        title={intl.formatMessage({ id: 'Menus' })}
         extra={[
           <ButtonLink linkTo="/menus/create" type="primary" icon={<PlusOutlined />} key="add-menu">
-            Add menu
+            {translate('AddMenu')}
           </ButtonLink>,
         ]}
       />

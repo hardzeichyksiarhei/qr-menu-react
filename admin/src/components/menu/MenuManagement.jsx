@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useIntl } from 'react-intl'
 
 import { PageHeader, Button, Modal, notification, Space } from 'antd'
 import { SaveOutlined, SettingOutlined } from '@ant-design/icons'
@@ -14,6 +15,7 @@ import './MenuManagement.scss'
 import MenuSettingsEditorCard from './cards/MenuSettingsEditorCard'
 
 const MenuManagement = () => {
+  const intl = useIntl()
   const dispatch = useDispatch()
 
   const [isMenuNotSave, setIsMenuNotSave] = useState(false)
@@ -41,23 +43,23 @@ const MenuManagement = () => {
         message: 'Warning',
         description: (
           <div>
-            <p>Changes have been made to the menu! Please save your changes or discard them.</p>
+            <p>{intl.formatMessage({ id: 'ChangesDiscard' })}</p>
             <Space>
               <Button
                 onClick={() => notification.close('menu-not-save')}
                 key="cancel-menu-notification"
               >
-                Cancel
+                {intl.formatMessage({ id: 'Cancel' })}
               </Button>
               <Button
                 className="btn btn--warning"
                 onClick={handleDiscardMenu}
                 key="discard-menu-notification"
               >
-                Discord
+                {intl.formatMessage({ id: 'Discard' })}
               </Button>
               <Button type="primary" onClick={handleClickSaveMenu} key="save-menu-notification">
-                Save
+                {intl.formatMessage({ id: 'Save' })}
               </Button>
             </Space>
           </div>
@@ -76,9 +78,14 @@ const MenuManagement = () => {
 
   const menuTitle = (
     <div className="menu-title">
-      <span>{isMenuNotSave ? <span style={{ color: '#fa8c16' }}>* </span> : ''}Menu</span>
+      <span>
+        {isMenuNotSave ? <span style={{ color: '#fa8c16' }}>* </span> : ''}
+        {intl.formatMessage({ id: 'Menu' })}
+      </span>
       {!isMenuLoading && menu.title ? `: ${menu.title}` : null}
-      {isMenuNotSave ? <span style={{ color: '#fa8c16' }}> - not saved</span> : null}
+      {isMenuNotSave ? (
+        <span style={{ color: '#fa8c16' }}> - {intl.formatMessage({ id: 'notSaved' })}</span>
+      ) : null}
     </div>
   )
 
@@ -91,7 +98,7 @@ const MenuManagement = () => {
         extra={[
           isMenuNotSave ? (
             <Button className="btn btn--warning" onClick={handleDiscardMenu} key="discard-menu">
-              Discord
+              {intl.formatMessage({ id: 'Discard' })}
             </Button>
           ) : null,
           <Button
@@ -101,7 +108,7 @@ const MenuManagement = () => {
             loading={isMenuBusy}
             key="save-menu"
           >
-            Save
+            {intl.formatMessage({ id: 'Save' })}
           </Button>,
           <Button
             type="default"
@@ -109,7 +116,7 @@ const MenuManagement = () => {
             onClick={handleClickSettingsMenu}
             key="settings-menu"
           >
-            Settings
+            {intl.formatMessage({ id: 'Settings' })}
           </Button>,
         ]}
       />
@@ -124,7 +131,7 @@ const MenuManagement = () => {
       </div>
 
       <Modal
-        title="Settings"
+        title={intl.formatMessage({ id: 'Settings' })}
         visible={isSettingsEditorVisible}
         width={720}
         footer={null}

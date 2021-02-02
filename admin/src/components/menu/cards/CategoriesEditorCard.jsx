@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useIntl } from 'react-intl'
 
 import { Card, Button, Spin, Modal, Empty } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
@@ -13,10 +14,11 @@ import menuSelectors from '../../../store/selectors/menu'
 import VerticalScrolling from '../../VerticalScrolling'
 import CategoryItem from '../items/CategoryItem'
 import CategoryEditorCard from './CategoryEditorCard'
-
+import translate from '../../../intl/translate'
 import './CategoriesEditorCard.scss'
 
 const CategoriesEditorCard = () => {
+  const intl = useIntl()
   const dispatch = useDispatch()
   const isSortingRef = useRef(false)
 
@@ -87,14 +89,14 @@ const CategoriesEditorCard = () => {
   return (
     <div className="category-editor">
       <Card
-        title={<h3 className="mb-0">Categories</h3>}
+        title={<h3 className="mb-0">{translate('Categories')}</h3>}
         extra={
           <Button
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => handleActionCategory('category:create')}
           >
-            Add new
+            {translate('AddNew')}
           </Button>
         }
       >
@@ -108,7 +110,11 @@ const CategoriesEditorCard = () => {
       </Card>
 
       <Modal
-        title={editCategory ? 'Edit Category' : 'Create category'}
+        title={
+          editCategory
+            ? intl.formatMessage({ id: 'EditCategory' })
+            : intl.formatMessage({ id: 'CreateCategory' })
+        }
         visible={isCategoryEditorVisible}
         footer={null}
         closable={false}

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useIntl } from 'react-intl'
 
 import { Card, Button, Spin, Modal } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
@@ -13,9 +14,11 @@ import VerticalScrolling from '../../VerticalScrolling'
 import DishItem from '../items/DishItem'
 import DishEditorCard from './DishEditorCard'
 
+import translate from '../../../intl/translate'
 import './DishesEditorCard.scss'
 
 const DishesEditorCard = () => {
+  const intl = useIntl()
   const dispatch = useDispatch()
   const isSortingRef = useRef(false)
 
@@ -62,14 +65,14 @@ const DishesEditorCard = () => {
   return (
     <div className="menu-editor">
       <Card
-        title={<h3 className="mb-0">Dishes</h3>}
+        title={<h3 className="mb-0">{translate('Dishes')}</h3>}
         extra={
           <Button
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => handleActionDish('dish:create')}
           >
-            Add new
+            {translate('AddNew')}
           </Button>
         }
       >
@@ -101,7 +104,11 @@ const DishesEditorCard = () => {
       </Card>
 
       <Modal
-        title={editDish ? 'Edit Dish' : 'Create dish'}
+        title={
+          editDish
+            ? intl.formatMessage({ id: 'EditDish' })
+            : intl.formatMessage({ id: 'CreateDish' })
+        }
         visible={isDishEditorVisible}
         width={720}
         footer={null}

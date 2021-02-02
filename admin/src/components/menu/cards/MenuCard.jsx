@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
@@ -10,6 +11,7 @@ import { EditOutlined, MenuOutlined, EyeOutlined } from '@ant-design/icons'
 
 import * as menusActions from '../../../store/actions/menus'
 import menusService from '../../../services/menus'
+import translate from '../../../intl/translate'
 
 import { SERVER_URL } from '../../../config'
 
@@ -18,6 +20,7 @@ import './MenuCard.scss'
 const { Meta } = Card
 
 const MenuCard = ({ menu, onShowPreviewDrawer }) => {
+  const intl = useIntl()
   const dispatch = useDispatch()
   const [isPublishedLoading, setIsPublishedLoading] = useState(false)
 
@@ -79,16 +82,16 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
         <Dropdown
           overlay={
             <Menu>
-              <Menu.Item onClick={handleClickDuplicateMenu}>Duplicate</Menu.Item>
+              <Menu.Item onClick={handleClickDuplicateMenu}>{translate('Duplicate')}</Menu.Item>
               {!menu.deletedAt ? (
                 <Menu.Item onClick={handleClickMoveToTrashMenu} danger>
-                  Move To Trash
+                  {translate('MoveToTrash')}
                 </Menu.Item>
               ) : (
                 [
                   <Menu.Item onClick={handleClickRestoreMenu}>Restore</Menu.Item>,
                   <Menu.Item onClick={handleClickDeleteMenu} danger>
-                    Delete
+                    {translate('Delete')}
                   </Menu.Item>,
                 ]
               )}
@@ -112,13 +115,19 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
             />
           </div>
           <div className="menu-published__label">
-            {menu.isPublished ? 'Published' : 'Unpublished'}
+            {menu.isPublished
+              ? intl.formatMessage({ id: 'Published' })
+              : intl.formatMessage({ id: 'Unpublished' })}
           </div>
         </div>
       </div>
       <Meta
         title={menu.title}
-        description={`${menu.categories.length} categories, ${numberItems} items`}
+        description={`${menu.categories.length} ${intl.formatMessage({
+          id: 'categories',
+        })} , ${numberItems} ${intl.formatMessage({
+          id: 'items',
+        })}`}
       />
     </Card>
   )

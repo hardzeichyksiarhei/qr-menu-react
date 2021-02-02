@@ -15,7 +15,7 @@ const DishPage = () => {
 
   const { userId, menuId, categoryId, dishId } = useParams()
 
-  const menu: Dish | null = useSelector(menusSelectors.dish(menuId))
+  const menu: any = useSelector(menusSelectors.dish(menuId))
   const dish: Dish | null = useSelector(menusSelectors.dish(menuId)(categoryId)(dishId))
 
   useEffect(() => {
