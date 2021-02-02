@@ -21,16 +21,22 @@ function CardCategory({ category, menuId, priceCurrency }: CardCategoryProps) {
       className="category-card"
       bodyStyle={{ padding: 0 }}
       cover={
-        <Image
-          src={
-            category.photo
-              ? `${SERVER_URL}/uploads/${category.photo.userId}/large/${category.photo.sizes.large}`
-              : 'https://via.placeholder.com/1366x768?text=QR Menu'
-          }
-          fallback="https://via.placeholder.com/1366x768?text=QR Menu"
-          preview={false}
-          alt={category.title}
-        />
+        <div className="category-card__cover">
+          <Image
+            src={
+              category.photo
+                ? `${SERVER_URL}/uploads/${category.photo.userId}/large/${category.photo.sizes.large}`
+                : 'https://via.placeholder.com/1366x768?text=QR Menu'
+            }
+            fallback="https://via.placeholder.com/1366x768?text=QR Menu"
+            preview={false}
+            alt={category.title}
+          />
+          <span className="category-card__cover-mask" />
+          <Title level={3} className="category-card__title">
+            {category.title}
+          </Title>
+        </div>
       }
       hoverable
     >
@@ -76,10 +82,6 @@ function CardCategory({ category, menuId, priceCurrency }: CardCategoryProps) {
           </Panel>
         ))}
       </Collapse>
-
-      <Title level={3} className="category-card__title">
-        {category.title}
-      </Title>
     </Card>
   )
 }
