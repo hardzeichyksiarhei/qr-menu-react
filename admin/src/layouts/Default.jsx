@@ -92,7 +92,7 @@ const Default = () => {
           className="left-navigation__create-menu"
           icon={<PlusOutlined />}
         >
-          {translate('CreateMenu')}
+          <span>{translate('CreateMenu')}</span>
         </ButtonLink>
         <Menu theme="dark" selectedKeys={[location.pathname]}>
           {routes.map((route) => (

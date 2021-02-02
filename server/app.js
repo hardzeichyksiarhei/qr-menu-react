@@ -10,7 +10,7 @@ const SocketIO = require('socket.io')
 const { auth } = require('./middlewares')
 const i18n = require('./i18n')
 
-const { CLIENT_URL } = require('./helpers/config')
+const { CLIENT_URL, ADMIN_URL } = require('./helpers/config')
 
 const authRouter = require('./resources/auth/auth.router')
 const userRouter = require('./resources/users/user.router')
@@ -26,7 +26,7 @@ const settingsPublicRouter = require('./resources/settings/settings.public.route
 
 const io = SocketIO(http, {
   cors: {
-    origin: CLIENT_URL,
+    origin: [CLIENT_URL, ADMIN_URL],
     methods: ['GET', 'POST'],
   },
 })

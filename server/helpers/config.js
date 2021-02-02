@@ -11,4 +11,5 @@ module.exports = {
   MONGO_CONNECTION_STRING: process.env.MONGO_CONNECTION_STRING,
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
   CLIENT_URL: process.env.CLIENT_URL,
+  ADMIN_URL: process.env.ADMIN_URL,
 }
