@@ -9,6 +9,7 @@ import MenuBar from '../components/Navigation/Navigation'
 import Basket from '../components/Basket/Basket'
 
 import orderSelectors from '../store/selectors/order'
+import menusSelectors from '../store/selectors/menus'
 
 const { Header, Content, Footer } = Layout
 const { useBreakpoint } = Grid
@@ -16,6 +17,7 @@ const { useBreakpoint } = Grid
 function Default() {
   const { userId } = useParams()
   const quantity = useSelector(orderSelectors.quantity)
+  const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
 
   const [isCartVisible, setIsCartVisible] = useState(false)
   const screen = useBreakpoint()
@@ -32,7 +34,7 @@ function Default() {
           </Badge>
         </div>
       </Header>
-      <Content className="default-layout__content">
+      <Content className={`default-layout__content ${isMenusLoading ? 'loading' : ''}`}>
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>

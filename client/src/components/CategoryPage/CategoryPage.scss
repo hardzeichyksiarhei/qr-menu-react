@@ -1,0 +1,15 @@
+.categories-masonry-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: -20px;
+    width: auto;
+}
+.categories-masonry-grid__column {
+    padding-left: 20px;
+    background-clip: padding-box;
+}
+
+.categories-masonry-grid__item {
+    margin-bottom: 30px;
+}

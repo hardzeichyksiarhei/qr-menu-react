@@ -1,9 +1,13 @@
+const isMenusLoading = (state) => state.menus.isMenusLoading
+
 const menus = (state) => state.menus.menus
 
 const menuById = (menuId) => (state) => state.menus.menus.find((menu) => menu.id === menuId)
 
 const categoriesByMenuId = (menuId) => (state) =>
-  state.menus.menus.find((menu) => menu.id === menuId).categories
+  state.menus.menus
+    .find((menu) => menu.id === menuId)
+    ?.categories.filter((category) => category.isVisible)
 
 const category = (menuId) => (categoryId) => (state) =>
   state.menus.menus
@@ -16,4 +20,4 @@ const dish = (menuId) => (categoryId) => (dishId) => (state) =>
     ?.categories.find((category) => category.id === categoryId)
     ?.dishes.find((dish) => dish.id === dishId)
 
-export default { menus, menuById, categoriesByMenuId, category, dish }
+export default { isMenusLoading, menus, menuById, categoriesByMenuId, category, dish }

@@ -1,0 +1,29 @@
+.menu-card {
+    &.enabled {
+        .menu-card__status {
+            color: #4caf50;
+        }
+    }
+    &.disabled {
+        cursor: not-allowed;
+        opacity: 0.8;
+        .menu-card__status {
+            color: #ff9800;
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+    }
+    &__status {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        color: green;
+        letter-spacing: 1px;
+    }
+    &__title {
+        font-size: 28px;
+        font-weight: normal;
+    }
+}

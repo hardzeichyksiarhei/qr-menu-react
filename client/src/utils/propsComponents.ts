@@ -38,12 +38,13 @@ export type CategoryProps = {
     id: string,
     sizes: any,
     userId: string,
-  } ,
+  },
   dishes: Dish[],
 }
 export type MenuProps = {
   id: string,
   title: string,
+  isEnabledToOrder: Boolean,
   userId: string,
   photo: {
     id: string,

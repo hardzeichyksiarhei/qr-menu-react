@@ -7,6 +7,8 @@ import { CardMenuProps } from '../../utils/propsComponents'
 
 import { SERVER_URL } from '../../config'
 
+import './CardMenu.scss'
+
 const { Meta } = Card
 
 function CardMenu({ menu }: CardMenuProps) {
@@ -17,9 +19,9 @@ function CardMenu({ menu }: CardMenuProps) {
 
   return (
     <Card
-      className="menu-card"
-      style={{ width: '100%', cursor: 'pointer' }}
-      onClick={() => navigate(`/${userId}/menu/${menu.id}`)}
+      className={`menu-card ${menu.isEnabledToOrder ? 'enabled' : 'disabled'}`}
+      bodyStyle={{ padding: '10px' }}
+      onClick={() => menu.isEnabledToOrder && navigate(`/${userId}/menu/${menu.id}`)}
       cover={
         <Image
           src={
@@ -32,10 +34,17 @@ function CardMenu({ menu }: CardMenuProps) {
           alt={menu.title}
         />
       }
-      hoverable
+      hoverable={!!menu.isEnabledToOrder}
     >
       <Meta
-        title={menu.title}
+        title={
+          <div className="menu-card__content">
+            <span className="menu-card__status">
+              {menu.isEnabledToOrder ? 'Enabled To Order' : 'Disabled To Order'}
+            </span>
+            <span className="menu-card__title">{menu.title}</span>
+          </div>
+        }
         description={`${menu.categories.length} categories, ${numberItems} items`}
       />
     </Card>

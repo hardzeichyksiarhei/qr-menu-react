@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Image } from 'antd'
+import { Button, Image, Spin } from 'antd'
 
 import * as menusActions from '../../store/actions/menus'
 import * as orderActions from '../../store/actions/order'
@@ -19,19 +19,26 @@ const DishPage = () => {
 
   const { userId, menuId, categoryId, dishId } = useParams()
 
+  const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
   const menu: any = useSelector(menusSelectors.menuById(menuId))
   const category: any = useSelector(menusSelectors.category(menuId)(categoryId))
-  const dish: Dish | null = useSelector(menusSelectors.dish(menuId)(categoryId)(dishId))
+  const dish: Dish = useSelector(menusSelectors.dish(menuId)(categoryId)(dishId))
 
   useEffect(() => {
     dispatch(menusActions.fetchMenus(userId))
   }, [dispatch, userId])
 
   const addDish = () => {
+    console.log(dish)
+
     dispatch(orderActions.addItem(dish))
   }
 
-  return dish ? (
+  if (isMenusLoading) {
+    return <Spin size="large" />
+  }
+
+  return (
     <div className="dish">
       <div className="dish__image">
         <Image
@@ -101,6 +108,6 @@ const DishPage = () => {
         </Button>
       </div>
     </div>
-  ) : null
+  )
 }
 export default DishPage
