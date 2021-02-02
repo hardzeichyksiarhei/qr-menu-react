@@ -53,7 +53,4 @@ menuSchema.set('toJSON', { virtuals: true })
 
 const Menu = model('Menu', menuSchema)
 
-module.exports = {
-  dishSchema,
-  Menu,
-}
+module.exports = Menu

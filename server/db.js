@@ -5,7 +5,7 @@ const { MONGO_CONNECTION_STRING } = require('./helpers/config')
 const User = require('./resources/users/user.model')
 const Role = require('./resources/roles/role.model')
 const Settings = require('./resources/settings/settings.model')
-const { Menu } = require('./resources/menus/menu.model')
+const Menu = require('./resources/menus/menu.model')
 
 const connectDb = () =>
   // eslint-disable-next-line implicit-arrow-linebreak
