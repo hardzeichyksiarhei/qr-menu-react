@@ -4,14 +4,19 @@ export type Dish = {
   title: string,
   internalId: string,
   description: string,
-  photo: string,
+  photo: {
+    id: string,
+    userId:string,
+    sizes: any
+  },
   isPublished: boolean,
   isEnabledToOrder: boolean,
   tags: [],
   priceValue: number,
   ingredients: any,
   allergens: any,
-  priceCurrency: String
+  priceCurrency: String,
+
 }
 export type CategoryProps = {
   isVisible: boolean
@@ -54,7 +59,12 @@ export type CardDishProps = {
 export type CardCategoryProps = {
   category: CategoryProps,
   menuId: string,
-  priceCurrency: string
+  priceCurrency: string,
+  photo: {
+    id: string,
+    userId:string,
+    sizes: any
+  },
 }
 export type MenuCategoryProps = {
   categoryMenu: CategoryProps[],
