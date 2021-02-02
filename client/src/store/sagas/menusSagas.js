@@ -6,10 +6,11 @@ import * as actions from '../actions/menus'
 import menusService from '../../services/menus'
 
 // Menus
-function* fetchMenus() {
+function* fetchMenus(action) {
+  const { userId } = action.payload
   try {
     yield put(actions.requestedMenus())
-    const menus = yield call(menusService.getAll)
+    const menus = yield call(menusService.getAllByUserId, userId)
     yield put(actions.requestedMenusSuccess(menus))
   } catch (error) {
     yield put(actions.requestedMenusError())

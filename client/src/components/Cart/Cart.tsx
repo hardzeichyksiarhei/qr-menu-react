@@ -5,6 +5,7 @@ import OrderedDish from '../OrderedDish/OrderedDish'
 import './Cart.scss'
 
 const { Title } = Typography
+
 function Cart({ orederUser, dishCountIncrease, dishCountReduce, deleteDish }: CartProps) {
   const [totalPrice, setTotalPrice] = useState<number>(0)
   const calcTotalPrice = (orederUser: OrderUserProps[]) => {

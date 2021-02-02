@@ -1,6 +1,77 @@
-@import '~antd/dist/antd.css';
-.App {
-  text-align: center;
-  padding-bottom: 48px;
+@import "~antd/dist/antd.css";
 
+/* Common */
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.justify-content-end {
+  justify-content: flex-end !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.default-layout {
+  min-height: 100vh;
+  .header-logo {
+    a {
+      color: #fff;
+      font-size: 22px;
+    }
+  }
+  .header-cart {
+    display: flex;
+    align-items: center;
+    a {
+      display: block;
+    }
+    .anticon-shopping-cart {
+      font-size: 28px;
+      color: #fff;
+    }
+    .head-example {
+      width: 42px;
+      height: 42px;
+      border-radius: 2px;
+      background: #eee;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__content {
+    min-height: 280px;
+    margin: 50px;
+    padding: 24px;
+    background: #fff;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* Default Layout */
+  .default-layout {
+    &__content {
+      background-color: #fff;
+      padding: 10px;
+      margin: 10px;
+    }
+  }
 }

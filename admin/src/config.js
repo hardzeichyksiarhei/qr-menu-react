@@ -16,7 +16,7 @@ module.exports = {
   ],
 
   CURRENCIES: {
-    BYN: 'BYN',
+    BLR: 'BYN',
     USD: '$',
     EUR: '€',
     CZK: 'Kč',

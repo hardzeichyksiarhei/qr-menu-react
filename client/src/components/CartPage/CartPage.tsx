@@ -41,16 +41,12 @@ function CategoryPage() {
     setCountOrderDish(renderCountOrderDish(orderUser))
   }
   return (
-    <>
-      <Header countOrder={countOrderDish} />
-      <Cart
-        dishCountIncrease={dishCountIncrease}
-        dishCountReduce={dishCountReduce}
-        orederUser={orderUser}
-        deleteDish={deleteDish}
-      />
-      <MenuBar />
-    </>
+    <Cart
+      dishCountIncrease={dishCountIncrease}
+      dishCountReduce={dishCountReduce}
+      orederUser={orderUser}
+      deleteDish={deleteDish}
+    />
   )
 }
 

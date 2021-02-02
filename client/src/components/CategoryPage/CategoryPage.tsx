@@ -1,59 +1,34 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import Header from '../Header/Header'
-import menusService from '../../services/menus'
-import MenuCategory from '../MenuCategory/MenuCategory'
-import MenuBar from '../Navigation/Navigation'
-import { renderCountOrderDish } from '../../utils/renderCountOrderDish'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import MenuCategory from '../MenuCategory/MenuCategory'
+
+import * as menusActions from '../../store/actions/menus'
+import menusSelectors from '../../store/selectors/menus'
+
 import { MenuProps } from '../../utils/propsComponents'
 
-function CategoryPage() {
-  const orderUser = JSON.parse(localStorage.getItem('orderUser') || '[]')
-  const [countOrderDish, setCountOrderDish] = useState(0)
-  const [menus, setMenus] = useState<MenuProps[]>([])
-  const [priceCurrency, setPriceCurrency] = useState<string | undefined>('')
+const CategoryPage = () => {
+  const dispatch = useDispatch()
 
-  const {userId, menuId } = useParams()
-  const getMenus = async () => {
-    await menusService
-      .getById(userId)
+  const { userId, menuId } = useParams()
 
-      .then((menu) => {
-        setMenus(menu)
-      })
-      .catch(() => {
-        console.log('Не удалось загрузить меню')
-      })
-  }
+  const menu: MenuProps = useSelector(menusSelectors.menuById(menuId))
+
   useEffect(() => {
-    getMenus()
-  }, [])
-  useEffect(() => {
-    setCountOrderDish(renderCountOrderDish(orderUser))
-  }, [orderUser])
-  const menu = useMemo<MenuProps | undefined>(() => {
-    return menus.find((item) => item.id === menuId)
-  }, [menus, menuId])
-  useEffect(() => {
-    if (menu) {
-      setPriceCurrency(menu.priceCurrency)
-    }
-  }, [menu])
-
-
- 
+    dispatch(menusActions.fetchMenus(userId))
+  }, [dispatch, userId])
 
   return (
     <>
-      <Header countOrder={countOrderDish} />
-      {menu && priceCurrency && (
+      {menu && (
         <MenuCategory
-          priceCurrency={priceCurrency}
+          priceCurrency={menu.priceCurrency}
           categoryMenu={menu.categories}
           menuId={menu.id}
         />
       )}
-      <MenuBar />
     </>
   )
 }
