@@ -5,7 +5,10 @@ import * as types from '../types/order'
 {
     items: [{
         quantity: 10,
-        item: {}
+        item: {
+          title: 'Dish'
+          price: 100,
+        }
     }],
     totalPrice: 0
 }
@@ -39,10 +42,30 @@ const reducer = (state = initialState, action) => {
     case types.DELETE_ITEM: {
       const { item: deleteItem } = action.payload
 
-      // const itemIdx = state.items.findIndex(({ item }) => item.id === deleteItem.id)
+      const itemIdx = state.items.findIndex(({ item }) => item.id === deleteItem.id)
+
+      if (state.items[itemIdx].quantity === 1) {
+        const newItems = state.items.filter((el) => el.item.id !== deleteItem.id)
+        return {
+          ...state,
+          items: newItems,
+          totalPrice: state.totalPrice - deleteItem.priceValue,
+        }
+      }
 
       return {
         ...state,
+        items: state.items.map(({ item, quantity }, idx) =>
+          itemIdx === idx ? { quantity: quantity - 1, item } : item,
+        ),
+        totalPrice: state.totalPrice - deleteItem.priceValue,
+      }
+    }
+
+    case types.CLEAR_CART: {
+      return {
+        items: [],
+        totalPrice: 0,
       }
     }
 
