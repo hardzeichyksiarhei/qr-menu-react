@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -22,6 +22,7 @@ const { Meta } = Card
 const MenuCard = ({ menu, onShowPreviewDrawer }) => {
   const intl = useIntl()
   const dispatch = useDispatch()
+  const location = useLocation()
   const [isPublishedLoading, setIsPublishedLoading] = useState(false)
 
   const numberItems = menu.categories.reduce((acc, curr) => acc + curr.dishes.length, 0)
@@ -38,8 +39,13 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
 
   const handleClickMoveToTrashMenu = async () => {
     const deletedAt = moment()
-    await menusService.updateById(menu.id, { deletedAt })
-    dispatch(menusActions.updateMenu(menu.id, { deletedAt }))
+    const payload = {
+      deletedAt,
+      isPublished: false,
+      isEnabledToOrder: false,
+    }
+    await menusService.updateById(menu.id, payload)
+    dispatch(menusActions.updateMenu(menu.id, payload))
   }
 
   const handleClickDeleteMenu = async () => {
@@ -75,14 +81,18 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
         />
       }
       actions={[
-        <Link to={`/menus/${menu.id}/edit`}>
-          <EditOutlined key="edit" />
-        </Link>,
+        location.pathname !== '/menus/trash' ? (
+          <Link to={`/menus/${menu.id}/edit`}>
+            <EditOutlined key="edit" />
+          </Link>
+        ) : null,
         <EyeOutlined key="preview" onClick={onShowPreviewDrawer} />,
         <Dropdown
           overlay={
             <Menu>
-              <Menu.Item onClick={handleClickDuplicateMenu}>{translate('Duplicate')}</Menu.Item>
+              {location.pathname !== '/menus/trash' ? (
+                <Menu.Item onClick={handleClickDuplicateMenu}>{translate('Duplicate')}</Menu.Item>
+              ) : null}
               {!menu.deletedAt ? (
                 <Menu.Item onClick={handleClickMoveToTrashMenu} danger>
                   {translate('MoveToTrash')}
@@ -105,22 +115,24 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
       ]}
       hoverable
     >
-      <div className="menu-availability-block">
-        <div className={`menu-published ${menu.isPublished ? 'published' : 'unpublished'}`}>
-          <div className="menu-published__switch">
-            <Switch
-              defaultChecked={menu.isPublished}
-              loading={isPublishedLoading}
-              onChange={handleChangePublishedMenu}
-            />
-          </div>
-          <div className="menu-published__label">
-            {menu.isPublished
-              ? intl.formatMessage({ id: 'Published' })
-              : intl.formatMessage({ id: 'Unpublished' })}
+      {location.pathname !== '/menus/trash' ? (
+        <div className="menu-availability-block">
+          <div className={`menu-published ${menu.isPublished ? 'published' : 'unpublished'}`}>
+            <div className="menu-published__switch">
+              <Switch
+                defaultChecked={menu.isPublished}
+                loading={isPublishedLoading}
+                onChange={handleChangePublishedMenu}
+              />
+            </div>
+            <div className="menu-published__label">
+              {menu.isPublished
+                ? intl.formatMessage({ id: 'Published' })
+                : intl.formatMessage({ id: 'Unpublished' })}
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
       <Meta
         title={menu.title}
         description={`${menu.categories.length} ${intl.formatMessage({

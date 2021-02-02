@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: '/menus/trash',
-    label: translate('TrashMenu'),
+    label: translate('TrashMenus'),
     icon: <DeleteOutlined />,
   },
   {

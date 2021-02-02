@@ -63,6 +63,7 @@ export default {
     Dashboard: 'Dashboard',
     MyMenus: 'My menus',
     TrashMenu: 'Trash menu',
+    TrashMenus: 'Trash menus',
     Profile: 'Profile',
     MyProfile: 'My Profile',
     // Dashboard

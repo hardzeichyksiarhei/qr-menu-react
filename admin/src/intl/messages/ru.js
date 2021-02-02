@@ -64,7 +64,8 @@ export default {
     // Admin layout
     Dashboard: 'Главная панель',
     MyMenus: 'Мои меню',
-    TrashMenu: 'Удаленные меню',
+    TrashMenu: 'Удаленное меню',
+    TrashMenus: 'Удаленные меню',
     Profile: 'Профиль',
     MyProfile: 'Мой профиль',
     // Dashboard
