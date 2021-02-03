@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const OrdersContoller = require('./orders.public.controller')
+const OrdersPublicContoller = require('./orders.public.controller')
 
-router.route('/').post(OrdersContoller.save)
-router.route('/chart').get(OrdersContoller.getOrdersForChart)
+router.route('/').post(OrdersPublicContoller.save)
 
 module.exports = router

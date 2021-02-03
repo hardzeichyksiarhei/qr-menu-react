@@ -1,3 +1,4 @@
+const { Types } = require('mongoose')
 const { StatusCodes } = require('http-status-codes')
 const catchErrors = require('../../helpers/catchErrors')
 const Orders = require('./orders.model')
@@ -42,4 +43,30 @@ module.exports.deleteById = catchErrors(async (req, res) => {
 
   const order = await Orders.findOneAndDelete({ _id: orderId })
   return res.status(StatusCodes.OK).json(order)
+})
+
+module.exports.getOrdersForChart = catchErrors(async (req, res) => {
+  const { id: userId } = req.user
+
+  const orders = await Orders.aggregate([
+    {
+      $match: { userId: { $eq: Types.ObjectId(userId) } },
+    },
+    {
+      $group: {
+        _id: '$orderDate',
+        secondary: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        primary: '$_id',
+        secondary: '$secondary',
+      },
+    },
+    { $sort: { primary: -1 } },
+  ])
+
+  return res.status(StatusCodes.OK).json(orders)
 })

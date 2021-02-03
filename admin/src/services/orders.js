@@ -12,7 +12,13 @@ const getById = async ({ orderId }) => {
   return status === 200 && data ? data : null
 }
 
+const getOrdersForChart = async () => {
+  const { data, status } = await axios.get(`${API_URL}/orders/chart`)
+  return status === 200 && data ? data : []
+}
+
 export default {
   getAll,
   getById,
+  getOrdersForChart,
 }

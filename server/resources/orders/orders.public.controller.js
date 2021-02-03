@@ -1,4 +1,3 @@
-const { Types } = require('mongoose')
 const { StatusCodes } = require('http-status-codes')
 const dateFormat = require('dateformat')
 const catchErrors = require('../../helpers/catchErrors')
@@ -30,29 +29,4 @@ module.exports.save = catchErrors(async (req, res) => {
   return res
     .status(StatusCodes.CREATED)
     .json({ orderId: createdOrder.id, message: 'Order was created' })
-})
-
-module.exports.getOrdersForChart = catchErrors(async (req, res) => {
-  const { userId } = req.query
-
-  const orders = await Orders.aggregate([
-    {
-      $match: { userId: { $eq: Types.ObjectId(userId) } },
-    },
-    {
-      $group: {
-        _id: '$orderDate',
-        secondary: { $sum: 1 },
-      },
-    },
-    {
-      $project: {
-        _id: 0,
-        primary: '$_id',
-        secondary: '$secondary',
-      },
-    },
-  ])
-
-  return res.status(StatusCodes.OK).json(orders)
 })
