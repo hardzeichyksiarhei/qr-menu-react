@@ -179,7 +179,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
                   <div className="order-item__prices">
                     <span className="price">
                       <b>
-                        {item.priceValue} {selectedOrder.currency}
+                        {item.priceValue ? `${item.priceValue} ${selectedOrder.currency}` : 'Free'}
                       </b>
                     </span>
                     <span>
@@ -188,7 +188,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
                     <span>
                       Total:{' '}
                       <b>
-                        {item.priceValue * quantity} {selectedOrder.currency}
+                        {item.priceValue ? `${item.priceValue} ${selectedOrder.currency}` : 'Free'}
                       </b>
                     </span>
                   </div>
