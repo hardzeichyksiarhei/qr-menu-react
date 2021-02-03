@@ -34,7 +34,7 @@ const DishPage = () => {
     dispatch(orderActions.addItem(dish))
   }
 
-  if (isMenusLoading) {
+  if (!dish && isMenusLoading) {
     return <Spin size="large" />
   }
 

@@ -35,7 +35,7 @@ const DashboardPage = () => {
       )
   }, [menus])
 
-  if (isMenusLoading) {
+  if (!menus.length || isMenusLoading) {
     return <Spin size="large" />
   }
 
