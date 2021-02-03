@@ -48,7 +48,7 @@ const MenuList = ({ menus, isMenusLoading }) => {
         width={600}
         destroyOnClose
       >
-        <MenuPreview url={`${CLIENT_URL}/${user.id}`} />
+        <MenuPreview url={`${CLIENT_URL}/${user?.id}`} />
       </Drawer>
     </div>
   )
