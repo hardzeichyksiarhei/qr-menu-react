@@ -33,7 +33,7 @@ const Basket = () => {
   const { defaultCurrency } = useSelector(appSelectors.settings)
 
   useEffect(() => {
-    if (wasMadeAnOrder) clearOrderHistory()
+    if (wasMadeAnOrder) setWasMadeAnOrder(false)
   }, [order.items])
 
   const addCountToPosition = (dishId: string) => {

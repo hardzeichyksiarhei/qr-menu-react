@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useState, useEffect, useCallback } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -21,6 +21,7 @@ import translate from '../intl/translate'
 import { useAuth } from '../auth/AuthProvider'
 
 import appSelectors from '../store/selectors/app'
+import authSelectors from '../store/selectors/auth'
 
 import ProfileDropdown from '../components/ProfileDropdown'
 import LanguageSelect from '../components/LanguageSelect'
@@ -57,22 +58,32 @@ const routes = [
 ]
 
 const Default = () => {
+  const dispatch = useDispatch()
   const auth = useAuth()
   const location = useLocation()
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-    socket.emit('ROOM:JOIN', localStorage.getItem('userId'))
-  }, [])
+  const user = useSelector(authSelectors.user)
 
   useEffect(() => {
-    socket.on('ROOM:ADD_ORDER', (order) => {
+    if (user) socket.emit('ROOM:JOIN', user.id)
+  }, [user])
+
+  const addOrderHandler = useCallback(
+    (order) => {
       notification.info({
         message: 'A new order has arrived',
       })
       dispatch(addOrder(order))
-    })
-  }, [dispatch])
+    },
+    [dispatch],
+  )
+
+  useEffect(() => {
+    socket.on('ROOM:ADD_ORDER', addOrderHandler)
+    return () => {
+      socket.off('ROOM:ADD_ORDER', addOrderHandler)
+    }
+  }, [addOrderHandler, dispatch])
 
   const [isCollapsed, setIsCollapsed] = useState(false)
   const { restaurantName } = useSelector(appSelectors.settings)

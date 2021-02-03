@@ -35,7 +35,6 @@ io.on('connection', (socket) => {
   socket.on('ROOM:JOIN', (userId) => {
     socket.join(userId)
   })
-  console.log('user connected', socket.id)
   socket.on('ROOM:LEAVE', (userId) => {
     socket.leave(userId)
   })
