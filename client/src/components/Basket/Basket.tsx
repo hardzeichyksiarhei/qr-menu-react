@@ -122,7 +122,7 @@ const Basket = () => {
 
   return (
     <>
-      <Title level={4}>Your order</Title>
+      <Title level={4}>{wasMadeAnOrder ? 'Your order info' : 'Your order'}</Title>
       <Table dataSource={dataSource} columns={tableColumns} pagination={false} />
       <Title level={5} className="order__totalPrice">
         Total price: {order.totalPrice} {defaultCurrency}
@@ -152,7 +152,7 @@ const Basket = () => {
         </>
       ) : (
         <Button type="primary" size={'large'} shape="round" onClick={() => clearOrderHistory()}>
-          Clear your order
+          Clear basket info
         </Button>
       )}
     </>
