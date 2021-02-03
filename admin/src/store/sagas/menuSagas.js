@@ -4,6 +4,8 @@ import { message } from 'antd'
 
 import * as types from '../types/menu'
 import * as actions from '../actions/menu'
+
+import authSelectors from '../selectors/auth'
 import menuSelectors from '../selectors/menu'
 import appSelectors from '../selectors/app'
 
@@ -24,10 +26,16 @@ function* fetchMenu(action) {
 
 // Fetch Default Menu
 function* fetchDefaultMenu() {
+  const user = yield select(authSelectors.user)
   try {
     yield put(actions.requestedMenu())
     const menu = yield call(menusService.getDefaultMenu)
-    yield put(actions.requestedMenuSuccess(menu))
+    yield put(
+      actions.requestedMenuSuccess({
+        ...menu,
+        userId: user.id,
+      }),
+    )
   } catch (error) {
     yield put(actions.requestedMenuError(error.response))
   }
@@ -35,6 +43,7 @@ function* fetchDefaultMenu() {
 
 // Save Menu
 function* saveMenu() {
+  const user = yield select(authSelectors.user)
   const menu = yield select(menuSelectors.menu)
   const { defaultCurrency } = yield select(appSelectors.settings)
 
@@ -43,6 +52,7 @@ function* saveMenu() {
     yield put(actions.requestedSaveMenu())
     const { menuId } = yield call(menusService.save, {
       ...menu,
+      userId: menu.userId || user.id,
       priceCurrency: menu.priceCurrency || defaultCurrency,
     })
     yield put(actions.requestedSaveMenuSuccess(menuId))

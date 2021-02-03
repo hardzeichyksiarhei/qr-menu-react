@@ -72,7 +72,7 @@ const DishesEditorCard = () => {
             icon={<PlusOutlined />}
             onClick={() => handleActionDish('dish:create')}
           >
-            {translate('AddNew')}
+            <span>{translate('AddNew')}</span>
           </Button>
         }
       >

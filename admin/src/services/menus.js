@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { API_URL } from '../config'
 
-const getDefaultMenu = async () => ({})
+const getDefaultMenu = async () => ({ title: 'New menu' })
 
 const getAll = async () => {
   const { data, status } = await axios.get(`${API_URL}/menus`)

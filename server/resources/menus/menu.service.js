@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 const Menu = require('./menu.model')
 
 exports.getAll = async (userId, filters = {}) => {
@@ -12,7 +13,7 @@ exports.getById = async (menuId) => {
 
 exports.create = async (menu) => new Menu(menu).save()
 
-exports.update = async ({ id, userId, ...payload }) => {
+exports.update = async ({ id, userId, createdAt, updatedAt, ...payload }) => {
   const menu = Menu.findOneAndUpdate({ _id: id }, payload, { new: true })
   return menu
 }

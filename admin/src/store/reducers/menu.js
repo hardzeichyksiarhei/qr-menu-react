@@ -35,8 +35,12 @@ const reducer = (state = initialState, action) => {
       }
     }
     case types.REQUESTED_MENU_SUCCEEDED: {
-      const { menu } = action.payload
-      const firstCategory = menu.categories[0]
+      const menu = {
+        ...state.menu,
+        ...action.payload.menu,
+      }
+
+      const firstCategory = menu.categories.length ? menu.categories[0] : {}
 
       return {
         ...state,

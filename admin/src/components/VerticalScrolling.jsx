@@ -10,6 +10,7 @@ const VerticalScrolling = ({ height, children }) => (
 
 const StyledVerticalScrolling = styled.div`
   overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
   max-height: 100%;
   height: ${(props) => props.height};

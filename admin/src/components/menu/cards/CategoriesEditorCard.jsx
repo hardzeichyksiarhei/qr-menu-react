@@ -96,7 +96,7 @@ const CategoriesEditorCard = () => {
             icon={<PlusOutlined />}
             onClick={() => handleActionCategory('category:create')}
           >
-            {translate('AddNew')}
+            <span>{translate('AddNew')}</span>
           </Button>
         }
       >

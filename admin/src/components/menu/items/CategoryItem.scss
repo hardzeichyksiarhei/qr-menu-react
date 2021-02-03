@@ -51,3 +51,11 @@
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .category-item {
+    &__photo {
+      display: none;
+    }
+  }
+}

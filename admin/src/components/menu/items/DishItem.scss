@@ -66,3 +66,25 @@
     color: rgba(0, 0, 0, 0.6);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .dish-item {
+    position: relative;
+    flex-direction: column;
+    &__move {
+      margin-bottom: 10px;
+    }
+    &__photo {
+      margin-bottom: 10px;
+    }
+    &__actions {
+      position: absolute;
+      top: 70px;
+      right: 5px;
+    }
+    &__price {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+  }
+}

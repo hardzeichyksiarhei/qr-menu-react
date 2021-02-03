@@ -172,7 +172,7 @@ const Default = () => {
             <Outlet />
           </Suspense>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
+        <Footer className="app-footer" style={{ textAlign: 'center' }}>
           © 2021 Developed by
           <a href="https://github.com/hardzeichyksiarhei" target="_blank" rel="noreferrer">
             &nbsp;hardz&nbsp;
