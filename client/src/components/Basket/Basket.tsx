@@ -1,6 +1,8 @@
-import React, { useMemo, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
 import { Table, Button, Input, Typography, Empty, Space, notification, message } from 'antd'
 import orderSelectors from '../../store/selectors/order'
 import * as orderActions from '../../store/actions/order'
@@ -13,19 +15,26 @@ const { TextArea } = Input
 const { Title } = Typography
 
 const openNotificationWithIcon = () => {
-  notification['success']({
+  notification.success({
     message: 'Your order was send',
+    placement: 'topLeft',
   })
 }
 
 const Basket = () => {
   const { userId } = useParams()
+
   const [wasMadeAnOrder, setWasMadeAnOrder] = useState(false)
+
   const [tableNumber, setTableNumber] = useState('')
   const [orderComment, setOrderComment] = useState('')
   const dispatch = useDispatch()
   const order = useSelector(orderSelectors.order)
   const { defaultCurrency } = useSelector(appSelectors.settings)
+
+  useEffect(() => {
+    if (wasMadeAnOrder) clearOrderHistory()
+  }, [order.items])
 
   const addCountToPosition = (dishId: string) => {
     const selectedDish = order.items.find((el: any) => el.item.id === dishId)
@@ -81,29 +90,23 @@ const Basket = () => {
       dataIndex: 'Price',
       key: 'Price',
     },
-    {
-      title: 'Action',
-      dataIndex: 'Action',
-      key: 'Action',
-      render: (_: any, record: any) => (
-        <Space size="middle">
-          <Button shape="circle" onClick={() => addCountToPosition(record.key)}>
-            +
-          </Button>
-          <Button shape="circle" onClick={() => removeCountToPosition(record.key)}>
-            -
-          </Button>
-        </Space>
-      ),
-    },
   ]
 
-  const tableColumns = columns.map((column: any) => {
-    if (wasMadeAnOrder) {
-      return column.title !== 'Action' ? column : {}
-    }
-    return column
-  })
+  const columnAction = {
+    title: 'Action',
+    dataIndex: 'Action',
+    key: 'Action',
+    render: (_: any, record: any) => (
+      <Space size="middle">
+        <Button shape="circle" onClick={() => addCountToPosition(record.key)}>
+          +
+        </Button>
+        <Button shape="circle" onClick={() => removeCountToPosition(record.key)}>
+          -
+        </Button>
+      </Space>
+    ),
+  }
 
   const dataSource = useMemo(
     () =>
@@ -121,41 +124,53 @@ const Basket = () => {
   }
 
   return (
-    <>
-      <Title level={4}>Your order</Title>
-      <Table dataSource={dataSource} columns={tableColumns} pagination={false} />
+    <div className="basket">
+      <Title level={3}>Your order</Title>
+
+      <Table
+        dataSource={dataSource}
+        columns={wasMadeAnOrder ? columns : [...columns, columnAction]}
+        pagination={false}
+        size="small"
+        bordered
+      />
+
       <Title level={5} className="order__totalPrice">
         Total price: {order.totalPrice} {defaultCurrency}
       </Title>
       {!wasMadeAnOrder ? (
-        <>
-          <Title level={5}>Your table number</Title>
-          <Input
-            placeholder="add table number"
-            value={tableNumber}
-            onChange={(e) => setTableNumber(e.target.value)}
-          />
-          <Title level={5}>Your comment on the order</Title>
-          <TextArea
-            rows={3}
-            value={orderComment}
-            onChange={(e) => setOrderComment(e.target.value)}
-          />
+        <div className="basket-info">
+          <div className="basket-info__table-number">
+            <Title level={5}>Your table number</Title>
+            <Input
+              placeholder="Add table number"
+              value={tableNumber}
+              onChange={(e) => setTableNumber(e.target.value)}
+            />
+          </div>
+          <div className="basket-info__comment">
+            <Title level={5}>Your comment on the order</Title>
+            <TextArea
+              rows={3}
+              value={orderComment}
+              onChange={(e) => setOrderComment(e.target.value)}
+            />
+          </div>
           <div className="basket-footer">
-            <Button type="primary" size={'large'} shape="round" onClick={() => sendOrder()}>
+            <Button type="primary" onClick={() => sendOrder()}>
               Place order
             </Button>
-            <Button type="primary" size={'large'} shape="round" onClick={() => clearCart()}>
+            <Button onClick={() => clearCart()} danger>
               Clear order
             </Button>
           </div>
-        </>
+        </div>
       ) : (
-        <Button type="primary" size={'large'} shape="round" onClick={() => clearOrderHistory()}>
+        <Button type="primary" onClick={() => clearOrderHistory()} block>
           Clear your order
         </Button>
       )}
-    </>
+    </div>
   )
 }
 

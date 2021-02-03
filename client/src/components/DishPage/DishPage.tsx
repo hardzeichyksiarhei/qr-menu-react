@@ -119,10 +119,17 @@ const DishPage = () => {
           <span className="dish__price">
             {dish.priceValue ? `${dish.priceValue} ${menu.priceCurrency}` : `Free`}
           </span>
-          <Button className="dish__add-to-cart" type="primary" onClick={addDish}>
-            <span>ADD TO CART</span>
-            <b>{dish.priceValue ? `${dish.priceValue} ${menu.priceCurrency}` : `Free`}</b>
-          </Button>
+          {dish.isEnabledToOrder ? (
+            <Button className="dish__add-to-cart" type="primary" onClick={addDish}>
+              <span>ADD TO CART</span>
+              <b>{dish.priceValue ? `${dish.priceValue} ${menu.priceCurrency}` : `Free`}</b>
+            </Button>
+          ) : (
+            <Button className="dish__add-to-cart" danger disabled>
+              <span>DISABLED TO ORDER</span>
+              <b>{dish.priceValue ? `${dish.priceValue} ${menu.priceCurrency}` : `Free`}</b>
+            </Button>
+          )}
         </div>
       </div>
     </div>

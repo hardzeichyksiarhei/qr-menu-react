@@ -76,7 +76,7 @@ function Default() {
       {screen.xs ? <MenuBar onShowCartDrawer={() => setIsCartVisible(true)} /> : null}
 
       <Drawer
-        title="Cart"
+        title={<h2 style={{ margin: 0 }}>CART</h2>}
         placement="right"
         width={480}
         closable={true}
