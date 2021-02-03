@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Table, Button, Input, Typography, Empty, Space, notification } from 'antd'
+import { Table, Button, Input, Typography, Empty, Space, notification, message } from 'antd'
 import orderSelectors from '../../store/selectors/order'
 import * as orderActions from '../../store/actions/order'
 import saveOrder from '../../services/orders'
+import appSelectors from '../../store/selectors/app'
 
 import './Basket.scss'
 
@@ -23,6 +24,7 @@ const Basket = () => {
   const [orderComment, setOrderComment] = useState('')
   const dispatch = useDispatch()
   const order = useSelector(orderSelectors.order)
+  const { defaultCurrency } = useSelector(appSelectors.settings)
 
   if (!order.items.length) {
     return <Empty />
@@ -43,12 +45,16 @@ const Basket = () => {
   }
 
   const sendOrder = () => {
+    if (tableNumber === '') {
+      return message.warning('Field table number is required')
+    }
     const newOrder = {
       userId: userId,
       totalPrice: order.totalPrice,
       items: order.items,
       tableNumber: tableNumber,
       comment: orderComment,
+      currency: defaultCurrency,
     }
     saveOrder(newOrder)
     setTableNumber('')
@@ -105,7 +111,7 @@ const Basket = () => {
       <Title level={4}>Your order</Title>
       <Table dataSource={dataSource} columns={columns} pagination={false} />
       <Title level={5} className="order__totalPrice">
-        Total price: {order.totalPrice}
+        Total price: {order.totalPrice} {defaultCurrency}
       </Title>
       <Title level={5}>Your table number</Title>
       <Input

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import { useIntl } from 'react-intl'
 import moment from 'moment'
 
 import { Table, PageHeader, Select, Space, Button, Modal, List, Popconfirm } from 'antd'
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
-
+import orderService from '../../services/orders'
+import * as orderActions from '../../store/actions/orders'
 import './OrdersList.scss'
 
 const { Option } = Select
@@ -18,10 +20,16 @@ const ORDER_STATUS = [
 ]
 
 const OrdersList = ({ orders, isOrdersLoading }) => {
+  const dispatch = useDispatch()
   const intl = useIntl()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState({})
   const [selectedOrderList, setSelectedOrderList] = useState([])
+
+  const removeOrder = async (orderId) => {
+    await orderService.deleteById(orderId)
+    dispatch(orderActions.removeOrder(orderId))
+  }
 
   const showModal = (orderNumber) => {
     const order = orders.find((el) => el.orderNumber === orderNumber)
@@ -86,7 +94,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       dataIndex: 'Action',
       key: 'Action',
       width: '100px',
-      render: (__, record) => (
+      render: (_, record) => (
         <Space>
           <Button
             key="show_modal"
@@ -96,7 +104,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
           <Popconfirm
             title="Are you sure to delete this task?"
             placement="topRight"
-            onConfirm={() => {}}
+            onConfirm={() => removeOrder(record.id)}
             okText="Yes"
             cancelText="No"
           >

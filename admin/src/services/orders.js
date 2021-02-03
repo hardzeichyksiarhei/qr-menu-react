@@ -12,7 +12,13 @@ const getById = async ({ orderId }) => {
   return status === 200 && data ? data : null
 }
 
+const deleteById = async (orderId) => {
+  const { data, status } = await axios.delete(`${API_URL}/orders/${orderId}`)
+  return status === 200 ? data : null
+}
+
 export default {
   getAll,
   getById,
+  deleteById,
 }
