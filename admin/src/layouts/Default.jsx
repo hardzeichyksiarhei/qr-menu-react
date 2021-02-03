@@ -2,7 +2,7 @@ import React, { Suspense, useState, useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Layout, Menu, Button, Space, Popover, message } from 'antd'
+import { Layout, Menu, Button, Space, Popover, notification } from 'antd'
 import {
   PoweroffOutlined,
   AppstoreAddOutlined,
@@ -67,7 +67,10 @@ const Default = () => {
 
   useEffect(() => {
     socket.on('ROOM:ADD_ORDER', (order) => {
-      message.info('Added a new order')
+      // message.info('Added a new order')
+      notification.info({
+        message: 'A new order has arrived',
+      })
       dispatch(addOrder(order))
     })
   }, [dispatch])

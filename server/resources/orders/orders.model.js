@@ -18,7 +18,7 @@ const dishSchema = new Schema({
 })
 
 const orderPosition = new Schema({
-  item: [{ type: dishSchema, default: [] }],
+  item: { type: dishSchema, default: null },
   quantity: { type: Number },
 })
 
