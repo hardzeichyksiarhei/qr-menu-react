@@ -10,3 +10,57 @@
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.order-item {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    &__photo {
+        .ant-image,
+        .ant-image img {
+            display: block;
+        }
+    }
+    &__body {
+        flex-grow: 1;
+        display: flex;
+    }
+    &__content {
+        flex-grow: 1;
+    }
+    &__title {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    &__meta {
+        display: flex;
+        span {
+            margin-right: 5px;
+            &:after {
+                content: ", ";
+            }
+            &:last-of-type {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+    &__prices {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .order-item {
+        &__body {
+            flex-direction: column;
+        }
+        &__prices {
+            flex-direction: row;
+            gap: 10px;
+        }
+    }
+}
