@@ -65,9 +65,15 @@ const CardCategoryItems = ({ userId, menuId, categoryId, items }: CardCategoryIt
                 >
                   Details
                 </Button>
-                <Button onClick={() => addDish(dish)} size="small" type="primary">
-                  Add to cart
-                </Button>
+                {dish.isEnabledToOrder ? (
+                  <Button onClick={() => addDish(dish)} size="small" type="primary">
+                    Add to cart
+                  </Button>
+                ) : (
+                  <Button size="small" danger disabled>
+                    Disabled
+                  </Button>
+                )}
               </div>
             </div>
           </div>
