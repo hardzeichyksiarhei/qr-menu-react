@@ -4,10 +4,13 @@ import { useDispatch } from 'react-redux'
 import { useIntl } from 'react-intl'
 import moment from 'moment'
 
-import { Table, PageHeader, Select, Space, Button, Modal, List, Popconfirm } from 'antd'
+import { Table, PageHeader, Select, Space, Button, Modal, List, Popconfirm, Image } from 'antd'
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 import orderService from '../../services/orders'
 import * as orderActions from '../../store/actions/orders'
+
+import { SERVER_URL } from '../../config'
+
 import './OrdersList.scss'
 
 const { Option } = Select
@@ -24,7 +27,6 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
   const intl = useIntl()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState({})
-  const [selectedOrderList, setSelectedOrderList] = useState([])
 
   const removeOrder = async (orderId) => {
     await orderService.deleteById(orderId)
@@ -34,7 +36,6 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
   const showModal = (orderNumber) => {
     const order = orders.find((el) => el.orderNumber === orderNumber)
     setSelectedOrder(order)
-    setSelectedOrderList(order.items)
     setIsModalVisible(true)
   }
 
@@ -70,6 +71,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       dataIndex: 'totalPrice',
       key: 'totalPrice',
       width: '150px',
+      render: (value, record) => `${value} ${record.currency}`,
     },
     {
       title: 'Status',
@@ -131,10 +133,56 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
         footer={null}
       >
         <List
-          size="large"
-          header={<div>List:</div>}
-          dataSource={selectedOrderList.map((order) => `${order.title} | x${order.quantity}`)}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          className="order-items"
+          itemLayout="horizontal"
+          dataSource={selectedOrder.items}
+          renderItem={({ item, quantity }) => (
+            <List.Item>
+              <div className="order-item">
+                <div className="order-item__photo">
+                  <Image
+                    width={65}
+                    src={
+                      item.photo
+                        ? `${SERVER_URL}/uploads/${item.photo.userId}/thumbnail/${item.photo.sizes.thumbnail}`
+                        : 'https://via.placeholder.com/80x80?text=QR Menu'
+                    }
+                    preview={false}
+                  />
+                </div>
+                <div className="order-item__body">
+                  <div className="order-item__content">
+                    <h4 className="order-item__title">{item.title}</h4>
+                    <div className="order-item__meta">
+                      {item.ingredients.length ? (
+                        <span>{item.ingredients.length} ingredients</span>
+                      ) : null}
+                      {item.tags.length ? <span>{item.tags.length} tags</span> : null}
+                      {item.allergens.length ? (
+                        <span>{item.allergens.length} allergens</span>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="order-item__prices">
+                    <span className="price">
+                      <b>
+                        {item.priceValue} {selectedOrder.currency}
+                      </b>
+                    </span>
+                    <span>
+                      Quantity: <b>{quantity}</b>
+                    </span>
+                    <span>
+                      Total:{' '}
+                      <b>
+                        {item.priceValue * quantity} {selectedOrder.currency}
+                      </b>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </List.Item>
+          )}
         />
       </Modal>
     </div>
