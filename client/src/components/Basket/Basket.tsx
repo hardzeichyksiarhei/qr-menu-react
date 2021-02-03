@@ -20,6 +20,7 @@ const openNotificationWithIcon = () => {
 
 const Basket = () => {
   const { userId } = useParams()
+  const [wasMadeAnOrder, setWasMadeAnOrder] = useState(false)
   const [tableNumber, setTableNumber] = useState('')
   const [orderComment, setOrderComment] = useState('')
   const dispatch = useDispatch()
@@ -55,8 +56,13 @@ const Basket = () => {
     saveOrder(newOrder)
     setTableNumber('')
     setOrderComment('')
-    clearCart()
     openNotificationWithIcon()
+    setWasMadeAnOrder(true)
+  }
+
+  const clearOrderHistory = () => {
+    clearCart()
+    setWasMadeAnOrder(false)
   }
 
   const columns = [
@@ -92,6 +98,13 @@ const Basket = () => {
     },
   ]
 
+  const tableColumns = columns.map((column: any) => {
+    if (wasMadeAnOrder) {
+      return column.title !== 'Action' ? column : {}
+    }
+    return column
+  })
+
   const dataSource = useMemo(
     () =>
       order.items.map((el: any) => ({
@@ -110,26 +123,38 @@ const Basket = () => {
   return (
     <>
       <Title level={4}>Your order</Title>
-      <Table dataSource={dataSource} columns={columns} pagination={false} />
+      <Table dataSource={dataSource} columns={tableColumns} pagination={false} />
       <Title level={5} className="order__totalPrice">
         Total price: {order.totalPrice} {defaultCurrency}
       </Title>
-      <Title level={5}>Your table number</Title>
-      <Input
-        placeholder="add table number"
-        value={tableNumber}
-        onChange={(e) => setTableNumber(e.target.value)}
-      />
-      <Title level={5}>Your comment on the order</Title>
-      <TextArea rows={3} value={orderComment} onChange={(e) => setOrderComment(e.target.value)} />
-      <div className="basket-footer">
-        <Button type="primary" size={'large'} shape="round" onClick={() => sendOrder()}>
-          Place order
+      {!wasMadeAnOrder ? (
+        <>
+          <Title level={5}>Your table number</Title>
+          <Input
+            placeholder="add table number"
+            value={tableNumber}
+            onChange={(e) => setTableNumber(e.target.value)}
+          />
+          <Title level={5}>Your comment on the order</Title>
+          <TextArea
+            rows={3}
+            value={orderComment}
+            onChange={(e) => setOrderComment(e.target.value)}
+          />
+          <div className="basket-footer">
+            <Button type="primary" size={'large'} shape="round" onClick={() => sendOrder()}>
+              Place order
+            </Button>
+            <Button type="primary" size={'large'} shape="round" onClick={() => clearCart()}>
+              Clear order
+            </Button>
+          </div>
+        </>
+      ) : (
+        <Button type="primary" size={'large'} shape="round" onClick={() => clearOrderHistory()}>
+          Clear your order
         </Button>
-        <Button type="primary" size={'large'} shape="round" onClick={() => clearCart()}>
-          Clear order
-        </Button>
-      </div>
+      )}
     </>
   )
 }
