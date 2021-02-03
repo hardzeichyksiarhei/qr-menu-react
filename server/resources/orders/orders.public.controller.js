@@ -5,7 +5,7 @@ const Orders = require('./orders.model')
 
 module.exports.save = catchErrors(async (req, res) => {
   // eslint-disable-next-line object-curly-newline
-  const { userId, tableNumber, items, totalPrice, comment } = req.body
+  const { userId, tableNumber, items, totalPrice, comment, currency } = req.body
 
   const ordersById = await Orders.find({ userId })
 
@@ -21,6 +21,7 @@ module.exports.save = catchErrors(async (req, res) => {
     totalPrice,
     comment,
     orderDate: date,
+    currency,
   }).save()
 
   req.io.to(userId).emit('ROOM:ADD_ORDER', createdOrder)
