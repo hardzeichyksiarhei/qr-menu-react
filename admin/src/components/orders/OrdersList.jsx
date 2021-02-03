@@ -139,6 +139,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       <Table bordered dataSource={orders} loading={isOrdersLoading} columns={columns} rowKey="id" />
 
       <Modal
+        width={720}
         title={`Order ${selectedOrder.orderNumber}`}
         visible={isModalVisible}
         onCancel={handleCancel}

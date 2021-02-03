@@ -28,7 +28,7 @@ const ordersSchema = new Schema(
     userId: { type: Types.ObjectId, ref: 'User' },
     tableNumber: { type: String },
     items: [{ type: orderPosition }],
-    status: { type: String, default: 'New' },
+    status: { type: String, default: 'NEW' },
     totalPrice: { type: Number },
     comment: { type: String },
     currency: { type: String },
