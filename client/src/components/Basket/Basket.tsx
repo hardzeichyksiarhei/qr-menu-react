@@ -115,7 +115,7 @@ const Basket = () => {
       </Title>
       <Title level={5}>Your table number</Title>
       <Input
-        placeholder="table number"
+        placeholder="add table number"
         value={tableNumber}
         onChange={(e) => setTableNumber(e.target.value)}
       />
