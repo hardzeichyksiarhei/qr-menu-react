@@ -27,7 +27,7 @@ const CategoryPage = () => {
     dispatch(menusActions.fetchMenus(userId))
   }, [dispatch, userId])
 
-  if (isMenusLoading) {
+  if (!menu || isMenusLoading) {
     return <Spin size="large" />
   }
 
@@ -53,7 +53,7 @@ const CategoryPage = () => {
       >
         {categoriesByMenuId.map((category: CategoryProps) => {
           return (
-            <div className="categories-masonry-grid__item">
+            <div className="categories-masonry-grid__item" key={category.id}>
               <CardCategory
                 menuId={menuId}
                 category={category}
