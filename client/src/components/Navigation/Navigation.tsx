@@ -1,24 +1,41 @@
 import React from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import { Menu } from 'antd'
-import { NavLink } from 'react-router-dom'
+import { Button } from 'antd'
 import { ArrowLeftOutlined, HomeOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+
 import './Navigation.scss'
 
-function MenuBar() {
-  const goBack = () => {
-    window.history.back()
-  }
+const MenuBar = (props: any) => {
+  const { userId } = useParams()
+  const navigate = useNavigate()
+  const location = useLocation()
+
   return (
-    <Menu className="menu-bar" mode="horizontal">
-      <Menu.Item icon={<ArrowLeftOutlined />} onClick={goBack} key="back" />
-      <Menu.Item icon={<HomeOutlined />} key="home">
-        <NavLink to="/" />
-      </Menu.Item>
-      <Menu.Item icon={<ShoppingCartOutlined />} key="cart">
-        <NavLink to="/cart" />
-      </Menu.Item>
-    </Menu>
+    <div className="bottom-navigation">
+      {location.pathname !== `/${userId}`
+        ? [
+            <Button
+              icon={<ArrowLeftOutlined style={{ fontSize: '26px' }} />}
+              onClick={() => window.history.back()}
+              type="text"
+              key="back"
+            />,
+            <Button
+              icon={<HomeOutlined style={{ fontSize: '26px' }} />}
+              onClick={() => navigate(`/${userId}`)}
+              type="text"
+              key="home"
+            />,
+          ]
+        : null}
+
+      <Button
+        icon={<ShoppingCartOutlined style={{ fontSize: '26px' }} />}
+        onClick={() => props.onShowCartDrawer()}
+        type="text"
+      />
+    </div>
   )
 }
 

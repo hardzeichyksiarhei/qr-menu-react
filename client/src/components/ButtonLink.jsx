@@ -7,6 +7,9 @@ import { Button } from 'antd'
 const ButtonLink = ({ linkTo, staticContext, ...props }) => {
   const navigate = useNavigate()
 
+  if (staticContext) {
+  }
+
   return linkTo ? <Button {...props} onClick={() => navigate(linkTo)} /> : <Button {...props} />
 }
 

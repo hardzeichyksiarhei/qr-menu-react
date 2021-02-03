@@ -33,6 +33,15 @@ body {
   align-items: center !important;
 }
 
+.content-loading,
+.content-empty {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .default-layout {
   min-height: 100vh;
   .header-logo {
@@ -66,11 +75,7 @@ body {
     align-items: center;
   }
   &__content {
-    &.loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    display: flex;
     min-height: 280px;
     margin: 50px;
     padding: 24px;

@@ -10,7 +10,6 @@ import Basket from '../components/Basket/Basket'
 
 import * as appActions from '../store/actions/app'
 import appSelectors from '../store/selectors/app'
-import menusSelectors from '../store/selectors/menus'
 import orderSelectors from '../store/selectors/order'
 
 const { Header, Content, Footer } = Layout
@@ -20,7 +19,6 @@ function Default() {
   const dispatch = useDispatch()
   const { userId } = useParams()
 
-  const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
   const quantity = useSelector(orderSelectors.quantity)
   const { restaurantName } = useSelector(appSelectors.settings)
 
@@ -47,7 +45,7 @@ function Default() {
           </Badge>
         </div>
       </Header>
-      <Content className={`default-layout__content ${isMenusLoading ? 'loading' : ''}`}>
+      <Content className="default-layout__content">
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
@@ -75,7 +73,8 @@ function Default() {
         </a>
       </Footer>
 
-      {screen.xs ? <MenuBar /> : null}
+      {screen.xs ? <MenuBar onShowCartDrawer={() => setIsCartVisible(true)} /> : null}
+
       <Drawer
         title="Cart"
         placement="right"

@@ -1,20 +1,5 @@
 import * as types from '../types/order'
 
-/*
-
-{
-    items: [{
-        quantity: 10,
-        item: {
-          title: 'Dish'
-          price: 100,
-        }
-    }],
-    totalPrice: 0
-}
-
-*/
-
 const initialState = {
   items: [],
   totalPrice: 0,

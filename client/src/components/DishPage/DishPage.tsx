@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Image, Spin, PageHeader } from 'antd'
+import { Button, Image, Spin, PageHeader, Empty } from 'antd'
 
 import * as menusActions from '../../store/actions/menus'
 import * as orderActions from '../../store/actions/order'
@@ -35,7 +35,19 @@ const DishPage = () => {
   }
 
   if (!dish && isMenusLoading) {
-    return <Spin size="large" />
+    return (
+      <div className="content-loading">
+        <Spin size="large" />
+      </div>
+    )
+  }
+
+  if (!dish && !isMenusLoading) {
+    return (
+      <div className="content-empty">
+        <Empty />
+      </div>
+    )
   }
 
   return (

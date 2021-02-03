@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { PageHeader, Space, Statistic, Spin } from 'antd'
+import { PageHeader, Space, Statistic, Spin, Empty } from 'antd'
 import MenuList from '../MenuList/MenuList'
 
 import * as menusActions from '../../store/actions/menus'
@@ -35,8 +35,20 @@ const DashboardPage = () => {
       )
   }, [menus])
 
-  if (!menus.length || isMenusLoading) {
-    return <Spin size="large" />
+  if (!menus.length && isMenusLoading) {
+    return (
+      <div className="content-loading">
+        <Spin size="large" />
+      </div>
+    )
+  }
+
+  if (!menus.length && !isMenusLoading) {
+    return (
+      <div className="content-empty">
+        <Empty />
+      </div>
+    )
   }
 
   return (
