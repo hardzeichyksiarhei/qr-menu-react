@@ -33,6 +33,13 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
     dispatch(orderActions.removeOrder(orderId))
   }
 
+  const updateOrder = async (newStatus, order) => {
+    const updatedOrder = {
+      status: newStatus,
+    }
+    await orderService.updateById(order.id, updatedOrder)
+  }
+
   const showModal = (orderNumber) => {
     const order = orders.find((el) => el.orderNumber === orderNumber)
     setSelectedOrder(order)
@@ -78,8 +85,13 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       dataIndex: 'status',
       key: 'status',
       width: '200px',
-      render: () => (
-        <Select style={{ minWidth: '150px' }} defaultValue="New" dropdownMatchSelectWidth={false}>
+      render: (_, record) => (
+        <Select
+          style={{ minWidth: '150px' }}
+          defaultValue={record.status}
+          dropdownMatchSelectWidth={false}
+          onChange={(value) => updateOrder(value, record)}
+        >
           {ORDER_STATUS.map((status) => (
             <Option value={status.key} key={status.key}>
               <div className="status-item">
