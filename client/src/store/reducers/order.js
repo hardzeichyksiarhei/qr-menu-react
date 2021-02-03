@@ -1,20 +1,5 @@
 import * as types from '../types/order'
 
-/*
-
-{
-    items: [{
-        quantity: 10,
-        item: {
-          title: 'Dish'
-          price: 100,
-        }
-    }],
-    totalPrice: 0
-}
-
-*/
-
 const initialState = {
   items: [],
   totalPrice: 0,
@@ -33,7 +18,7 @@ const reducer = (state = initialState, action) => {
         items:
           itemIdx !== -1
             ? state.items.map(({ item, quantity }, idx) =>
-                itemIdx === idx ? { quantity: quantity + 1, item } : item,
+                itemIdx === idx ? { quantity: quantity + 1, item } : { quantity, item },
               )
             : [...state.items, { quantity: 1, item: addItem }],
         totalPrice: state.totalPrice + addItem.priceValue,
@@ -57,7 +42,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         items: state.items.map(({ item, quantity }, idx) =>
-          itemIdx === idx ? { quantity: quantity - 1, item } : item,
+          itemIdx === idx ? { quantity: quantity - 1, item } : { quantity, item },
         ),
         totalPrice: state.totalPrice - deleteItem.priceValue,
       }

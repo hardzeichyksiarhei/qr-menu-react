@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Table, Button, Input, Typography, Empty, Space, notification, message } from 'antd'
@@ -25,10 +25,6 @@ const Basket = () => {
   const dispatch = useDispatch()
   const order = useSelector(orderSelectors.order)
   const { defaultCurrency } = useSelector(appSelectors.settings)
-
-  if (!order.items.length) {
-    return <Empty />
-  }
 
   const addCountToPosition = (dishId: string) => {
     const selectedDish = order.items.find((el: any) => el.item.id === dishId)
@@ -96,15 +92,20 @@ const Basket = () => {
     },
   ]
 
-  const dataSource = order.items.map((el: any) => {
-    console.log(el.item.id)
-    return {
-      key: el.item.id,
-      Title: el.item.title,
-      Quantity: el.quantity,
-      Price: el.item.priceValue ? el.item.priceValue : 'free',
-    }
-  })
+  const dataSource = useMemo(
+    () =>
+      order.items.map((el: any) => ({
+        key: el.item.id,
+        Title: el.item.title,
+        Quantity: el.quantity,
+        Price: el.item.priceValue ? el.item.priceValue : 'free',
+      })),
+    [order.items],
+  )
+
+  if (!order.items.length) {
+    return <Empty />
+  }
 
   return (
     <>
