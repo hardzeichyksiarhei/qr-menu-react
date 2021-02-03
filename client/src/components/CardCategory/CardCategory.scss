@@ -38,6 +38,7 @@
     width: 100%;
     display: flex;
     gap: 10px;
+    cursor: default;
     &__photo {
         .ant-image,
         .ant-image img {
@@ -47,6 +48,9 @@
     &__title {
         font-size: 16px;
         margin-bottom: 0;
+    }
+    &__content {
+        flex-grow: 1;
     }
     &__meta {
         display: flex;
@@ -61,6 +65,12 @@
                 }
             }
         }
+    }
+    &__actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
     }
 }
 

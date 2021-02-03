@@ -29,8 +29,6 @@ const DishPage = () => {
   }, [dispatch, userId])
 
   const addDish = () => {
-    console.log(dish)
-
     dispatch(orderActions.addItem(dish))
   }
 
