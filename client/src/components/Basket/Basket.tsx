@@ -125,7 +125,7 @@ const Basket = () => {
 
   return (
     <div className="basket">
-      <Title level={3}>Your order</Title>
+      <Title level={3}>{wasMadeAnOrder ? 'Your order info' : 'Your order'}</Title>
 
       <Table
         dataSource={dataSource}
