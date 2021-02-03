@@ -1,4 +1,4 @@
-import React, { Children, lazy } from 'react'
+import React, { lazy } from 'react'
 
 import DefaultLayout from '../layouts/Default'
 import EmptyLayout from '../layouts/Empty'

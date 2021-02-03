@@ -10,7 +10,6 @@ import Basket from '../components/Basket/Basket'
 
 import * as appActions from '../store/actions/app'
 import appSelectors from '../store/selectors/app'
-import menusSelectors from '../store/selectors/menus'
 import orderSelectors from '../store/selectors/order'
 
 const { Header, Content, Footer } = Layout
