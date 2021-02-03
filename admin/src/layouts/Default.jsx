@@ -67,7 +67,6 @@ const Default = () => {
 
   useEffect(() => {
     socket.on('ROOM:ADD_ORDER', (order) => {
-      // message.info('Added a new order')
       notification.info({
         message: 'A new order has arrived',
       })

@@ -80,7 +80,7 @@ function Default() {
         title="Cart"
         placement="right"
         width={480}
-        closable={false}
+        closable={true}
         visible={isCartVisible}
         onClose={onCloseDrawer}
       >
