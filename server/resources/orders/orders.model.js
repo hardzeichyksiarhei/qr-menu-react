@@ -32,6 +32,7 @@ const ordersSchema = new Schema(
     totalPrice: { type: Number },
     comment: { type: String },
     currency: { type: String },
+    orderDate: { type: String },
   },
   {
     timestamps: true,
