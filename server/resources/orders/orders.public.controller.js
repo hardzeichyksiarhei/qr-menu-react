@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes')
+const dateFormat = require('dateformat')
 const catchErrors = require('../../helpers/catchErrors')
 const Orders = require('./orders.model')
 
@@ -10,6 +11,8 @@ module.exports.save = catchErrors(async (req, res) => {
 
   const maxOrder = ordersById ? ordersById.length : 0
 
+  const date = dateFormat(new Date(), 'yyyy-mm-dd')
+
   const createdOrder = await new Orders({
     orderNumber: maxOrder + 1,
     userId,
@@ -17,6 +20,7 @@ module.exports.save = catchErrors(async (req, res) => {
     items,
     totalPrice,
     comment,
+    orderDate: date,
   }).save()
 
   req.io.to(userId).emit('ROOM:ADD_ORDER', createdOrder)
