@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { useAsync } from 'react-use'
 
 import { Card } from 'antd'
 
-import { Chart } from 'react-charts'
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from 'recharts'
 
 import translate from '../../../intl/translate'
 
@@ -16,45 +16,19 @@ const OrdersStatsCard = () => {
 
   useAsync(async () => {
     const ordersResponse = await ordersService.getOrdersForChart()
-    setOrders(
-      ordersResponse.map((order) => ({
-        primary: new Date(order.primary),
-        secondary: order.secondary,
-      })),
-    )
+    setOrders(ordersResponse)
   }, [])
-
-  const data = useMemo(
-    () => [
-      {
-        label: 'Orders',
-        data: orders,
-      },
-    ],
-    [orders],
-  )
-
-  const series = useMemo(() => ({}), [])
-
-  const axes = useMemo(
-    () => [
-      { primary: true, type: 'time', position: 'bottom' },
-      { type: 'linear', position: 'left' },
-    ],
-    [],
-  )
 
   return (
     <Card className="orders-stats-card" bodyStyle={{ padding: '10px 20px' }} hoverable>
       <h3 className="orders-stats-card__title">{translate('HistoryOrders')}</h3>
-      <div
-        style={{
-          height: '300px',
-          overflow: 'hidden',
-        }}
-      >
-        {orders.length ? <Chart data={data} series={series} axes={axes} tooltip /> : null}
-      </div>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={orders}>
+          <XAxis dataKey="date" />
+          <Bar type="monotone" dataKey="count" fill="#1890ff" />
+          <YAxis />
+        </BarChart>
+      </ResponsiveContainer>
     </Card>
   )
 }

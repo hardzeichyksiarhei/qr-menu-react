@@ -55,17 +55,17 @@ module.exports.getOrdersForChart = catchErrors(async (req, res) => {
     {
       $group: {
         _id: '$orderDate',
-        secondary: { $sum: 1 },
+        count: { $sum: 1 },
       },
     },
     {
       $project: {
         _id: 0,
-        primary: '$_id',
-        secondary: '$secondary',
+        date: '$_id',
+        count: '$count',
       },
     },
-    { $sort: { primary: -1 } },
+    { $sort: { date: 1 } },
   ])
 
   return res.status(StatusCodes.OK).json(orders)
