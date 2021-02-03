@@ -75,7 +75,8 @@ function Default() {
         </a>
       </Footer>
 
-      {screen.xs ? <MenuBar /> : null}
+      {screen.xs ? <MenuBar onShowCartDrawer={() => setIsCartVisible(true)} /> : null}
+
       <Drawer
         title="Cart"
         placement="right"

@@ -11,10 +11,6 @@ import { MenuProps } from '../../utils/propsComponents'
 const MenuList = () => {
   const menus: MenuProps[] = useSelector(menusSelectors.menus)
 
-  if (!menus.length) {
-    return null
-  }
-
   return (
     <div className="menus-list">
       <Row gutter={20}>

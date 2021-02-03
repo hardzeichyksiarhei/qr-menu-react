@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Masonry from 'react-masonry-css'
 
-import { PageHeader, Spin, Statistic } from 'antd'
+import { PageHeader, Spin, Statistic, Empty } from 'antd'
 import CardCategory from '../CardCategory/CardCategory'
 
 import * as menusActions from '../../store/actions/menus'
@@ -27,8 +27,12 @@ const CategoryPage = () => {
     dispatch(menusActions.fetchMenus(userId))
   }, [dispatch, userId])
 
-  if (!menu || isMenusLoading) {
+  if (!menu && isMenusLoading) {
     return <Spin size="large" />
+  }
+
+  if (!menu && !isMenusLoading) {
+    return <Empty />
   }
 
   return (
