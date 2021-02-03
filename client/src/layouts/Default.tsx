@@ -78,7 +78,7 @@ function Default() {
       <Drawer
         title={<h2 style={{ margin: 0 }}>CART</h2>}
         placement="right"
-        width={480}
+        width={screen.xs ? '100%' : 480}
         closable={true}
         visible={isCartVisible}
         onClose={onCloseDrawer}
