@@ -45,6 +45,14 @@ module.exports.deleteById = catchErrors(async (req, res) => {
   return res.status(StatusCodes.OK).json(order)
 })
 
+module.exports.updateById = catchErrors(async (req, res) => {
+  const { orderId } = req.params
+  const { data } = req.body
+
+  const order = await Orders.findOneAndUpdate({ _id: orderId }, data)
+  return res.status(StatusCodes.OK).json(order)
+})
+
 module.exports.getOrdersForChart = catchErrors(async (req, res) => {
   const { id: userId } = req.user
 

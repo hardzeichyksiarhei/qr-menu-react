@@ -22,9 +22,15 @@ const deleteById = async (orderId) => {
   return status === 200 ? data : null
 }
 
+const updateById = async (oderId, data) => {
+  const { status } = await axios.patch(`${API_URL}/orders/${oderId}`, { data })
+  return status === 200
+}
+
 export default {
   getAll,
   getById,
   getOrdersForChart,
   deleteById,
+  updateById,
 }
