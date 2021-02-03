@@ -28,11 +28,19 @@ const CategoryPage = () => {
   }, [dispatch, userId])
 
   if (!menu && isMenusLoading) {
-    return <Spin size="large" />
+    return (
+      <div className="content-loading">
+        <Spin size="large" />
+      </div>
+    )
   }
 
   if (!menu && !isMenusLoading) {
-    return <Empty />
+    return (
+      <div className="content-empty">
+        <Empty />
+      </div>
+    )
   }
 
   return (

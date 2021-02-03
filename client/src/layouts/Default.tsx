@@ -20,7 +20,6 @@ function Default() {
   const dispatch = useDispatch()
   const { userId } = useParams()
 
-  const isMenusLoading: Boolean = useSelector(menusSelectors.isMenusLoading)
   const quantity = useSelector(orderSelectors.quantity)
   const { restaurantName } = useSelector(appSelectors.settings)
 
@@ -47,7 +46,7 @@ function Default() {
           </Badge>
         </div>
       </Header>
-      <Content className={`default-layout__content ${isMenusLoading ? 'loading' : ''}`}>
+      <Content className="default-layout__content">
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
