@@ -43,6 +43,14 @@ const reducer = (state = initialState, action) => {
         orders: [],
       }
     }
+
+    case types.REMOVE_ORDER: {
+      const { orderId } = action.payload
+      return {
+        ...state,
+        orders: state.orders.filter((order) => order.id !== orderId),
+      }
+    }
     default:
       return state
   }

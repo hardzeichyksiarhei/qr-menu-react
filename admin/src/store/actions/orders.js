@@ -23,6 +23,11 @@ export const addOrder = (order) => ({
   payload: { order },
 })
 
+export const removeOrder = (orderId) => ({
+  type: types.REMOVE_ORDER,
+  payload: { orderId },
+})
+
 export const clearOrders = () => ({
   type: types.CLEAR_ORDERS,
 })

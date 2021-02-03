@@ -31,6 +31,10 @@ function Default() {
     if (userId) dispatch(appActions.fetchSettings(userId))
   }, [dispatch, userId])
 
+  const onCloseDrawer = (): void => {
+    setIsCartVisible(false)
+  }
+
   return (
     <Layout className="default-layout">
       <Header className="default-layout__header">
@@ -72,14 +76,13 @@ function Default() {
       </Footer>
 
       {screen.xs ? <MenuBar /> : null}
-
       <Drawer
         title="Cart"
         placement="right"
         width={480}
         closable={false}
         visible={isCartVisible}
-        onClose={() => setIsCartVisible(false)}
+        onClose={onCloseDrawer}
       >
         <Basket />
       </Drawer>
