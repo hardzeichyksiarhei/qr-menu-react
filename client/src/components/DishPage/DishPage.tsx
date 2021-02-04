@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Image, Spin, PageHeader, Empty } from 'antd'
+import { Button, Image, Spin, PageHeader, Empty, message } from 'antd'
 
 import * as menusActions from '../../store/actions/menus'
 import * as orderActions from '../../store/actions/order'
@@ -29,6 +29,7 @@ const DishPage = () => {
   }, [dispatch, userId])
 
   const addDish = () => {
+    message.info({ content: 'Added to cart' })
     dispatch(orderActions.addItem(dish))
   }
 

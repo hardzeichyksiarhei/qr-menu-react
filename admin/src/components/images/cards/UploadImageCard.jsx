@@ -19,12 +19,21 @@ const UploadImageCard = ({ onUploadSuccess, children }) => {
     showUploadList: false,
     customRequest: uploadImage,
     beforeUpload: (file) => {
-      message.loading({ content: 'Loading...', key: 'imported' })
-
       if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type.toLowerCase())) {
         message.error({ content: `${file.name} is not a image file`, key: 'uploaded-fail' })
         return false
       }
+
+      if (file.size > 800000) {
+        message.warning({
+          content: `The "${file.name}" may not be greater than 800 kilobytes.`,
+          key: 'uploaded-fail',
+        })
+        return false
+      }
+
+      message.loading({ content: 'Loading...', key: 'imported' })
+
       return true
     },
     onChange(info) {

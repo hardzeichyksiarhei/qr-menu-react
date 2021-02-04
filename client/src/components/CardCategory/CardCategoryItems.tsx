@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { List, Image, Button, Grid } from 'antd'
+import { List, Image, Button, Grid, message } from 'antd'
 
 import { Dish } from '../../utils/propsComponents'
 
@@ -25,6 +25,7 @@ const CardCategoryItems = ({ userId, menuId, categoryId, items }: CardCategoryIt
   const screen = useBreakpoint()
 
   const addDish = (dish: Dish) => {
+    message.info({ content: 'Added to cart' })
     dispatch(orderActions.addItem(dish))
   }
 
