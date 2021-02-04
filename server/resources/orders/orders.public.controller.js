@@ -25,7 +25,7 @@ module.exports.save = catchErrors(async (req, res) => {
   }).save()
 
   req.io.to(userId).emit('ROOM:ADD_ORDER', createdOrder)
-  req.io.to(userId).emit('ROOM:ADD_ORDER_FOR_CHART')
+  req.io.to(userId).emit('ROOM:ADD_ORDER_FOR_CHART', createdOrder)
 
   return res
     .status(StatusCodes.CREATED)

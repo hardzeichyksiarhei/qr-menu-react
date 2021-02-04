@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useAsync } from 'react-use'
 
 import { Card } from 'antd'
@@ -19,15 +19,30 @@ const OrdersStatsCard = () => {
     setOrders(ordersResponse)
   }, [])
 
+  const addOrderHandler = useCallback(
+    ({ orderDate }) => {
+      if (!orderDate) return
+
+      const orderIdx = orders.findIndex((order) => order.date === orderDate)
+      if (orderIdx !== -1) {
+        setOrders((prevOrders) =>
+          prevOrders.map((order, idx) =>
+            orderIdx === idx ? { date: order.date, count: order.count + 1 } : order,
+          ),
+        )
+      } else {
+        setOrders((prevOrders) => [...prevOrders, { date: orderDate, count: 1 }])
+      }
+    },
+    [orders],
+  )
+
   useEffect(() => {
-    socket.on('ROOM:ADD_ORDER_FOR_CHART', () => {
-      const lastOrderIdx = orders.length - 1
-      const newOrders = orders.map((order, idx) =>
-        lastOrderIdx === idx ? { date: order.date, count: order.count + 1 } : order,
-      )
-      setOrders(newOrders)
-    })
-  }, [orders])
+    socket.on('ROOM:ADD_ORDER_FOR_CHART', addOrderHandler)
+    return () => {
+      socket.off('ROOM:ADD_ORDER_FOR_CHART', addOrderHandler)
+    }
+  }, [addOrderHandler])
 
   return (
     <Card className="orders-stats-card" bodyStyle={{ padding: '10px 20px' }} hoverable>
