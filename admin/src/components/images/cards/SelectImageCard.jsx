@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useAsync } from 'react-use'
 
-import { Modal, Button, Spin } from 'antd'
+import { Modal, Button, Spin, message, Empty } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
 import UploadImageCard from './UploadImageCard'
@@ -32,6 +32,8 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
   const handleDeleteImage = async (imageId) => {
     await imagesService.deleteById(imageId)
     setImagesList((prevState) => prevState.filter((image) => image.id !== imageId))
+
+    message.success({ content: 'Image was deleted' })
   }
 
   const handleSave = () => {
@@ -41,6 +43,29 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
 
   const handleCancel = () => onCloseModal()
   const handleUploadSuccess = (image) => setImagesList((prevState) => [image, ...prevState])
+
+  let content = null
+  if (!imagesList.length) {
+    content = isImageLoading ? (
+      <Spin className="d-flex justify-content-center" size="large" />
+    ) : (
+      <Empty />
+    )
+  } else {
+    content = (
+      <div className="image-uploader-grid">
+        {imagesList.map((image) => (
+          <ImageItem
+            image={image}
+            isSelected={!!localCurrentImage && localCurrentImage.id === image.id}
+            onSelectImage={handleSelectImage}
+            onDeleteImage={handleDeleteImage}
+            key={image.id}
+          />
+        ))}
+      </div>
+    )
+  }
 
   return (
     <Modal
@@ -63,23 +88,7 @@ const SelectImageCard = ({ currentImage, onSelectImage, visible, onCloseModal })
       cancelText="Close"
       centered
     >
-      {!imagesList.length && isImageLoading ? (
-        <div className="image-uploader-loader">
-          <Spin />
-        </div>
-      ) : (
-        <div className="image-uploader-grid">
-          {imagesList.map((image) => (
-            <ImageItem
-              image={image}
-              isSelected={!!localCurrentImage && localCurrentImage.id === image.id}
-              onSelectImage={handleSelectImage}
-              onDeleteImage={handleDeleteImage}
-              key={image.id}
-            />
-          ))}
-        </div>
-      )}
+      {content}
     </Modal>
   )
 }

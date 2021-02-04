@@ -37,9 +37,9 @@
 .dish-item {
     width: 100%;
     display: flex;
-    gap: 10px;
     cursor: default;
     &__photo {
+        margin-right: 10px;
         .ant-image,
         .ant-image img {
             display: block;
@@ -76,6 +76,6 @@
 
 @media screen and (max-width: 576px) {
     .dish-item {
-        padding: 0 16px;
+        padding: 0 10px;
     }
 }

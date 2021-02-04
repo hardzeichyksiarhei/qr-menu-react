@@ -183,6 +183,7 @@
 /* Media */
 @media screen and (max-width: 768px) {
     .app-header {
+        padding: 0 24px;
         &__restaurant-name {
             font-size: 16px;
         }

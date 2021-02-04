@@ -93,3 +93,10 @@ body {
     }
   }
 }
+
+@media screen and (max-width: 576px) {
+  /* Default Layout */
+  .default-layout {
+    padding-bottom: 80px;
+  }
+}

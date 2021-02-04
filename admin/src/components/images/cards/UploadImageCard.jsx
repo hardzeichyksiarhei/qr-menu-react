@@ -32,7 +32,7 @@ const UploadImageCard = ({ onUploadSuccess, children }) => {
         return false
       }
 
-      message.loading({ content: 'Loading...', key: 'imported' })
+      message.loading({ content: 'Loading...', key: 'upload-loading' })
 
       return true
     },
@@ -40,12 +40,14 @@ const UploadImageCard = ({ onUploadSuccess, children }) => {
       if (info.file.status === 'done') {
         message.success({
           content: `${info.file.name} file uploaded successfully`,
-          key: 'uploaded',
+          key: 'upload-end',
         })
 
         onUploadSuccess(info.file.response)
+
+        message.destroy('upload-loading')
       } else if (info.file.status === 'error') {
-        message.error({ content: `${info.file.name} file upload failed.`, key: 'uploaded-fail' })
+        message.error({ content: `${info.file.name} file upload failed.`, key: 'upload-fail' })
       }
     },
   }
