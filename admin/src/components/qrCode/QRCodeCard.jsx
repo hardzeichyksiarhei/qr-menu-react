@@ -25,7 +25,12 @@ const QRCodeCard = () => {
   return (
     <Card className="qr-code-card" hoverable>
       <div className="qr-code-image">
-        <Image width="100%" src={`${qrCodeUrl}`} />
+        <Image
+          width="100%"
+          src={`${qrCodeUrl}`}
+          fallback="https://via.placeholder.com/600x600?text=QR Menu"
+          placeholder
+        />
       </div>
       <div className="qr-code-actions">
         <Button type="primary" icon={<DownloadOutlined />} onClick={downloadQRCode}>

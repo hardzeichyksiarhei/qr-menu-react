@@ -13,12 +13,14 @@ function* fetchSettings() {
       'regionSettings.timeFormat',
       'regionSettings.currency',
       'supplierSettings.restaurantName',
+      'supplierSettings.backgroundImage',
     ])
     yield put(
       actions.requestedSettingsSuccess({
         timeFormat: regionSettings.timeFormat,
         defaultCurrency: regionSettings.currency,
         restaurantName: supplierSettings.restaurantName,
+        background: supplierSettings.backgroundImage,
       }),
     )
   } catch (error) {

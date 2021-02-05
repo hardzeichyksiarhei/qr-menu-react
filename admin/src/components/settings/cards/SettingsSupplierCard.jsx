@@ -78,7 +78,7 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
   }
 
   const onChangeBackgroundImage = (changedBackgroundImage) => {
-    setField('background', changedBackgroundImage)
+    setField('backgroundImage', changedBackgroundImage)
   }
 
   const onChangeTimeWindows = (changerOpenHours) => {
