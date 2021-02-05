@@ -34,6 +34,7 @@ function CardCategory({ category, menuId }: CardCategoryProps) {
             fallback="https://via.placeholder.com/1366x768?text=QR Menu"
             preview={false}
             alt={category.title}
+            placeholder
           />
           <span className="category-card__cover-mask" />
           <Title level={3} className="category-card__title">
