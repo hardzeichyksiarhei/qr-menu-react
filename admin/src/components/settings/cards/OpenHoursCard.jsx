@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useIntl } from 'react-intl'
 import { Collapse } from 'antd'
+import { ClockCircleTwoTone } from '@ant-design/icons'
 import OpenHoursList from './OpenHoursList'
 
 const { Panel } = Collapse
@@ -30,11 +31,23 @@ const OpenHoursCard = ({ openHours, onChangeTimeWindows }) => {
     onChangeTimeWindows(localOpenHours)
   }
 
+  const genExtra = (dayItem) =>
+    dayItem.timeWindows.length ? (
+      <ClockCircleTwoTone twoToneColor="#52c41a" />
+    ) : (
+      <ClockCircleTwoTone twoToneColor="#f7353adb" />
+    )
+
   return (
     <Collapse accordion>
       {localOpenHours.map((dayItem) => (
         <Panel
-          header={`${DAYS[dayItem.dayCode]} - ${dayItem.timeWindows.length ? 'OPEN' : 'CLOSE'}`}
+          header={`${DAYS[dayItem.dayCode]} - ${
+            dayItem.timeWindows.length
+              ? dayItem.timeWindows.map((timeSlot) => ` ${timeSlot.start} - ${timeSlot.end}`)
+              : 'CLOSED'
+          }`}
+          extra={genExtra(dayItem)}
           key={dayItem.dayCode}
         >
           <OpenHoursList
