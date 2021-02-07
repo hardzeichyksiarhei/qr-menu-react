@@ -42,7 +42,7 @@ const OpenHoursCard = ({ openHours, onChangeTimeWindows }) => {
     <Collapse accordion>
       {localOpenHours.map((dayItem) => (
         <Panel
-          header={`${DAYS[dayItem.dayCode]} - ${
+          header={`${DAYS[dayItem.dayCode]} • ${
             dayItem.timeWindows.length
               ? dayItem.timeWindows.map((timeSlot) => ` ${timeSlot.start} - ${timeSlot.end}`)
               : 'CLOSED'

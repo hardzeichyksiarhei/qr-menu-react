@@ -40,7 +40,7 @@ const SettingsManagement = () => {
 
   const saveChanges = () => {
     dispatch(saveSettings())
-    !isSettingsBusy && !settingsSaveError ? message.info('Settings was saved') : null
+    !isSettingsBusy && !settingsSaveError ? message.success('Settings was saved') : null
   }
 
   if (isSettingsLoading || !settings) {
