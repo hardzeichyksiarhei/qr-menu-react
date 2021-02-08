@@ -44,7 +44,7 @@ module.exports.getPopularDishesByUserId = catchErrors(async (req, res) => {
       }
     })
     .sort((a, b) => a.calculateRating - b.calculateRating)
-    .slice(0, 5)
+    .slice(0, 10)
 
   return res.status(StatusCodes.OK).json(dishes)
 })
