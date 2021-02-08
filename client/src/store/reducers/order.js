@@ -1,9 +1,8 @@
 import * as types from '../types/order'
 
 const initialState = {
-  items: JSON.parse(localStorage.getItem('order')).items || [],
-  totalPrice: JSON.parse(localStorage.getItem('order')).totalPrice | 0,
-  currency: null,
+  items: JSON.parse(localStorage.getItem('order'))?.items || [],
+  totalPrice: JSON.parse(localStorage.getItem('order'))?.totalPrice || 0,
 }
 
 const reducer = (state = initialState, action) => {
