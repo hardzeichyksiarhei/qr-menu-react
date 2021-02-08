@@ -9,4 +9,6 @@ router
   .route('/')
   .get([MenuPublicValidator.getAllByUserId(), validate, MenuPublicController.getAllByUserId])
 
+router.route('/rating').patch([MenuPublicController.updateDishRating])
+
 module.exports = router

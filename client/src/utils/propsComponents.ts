@@ -27,7 +27,13 @@ export type Dish = {
   ingredients: String[],
   allergens: Allergen[],
   priceCurrency: String,
-
+  rating: [
+    {key: number, value: number},
+    {key: number, value: number},
+    {key: number, value: number},
+    {key: number, value: number},
+    {key: number, value: number},
+  ] 
 }
 export type CategoryProps = {
   isVisible: boolean

@@ -17,13 +17,18 @@
     &__title {
         font-size: 32px;
         font-weight: normal;
+        margin-bottom: 0;
+    }
+    &__rating {
+        font-size: 26px;
+        margin-bottom: 5px;
     }
     &__description {
         font-size: 16px;
     }
     &__price {
         position: absolute;
-        top: 0;
+        top: -5px;
         right: 0;
         font-size: 28px;
         font-weight: 600;

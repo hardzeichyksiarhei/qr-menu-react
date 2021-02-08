@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Image, Spin, PageHeader, Empty, message } from 'antd'
+import { StarFilled, StarOutlined } from '@ant-design/icons'
+
+import Rating from 'react-rating'
 
 import * as menusActions from '../../store/actions/menus'
 import * as orderActions from '../../store/actions/order'
 import menusSelectors from '../../store/selectors/menus'
+
+import menusService from '../../services/menus'
 
 import { SERVER_URL } from '../../config'
 
@@ -16,6 +21,7 @@ import './DishPage.scss'
 
 const DishPage = () => {
   const dispatch = useDispatch()
+  const [rating, setRating] = useState(0)
 
   const { userId, menuId, categoryId, dishId } = useParams()
 
@@ -28,9 +34,31 @@ const DishPage = () => {
     dispatch(menusActions.fetchMenus(userId))
   }, [dispatch, userId])
 
+  useEffect(() => {
+    if (dish && dish.rating) {
+      const [value1, value2]: number[] = dish.rating.reduce(
+        (acc, curr) => {
+          acc[0] += curr.key * curr.value
+          acc[1] += curr.value
+          return acc
+        },
+        [0, 1],
+      )
+
+      setRating(value1 / value2)
+    }
+  }, [dish])
+
   const addDish = () => {
     message.info({ content: 'Added to cart' })
     dispatch(orderActions.addItem(dish))
+  }
+
+  const handleChangeRating = async (rating: number) => {
+    await menusService.updateDishRating(
+      { menuId: menu.id, categoryId: category.id, dishId: dish.id },
+      rating,
+    )
   }
 
   if (!dish && isMenusLoading) {
@@ -50,7 +78,7 @@ const DishPage = () => {
   }
 
   return (
-    <div className="">
+    <div className="dish-page">
       <PageHeader
         onBack={() => window.history.back()}
         title="Dish"
@@ -75,6 +103,15 @@ const DishPage = () => {
             Category: <span>{category.title}</span>
           </h3>
           <h2 className="dish__title">{dish.title}</h2>
+          <div className="dish__rating">
+            <Rating
+              placeholderRating={rating}
+              placeholderSymbol={<StarFilled style={{ color: '#1890ff' }} />}
+              fullSymbol={<StarFilled style={{ color: 'orange' }} />}
+              emptySymbol={<StarOutlined style={{ color: '#1890ff' }} />}
+              onChange={handleChangeRating}
+            />
+          </div>
           <p className="dish__description">{dish.description}</p>
           <div className="dish__meta">
             <h4>Tags</h4>

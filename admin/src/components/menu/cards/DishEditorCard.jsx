@@ -14,7 +14,7 @@ import { INGREDIENTS, TAGS, ALLERGENS } from '../../../default/menus.default'
 
 import './DishEditorCard.scss'
 
-const dishSchema = () => ({
+export const dishSchema = () => ({
   categoryId: null,
   title: 'New dish',
   internalId: '',
@@ -26,6 +26,13 @@ const dishSchema = () => ({
   tags: [],
   ingredients: [],
   allergens: [],
+  rating: [
+    { key: 1, value: 0 },
+    { key: 2, value: 0 },
+    { key: 3, value: 0 },
+    { key: 4, value: 0 },
+    { key: 5, value: 0 },
+  ],
 })
 
 const DishEditorCard = ({ editDish, onAction }) => {

@@ -7,4 +7,9 @@ const getAllByUserId = async (userId) => {
   return status === 200 && data ? data : null
 }
 
-export default { getAllByUserId }
+const updateDishRating = async (ids, rating) => {
+  const { status } = await axios.patch(`${API_URL}/public/menus/rating`, { ids, rating })
+  return status === 200
+}
+
+export default { getAllByUserId, updateDishRating }

@@ -16,8 +16,11 @@ import * as menuActions from '../../../store/actions/menu'
 import menuSelectors from '../../../store/selectors/menu'
 import appSelectors from '../../../store/selectors/app'
 
+import { dishSchema } from '../cards/DishEditorCard'
+
 import { SERVER_URL, CURRENCIES } from '../../../config'
 import translate from '../../../intl/translate'
+
 import './DishItem.scss'
 
 const DishItem = ({ dish, onAction }) => {
@@ -29,12 +32,13 @@ const DishItem = ({ dish, onAction }) => {
   const { defaultCurrency } = useSelector(appSelectors.settings)
   const copyOfTranslate = intl.formatMessage({ id: 'CopyOf' })
   const handleClickDuplicateDish = () => {
-    const { _id, ...copyDish } = dish
+    const { _id, rating, createdAt, updatedAt, ...copyDish } = dish
     dispatch(
       menuActions.addDish(selectedCategoryId, {
         ...copyDish,
         id: uuid(),
         title: `${copyOfTranslate} ${dish.title}`,
+        rating: dishSchema().rating,
       }),
     )
   }
