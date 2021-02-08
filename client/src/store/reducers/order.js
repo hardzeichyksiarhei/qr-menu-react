@@ -56,6 +56,7 @@ const reducer = (state = initialState, action) => {
     }
 
     case types.CLEAR_CART: {
+      localStorage.setItem('order', JSON.stringify({}))
       return {
         items: [],
         totalPrice: 0,
