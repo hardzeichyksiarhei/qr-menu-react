@@ -67,6 +67,7 @@ const Basket = () => {
     setOrderComment('')
     openNotificationWithIcon()
     setWasMadeAnOrder(true)
+    localStorage.setItem('order', JSON.stringify({}))
   }
 
   const clearOrderHistory = () => {
