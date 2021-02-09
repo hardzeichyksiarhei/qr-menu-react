@@ -45,7 +45,16 @@ body {
 .default-layout {
   min-height: 100vh;
   .header-logo {
-    a {
+    display: flex;
+    align-items: center;
+    &__image {
+      display: flex;
+      margin-right: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    span {
+      display: block;
       color: #fff;
       font-size: 22px;
     }

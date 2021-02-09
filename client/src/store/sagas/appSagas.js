@@ -13,12 +13,13 @@ function* fetchSettings(action) {
     const { regionSettings, supplierSettings } = yield call(
       settingsService.getFieldsSettings,
       userId,
-      ['regionSettings.currency', 'supplierSettings.restaurantName'],
+      ['regionSettings.currency', 'supplierSettings.restaurantName', 'supplierSettings.logo'],
     )
     yield put(
       actions.requestedSettingsSuccess({
         defaultCurrency: regionSettings.currency,
         restaurantName: supplierSettings.restaurantName,
+        logo: supplierSettings.logo,
       }),
     )
   } catch (error) {

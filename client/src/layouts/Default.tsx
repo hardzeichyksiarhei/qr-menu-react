@@ -2,8 +2,8 @@ import React, { Suspense, useState, useEffect } from 'react'
 import { Link, Outlet, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Badge, Layout, Drawer, Grid } from 'antd'
-import { ShoppingCartOutlined } from '@ant-design/icons'
+import { Badge, Layout, Drawer, Grid, Avatar, Image } from 'antd'
+import { ShoppingCartOutlined, QrcodeOutlined } from '@ant-design/icons'
 
 import MenuBar from '../components/Navigation/Navigation'
 import Basket from '../components/Basket/Basket'
@@ -11,6 +11,8 @@ import Basket from '../components/Basket/Basket'
 import * as appActions from '../store/actions/app'
 import appSelectors from '../store/selectors/app'
 import orderSelectors from '../store/selectors/order'
+
+import { SERVER_URL } from '../config'
 
 const { Header, Content, Footer } = Layout
 const { useBreakpoint } = Grid
@@ -20,7 +22,7 @@ function Default() {
   const { userId } = useParams()
 
   const quantity = useSelector(orderSelectors.quantity)
-  const { restaurantName } = useSelector(appSelectors.settings)
+  const { restaurantName, logo } = useSelector(appSelectors.settings)
 
   const [isCartVisible, setIsCartVisible] = useState(false)
   const screen = useBreakpoint()
@@ -36,9 +38,25 @@ function Default() {
   return (
     <Layout className="default-layout">
       <Header className="default-layout__header">
-        <div className="header-logo">
-          <Link to={`/${userId}`}>{restaurantName || 'QR Menu Clone'}</Link>
-        </div>
+        <Link to={`/${userId}`} className="header-logo">
+          <div className="header-logo__image">
+            {logo ? (
+              <Image
+                width={40}
+                src={
+                  logo
+                    ? `${SERVER_URL}/uploads/${logo.userId}/thumbnail/${logo.sizes.thumbnail}`
+                    : 'https://via.placeholder.com/80x80?text=QR Menu'
+                }
+                preview={false}
+              />
+            ) : (
+              <Avatar shape="square" size={40} icon={<QrcodeOutlined />} />
+            )}
+          </div>
+
+          <span>{restaurantName || 'QR Menu Clone'}</span>
+        </Link>
         <div className="header-cart">
           <Badge count={quantity}>
             <ShoppingCartOutlined onClick={() => setIsCartVisible(true)} />
