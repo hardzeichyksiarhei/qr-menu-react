@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { Suspense, useState, useEffect, useCallback } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Layout, Menu, Button, Space, Popover, notification } from 'antd'
+import { Layout, Menu, Button, Space, Popover, notification, Spin } from 'antd'
 import {
   PoweroffOutlined,
   AppstoreAddOutlined,
@@ -26,6 +27,8 @@ import authSelectors from '../store/selectors/auth'
 import ProfileDropdown from '../components/ProfileDropdown'
 import LanguageSelect from '../components/LanguageSelect'
 import ButtonLink from '../components/ButtonLink'
+
+import PageLoader from '../components/PageLoader'
 
 const { Header, Content, Sider, Footer } = Layout
 
@@ -63,6 +66,7 @@ const Default = () => {
   const location = useLocation()
 
   const user = useSelector(authSelectors.user)
+  const isLoading = useSelector(authSelectors.isLoading)
 
   useEffect(() => {
     if (user) {
@@ -92,113 +96,119 @@ const Default = () => {
   const { restaurantName } = useSelector(appSelectors.settings)
 
   return (
-    <Layout className="default-layout" hasSider>
-      <Sider
-        className="left-navigation"
-        breakpoint="lg"
-        width={280}
-        collapsed={isCollapsed}
-        collapsedWidth={0}
-        zeroWidthTriggerStyle={{ display: 'none' }}
-        onBreakpoint={setIsCollapsed}
-      >
-        <h2 className="left-navigation__logo">QR Menu</h2>
-        <ButtonLink
-          linkTo="/menus/create"
-          className="left-navigation__create-menu"
-          icon={<PlusOutlined />}
+    <PageLoader isLoading={isLoading} content={<Spin size="large" />}>
+      <Layout className="default-layout" hasSider>
+        <Sider
+          className="left-navigation"
+          breakpoint="lg"
+          width={280}
+          collapsed={isCollapsed}
+          collapsedWidth={0}
+          zeroWidthTriggerStyle={{ display: 'none' }}
+          onBreakpoint={setIsCollapsed}
         >
-          <span>{translate('CreateMenu')}</span>
-        </ButtonLink>
-        <Menu theme="dark" selectedKeys={[location.pathname]}>
-          {routes.map((route) => (
-            <Menu.Item className="left-navigation__item" key={route.path} icon={route.icon}>
-              <Link to={route.path}>{route.label}</Link>
-            </Menu.Item>
-          ))}
-          <Menu.Item
-            className="left-navigation__item"
-            icon={<LogoutOutlined />}
-            onClick={auth.logout}
-            key="logout"
+          <h2 className="left-navigation__logo">QR Menu</h2>
+          <ButtonLink
+            linkTo="/menus/create"
+            className="left-navigation__create-menu"
+            icon={<PlusOutlined />}
           >
-            {translate('Logout')}
-          </Menu.Item>
-        </Menu>
-      </Sider>
+            <span>{translate('CreateMenu')}</span>
+          </ButtonLink>
+          <Menu theme="dark" selectedKeys={[location.pathname]}>
+            {routes.map((route) => (
+              <Menu.Item className="left-navigation__item" key={route.path} icon={route.icon}>
+                <Link to={route.path}>{route.label}</Link>
+              </Menu.Item>
+            ))}
+            <Menu.Item
+              className="left-navigation__item"
+              icon={<LogoutOutlined />}
+              onClick={auth.logout}
+              key="logout"
+            >
+              {translate('Logout')}
+            </Menu.Item>
+          </Menu>
+        </Sider>
 
-      <Layout className="default-layout__container">
-        <Header className="app-header">
-          <Space className="d-flex align-items-center">
-            {isCollapsed ? (
-              <Popover
-                overlayClassName="popover-navigation"
-                placement="bottomLeft"
-                content={[
-                  <ButtonLink
-                    linkTo="/menus/create"
-                    className="popover-menu__create-menu"
-                    icon={<PlusOutlined />}
-                  >
-                    Menu Create
-                  </ButtonLink>,
-                  <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
-                    {routes.map((route) => (
-                      <Menu.Item className="popover-menu__item" key={route.path} icon={route.icon}>
-                        <Link to={route.path}>{route.label}</Link>
-                      </Menu.Item>
-                    ))}
-                  </Menu>,
-                ]}
-                trigger="focus"
-              >
-                <Button icon={<MenuOutlined />} />
-              </Popover>
-            ) : null}
-            <h1 className="app-header__restaurant-name">{restaurantName}</h1>
-          </Space>
-          <div className="app-header__controls">
-            <Space>
-              <LanguageSelect />
-              <ProfileDropdown />
-              <Button
-                className="app-header__logout"
-                type="danger"
-                icon={<PoweroffOutlined />}
-                onClick={auth.logout}
-              />
+        <Layout className="default-layout__container">
+          <Header className="app-header">
+            <Space className="d-flex align-items-center">
+              {isCollapsed ? (
+                <Popover
+                  overlayClassName="popover-navigation"
+                  placement="bottomLeft"
+                  content={[
+                    <ButtonLink
+                      linkTo="/menus/create"
+                      className="popover-menu__create-menu"
+                      icon={<PlusOutlined />}
+                    >
+                      Menu Create
+                    </ButtonLink>,
+                    <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
+                      {routes.map((route) => (
+                        <Menu.Item
+                          className="popover-menu__item"
+                          key={route.path}
+                          icon={route.icon}
+                        >
+                          <Link to={route.path}>{route.label}</Link>
+                        </Menu.Item>
+                      ))}
+                    </Menu>,
+                  ]}
+                  trigger="focus"
+                >
+                  <Button icon={<MenuOutlined />} />
+                </Popover>
+              ) : null}
+              <h1 className="app-header__restaurant-name">{restaurantName}</h1>
             </Space>
-          </div>
-        </Header>
-        <Content className="default-layout__content">
-          <Suspense fallback={null}>
-            <Outlet />
-          </Suspense>
-        </Content>
-        <Footer className="app-footer" style={{ textAlign: 'center' }}>
-          © 2021 Developed by
-          <a href="https://github.com/hardzeichyksiarhei" target="_blank" rel="noreferrer">
-            &nbsp;hardz&nbsp;
-          </a>
-          /
-          <a href="https://github.com/IKLOA" target="_blank" rel="noreferrer">
-            &nbsp;IKLOA&nbsp;
-          </a>
-          /
-          <a href="https://github.com/Mobidikt" target="_blank" rel="noreferrer">
-            &nbsp;Mobidikt&nbsp;
-          </a>
-          /
-          <a href="https://github.com/Grenzen" target="_blank" rel="noreferrer">
-            &nbsp;Grenzen&nbsp;
-          </a>
-          &nbsp;for&nbsp;
-          <a href="https://rs.school/" target="_blank" rel="noreferrer">
-            RS School
-          </a>
-        </Footer>
+            <div className="app-header__controls">
+              <Space>
+                <LanguageSelect />
+                <ProfileDropdown />
+                <Button
+                  className="app-header__logout"
+                  type="danger"
+                  icon={<PoweroffOutlined />}
+                  onClick={auth.logout}
+                />
+              </Space>
+            </div>
+          </Header>
+          <Content className="default-layout__content">
+            <Suspense fallback={null}>
+              <Outlet />
+            </Suspense>
+          </Content>
+          <Footer className="app-footer" style={{ textAlign: 'center' }}>
+            © 2021 Developed by
+            <a href="https://github.com/hardzeichyksiarhei" target="_blank" rel="noreferrer">
+              &nbsp;hardz&nbsp;
+            </a>
+            /
+            <a href="https://github.com/IKLOA" target="_blank" rel="noreferrer">
+              &nbsp;IKLOA&nbsp;
+            </a>
+            /
+            <a href="https://github.com/Mobidikt" target="_blank" rel="noreferrer">
+              &nbsp;Mobidikt&nbsp;
+            </a>
+            /
+            <a href="https://github.com/Grenzen" target="_blank" rel="noreferrer">
+              &nbsp;Grenzen&nbsp;
+            </a>
+            &nbsp;for&nbsp;
+            <a href="https://rs.school/" target="_blank" rel="noreferrer">
+              RS School
+            </a>
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </PageLoader>
   )
 }
 

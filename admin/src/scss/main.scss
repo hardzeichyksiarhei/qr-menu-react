@@ -64,7 +64,29 @@
     }
 }
 
+/* Page Loader */
+.page-loader {
+    position: fixed !important;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    transition: 0.3s all linear;
+    &.show {
+        opacity: 1;
+    }
+    &.hide {
+        opacity: 0;
+    }
+}
+
 /* Default Layout */
+
 .default-layout {
     display: flex;
     flex-direction: column;
