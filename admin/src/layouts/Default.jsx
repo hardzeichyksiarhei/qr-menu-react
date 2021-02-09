@@ -107,7 +107,15 @@ const Default = () => {
           zeroWidthTriggerStyle={{ display: 'none' }}
           onBreakpoint={setIsCollapsed}
         >
-          <h2 className="left-navigation__logo">QR Menu</h2>
+          <a
+            href="https://youtu.be/law1w1XCzyo"
+            className="left-navigation__logo"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src="./qr-logo.png" alt="QR Code" />
+            <span>QR Menu</span>
+          </a>
           <ButtonLink
             linkTo="/menus/create"
             className="left-navigation__create-menu"

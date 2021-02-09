@@ -129,13 +129,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 64px;
+        flex-direction: column;
         font-size: 22px;
-        margin-bottom: 0;
+        padding: 20px 0;
         line-height: 1;
         color: #fff;
-        span {
-            margin-left: 10px;
+        img {
+            display: block;
+            width: 64px;
+            margin-bottom: 15px;
         }
     }
     &__item {

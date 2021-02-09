@@ -54,7 +54,9 @@
     }
     &__meta {
         display: flex;
+        flex-wrap: wrap;
         span {
+            white-space: nowrap;
             margin-right: 5px;
             &:after {
                 content: ", ";
