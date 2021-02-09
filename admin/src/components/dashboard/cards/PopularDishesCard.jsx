@@ -79,7 +79,12 @@ const PopularDishesCard = () => {
   }
 
   return (
-    <Card className="popular-dishes-card" bodyStyle={{ height: '100%', padding: 0 }} bordered>
+    <Card
+      className="popular-dishes-card"
+      bodyStyle={{ height: '100%', padding: 0 }}
+      hoverable
+      bordered
+    >
       <h3 className="popular-dishes-card__title">Popular Dishes</h3>
       <VerticalScrolling maxHeight="calc(100% - 46px)">{content}</VerticalScrolling>
     </Card>
