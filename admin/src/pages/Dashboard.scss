@@ -4,7 +4,7 @@
         "a b b c"
         "d d d d";
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto 360px;
+    grid-template-rows: 400px 360px;
     gap: 20px;
 }
 

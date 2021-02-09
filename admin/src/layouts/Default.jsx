@@ -65,7 +65,10 @@ const Default = () => {
   const user = useSelector(authSelectors.user)
 
   useEffect(() => {
-    if (user) socket.emit('ROOM:JOIN', user.id)
+    if (user) {
+      socket.emit('ROOM:JOIN', user.id)
+      notification.destroy('session-expired')
+    }
   }, [user])
 
   const addOrderHandler = useCallback(

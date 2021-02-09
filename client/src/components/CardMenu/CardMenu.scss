@@ -8,6 +8,9 @@
     &.disabled {
         cursor: not-allowed;
         opacity: 0.8;
+        .menu-card__photo {
+            opacity: 0.5;
+        }
         .menu-card__status {
             color: #ff9800;
         }

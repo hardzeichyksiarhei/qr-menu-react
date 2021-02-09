@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const VerticalScrolling = ({ height, children }) => (
-  <StyledVerticalScrolling height={height} className="vertical-scrolling">
+const VerticalScrolling = ({ height, maxHeight, children }) => (
+  <StyledVerticalScrolling height={height} maxHeight={maxHeight} className="vertical-scrolling">
     {children}
   </StyledVerticalScrolling>
 )
@@ -12,7 +12,7 @@ const StyledVerticalScrolling = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  max-height: 100%;
+  max-height: ${(props) => props.maxHeight};
   height: ${(props) => props.height};
   &::-webkit-scrollbar {
     width: 8px;
@@ -30,10 +30,12 @@ const StyledVerticalScrolling = styled.div`
 
 VerticalScrolling.defaultProps = {
   height: '100%',
+  maxHeight: '100%',
 }
 
 VerticalScrolling.propTypes = {
   height: PropTypes.string,
+  maxHeight: PropTypes.string,
   children: PropTypes.node.isRequired,
 }
 

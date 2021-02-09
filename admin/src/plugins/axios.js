@@ -35,6 +35,7 @@ axios.interceptors.response.use(
         description:
           'Logout from the Administration Panel was successful. To log in to Administration Panel, click on the "Sign in" button.',
         duration: null,
+        key: 'session-expired',
       })
     }
     return Promise.reject(error)

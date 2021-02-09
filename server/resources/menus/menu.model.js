@@ -5,6 +5,11 @@ const photoSchema = new Schema({
   sizes: { type: Object },
 })
 
+const ratingSchema = new Schema({
+  key: Number,
+  value: { type: Number, default: 0 },
+})
+
 const dishSchema = new Schema({
   title: { type: String },
   photo: { type: photoSchema, default: null },
@@ -15,6 +20,7 @@ const dishSchema = new Schema({
   ingredients: [String],
   allergens: [{ type: new Schema({ number: Number, label: String }), default: [] }],
   tags: [{ type: new Schema({ id: Number, icon: String, label: String }), default: [] }],
+  rating: [{ type: ratingSchema, default: [] }],
 })
 
 const categorySchema = new Schema({

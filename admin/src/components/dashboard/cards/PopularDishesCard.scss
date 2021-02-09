@@ -1,0 +1,61 @@
+.popular-dishes-card {
+    height: 100%;
+    cursor: default !important;
+    &__title {
+        margin: 0;
+        padding: 10px;
+        text-transform: uppercase;
+        font-size: 16px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+}
+
+.popular-dish-item {
+    width: 100%;
+    display: flex;
+    padding: 0 10px;
+    cursor: default;
+    &__photo {
+        margin-right: 10px;
+        .ant-image,
+        .ant-image img {
+            display: block;
+        }
+    }
+    &__title {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    &__content {
+        flex-grow: 1;
+    }
+    &__meta {
+        display: flex;
+        span {
+            margin-right: 5px;
+            &:after {
+                content: ", ";
+            }
+            &:last-of-type {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+    &__rating {
+        display: flex;
+        align-items: center;
+        span + span {
+            margin-left: 5px;
+        }
+    }
+}
+
+.popular-dish-loading,
+.popular-dish-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

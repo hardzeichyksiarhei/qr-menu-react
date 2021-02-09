@@ -24,6 +24,7 @@ function CardMenu({ menu }: CardMenuProps) {
       onClick={() => menu.isEnabledToOrder && navigate(`/${userId}/menu/${menu.id}`)}
       cover={
         <Image
+          className="menu-card__photo"
           src={
             menu.photo
               ? `${SERVER_URL}/uploads/${menu.userId}/large/${menu.photo.sizes.large}`

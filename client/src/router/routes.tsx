@@ -4,12 +4,18 @@ import DefaultLayout from '../layouts/Default'
 import EmptyLayout from '../layouts/Empty'
 
 import Dashboard from '../pages/Dashboard'
+const QrCodeScanner = lazy(() => import('../pages/QrCodeScanner'))
 const MenuCategory = lazy(() => import('../pages/Category'))
 const MenuDish = lazy(() => import('../pages/Dish'))
 
 const NotFound = lazy(() => import('../pages/NotFound'))
 
 const routes = () => [
+  {
+    path: '/',
+    element: <EmptyLayout />,
+    children: [{ path: '/', element: <QrCodeScanner /> }],
+  },
   {
     path: '/:userId',
     element: <DefaultLayout />,
