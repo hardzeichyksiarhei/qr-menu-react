@@ -15,7 +15,7 @@
     &--create-menu {
         grid-area: b;
     }
-    &--empty {
+    &--popular-dishes {
         grid-area: c;
     }
     &--orders-stats {
@@ -26,19 +26,15 @@
 @media screen and (max-width: 1600px) {
     .dashboard-grid {
         grid-template-areas:
-            "a b b"
-            "d d d";
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .dashboard-col {
-        &--empty {
-            display: none;
-        }
+            "a b b b"
+            "d d d d"
+            "c c . .";
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 300px 360px auto;
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
     .dashboard-grid {
         grid-template-areas: none;
         grid-template-columns: 100%;

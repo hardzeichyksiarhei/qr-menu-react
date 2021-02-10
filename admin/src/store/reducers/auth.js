@@ -4,7 +4,7 @@ import * as types from '../types/auth'
 const initialState = {
   user: null,
   token: Cookies.get('token') || null,
-  isLoading: false,
+  isLoading: true,
 
   isLoginError: false,
   isRegistrationError: false,

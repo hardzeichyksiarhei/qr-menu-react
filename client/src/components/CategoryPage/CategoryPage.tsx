@@ -55,8 +55,7 @@ const CategoryPage = () => {
       </PageHeader>
       <Masonry
         breakpointCols={{
-          default: 4,
-          1600: 3,
+          default: 3,
           1200: 2,
           768: 1,
         }}

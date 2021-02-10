@@ -45,7 +45,17 @@ body {
 .default-layout {
   min-height: 100vh;
   .header-logo {
-    a {
+    display: flex;
+    align-items: center;
+    &__image {
+      display: flex;
+      max-width: 40px;
+      margin-right: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    span {
+      display: block;
       color: #fff;
       font-size: 22px;
     }
@@ -83,14 +93,28 @@ body {
   }
 }
 
+.app-footer {
+  a {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   /* Default Layout */
   .default-layout {
+    &__header {
+      padding: 0 24px;
+    }
     &__content {
       background-color: #fff;
       padding: 10px;
       margin: 10px;
     }
+  }
+
+  .app-footer {
+    padding: 24px;
   }
 }
 
@@ -98,5 +122,14 @@ body {
   /* Default Layout */
   .default-layout {
     padding-bottom: 80px;
+    .header-logo {
+      max-width: 200px;
+      span {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
 }

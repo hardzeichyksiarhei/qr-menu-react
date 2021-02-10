@@ -64,7 +64,29 @@
     }
 }
 
+/* Page Loader */
+.page-loader {
+    position: fixed !important;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    transition: 0.3s all linear;
+    &.show {
+        opacity: 1;
+    }
+    &.hide {
+        opacity: 0;
+    }
+}
+
 /* Default Layout */
+
 .default-layout {
     display: flex;
     flex-direction: column;
@@ -107,13 +129,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 64px;
+        flex-direction: column;
         font-size: 22px;
-        margin-bottom: 0;
+        padding: 20px 0;
         line-height: 1;
         color: #fff;
-        span {
-            margin-left: 10px;
+        img {
+            display: block;
+            width: 64px;
+            margin-bottom: 15px;
         }
     }
     &__item {
@@ -178,6 +202,13 @@
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+}
+
+.app-footer {
+    a {
+        display: inline-block;
+        margin: 0 5px;
+    }
 }
 
 /* Media */

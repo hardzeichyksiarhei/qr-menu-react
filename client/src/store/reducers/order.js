@@ -1,8 +1,11 @@
 import * as types from '../types/order'
+import * as storage from '../../helpers/storage'
+
+const { items, totalPrice } = storage.get('order', {})
 
 const initialState = {
-  items: JSON.parse(localStorage.getItem('order'))?.items || [],
-  totalPrice: JSON.parse(localStorage.getItem('order'))?.totalPrice || 0,
+  items: items || [],
+  totalPrice: totalPrice || 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,18 +15,20 @@ const reducer = (state = initialState, action) => {
 
       const itemIdx = state.items.findIndex(({ item }) => item.id === addItem.id)
 
-      state.items =
+      const items =
         itemIdx !== -1
           ? state.items.map(({ item, quantity }, idx) =>
               itemIdx === idx ? { quantity: quantity + 1, item } : { quantity, item },
             )
           : [...state.items, { quantity: 1, item: addItem }]
 
-      state.totalPrice = state.totalPrice + addItem.priceValue
+      const totalPrice = state.totalPrice + addItem.priceValue
 
-      localStorage.setItem('order', JSON.stringify(state))
+      storage.set('order', { items, totalPrice })
       return {
         ...state,
+        items,
+        totalPrice,
       }
     }
 
@@ -33,29 +38,32 @@ const reducer = (state = initialState, action) => {
       const itemIdx = state.items.findIndex(({ item }) => item.id === deleteItem.id)
 
       if (state.items[itemIdx].quantity === 1) {
-        const newItems = state.items.filter((el) => el.item.id !== deleteItem.id)
-        state.totalPrice = state.totalPrice - deleteItem.priceValue
-        state.items = newItems
-        localStorage.setItem('order', JSON.stringify(state))
+        const items = state.items.filter((el) => el.item.id !== deleteItem.id)
+        const totalPrice = state.totalPrice - deleteItem.priceValue
+
+        storage.set('order', { items, totalPrice })
         return {
           ...state,
+          items,
+          totalPrice,
         }
       }
 
-      state.items = state.items.map(({ item, quantity }, idx) =>
+      const items = state.items.map(({ item, quantity }, idx) =>
         itemIdx === idx ? { quantity: quantity - 1, item } : { quantity, item },
       )
-      state.totalPrice = state.totalPrice - deleteItem.priceValue
+      const totalPrice = state.totalPrice - deleteItem.priceValue
 
-      localStorage.setItem('order', JSON.stringify(state))
-
+      storage.set('order', { items, totalPrice })
       return {
         ...state,
+        items,
+        totalPrice,
       }
     }
 
     case types.CLEAR_CART: {
-      localStorage.setItem('order', JSON.stringify({}))
+      storage.set('order', {})
       return {
         items: [],
         totalPrice: 0,
