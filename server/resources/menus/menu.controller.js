@@ -43,7 +43,7 @@ module.exports.getPopularDishesByUserId = catchErrors(async (req, res) => {
         calculateRating: value1 / value2,
       }
     })
-    .sort((a, b) => a.calculateRating - b.calculateRating)
+    .sort((a, b) => b.calculateRating - a.calculateRating)
     .slice(0, 10)
 
   return res.status(StatusCodes.OK).json(dishes)
