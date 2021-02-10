@@ -7,8 +7,8 @@ import Dashboard from '../pages/Dashboard'
 const QrCodeScanner = lazy(() => import('../pages/QrCodeScanner'))
 const MenuCategory = lazy(() => import('../pages/Category'))
 const MenuDish = lazy(() => import('../pages/Dish'))
-
 const NotFound = lazy(() => import('../pages/NotFound'))
+const About = lazy(() => import('../pages/About'))
 
 const routes = () => [
   {
@@ -23,6 +23,7 @@ const routes = () => [
       { path: '/', element: <Dashboard /> },
       { path: '/menu/:menuId', element: <MenuCategory /> },
       { path: '/menu/:menuId/category/:categoryId/dish/:dishId', element: <MenuDish /> },
+      { path: '/about', element: <About /> },
       { path: '*', element: <NotFound /> },
     ],
   },
