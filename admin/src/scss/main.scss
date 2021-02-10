@@ -204,6 +204,13 @@
     padding: 20px;
 }
 
+.app-footer {
+    a {
+        display: inline-block;
+        margin: 0 5px;
+    }
+}
+
 /* Media */
 @media screen and (max-width: 768px) {
     .app-header {

@@ -15,7 +15,7 @@ const MenuList = () => {
     <div className="menus-list">
       <Row gutter={20}>
         {menus.map((menu) => (
-          <Col span={24} xxl={6} xl={8} md={12} sm={24} key={menu.id}>
+          <Col span={24} xxl={8} xl={8} md={12} sm={24} key={menu.id}>
             <CardMenu menu={menu} />
           </Col>
         ))}
