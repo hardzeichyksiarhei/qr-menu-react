@@ -37,8 +37,6 @@ const AboutUs = () => {
         )
     }
 
-    console.log(settings)
-
     return (
         <div className="about-us-container">
             {settings.backgroundImage ? <Image preview={false} src={`${SERVER_URL}/uploads/${userId}/medium/${settings.backgroundImage.sizes.medium}`} alt="background" /> : null}
