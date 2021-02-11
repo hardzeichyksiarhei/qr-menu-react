@@ -12,7 +12,7 @@ import authSelectors from '../../store/selectors/auth'
 import { CLIENT_URL } from '../../config'
 
 const MenuList = ({ menus, isMenusLoading }) => {
-  const [isMenuPreviewVisible, setIsMenuPreviewVisible] = useState(false)
+  const [previewMenuId, setPreviewMenuId] = useState(null)
   const user = useSelector(authSelectors.user)
 
   if (!menus.length && isMenusLoading) {
@@ -27,8 +27,12 @@ const MenuList = ({ menus, isMenusLoading }) => {
     return <Empty />
   }
 
-  const handleShowPreviewDrawer = () => {
-    setIsMenuPreviewVisible(true)
+  const handleShowPreviewDrawer = (menuId) => {
+    setPreviewMenuId(menuId)
+  }
+
+  const handleHidePreviewDrawer = () => {
+    setPreviewMenuId(null)
   }
 
   return (
@@ -41,15 +45,16 @@ const MenuList = ({ menus, isMenusLoading }) => {
         ))}
       </Row>
 
-      <Drawer
-        title="Preview"
-        visible={isMenuPreviewVisible}
-        onClose={() => setIsMenuPreviewVisible(false)}
-        width={600}
-        destroyOnClose
-      >
-        <MenuPreview url={`${CLIENT_URL}/${user?.id}`} />
-      </Drawer>
+      {user ? (
+        <Drawer
+          title="Preview"
+          visible={!!previewMenuId}
+          onClose={() => handleHidePreviewDrawer()}
+          width={600}
+        >
+          <MenuPreview url={`${CLIENT_URL}/${user.id}/menu/${previewMenuId}`} />
+        </Drawer>
+      ) : null}
     </div>
   )
 }

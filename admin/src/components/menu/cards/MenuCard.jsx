@@ -87,7 +87,7 @@ const MenuCard = ({ menu, onShowPreviewDrawer }) => {
             <EditOutlined key="edit" />
           </Link>
         ) : null,
-        <EyeOutlined key="preview" onClick={onShowPreviewDrawer} />,
+        <EyeOutlined key="preview" onClick={() => onShowPreviewDrawer(menu.id)} />,
         <Dropdown
           overlay={
             <Menu>
