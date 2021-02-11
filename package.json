@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "concurrently \"cd ./admin && npm install\" \"cd ./server && npm install\"",
+    "install": "concurrently \"cd ./admin && npm install\" \"cd ./client && npm install\" \"cd ./server && npm install\"",
     "server": "concurrently \"cd ./server && npm run server\"",
     "start:admin": "concurrently \"cd ./admin && npm start\"",
     "start:client": "concurrently \"cd ./client && npm start\"",
