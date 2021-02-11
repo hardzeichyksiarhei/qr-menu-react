@@ -8,9 +8,12 @@ import { Button, Space, Form, Input, Switch, Select, InputNumber } from 'antd'
 import ImagesManagement from '../../images/ImagesManagement'
 
 import * as menuActions from '../../../store/actions/menu'
+import appSettings from '../../../store/selectors/app'
 import menuSelectors from '../../../store/selectors/menu'
 
 import { INGREDIENTS, TAGS, ALLERGENS } from '../../../default/menus.default'
+
+import { CURRENCIES } from '../../../config'
 
 import './DishEditorCard.scss'
 
@@ -41,6 +44,7 @@ const DishEditorCard = ({ editDish, onAction }) => {
 
   const [dishEditorForm] = Form.useForm()
 
+  const { defaultCurrency } = useSelector(appSettings.settings)
   const menuCategories = useSelector(menuSelectors.menuCategories)
   const selectedCategoryId = useSelector(menuSelectors.selectedCategoryId)
 
@@ -166,7 +170,10 @@ const DishEditorCard = ({ editDish, onAction }) => {
           <Input.TextArea autoSize />
         </Form.Item>
         <Form.Item label={intl.formatMessage({ id: 'Price' })} name="priceValue">
-          <InputNumber min={0} />
+          <Space>
+            <InputNumber min={0} />
+            <span>{CURRENCIES[defaultCurrency]}</span>
+          </Space>
         </Form.Item>
         <Form.Item label={intl.formatMessage({ id: 'Ingredients' })} name="ingredients">
           <Select mode="tags" options={INGREDIENTS} />
