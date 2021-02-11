@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useIntl } from 'react-intl'
 
-import { Card, Button, Spin, Modal } from 'antd'
+import { Card, Button, Spin, Modal, Empty } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
 import { ReactSortable } from 'react-sortablejs'
@@ -62,6 +62,31 @@ const DishesEditorCard = () => {
     }
   }
 
+  let dishList = null
+  if (isMenuLoading) {
+    dishList = <Spin size="large" />
+  } else if (!dishes.length && !isMenuLoading) {
+    dishList = <Empty />
+  } else {
+    dishList = (
+      <VerticalScrolling>
+        <div className="dish-list">
+          <ReactSortable
+            list={dishes}
+            setList={handleSetDishes}
+            onUpdate={handleUpdateDishes}
+            handle=".move"
+            animation={200}
+          >
+            {dishes.map((dish) => (
+              <DishItem dish={dish} key={dish.id} onAction={handleActionDish} />
+            ))}
+          </ReactSortable>
+        </div>
+      </VerticalScrolling>
+    )
+  }
+
   return (
     <div className="menu-editor">
       <Card
@@ -81,25 +106,7 @@ const DishesEditorCard = () => {
             isMenuLoading ? 'menu-editor__content--loading' : ''
           } ${!isMenuLoading && !dishes.length ? 'menu-editor__content--empty' : ''}`}
         >
-          {isMenuLoading ? (
-            <Spin size="large" />
-          ) : (
-            <VerticalScrolling>
-              <div className="dish-list">
-                <ReactSortable
-                  list={dishes}
-                  setList={handleSetDishes}
-                  onUpdate={handleUpdateDishes}
-                  handle=".move"
-                  animation={200}
-                >
-                  {dishes.map((dish) => (
-                    <DishItem dish={dish} key={dish.id} onAction={handleActionDish} />
-                  ))}
-                </ReactSortable>
-              </div>
-            </VerticalScrolling>
-          )}
+          {dishList}
         </div>
       </Card>
 
