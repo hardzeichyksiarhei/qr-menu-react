@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Image, Spin, PageHeader, Empty, message } from 'antd'
-import { StarFilled, StarOutlined } from '@ant-design/icons'
+import { Button, Image, Spin, PageHeader, Empty, Space, Modal, message } from 'antd'
+import { StarFilled, StarOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 
 import Rating from 'react-rating'
 
@@ -14,6 +14,7 @@ import menusSelectors from '../../store/selectors/menus'
 import menusService from '../../services/menus'
 
 import { SERVER_URL } from '../../config'
+import { ALLERGENS } from '../../default/menus.default'
 
 import { Dish } from '../../utils/propsComponents'
 
@@ -22,6 +23,7 @@ import './DishPage.scss'
 const DishPage = () => {
   const dispatch = useDispatch()
   const [rating, setRating] = useState(0)
+  const [isAllergensModalVisible, setIsAllergensModalVisible] = useState(false)
 
   const { userId, menuId, categoryId, dishId } = useParams()
 
@@ -141,7 +143,13 @@ const DishPage = () => {
               '—'
             )}
             <br />
-            <h4>Allergens</h4>
+            <Space className="d-flex align-items-center">
+              <h4>Allergens</h4>
+              <QuestionCircleOutlined
+                style={{ fontSize: '16px' }}
+                onClick={() => setIsAllergensModalVisible(true)}
+              />
+            </Space>
             {dish.allergens.length ? (
               <ul className="dish__ingredients dish-ingredients">
                 {dish.allergens.map((allergen, idx) => (
@@ -170,6 +178,20 @@ const DishPage = () => {
           )}
         </div>
       </div>
+
+      <Modal
+        visible={isAllergensModalVisible}
+        onCancel={() => setIsAllergensModalVisible(false)}
+        width={700}
+        title="Allergens"
+        footer={false}
+      >
+        {ALLERGENS.map((allergen) => (
+          <p>
+            <b>{allergen.number}</b> - {allergen.label}
+          </p>
+        ))}
+      </Modal>
     </div>
   )
 }

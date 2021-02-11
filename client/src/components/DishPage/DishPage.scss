@@ -1,6 +1,6 @@
 .dish {
     display: grid;
-    grid-template-columns: minmax(360px, 1fr) 2fr;
+    grid-template-columns: minmax(360px, 540px) 2fr;
     gap: 30px;
     &__content {
         position: relative;
@@ -73,6 +73,12 @@
                 display: none;
             }
         }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .dish {
+        grid-template-columns: minmax(360px, 1fr) 2fr;
     }
 }
 
