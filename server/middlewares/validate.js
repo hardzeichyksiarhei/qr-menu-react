@@ -1,5 +1,5 @@
-const { StatusCodes } = require('http-status-codes')
 const { validationResult } = require('express-validator')
+const ValidateError = require('../classes/validation-error.class')
 
 module.exports = (req, res, next) => {
   const { errors } = validationResult(req)
@@ -8,5 +8,5 @@ module.exports = (req, res, next) => {
 
   const error = errors.pop()
 
-  return res.status(StatusCodes.BAD_REQUEST).json({ message: error.msg })
+  return next(new ValidateError(error.msg))
 }

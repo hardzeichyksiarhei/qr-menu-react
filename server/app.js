@@ -7,7 +7,7 @@ const app = express()
 const http = require('http').createServer(app)
 const SocketIO = require('socket.io')
 
-const { auth } = require('./middlewares')
+const { auth, httpLogger, errorLogger } = require('./middlewares')
 const i18n = require('./i18n')
 
 const { CLIENT_URL, ADMIN_URL } = require('./helpers/config')
@@ -62,6 +62,8 @@ app.use('/', (req, res, next) => {
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
+app.use(httpLogger)
+
 app.use('/api/auth', authRouter)
 
 app.use('/api/public/menus', menuPublicRouter)
@@ -74,5 +76,7 @@ app.use('/api/menus', auth, menuRouter)
 app.use('/api/settings', auth, settingsRouter)
 app.use('/api/orders', auth, ordersRouter)
 app.use('/api/images', auth, ImageRouter)
+
+app.use(errorLogger)
 
 module.exports = http
