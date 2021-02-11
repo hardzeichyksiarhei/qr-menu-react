@@ -96,6 +96,7 @@ const AboutUs = () => {
             {settings.openHours.map((item) => (
               <Timeline.Item
                 label={DAYS[item.dayCode]}
+                key={item.dayCode}
                 dot={<ClockCircleOutlined className="timeline-clock-icon" />}
                 color={!item.timeWindows.length ? 'red' : 'green'}
               >
@@ -110,6 +111,7 @@ const AboutUs = () => {
           {settings.googleMapsLink ? (
             <>
               <Divider dashed>Maps</Divider>
+              <iframe title="map" src={settings.googleMapsLink} width="500" height="400" frameBorder="0"></iframe>
             </>
           ) : null}
         </div>

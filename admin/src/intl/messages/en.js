@@ -82,7 +82,7 @@ export default {
     Friday: 'Friday',
     Saturday: 'Saturday',
     MapsLink: 'Maps Link (optional)',
-    AddMaps: 'Add google maps link to your restaurant',
+    AddMaps: 'Add link (src) from yandex map constructor',
     RestaurantAddress: 'Restaurant Address',
     AddRestaurantAddress: 'Add raestaurant address',
     AddMessengerNumber: 'Add messenger number',
@@ -114,6 +114,8 @@ export default {
     Belarus: 'Belarus',
     Poland: 'Poland',
     FormatTimeWithNumber: '{num} global hours',
+    Hint: 'Hint',
+    LinkToConstructor: 'Link to constructor',
     // Menus
     Visible: 'Visible',
     CreateCategory: 'Create category',

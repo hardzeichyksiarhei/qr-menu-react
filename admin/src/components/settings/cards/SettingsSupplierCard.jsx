@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useIntl } from 'react-intl'
-import { Card, Form, Input, Row, Col } from 'antd'
+import { Card, Form, Input, Row, Col, Popover, Image } from 'antd'
 import translate from '../../../intl/translate'
 
 import ImagesManagement from '../../images/ImagesManagement'
@@ -85,6 +85,13 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
     setField('openHours', changerOpenHours)
   }
 
+  const hint = () => (
+    <div className="map-hint">
+      <a href="https://yandex.ru/map-constructor/">{translate('LinkToConstructor')}</a>
+      <Image width={150} src="./hint.png" alt="hint" />
+    </div>
+  )
+
   return (
     <Card
       className="supplier-settings-card"
@@ -150,14 +157,16 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
                 </Form.Item>
               </Col>
               <Col span={24} md={12}>
-                <Form.Item label={intl.formatMessage({ id: 'MapsLink' })}>
-                  <Input
-                    id="googleMapsLink"
-                    placeholder={intl.formatMessage({ id: 'AddMaps' })}
-                    value={googleMapsLink}
-                    onChange={onChangeField}
-                  />
-                </Form.Item>
+                <Popover content={hint} title={intl.formatMessage({ id: 'Hint' })}>
+                  <Form.Item label={intl.formatMessage({ id: 'MapsLink' })}>
+                    <Input
+                      id="googleMapsLink"
+                      placeholder={intl.formatMessage({ id: 'AddMaps' })}
+                      value={googleMapsLink}
+                      onChange={onChangeField}
+                    />
+                  </Form.Item>
+                </Popover>
               </Col>
             </Row>
             <Row gutter={20}>

@@ -84,7 +84,7 @@ export default {
     Friday: 'Пятница',
     Saturday: 'Суббота',
     MapsLink: 'Ссылка на карту (необязательно)',
-    AddMaps: 'Добавьте ссылку google maps в ваш ресторан',
+    AddMaps: 'Добавьте ссылку (src) из конструктора карт яндекса',
     RestaurantAddress: 'Адрес ресторана',
     AddRestaurantAddress: 'Добавьте адрес ресторона',
     AddMessengerNumber: 'Добавьте номер мессенджера',
@@ -116,6 +116,8 @@ export default {
     Belarus: 'Беларусь',
     Poland: 'Польша',
     FormatTimeWithNumber: '{num} часовой пояс',
+    Hint: 'Подсказка',
+    LinkToConstructor: 'Ссылка на конструктор',
     // Menus
     Visible: 'Видимость',
     CreateCategory: 'Создание категории',
