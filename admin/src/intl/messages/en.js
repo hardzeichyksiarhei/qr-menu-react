@@ -67,12 +67,13 @@ export default {
     Profile: 'Profile',
     MyProfile: 'My Profile',
     // Dashboard
+    PopularDishes: 'Pupular dishes',
     HistoryOrders: 'Orders history',
     View: 'View',
     QRCode: 'QR code',
     // Settings
     Open: 'OPEN',
-    Close: 'CLOSE',
+    Closed: 'CLOSED',
     Background: 'Background',
     Sunday: 'Sunday',
     Monday: 'Monday',
@@ -149,6 +150,17 @@ export default {
     Menus: 'Menus',
     AddMenu: 'Add menu',
     // Orders
+    NEW: 'NEW',
+    PENDING: 'PENDING',
+    CONFIRMED: 'CONFIRMED',
+    CANCELLED: 'CANCELLED',
+    Action: 'Action',
+    Status: 'Status',
+    Total: 'Total',
+    Comment: 'Comment',
+    TableNumber: 'Table number',
+    OrderId: 'Order id',
+    Created: 'Created',
     Orders: 'Orders',
     // Validation
     PasswordConfirmed: 'Password confirmation does not match',

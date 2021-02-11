@@ -3,6 +3,7 @@ import { useAsync } from 'react-use'
 
 import { Card, List, Image, Empty, Spin } from 'antd'
 import { StarFilled } from '@ant-design/icons'
+import { useIntl } from 'react-intl'
 
 import VerticalScrolling from '../../VerticalScrolling'
 
@@ -15,6 +16,8 @@ import './PopularDishesCard.scss'
 const PopularDishesCard = () => {
   const [dishes, setDishes] = useState([])
   const [isDishesLoading, setIsDishesLoading] = useState(true)
+
+  const intl = useIntl()
 
   useAsync(async () => {
     const popularDishes = await menusService.getPopularDishes()
@@ -61,10 +64,20 @@ const PopularDishesCard = () => {
                 <h4 className="popular-dish-item__title">{dish.title}</h4>
                 <div className="popular-dish-item__meta">
                   {dish.ingredients.length ? (
-                    <span>{dish.ingredients.length} ingredients</span>
+                    <span>
+                      {dish.ingredients.length} {intl.formatMessage({ id: 'ingredients' })}
+                    </span>
                   ) : null}
-                  {dish.tags.length ? <span>{dish.tags.length} tags</span> : null}
-                  {dish.allergens.length ? <span>{dish.allergens.length} allergens</span> : null}
+                  {dish.tags.length ? (
+                    <span>
+                      {dish.tags.length} {intl.formatMessage({ id: 'tags' })}
+                    </span>
+                  ) : null}
+                  {dish.allergens.length ? (
+                    <span>
+                      {dish.allergens.length} {intl.formatMessage({ id: 'allergens' })}
+                    </span>
+                  ) : null}
                 </div>
                 <div className="popular-dish-item__rating">
                   <StarFilled style={{ color: '#1890ff' }} />
@@ -85,7 +98,7 @@ const PopularDishesCard = () => {
       hoverable
       bordered
     >
-      <h3 className="popular-dishes-card__title">Popular Dishes</h3>
+      <h3 className="popular-dishes-card__title">{intl.formatMessage({ id: 'PopularDishes' })}</h3>
       <VerticalScrolling maxHeight="calc(100% - 46px)">{content}</VerticalScrolling>
     </Card>
   )

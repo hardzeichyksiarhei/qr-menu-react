@@ -15,18 +15,18 @@ import './OrdersList.scss'
 
 const { Option } = Select
 
-const ORDER_STATUS = [
-  { key: 'NEW', label: 'NEW', color: '#FF9800' },
-  { key: 'PENDING', label: 'PENDING', color: '#4CAF50' },
-  { key: 'CONFIRMED', label: 'CONFIRMED', color: '#607D8B' },
-  { key: 'CANCELLED', label: 'CANCELLED', color: '#EF5350' },
-]
-
 const OrdersList = ({ orders, isOrdersLoading }) => {
   const dispatch = useDispatch()
   const intl = useIntl()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState({})
+
+  const ORDER_STATUS = [
+    { key: 'NEW', label: intl.formatMessage({ id: 'NEW' }), color: '#FF9800' },
+    { key: 'PENDING', label: intl.formatMessage({ id: 'PENDING' }), color: '#4CAF50' },
+    { key: 'CONFIRMED', label: intl.formatMessage({ id: 'CONFIRMED' }), color: '#607D8B' },
+    { key: 'CANCELLED', label: intl.formatMessage({ id: 'CANCELLED' }), color: '#EF5350' },
+  ]
 
   const removeOrder = async (orderId) => {
     await orderService.deleteById(orderId)
@@ -52,36 +52,36 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
 
   const columns = [
     {
-      title: 'Order Id',
+      title: intl.formatMessage({ id: 'OrderId' }),
       dataIndex: 'orderNumber',
       key: 'orderNumber',
       width: '100px',
     },
     {
-      title: 'Created',
+      title: intl.formatMessage({ id: 'Created' }),
       dataIndex: 'createdAt',
       key: 'createdAt',
       render: (value) => moment(value).fromNow(),
     },
     {
-      title: 'Table number',
+      title: intl.formatMessage({ id: 'TableNumber' }),
       dataIndex: 'tableNumber',
       key: 'tableNumber',
     },
     {
-      title: 'Comment',
+      title: intl.formatMessage({ id: 'Comment' }),
       dataIndex: 'comment',
       key: 'comment',
     },
     {
-      title: 'Total',
+      title: intl.formatMessage({ id: 'Total' }),
       dataIndex: 'totalPrice',
       key: 'totalPrice',
       width: '150px',
       render: (value, record) => `${value} ${record.currency}`,
     },
     {
-      title: 'Status',
+      title: intl.formatMessage({ id: 'Status' }),
       dataIndex: 'status',
       key: 'status',
       width: '200px',
@@ -104,7 +104,7 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
       ),
     },
     {
-      title: 'Action',
+      title: intl.formatMessage({ id: 'Action' }),
       dataIndex: 'Action',
       key: 'Action',
       width: '100px',
@@ -136,7 +136,14 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
         ghost={false}
         title={intl.formatMessage({ id: 'Orders' })}
       />
-      <Table bordered dataSource={orders} loading={isOrdersLoading} columns={columns} rowKey="id" />
+      <Table
+        bordered
+        dataSource={orders}
+        loading={isOrdersLoading}
+        columns={columns}
+        rowKey="id"
+        scroll={{ x: 240 }}
+      />
 
       <Modal
         width={720}

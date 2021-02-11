@@ -45,7 +45,7 @@ const OpenHoursCard = ({ openHours, onChangeTimeWindows }) => {
           header={`${DAYS[dayItem.dayCode]} • ${
             dayItem.timeWindows.length
               ? dayItem.timeWindows.map((timeSlot) => ` ${timeSlot.start} - ${timeSlot.end}`)
-              : 'CLOSED'
+              : intl.formatMessage({ id: 'Closed' })
           }`}
           extra={genExtra(dayItem)}
           key={dayItem.dayCode}
