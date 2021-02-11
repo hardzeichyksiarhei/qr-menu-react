@@ -47,7 +47,7 @@ const AboutUs = () => {
 
   if (!settings) {
     return (
-      <div>
+      <div className="content-loading">
         <Spin size="large" />
       </div>
     )
