@@ -152,10 +152,16 @@ const Default = () => {
                       linkTo="/menus/create"
                       className="popover-menu__create-menu"
                       icon={<PlusOutlined />}
+                      key="create-menu"
                     >
                       Menu Create
                     </ButtonLink>,
-                    <Menu width="320px" className="popover-menu" selectedKeys={[location.pathname]}>
+                    <Menu
+                      width="320px"
+                      className="popover-menu"
+                      selectedKeys={[location.pathname]}
+                      key="mobile-menu"
+                    >
                       {routes.map((route) => (
                         <Menu.Item
                           className="popover-menu__item"
