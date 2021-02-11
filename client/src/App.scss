@@ -55,9 +55,10 @@ body {
       overflow: hidden;
     }
     span {
-      display: block;
+      display: flex;
       color: #fff;
       font-size: 22px;
+      line-height: 1;
     }
   }
   .header-cart {

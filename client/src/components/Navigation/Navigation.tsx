@@ -2,7 +2,12 @@ import React from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from 'antd'
-import { ArrowLeftOutlined, HomeOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import {
+  ArrowLeftOutlined,
+  ShopOutlined,
+  AppstoreOutlined,
+  ShoppingCartOutlined,
+} from '@ant-design/icons'
 
 import './Navigation.scss'
 
@@ -13,22 +18,30 @@ const MenuBar = (props: any) => {
 
   return (
     <div className="bottom-navigation">
-      {location.pathname !== `/${userId}`
-        ? [
-            <Button
-              icon={<ArrowLeftOutlined style={{ fontSize: '26px' }} />}
-              onClick={() => window.history.back()}
-              type="text"
-              key="back"
-            />,
-            <Button
-              icon={<HomeOutlined style={{ fontSize: '26px' }} />}
-              onClick={() => navigate(`/${userId}`)}
-              type="text"
-              key="home"
-            />,
-          ]
-        : null}
+      {location.pathname !== `/${userId}` ? (
+        <Button
+          icon={<ArrowLeftOutlined style={{ fontSize: '26px' }} />}
+          onClick={() => window.history.back()}
+          type="text"
+          key="back"
+        />
+      ) : null}
+
+      {location.pathname !== `/${userId}` ? (
+        <Button
+          icon={<AppstoreOutlined style={{ fontSize: '26px' }} />}
+          onClick={() => navigate(`/${userId}`)}
+          type="text"
+          key="menus"
+        />
+      ) : null}
+
+      <Button
+        icon={<ShopOutlined style={{ fontSize: '26px' }} />}
+        onClick={() => navigate(`/${userId}/about`)}
+        type="text"
+        key="about"
+      />
 
       <Button
         icon={<ShoppingCartOutlined style={{ fontSize: '26px' }} />}
