@@ -136,7 +136,14 @@ const OrdersList = ({ orders, isOrdersLoading }) => {
         ghost={false}
         title={intl.formatMessage({ id: 'Orders' })}
       />
-      <Table bordered dataSource={orders} loading={isOrdersLoading} columns={columns} rowKey="id" />
+      <Table
+        bordered
+        dataSource={orders}
+        loading={isOrdersLoading}
+        columns={columns}
+        rowKey="id"
+        scroll={{ x: 240 }}
+      />
 
       <Modal
         width={720}
