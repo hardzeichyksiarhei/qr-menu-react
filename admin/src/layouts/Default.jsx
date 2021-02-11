@@ -66,7 +66,7 @@ const Default = () => {
   const location = useLocation()
 
   const user = useSelector(authSelectors.user)
-  const isLoading = useSelector(authSelectors.isLoading)
+  const isUserLoading = useSelector(authSelectors.isUserLoading)
 
   useEffect(() => {
     if (user) {
@@ -96,7 +96,7 @@ const Default = () => {
   const { restaurantName } = useSelector(appSelectors.settings)
 
   return (
-    <PageLoader isLoading={isLoading} content={<Spin size="large" />}>
+    <PageLoader isLoading={isUserLoading} content={<Spin size="large" />}>
       <Layout className="default-layout" hasSider>
         <Sider
           className="left-navigation"

@@ -4,7 +4,9 @@ import * as types from '../types/auth'
 const initialState = {
   user: null,
   token: Cookies.get('token') || null,
-  isLoading: true,
+  isLoading: false,
+
+  isUserLoading: true,
 
   isLoginError: false,
   isRegistrationError: false,
@@ -19,7 +21,7 @@ const reducer = (state = initialState, action) => {
     case types.REQUESTED_USER: {
       return {
         ...state,
-        isLoading: true,
+        isUserLoading: true,
       }
     }
     case types.REQUESTED_USER_SUCCEEDED: {
@@ -27,13 +29,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user,
-        isLoading: false,
+        isUserLoading: false,
       }
     }
     case types.REQUESTED_USER_FAILED: {
       return {
         ...state,
-        isLoading: false,
+        isUserLoading: false,
         errorMessage: action.payload.message,
       }
     }

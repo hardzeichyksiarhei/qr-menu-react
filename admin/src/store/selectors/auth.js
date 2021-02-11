@@ -1,7 +1,7 @@
 const user = (state) => state.auth.user
-const isLoading = (state) => state.auth.isLoading
+const isUserLoading = (state) => state.auth.isUserLoading
 
 export default {
   user,
-  isLoading,
+  isUserLoading,
 }
