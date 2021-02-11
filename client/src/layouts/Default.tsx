@@ -2,7 +2,7 @@ import React, { Suspense, useState, useEffect } from 'react'
 import { Link, Outlet, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Badge, Layout, Drawer, Grid, Avatar, Image } from 'antd'
+import { Badge, Layout, Drawer, Grid, Avatar, Image, Menu, Space } from 'antd'
 import { ShoppingCartOutlined, QrcodeOutlined } from '@ant-design/icons'
 
 import MenuBar from '../components/Navigation/Navigation'
@@ -47,6 +47,7 @@ function Default() {
                     ? `${SERVER_URL}/uploads/${logo.userId}/thumbnail/${logo.sizes.thumbnail}`
                     : 'https://via.placeholder.com/80x80?text=QR Menu'
                 }
+                fallback="https://via.placeholder.com/80x80?text=QR Menu"
                 preview={false}
               />
             ) : (
@@ -56,11 +57,20 @@ function Default() {
 
           <span>{restaurantName || 'QR Menu Clone'}</span>
         </Link>
-        <div className="header-cart">
-          <Badge count={quantity}>
-            <ShoppingCartOutlined onClick={() => setIsCartVisible(true)} />
-          </Badge>
-        </div>
+        <Space className="d-flex" size="large">
+          {!screen.xs ? (
+            <Menu theme="dark" mode="horizontal">
+              <Menu.Item key={`/${userId}/about`}>
+                <Link to={`/${userId}/about`}>About Us</Link>
+              </Menu.Item>
+            </Menu>
+          ) : null}
+          <div className="header-cart">
+            <Badge count={quantity}>
+              <ShoppingCartOutlined onClick={() => setIsCartVisible(true)} />
+            </Badge>
+          </div>
+        </Space>
       </Header>
       <Content className="default-layout__content">
         <Suspense fallback={null}>
