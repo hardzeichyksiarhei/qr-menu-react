@@ -69,12 +69,13 @@ export default {
     Profile: 'Профиль',
     MyProfile: 'Мой профиль',
     // Dashboard
+    PopularDishes: 'Популярные блюда',
     HistoryOrders: 'История заказов',
     View: 'Обзор',
     QRCode: 'QR код',
     // Settings
     Open: 'ОТКРЫТО',
-    Close: 'ЗАКРЫТО',
+    Closed: 'ЗАКРЫТО',
     Background: 'Фон',
     Sunday: 'Воскресенье',
     Monday: 'Понедельник',
@@ -151,6 +152,17 @@ export default {
     Menus: 'Меню',
     AddMenu: 'Добавить меню',
     // Orders
+    NEW: 'НОВЫЙ',
+    PENDING: 'ОЖИДАЕМЫЙ',
+    CONFIRMED: 'ПОДТВЕРЖДЕННЫЙ',
+    CANCELLED: 'ОТМЕНЕНЫЙ',
+    Action: 'Действия',
+    Status: 'Статус',
+    Total: 'Всего',
+    Comment: 'Комментарий',
+    TableNumber: 'Номер столика',
+    OrderId: 'Заказ №',
+    Created: 'Создано',
     Orders: 'Заказы',
     // Validation
     PasswordConfirmed: 'Подтверждение пароля не совпадает',

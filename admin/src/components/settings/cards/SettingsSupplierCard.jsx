@@ -220,7 +220,7 @@ const SettingsSupplierCard = ({ supplier, changeField }) => {
             </Form.Item>
           </Col>
           <Col span={24} xxl={12}>
-            <Form.Item label="Opening Hours">
+            <Form.Item label={intl.formatMessage({ id: 'OpeningHours' })}>
               <OpenHoursCard openHours={openHours} onChangeTimeWindows={onChangeTimeWindows} />
             </Form.Item>
           </Col>
