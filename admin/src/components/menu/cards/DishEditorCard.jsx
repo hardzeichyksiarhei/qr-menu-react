@@ -169,11 +169,11 @@ const DishEditorCard = ({ editDish, onAction }) => {
         <Form.Item label={intl.formatMessage({ id: 'Description' })} name="description">
           <Input.TextArea autoSize />
         </Form.Item>
-        <Form.Item label={intl.formatMessage({ id: 'Price' })} name="priceValue">
-          <Space>
-            <InputNumber min={0} />
-            <span>{CURRENCIES[defaultCurrency]}</span>
-          </Space>
+        <Form.Item
+          label={`${intl.formatMessage({ id: 'Price' })} (${CURRENCIES[defaultCurrency]})`}
+          name="priceValue"
+        >
+          <InputNumber min={0} />
         </Form.Item>
         <Form.Item label={intl.formatMessage({ id: 'Ingredients' })} name="ingredients">
           <Select mode="tags" options={INGREDIENTS} />
