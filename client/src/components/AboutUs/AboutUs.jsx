@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAsync } from 'react-use'
 
@@ -34,6 +34,17 @@ const AboutUs = () => {
     setSettings(supplierSettings)
   })
 
+  useEffect(() => {
+    if (settings && settings.googleMapsLink) {
+      const script = document.createElement('script')
+
+      script.src = settings.googleMapsLink
+      script.async = true
+
+      document.getElementById('map').appendChild(script)
+    }
+  }, [settings])
+
   if (!settings) {
     return (
       <div>
@@ -52,6 +63,7 @@ const AboutUs = () => {
         <div className="about-us-image">
           <Image
             src={`${SERVER_URL}/uploads/${userId}/large/${settings.backgroundImage.sizes.large}`}
+            fallback="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
             alt="background"
             preview={false}
           />
@@ -111,7 +123,7 @@ const AboutUs = () => {
           {settings.googleMapsLink ? (
             <>
               <Divider dashed>Maps</Divider>
-              <iframe title="map" src={settings.googleMapsLink} width="500" height="400" frameBorder="0"></iframe>
+              <div id="map" />
             </>
           ) : null}
         </div>
