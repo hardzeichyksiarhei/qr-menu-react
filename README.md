@@ -1,6 +1,6 @@
 # QR Menu Clone
 
-<img style="width: 100%; height: auto;" src="https://i.ibb.co/g7dSMy4/QR-Menu-Cover.jpg" alt="QR-Menu-Cover">
+<img width="100%" height="auto" src="https://i.ibb.co/DbzhrV8/QR-Menu-Cover-2x.jpg" alt="QR-Menu-Cover">
 
 ## Используемые технологии в процессе разработки (Server Side):
 
