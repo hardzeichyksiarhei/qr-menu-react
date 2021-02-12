@@ -1,5 +1,7 @@
 # QR Menu Clone
 
+<img style="width: 100%; height: auto;" src="https://i.ibb.co/g7dSMy4/QR-Menu-Cover.jpg" alt="QR-Menu-Cover">
+
 ## Используемые технологии в процессе разработки (Server Side):
 
 * node.js - является оптимальным решением для реализации бекэнда, когда JS позволяет писать и фронтенд, и сервер, но есть и свои особенности, связанные с однопоточностью JS.
