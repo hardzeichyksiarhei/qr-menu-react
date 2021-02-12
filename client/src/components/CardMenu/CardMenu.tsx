@@ -23,18 +23,20 @@ function CardMenu({ menu }: CardMenuProps) {
       bodyStyle={{ padding: '10px' }}
       onClick={() => menu.isEnabledToOrder && navigate(`/${userId}/menu/${menu.id}`)}
       cover={
-        <Image
-          className="menu-card__photo"
-          src={
-            menu.photo
-              ? `${SERVER_URL}/uploads/${menu.userId}/large/${menu.photo.sizes.large}`
-              : 'https://via.placeholder.com/1366x768?text=QR Menu'
-          }
-          fallback="https://via.placeholder.com/1366x768?text=QR Menu"
-          preview={false}
-          alt={menu.title}
-          placeholder
-        />
+        <div className="menu-card__cover">
+          <Image
+            src={
+              menu.photo
+                ? `${SERVER_URL}/uploads/${menu.userId}/large/${menu.photo.sizes.large}`
+                : 'https://via.placeholder.com/1366x768?text=QR Menu'
+            }
+            fallback="https://via.placeholder.com/1366x768?text=QR Menu"
+            preview={false}
+            alt={menu.title}
+            placeholder
+          />
+          <span className="menu-card__cover-mask" />
+        </div>
       }
       hoverable={!!menu.isEnabledToOrder}
     >
