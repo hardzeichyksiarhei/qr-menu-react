@@ -52,7 +52,7 @@ const DishPage = () => {
   }, [dish])
 
   const addDish = () => {
-    message.info({ content: 'Added to cart' })
+    message.info('Added to cart', 0.5)
     dispatch(orderActions.addItem(dish))
   }
 

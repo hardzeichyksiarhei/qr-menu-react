@@ -25,7 +25,7 @@ const CardCategoryItems = ({ userId, menuId, categoryId, items }: CardCategoryIt
   const screen = useBreakpoint()
 
   const addDish = (dish: Dish) => {
-    message.info({ content: 'Added to cart' })
+    message.info('Added to cart', 0.5)
     dispatch(orderActions.addItem(dish))
   }
 
