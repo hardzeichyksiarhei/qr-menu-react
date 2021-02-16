@@ -52,6 +52,7 @@ const Login = () => {
           layout="vertical"
           validateMessages={validateMessages}
           onFinish={onFinish}
+          initialValues={{ email: 'test@test.com', password: '123456' }}
         >
           <h3 className="login-form__title">{translate('Authorization')}</h3>
           <Form.Item name="email" rules={[{ type: 'email', required: true }]}>

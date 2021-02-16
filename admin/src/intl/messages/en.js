@@ -124,7 +124,7 @@ export default {
     CreateDish: 'Create dish',
     EditDish: 'Edit dish',
     CopyOf: 'Copy of',
-    tags: 'tasg',
+    tags: 'tags',
     allergens: 'allergens',
     ingredients: 'ingredients',
     notSaved: 'not saved',
