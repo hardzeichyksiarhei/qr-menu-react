@@ -1,0 +1,25 @@
+.menu-editor {
+	width: 100%;
+	.ant-card-body {
+		padding: 0;
+	}
+	&__content {
+		width: 100%;
+		height: calc(100vh - 300px);
+		&--loading,
+		&--empty {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+
+@media screen and (max-width: 1600px) {
+	.menu-editor {
+		&__content {
+			height: auto;
+			max-height: none;
+		}
+	}
+}

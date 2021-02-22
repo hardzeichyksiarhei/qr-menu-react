@@ -1,0 +1,135 @@
+@import "~antd/dist/antd.css";
+
+body {
+  overflow-y: scroll;
+}
+
+.ant-image-preview-mask {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Common */
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.justify-content-end {
+  justify-content: flex-end !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.content-loading,
+.content-empty {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.default-layout {
+  min-height: 100vh;
+  .header-logo {
+    display: flex;
+    align-items: center;
+    &__image {
+      display: flex;
+      max-width: 40px;
+      margin-right: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    span {
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+    }
+  }
+  .header-cart {
+    display: flex;
+    align-items: center;
+    a {
+      display: block;
+    }
+    .anticon-shopping-cart {
+      font-size: 28px;
+      color: #fff;
+    }
+    .head-example {
+      width: 42px;
+      height: 42px;
+      border-radius: 2px;
+      background: #eee;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__content {
+    display: flex;
+    min-height: 280px;
+    margin: 50px;
+    padding: 24px;
+    background: #fff;
+  }
+}
+
+.app-footer {
+  a {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Default Layout */
+  .default-layout {
+    &__header {
+      padding: 0 24px;
+    }
+    &__content {
+      background-color: #fff;
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+
+  .app-footer {
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* Default Layout */
+  .default-layout {
+    padding-bottom: 80px;
+    .header-logo {
+      max-width: 200px;
+      span {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

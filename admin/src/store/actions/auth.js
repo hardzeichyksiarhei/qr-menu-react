@@ -14,8 +14,9 @@ export const requestedUserSuccess = (user) => ({
   payload: { user },
 })
 
-export const requestedUserError = () => ({
+export const requestedUserError = (message) => ({
   type: types.REQUESTED_USER_FAILED,
+  payload: { message },
 })
 
 // Login
@@ -33,8 +34,9 @@ export const requestedLoginSuccess = (token) => ({
   payload: { token },
 })
 
-export const requestedLoginError = () => ({
+export const requestedLoginError = (message) => ({
   type: types.REQUESTED_LOGIN_FAILED,
+  payload: { message },
 })
 
 // Registration
@@ -47,13 +49,17 @@ export const requestedRegistration = () => ({
   type: types.REQUESTED_REGISTRATION,
 })
 
-export const requestedRegistrationSuccess = (token) => ({
+export const requestedRegistrationSuccess = () => ({
   type: types.REQUESTED_REGISTRATION_SUCCEEDED,
-  payload: { token },
 })
 
-export const requestedRegistrationError = () => ({
+export const requestedRegistrationError = (message) => ({
   type: types.REQUESTED_REGISTRATION_FAILED,
+  payload: { message },
+})
+
+export const clearErrors = () => ({
+  type: types.CLEAR_ERRORS,
 })
 
 export const logout = () => ({

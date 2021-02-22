@@ -1,0 +1,242 @@
+@import "~antd/dist/antd.css";
+
+@import "variables";
+@import "./devices/mobile";
+@import "./devices/tablet";
+
+/* Common */
+.d-block {
+    display: block !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+/* Shadow */
+.card-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* Margin */
+.mt-2 {
+    margin-top: 20px !important;
+}
+
+.mr-05 {
+    margin-right: 5px !important;
+}
+
+.mr-1 {
+    margin-right: 20px !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.move {
+    cursor: move !important;
+}
+
+/* Button */
+.btn {
+    &--warning {
+        background-color: #fa8c16 !important;
+        border-color: #fa8c16 !important;
+        color: #fff !important;
+    }
+}
+
+/* Page Loader */
+.page-loader {
+    position: fixed !important;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    transition: 0.3s all linear;
+    &.show {
+        opacity: 1;
+    }
+    &.hide {
+        opacity: 0;
+    }
+}
+
+/* Default Layout */
+
+.default-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    &__container {
+        flex-grow: 1;
+    }
+    &__content {
+        background-color: #fff;
+        padding: 24px;
+        margin: 24px;
+    }
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    .trigger {
+        font-size: 22px;
+        margin-right: 20px;
+    }
+    &__restaurant-name {
+        margin: 0;
+        font-size: 22px;
+        font-weight: normal;
+    }
+}
+
+.left-navigation {
+    a,
+    span {
+        color: #fff !important;
+        &.anticon {
+            font-size: 18px;
+        }
+    }
+    &__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 22px;
+        padding: 20px 0;
+        line-height: 1;
+        color: #fff;
+        img {
+            display: block;
+            width: 64px;
+            margin-bottom: 15px;
+        }
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+    }
+    &__create-menu {
+        width: calc(100% - 32px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        background-color: $primary-color;
+        border-color: $primary-color;
+        margin: 15px !important;
+        padding: 0 !important;
+        color: #fff !important;
+        transition: 0.25 all ease;
+        text-transform: uppercase;
+        &:hover,
+        &:focus {
+            background-color: darken($primary-color, 10%) !important;
+        }
+    }
+}
+
+/* Popover Navifation */
+.popover-navigation {
+    width: 300px;
+    .ant-popover-inner-content {
+        padding: 0;
+        padding-top: 15px;
+    }
+}
+
+.popover-menu {
+    &__create-menu {
+        width: calc(100% - 32px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        background-color: $primary-color;
+        border-color: $primary-color;
+        margin: 15px;
+        margin-top: 0;
+        padding: 0;
+        transition: 0.25 all ease;
+        text-transform: uppercase;
+        color: #fff;
+        &:hover,
+        &:focus {
+            color: #fff;
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+/* Auth Layout */
+.auth-layout {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.app-footer {
+    a {
+        display: inline-block;
+        margin: 0 5px;
+    }
+}
+
+/* Media */
+@media screen and (max-width: 768px) {
+    .app-header {
+        padding: 0 24px;
+        &__restaurant-name {
+            font-size: 16px;
+        }
+    }
+    .app-footer {
+        padding: 24px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    /* Default Layout */
+    .default-layout {
+        &__content {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px;
+        }
+    }
+
+    .app-header {
+        &__restaurant-name {
+            display: none;
+        }
+    }
+}

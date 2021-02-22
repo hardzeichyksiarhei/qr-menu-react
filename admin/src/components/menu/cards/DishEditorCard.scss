@@ -1,0 +1,15 @@
+.dish-editor-form {
+    &__actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.tags-item {
+    &-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

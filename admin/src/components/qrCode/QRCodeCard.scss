@@ -1,0 +1,19 @@
+.qr-code-card {
+  height: 100%;
+  .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+  }
+  .qr-code-image {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  .qr-code-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}

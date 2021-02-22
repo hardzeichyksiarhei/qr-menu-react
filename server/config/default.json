@@ -1,5 +1,0 @@
-{
-  "port": 5000,
-  "mongoDB": "mongodb+srv://dbUser:rsschool@cluster0.hjnrf.mongodb.net/qr-menu?retryWrites=true&w=majority",
-  "jwt-secret": "rsschool"
-}

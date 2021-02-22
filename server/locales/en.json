@@ -1,0 +1,10 @@
+{
+    "validation": {
+        "email": "The \"E-mail\" must be a valid email address.",
+        "password": {
+            "length": "The password must be at least {{min}} characters"
+        },
+        "UserWithThisLoginAlreadyExists": "Пользователь с этой почтой уже существует",
+        "LoginFailed" : "Login failed! Check authentication credentials"
+    }
+}

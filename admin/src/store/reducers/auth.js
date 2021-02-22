@@ -5,7 +5,14 @@ const initialState = {
   user: null,
   token: Cookies.get('token') || null,
   isLoading: false,
-  isErrors: false,
+
+  isUserLoading: true,
+
+  isLoginError: false,
+  isRegistrationError: false,
+  errorMessage: null,
+
+  isRegistrated: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -14,21 +21,22 @@ const reducer = (state = initialState, action) => {
     case types.REQUESTED_USER: {
       return {
         ...state,
-        isLoading: true,
+        isUserLoading: true,
       }
     }
     case types.REQUESTED_USER_SUCCEEDED: {
+      localStorage.setItem('userId', action.payload.user.id)
       return {
         ...state,
         user: action.payload.user,
-        isLoading: false,
+        isUserLoading: false,
       }
     }
     case types.REQUESTED_USER_FAILED: {
       return {
         ...state,
-        isLoading: false,
-        isErrors: true,
+        isUserLoading: false,
+        errorMessage: action.payload.message,
       }
     }
 
@@ -51,7 +59,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isErrors: true,
+
+        isLoginError: true,
+        errorMessage: action.payload.message,
       }
     }
 
@@ -60,21 +70,32 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isRegistrated: false,
       }
     }
     case types.REQUESTED_REGISTRATION_SUCCEEDED: {
-      Cookies.set('token', action.payload.token, { expires: 1 })
       return {
         ...state,
-        token: action.payload.token,
         isLoading: false,
+        isRegistrated: true,
       }
     }
     case types.REQUESTED_REGISTRATION_FAILED: {
       return {
         ...state,
         isLoading: false,
-        isErrors: true,
+
+        isRegistrationError: true,
+        errorMessage: action.payload.message,
+      }
+    }
+
+    case types.CLEAR_ERRORS: {
+      return {
+        ...state,
+        isLoginError: false,
+        isRegistrationError: false,
+        errorMessage: null,
       }
     }
 

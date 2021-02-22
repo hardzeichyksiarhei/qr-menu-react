@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# qr-menu-react Admin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Используемые технологии в процессе разработки Admin:
 
-## Available Scripts
+* React - выбрали, как библиотеку, с которой все члены команды уже имели опыт работы. В целом, с остальными библиотеками, фреймворками и технологиями большей частью работали впервые, так что основной мотивацией было попробовать их в работе, определиться с рациональностью дальнейшего применения.
 
-In the project directory, you can run:
+* React-charts - библиотека для создания графиков и диаграмм.
 
-### `npm start`
+* Redux/Redux-saga, благодаря построенной структуре, значительно облегчал контроль состояния и получения/отправления данных.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Ant design - в условиях отсутствия дизайнера был хорошим выбором, дающим возможность сосредоточиться на функциональности приложения.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* Axios - библиотека для выполнения HTTP-запросов к API.
 
-### `npm test`
+* Moment.js - библиотека для работы с датой и временем.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* socket.io - библиотека для обмена данными в режиме реального времени.
 
-### `npm run build`
+* Sortable.js - библиотека, позволяющая создавать списки, которые можно изменять, перетаскивая элементы.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Prop-types - проверка типов в React.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Uuid - легковесная кросс-платформенная безопасная библиотека для создания RFC4122 UUIDs.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Запуск проекта
 
-### `npm run eject`
+* npm install - установка связей.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* npm start - запуск административной части в режиме разработки на порту 3000.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* npm build - собирает административную часть в папку dist, готовую к загрузке на сервер.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* npm start test - запуск тестов.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* npm start lint - проводить анализ качества кода.

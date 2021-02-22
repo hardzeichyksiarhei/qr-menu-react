@@ -1,0 +1,32 @@
+.login {
+    width: 100%;
+    max-width: 500px;
+    &__footer {
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+    }
+    &__sign-up {
+        text-transform: uppercase;
+        margin-left: 10px;
+    }
+}
+
+.login-card {
+    &__title {
+        margin-bottom: 0;
+        font-size: 22px;
+    }
+}
+
+.login-form {
+    &__title {
+        font-size: 18px;
+    }
+    &__sign-in {
+        text-transform: uppercase;
+    }
+}
+
+@media screen and (max-width: 576px) {
+}

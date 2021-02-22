@@ -1,0 +1,41 @@
+.about-us-image {
+    .ant-image {
+        width: 100%;
+        height: auto;
+        img {
+            width: 100%;
+            height: 50vh;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+    }
+}
+
+.about-us-grid {
+    display: grid;
+    grid-template-columns: 2fr minmax(320px, 1fr);
+    gap: 20px;
+}
+
+.about-us-map {
+    grid-column: 1 / 3;
+}
+
+@media screen and (max-width: 991px) {
+    .about-us-image {
+        .ant-image {
+            img {
+                height: 30vh;
+            }
+        }
+    }
+
+    .about-us-grid {
+        grid-template-columns: 100%;
+        gap: 20px;
+    }
+
+    .about-us-map {
+        grid-column: auto;
+    }
+}
